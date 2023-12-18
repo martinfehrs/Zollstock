@@ -1,2 +1,2 @@
 # zollstock
-physical type-safe zero overhead compile-time units
+physical type-safe zero overhead compile-time units C++ library
