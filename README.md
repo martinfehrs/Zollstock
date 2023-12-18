@@ -1,2 +1,5 @@
 # Zollstock
 A type-safe zero overhead compile-time physical units C++17 library
+
+The library is still in a very early development stage. So please be carefull when using it in production code.
+Currently there is support for length time and angle units and combinations of them.
