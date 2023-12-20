@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_NUMBER_UNITS_HPP__
-#define __ZOLLSTOCK_NUMBER_UNITS_HPP__
+#ifndef __ZOLLSTOCK_DIMENSIONLESS_UNITS_HPP__
+#define __ZOLLSTOCK_DIMENSIONLESS_UNITS_HPP__
 
 
 #include "unit_concept.hpp"
@@ -37,4 +37,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_NUMBER_UNITS_HPP__
+#endif //__ZOLLSTOCK_DIMENSIONLESS_UNITS_HPP__
