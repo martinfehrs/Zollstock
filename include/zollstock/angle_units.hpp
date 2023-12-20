@@ -41,20 +41,20 @@ namespace zollstock
                 static constexpr unit_symbols symbols{ ""_us, ""_us, "deg"_us };        
             };
 
-            inline namespace constants
-            {
+        }
 
-                inline constexpr picoradian  prad   {};
-                inline constexpr nanoradian  nrad   {};
-                inline constexpr microradian micrad {};
-                inline constexpr milliradian mrad   {};
-                inline constexpr centiradian crad   {};
-                inline constexpr deciradian  drad   {};
-                inline constexpr radian      rad    {};
- 
-                inline constexpr degree      deg    {};
+        inline namespace constants
+        {
 
-            }
+            inline constexpr picoradian  prad   {};
+            inline constexpr nanoradian  nrad   {};
+            inline constexpr microradian micrad {};
+            inline constexpr milliradian mrad   {};
+            inline constexpr centiradian crad   {};
+            inline constexpr deciradian  drad   {};
+            inline constexpr radian      rad    {};
+
+            inline constexpr degree      deg    {};
 
         }
 

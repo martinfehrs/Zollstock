@@ -3,10 +3,48 @@
 
 
 #include "unit_concept.hpp" 
+#include "unit_algorithms.hpp"
 
 
 namespace zollstock
 {
+
+    namespace detail
+    {
+
+        [[nodiscard]] constexpr long double pow(long double base, int exponent) noexcept
+        {
+            if (exponent > 0)
+            {
+                long double result = 1;
+
+                while(exponent > 0)
+                {
+                    result *= base;
+                    --exponent;
+                }
+
+                return result;
+            }
+            else if (exponent < 0)
+            {
+                long double result = 1;
+
+                while(exponent < 0)
+                {
+                    result /= base;
+                    ++exponent;
+                }
+
+                return result;
+            }
+            else
+            {
+                return 1.0L;
+            }
+        }
+    
+    }
 
     template <typename ThisUnit>
     class scalar
@@ -159,9 +197,13 @@ namespace zollstock
         {
             // muss der Exponent mit einbezogen werden?
 
-            if constexpr(get<pos>(ThisUnit::exponents) != 0 && get<pos>(ThatUnit::exponents) != 0)
+            constexpr auto this_exponent = get<pos>(ThisUnit::exponents);
+            constexpr auto that_exponent = get<pos>(ThatUnit::exponents);
+
+            if constexpr(this_exponent != 0 && that_exponent != 0)
             {
-                return get<pos>(ThisUnit::factors) / get<pos>(ThatUnit::factors);
+                return detail::pow(get<pos>(ThisUnit::factors), this_exponent) /
+                       detail::pow(get<pos>(ThatUnit::factors), that_exponent);
             }
             else if constexpr(get<pos>(ThisUnit::exponents) != 0)
             {
