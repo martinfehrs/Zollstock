@@ -1,5 +1,5 @@
 # Zollstock
-A type-safe zero overhead compile-time physical units C++17 library.
+A header-only type-safe zero overhead compile-time physical units C++17 library.
 
 Zollstock is German for folding rule. It's a funny word, because it's a lie. Zoll means inch but the so called Zollstock normaly shows meters these days.
 
