@@ -6,6 +6,8 @@
     "editor.rulers": [
         100
     ],
+    "editor.fontLigatures": true,
+    "editor.fontFamily": "Fira Code",
     "files.associations": {
         "type_traits": "cpp",
         "cctype": "cpp",
