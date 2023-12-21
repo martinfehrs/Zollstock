@@ -24,7 +24,9 @@ namespace zollstock
         std::index_sequence<indices...>
     ) noexcept
     {
-        return { ((get<indices>(factors_1) != 0) ? get<indices>(factors_1) : get<indices>(factors_2))... };
+        return {
+            ((get<indices>(factors_1) != 0) ? get<indices>(factors_1) : get<indices>(factors_2))...
+        };
     }
 
     [[nodiscard]] constexpr unit_factors combined(
