@@ -3,8 +3,9 @@
 
 
 #include "unit_concept.hpp"
-#include "length_units.hpp"
 #include "scalar.hpp"
+#include "length_units.hpp"
+#include "area_units.hpp"
 
 
 namespace zollstock
