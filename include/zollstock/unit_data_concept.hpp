@@ -95,7 +95,7 @@ namespace zollstock
     };
 
     template <typename IndexSequence, std::size_t offset>
-    using shift_right_t = typename shift_right<IndexSequence, offset>::type; 
+    using shift_right_t = typename shift_right<IndexSequence, offset>::type;
 
 
     template <std::size_t count, std::size_t first = 0U>
@@ -104,6 +104,27 @@ namespace zollstock
     using make_base_dimension_index_sequence = make_index_sequence<base_dimension_count>;
     using make_derived_dimension_index_sequence = make_index_sequence<derived_dimension_count, base_dimension_count>;
     using make_dimension_index_sequence = make_index_sequence<dimension_count>;
+
+    namespace detail
+    {
+        template <
+            typename UnitData,
+            std::size_t... indices,
+            typename = std::enable_if_t<is_unit_data_v<UnitData>>
+        >
+        [[nodiscard]] constexpr bool equal(
+            const UnitData& data_1, const UnitData& data_2, std::index_sequence<indices...>
+        ) noexcept
+        {
+            return (... && (get<indices>(data_1) == get<indices>(data_2)));
+        }
+    }
+
+    template <typename UnitData, typename = std::enable_if_t<is_unit_data_v<UnitData>>>
+    [[nodiscard]] constexpr bool operator==(const UnitData& data_1, const UnitData& data_2) noexcept
+    {
+        return detail::equal(data_1, data_2, make_dimension_index_sequence{});
+    }
 
 }
 
