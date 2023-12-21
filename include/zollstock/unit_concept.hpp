@@ -22,7 +22,7 @@ namespace zollstock
 
     template <typename Candidate>
     inline constexpr bool has_exponents_v<
-        Candidate,  
+        Candidate,
         std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::exponents)>, unit_exponents>>
     > = true;
 
@@ -75,13 +75,13 @@ namespace zollstock
     template <typename Unit1, typename Unit2>
     inline constexpr bool convertible_units_v = convertible_units_impl<Unit1, Unit2, make_base_dimension_index_sequence>::value;
 
-    template<typename Unit1, typename Unit2> 
+    template<typename Unit1, typename Unit2>
     struct unit_product
     {
         static constexpr unit_exponents exponents = Unit1::exponents + Unit2::exponents;
         static constexpr unit_factors factors{ combined(Unit1::factors, Unit2::factors) };
-        static constexpr unit_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) }; 
-    };        
+        static constexpr unit_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
+    };
 
     template<typename Unit1, typename Unit2>
     struct unit_division

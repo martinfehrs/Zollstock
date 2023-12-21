@@ -28,7 +28,7 @@ namespace zollstock
             using square_megameter  = unit_product<megameter , megameter >;
             using square_gigameter  = unit_product<gigameter , gigameter >;
             using square_terameter  = unit_product<terameter , terameter >;
-        
+
         }
 
         inline namespace constants

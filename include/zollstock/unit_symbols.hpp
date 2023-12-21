@@ -55,13 +55,13 @@ namespace zollstock
     ) noexcept
     {
         return unit_symbols{ select_symbol_entry<indices>(exponents, symbols_1, symbols_2)... };
-    }    
+    }
 
     [[nodiscard]] constexpr inline auto select_symbols(
         const unit_exponents& exponents,
         const unit_symbols& symbols_1,
         const unit_symbols& symbols_2
-    ) noexcept    
+    ) noexcept
     {
         return select_symbols(
             exponents,

@@ -38,7 +38,7 @@ namespace zollstock
             {
                 static constexpr unit_exponents exponents{ 0, 0, 1 };
                 static constexpr unit_factors factors{ 0.0L, 0.0L, 3.1415926L/180.0L };
-                static constexpr unit_symbols symbols{ ""_us, ""_us, "deg"_us };        
+                static constexpr unit_symbols symbols{ ""_us, ""_us, "deg"_us };
             };
 
         }
@@ -154,7 +154,7 @@ namespace zollstock
 
     inline namespace math_constants
     {
-    
+
         inline constexpr scalar<radian> pi{ 3.14159265358979323846264338327950288419716939937510L };
 
     }

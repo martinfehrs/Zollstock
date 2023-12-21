@@ -17,8 +17,8 @@ namespace zollstock
     constexpr bool has_factor_v<
         Candidate,
         std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::factor)>, long double>>
-    > = true;  
-    
+    > = true;
+
     template <typename Candidate, typename = void>
     inline constexpr bool has_symbol_v = false;
 
@@ -30,7 +30,7 @@ namespace zollstock
 
     template <typename Candidate>
     inline constexpr bool is_prefix_v = has_factor_v<Candidate>
-                                     && has_symbol_v<Candidate>;    
+                                     && has_symbol_v<Candidate>;
 
 }
 

@@ -25,7 +25,7 @@ namespace zollstock
 
             ss << exponent;
 
-            string_representation += ss.str();          
+            string_representation += ss.str();
 
             return string_representation;
         }
@@ -48,7 +48,7 @@ namespace zollstock
                     unit_representation += exponent_to_string<Char>(exponent);
             }
 
-            return unit_representation;      
+            return unit_representation;
         }
 
         template <typename Char>
@@ -60,7 +60,7 @@ namespace zollstock
             template <typename Separator>
             explicit basic_concatenator(const Separator& separator)
                 : separator{ stringify(separator) }
-            { 
+            {
             }
 
             template <typename FirstToken, typename... RemainingTokens>
@@ -108,7 +108,7 @@ namespace zollstock
             }
 
             std::basic_string<Char> separator;
-            
+
         };
 
         template <typename Char, typename Unit, std::size_t... indices>
@@ -131,13 +131,13 @@ namespace zollstock
     template <typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
     [[nodiscard]] std::string to_string(Unit unit)
     {
-        return to_basic_string<char>(unit); 
+        return to_basic_string<char>(unit);
     }
 
     template <typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
     [[nodiscard]] std::wstring to_wstring(Unit unit)
     {
-        return to_basic_string<wchar_t>(unit); 
+        return to_basic_string<wchar_t>(unit);
     }
 
     template <typename Char, typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
@@ -186,7 +186,7 @@ namespace zollstock
         {
             return (_1 / unit) * pow<exponent + 1>(unit);
         }
-    
+
     }
 
 }

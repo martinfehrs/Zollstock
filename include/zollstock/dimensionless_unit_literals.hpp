@@ -14,7 +14,7 @@ namespace zollstock
 
         inline namespace literals
         {
-        
+
             [[nodiscard]] constexpr auto operator""_1(long double val) noexcept
             {
                 return scalar<one>{ static_cast<double>(val) };
@@ -26,7 +26,7 @@ namespace zollstock
             }
 
         }
-    
+
     }
 
 }

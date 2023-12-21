@@ -12,7 +12,7 @@ namespace zollstock
     {
         long double length;
         long double time;
-        
+
         long double angle;
     };
 

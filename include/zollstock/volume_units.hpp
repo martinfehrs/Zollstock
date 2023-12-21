@@ -52,7 +52,7 @@ namespace zollstock
 
         inline namespace literals
         {
-        
+
             [[nodiscard]] constexpr auto operator""_pm3(long double val) noexcept
             {
                 return scalar<cubic_picometer>{ static_cast<double>(val) };
