@@ -88,10 +88,10 @@ namespace zollstock
     template <typename IndexSequence, std::size_t offset>
     struct shift_right;
 
-    template <template <typename, std::size_t...> typename IndexSequence, std::size_t... indices, std::size_t offset>
-    struct shift_right<IndexSequence<std::size_t, indices...>, offset>
+    template <std::size_t... indices, std::size_t offset>
+    struct shift_right<std::index_sequence<indices...>, offset>
     {
-        using type = IndexSequence<std::size_t, (indices + offset)...>;
+        using type = std::index_sequence<(indices + offset)...>;
     };
 
     template <typename IndexSequence, std::size_t offset>
