@@ -19,7 +19,11 @@ namespace zollstock
     };
 
     template <std::size_t pos>
-    [[nodiscard]] constexpr unit_symbol select_symbol_entry(const unit_exponents& exponents, const unit_symbols& symbols_1, const unit_symbols& symbols_2)
+    [[nodiscard]] constexpr unit_symbol select_symbol_entry(
+        const unit_exponents& exponents,
+        const unit_symbols& symbols_1,
+        const unit_symbols& symbols_2
+    )
     {
         const unit_symbol& symbol_1 = get<pos>(symbols_1);
         const unit_symbol& symbol_2 = get<pos>(symbols_2);
