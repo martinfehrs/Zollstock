@@ -189,6 +189,34 @@ namespace zollstock
 
     }
 
+    namespace detail
+    {
+        template <
+            typename Unit1,
+            typename Unit2,
+            std::size_t... indices,
+            typename = std::enable_if_t<is_unit_v<Unit1> && is_unit_v<Unit2>>
+        >
+        [[nodiscard]] constexpr bool equal(
+            const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
+        ) noexcept
+        {
+            return (... && (get<indices>(unit_1.exponents) == get<indices>(unit_2.exponents)))
+                && (... && (get<indices>(unit_1.factors  ) == get<indices>(unit_2.factors  )))
+                && (... && (get<indices>(unit_1.symbols  ) == get<indices>(unit_2.symbols  )));
+        }
+    }
+
+    template <
+        typename Unit1,
+        typename Unit2,
+        typename = std::enable_if_t<is_unit_v<Unit1> && is_unit_v<Unit2>>
+    >
+    [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
+    {
+        return detail::equal(unit_1, unit_2, make_dimension_index_sequence{});
+    }
+
 }
 
 
