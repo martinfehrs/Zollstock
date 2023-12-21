@@ -2,7 +2,9 @@
 #define __ZOLLSTOCK_VELOCITY_UNITS_HPP__
 
 
-#include "scalar.hpp"
+#include "unit_concept.hpp"
+#include "length_units.hpp"
+#include "time_units.hpp"
 
 
 namespace zollstock
@@ -46,4 +48,3 @@ namespace zollstock
 
 
 #endif //__ZOLLSTOCK_VELOCITY_UNITS_HPP__
-
