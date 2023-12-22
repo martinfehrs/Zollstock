@@ -86,32 +86,32 @@ namespace zollstock
 
         [[nodiscard]] constexpr bool operator==(const this_type& that) const noexcept
         {
-            return this->value == that.value;
+            return this->value_ == that.value_;
         }
 
         [[nodiscard]] constexpr bool operator!=(const this_type& that) const noexcept
         {
-            return this->value != that.value;
+            return this->value_ != that.value_;
         }
 
         [[nodiscard]] constexpr bool operator<(const this_type& that) const noexcept
         {
-            return this->value < that.value;
+            return this->value_ < that.value_;
         }
 
         [[nodiscard]] constexpr bool operator>(const this_type& that) const noexcept
         {
-            return this->value > that.value;
+            return this->value_ > that.value_;
         }
 
         [[nodiscard]] constexpr bool operator<=(const this_type& that) const noexcept
         {
-            return this->value > that.value;
+            return this->value_ > that.value_;
         }
 
         [[nodiscard]] constexpr bool operator>=(const this_type& that) const noexcept
         {
-            return this->value > that.value;
+            return this->value_ > that.value_;
         }
 
         [[nodiscard]] constexpr this_type operator-() const noexcept
