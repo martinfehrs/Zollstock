@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_SCALAR_HPP__
 
 
-#include "unit_concept.hpp" 
+#include "unit_concept.hpp"
 #include "unit_algorithms.hpp"
 
 
@@ -43,7 +43,7 @@ namespace zollstock
                 return 1.0L;
             }
         }
-    
+
     }
 
     template <typename ThisUnit>
@@ -165,13 +165,13 @@ namespace zollstock
         [[nodiscard]] constexpr auto operator*(ThatUnit) const noexcept
         {
             return scalar<unit_product<ThisUnit, ThatUnit>>{ this->value_ };
-        }  
+        }
 
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
         [[nodiscard]] constexpr auto operator/(ThatUnit) const noexcept
         {
             return scalar<unit_division<ThisUnit, ThatUnit>>{ this->value_ };
-        }  
+        }
 
         [[nodiscard]] constexpr this_type operator*(double that) const noexcept
         {
@@ -216,7 +216,9 @@ namespace zollstock
         }
 
         template <typename ThatUnit, std::size_t... indices>
-        [[nodiscard]] constexpr scalar<ThatUnit> as_impl(std::index_sequence<indices...>) const noexcept
+        [[nodiscard]] constexpr scalar<ThatUnit> as_impl(
+            std::index_sequence<indices...>
+        ) const noexcept
         {
             return { (this->value_ * ... * this->dimension_factor<ThatUnit, indices>()) };
         }
@@ -255,7 +257,10 @@ namespace zollstock
         const std::size_t unit_width = unit_representation.size();
         const std::size_t unit_width_including_space = unit_width + 1U;
 
-        if (unit_width > 0 && os.width() >= static_cast<std::streamsize>(unit_width_including_space))
+        if (
+            unit_width > 0 &&
+            os.width() >= static_cast<std::streamsize>(unit_width_including_space)
+        )
             os.width(os.width() - unit_width_including_space);
 
         os << scalar.cvalue();

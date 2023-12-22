@@ -112,9 +112,13 @@ namespace zollstock
         };
 
         template <typename Char, typename Unit, std::size_t... indices>
-        [[nodiscard]] std::basic_string<Char> to_basic_string_impl(const Unit& unit, std::index_sequence<indices...>)
+        [[nodiscard]] std::basic_string<Char> to_basic_string_impl(
+            const Unit& unit, std::index_sequence<indices...>
+            )
         {
-            return detail::basic_concatenator<Char>{ '*' }(detail::unit_entry_to_string<indices, Char>(unit)...);
+            return detail::basic_concatenator<Char>{ '*' }(
+                detail::unit_entry_to_string<indices, Char>(unit)...
+            );
         }
 
     }
