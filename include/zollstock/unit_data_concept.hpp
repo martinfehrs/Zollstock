@@ -102,7 +102,11 @@ namespace zollstock
     using make_index_sequence = shift_right_t<std::make_index_sequence<count>, first>;
 
     using make_base_dimension_index_sequence = make_index_sequence<base_dimension_count>;
-    using make_derived_dimension_index_sequence = make_index_sequence<derived_dimension_count, base_dimension_count>;
+
+    using make_derived_dimension_index_sequence = make_index_sequence<
+        derived_dimension_count, base_dimension_count
+    >;
+
     using make_dimension_index_sequence = make_index_sequence<dimension_count>;
 
     namespace detail

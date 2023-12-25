@@ -49,31 +49,35 @@ namespace zollstock
 
     template <typename Candidate>
     inline constexpr bool is_unit_v = std::is_constructible_v<Candidate>
-                                    && has_exponents_v<Candidate>
-                                    && has_factors_v<Candidate>
-                                    && has_symbols_v<Candidate>;
+                                   && has_exponents_v<Candidate>
+                                   && has_factors_v<Candidate>
+                                   && has_symbols_v<Candidate>;
 
+    namespace detail
+    {
 
-    template <typename Unit1, typename Unit2, typename IndexSequence, typename = void>
-    struct convertible_units_impl;
+        template <typename Unit1, typename Unit2, typename IndexSequence, typename = void>
+        struct convertible_units_impl;
 
-    template <
-        typename Unit1,
-        typename Unit2,
-        template <typename, std::size_t...> typename IndexSequence,
-        std::size_t... indices
-    >
-    struct convertible_units_impl<
-        Unit1,
-        Unit2,
-        IndexSequence<std::size_t, indices...>,
-        std::enable_if_t<is_unit_v<Unit1> &&  is_unit_v<Unit2>>
-    >
-        : std::bool_constant<(true && ... && (get<indices>(Unit1::exponents) == get<indices>(Unit2::exponents)))>
-    {};
+        template <
+            typename Unit1,
+            typename Unit2,
+            template <typename, std::size_t...> typename IndexSequence,
+            std::size_t... indices
+        >
+        struct convertible_units_impl<
+            Unit1,
+            Unit2,
+            IndexSequence<std::size_t, indices...>,
+            std::enable_if_t<is_unit_v<Unit1> &&  is_unit_v<Unit2>>
+        >
+            : std::bool_constant<(true && ... && (get<indices>(Unit1::exponents) == get<indices>(Unit2::exponents)))>
+        {};
+
+    }
 
     template <typename Unit1, typename Unit2>
-    inline constexpr bool convertible_units_v = convertible_units_impl<Unit1, Unit2, make_base_dimension_index_sequence>::value;
+    inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_dimension_index_sequence>::value;
 
     template<typename Unit1, typename Unit2>
     struct unit_product

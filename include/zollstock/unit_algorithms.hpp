@@ -14,6 +14,7 @@ namespace zollstock
 
     namespace detail
     {
+
         template <typename Char>
         [[nodiscard]] std::basic_string<Char> exponent_to_string(int exponent)
         {
