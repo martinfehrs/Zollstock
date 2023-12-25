@@ -26,6 +26,9 @@ namespace zollstock
                 static constexpr unit_symbols symbols{ Prefix::symbol + "m"_us, ""_us, ""_us };
             };
 
+            using zeptometer = basic_meter<zepto     >;
+            using attometer  = basic_meter<atto      >;
+            using femtometer = basic_meter<femto     >;
             using picometer  = basic_meter<pico      >;
             using nanometer  = basic_meter<nano      >;
             using micrometer = basic_meter<micro     >;
@@ -45,6 +48,9 @@ namespace zollstock
         inline namespace constants
         {
 
+            inline constexpr zeptometer  zm   {};
+            inline constexpr attometer   am   {};
+            inline constexpr femtometer  fm   {};
             inline constexpr picometer   pm   {};
             inline constexpr nanometer   nm   {};
             inline constexpr micrometer  micm {};
@@ -63,6 +69,36 @@ namespace zollstock
 
         inline namespace literals
         {
+
+            [[nodiscard]] constexpr auto operator""_zm(long double val) noexcept
+            {
+                return scalar<zeptometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_zm(unsigned long long int val) noexcept
+            {
+                return scalar<zeptometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_am(long double val) noexcept
+            {
+                return scalar<attometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_am(unsigned long long int val) noexcept
+            {
+                return scalar<attometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_fm(long double val) noexcept
+            {
+                return scalar<femtometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_fm(unsigned long long int val) noexcept
+            {
+                return scalar<femtometer>{ static_cast<double>(val) };
+            }
 
             [[nodiscard]] constexpr auto operator""_pm(long double val) noexcept
             {
