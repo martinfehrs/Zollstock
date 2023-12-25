@@ -26,6 +26,7 @@ namespace zollstock
                 static constexpr unit_symbols symbols{ ""_us, Prefix::symbol + "s"_us, ""_us };
             };
 
+            using picosecond  = basic_second<pico      >;
             using nanosecond  = basic_second<nano      >;
             using microsecond = basic_second<micro     >;
             using millisecond = basic_second<milli     >;
@@ -38,6 +39,7 @@ namespace zollstock
             using megasecond  = basic_second<mega      >;
             using gigasecond  = basic_second<giga      >;
             using terasecond  = basic_second<tera      >;
+            using petasecond  = basic_second<peta      >;
 
             struct minute
             {
@@ -72,6 +74,7 @@ namespace zollstock
         inline namespace constants
         {
 
+            inline constexpr picosecond  ps   {};
             inline constexpr nanosecond  ns   {};
             inline constexpr microsecond mics {};
             inline constexpr millisecond ms   {};
@@ -84,6 +87,7 @@ namespace zollstock
             inline constexpr megasecond  Ms   {};
             inline constexpr gigasecond  Gs   {};
             inline constexpr terasecond  Ts   {};
+            inline constexpr petasecond  Ps   {};
 
             inline constexpr minute      min  {};
             inline constexpr hour        h    {};
@@ -94,6 +98,16 @@ namespace zollstock
 
         inline namespace literals
         {
+
+            [[nodiscard]] constexpr auto operator""_ps(long double val) noexcept
+            {
+                return scalar<picosecond>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_ps(unsigned long long int val) noexcept
+            {
+                return scalar<picosecond>{ static_cast<double>(val) };
+            }
 
             [[nodiscard]] constexpr auto operator""_ns(long double val) noexcept
             {
@@ -215,6 +229,16 @@ namespace zollstock
                 return scalar<terasecond>{ static_cast<double>(val) };
             }
 
+            [[nodiscard]] constexpr auto operator""_Ps(long double val) noexcept
+            {
+                return scalar<petasecond>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_Ps(unsigned long long int val) noexcept
+            {
+                return scalar<petasecond>{ static_cast<double>(val) };
+            }
+
 
             [[nodiscard]] constexpr auto operator""_min(long double val) noexcept
             {
@@ -244,6 +268,16 @@ namespace zollstock
             [[nodiscard]] constexpr auto operator""_d(unsigned long long int val) noexcept
             {
                 return scalar<day>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_a(long double val) noexcept
+            {
+                return scalar<year>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_a(unsigned long long int val) noexcept
+            {
+                return scalar<year>{ static_cast<double>(val) };
             }
 
         }
