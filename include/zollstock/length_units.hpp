@@ -26,28 +26,40 @@ namespace zollstock
                 static constexpr unit_symbols symbols{ Prefix::symbol + "m"_us, ""_us, ""_us };
             };
 
-            using zeptometer = basic_meter<zepto     >;
-            using attometer  = basic_meter<atto      >;
-            using femtometer = basic_meter<femto     >;
-            using picometer  = basic_meter<pico      >;
-            using nanometer  = basic_meter<nano      >;
-            using micrometer = basic_meter<micro     >;
-            using millimeter = basic_meter<milli     >;
-            using centimeter = basic_meter<centi     >;
-            using decimeter  = basic_meter<deci      >;
-            using meter      = basic_meter<unprefixed>;
-            using decameter  = basic_meter<deca      >;
-            using hectometer = basic_meter<hecto     >;
-            using kilometer  = basic_meter<kilo      >;
-            using megameter  = basic_meter<mega      >;
-            using gigameter  = basic_meter<giga      >;
-            using terameter  = basic_meter<tera      >;
+            using quektometer = basic_meter<quekto    >;
+            using rontometer  = basic_meter<ronto     >;
+            using yoktometer  = basic_meter<yokto     >;
+            using zeptometer  = basic_meter<zepto     >;
+            using attometer   = basic_meter<atto      >;
+            using femtometer  = basic_meter<femto     >;
+            using picometer   = basic_meter<pico      >;
+            using nanometer   = basic_meter<nano      >;
+            using micrometer  = basic_meter<micro     >;
+            using millimeter  = basic_meter<milli     >;
+            using centimeter  = basic_meter<centi     >;
+            using decimeter   = basic_meter<deci      >;
+            using meter       = basic_meter<unprefixed>;
+            using decameter   = basic_meter<deca      >;
+            using hectometer  = basic_meter<hecto     >;
+            using kilometer   = basic_meter<kilo      >;
+            using megameter   = basic_meter<mega      >;
+            using gigameter   = basic_meter<giga      >;
+            using terameter   = basic_meter<tera      >;
+            using petameter   = basic_meter<peta      >;
+            using exameter    = basic_meter<exa       >;
+            using zettameter  = basic_meter<zetta     >;
+            using yottameter  = basic_meter<yotta     >;
+            using ronnameter  = basic_meter<ronna     >;
+            using quettameter = basic_meter<quetta    >;
 
         }
 
         inline namespace constants
         {
 
+            inline constexpr quektometer qm   {};
+            inline constexpr rontometer  rm   {};
+            inline constexpr yoktometer  ym   {};
             inline constexpr zeptometer  zm   {};
             inline constexpr attometer   am   {};
             inline constexpr femtometer  fm   {};
@@ -64,11 +76,50 @@ namespace zollstock
             inline constexpr megameter   Mm   {};
             inline constexpr gigameter   Gm   {};
             inline constexpr terameter   Tm   {};
+            inline constexpr petameter   Pm   {};
+            inline constexpr exameter    Em   {};
+            inline constexpr zettameter  Zm   {};
+            inline constexpr yottameter  Ym   {};
+            inline constexpr ronnameter  Rm   {};
+            inline constexpr quettameter Qm   {};
 
         }
 
         inline namespace literals
         {
+
+            [[nodiscard]] constexpr auto operator""_qm(long double val) noexcept
+            {
+                return scalar<quektometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_qm(unsigned long long int val) noexcept
+            {
+                return scalar<quektometer>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_rm(long double val) noexcept
+            {
+                return scalar<rontometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_rm(unsigned long long int val) noexcept
+            {
+                return scalar<rontometer>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_ym(long double val) noexcept
+            {
+                return scalar<yoktometer>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_ym(unsigned long long int val) noexcept
+            {
+                return scalar<yoktometer>{ static_cast<double>(val) };
+            }
+
 
             [[nodiscard]] constexpr auto operator""_zm(long double val) noexcept
             {
@@ -80,6 +131,7 @@ namespace zollstock
                 return scalar<zeptometer>{ static_cast<double>(val) };
             }
 
+
             [[nodiscard]] constexpr auto operator""_am(long double val) noexcept
             {
                 return scalar<attometer>{ static_cast<double>(val) };
@@ -90,6 +142,7 @@ namespace zollstock
                 return scalar<attometer>{ static_cast<double>(val) };
             }
 
+
             [[nodiscard]] constexpr auto operator""_fm(long double val) noexcept
             {
                 return scalar<femtometer>{ static_cast<double>(val) };
@@ -99,6 +152,7 @@ namespace zollstock
             {
                 return scalar<femtometer>{ static_cast<double>(val) };
             }
+
 
             [[nodiscard]] constexpr auto operator""_pm(long double val) noexcept
             {
@@ -240,6 +294,72 @@ namespace zollstock
             [[nodiscard]] constexpr auto operator""_Tm(unsigned long long int val) noexcept
             {
                 return scalar<terameter>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_Pm(long double val) noexcept
+            {
+                return scalar<petameter>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_Pm(unsigned long long int val) noexcept
+            {
+                return scalar<petameter>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_Em(long double val) noexcept
+            {
+                return scalar<exameter>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_Em(unsigned long long int val) noexcept
+            {
+                return scalar<exameter>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_Zm(long double val) noexcept
+            {
+                return scalar<zettameter>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_Zm(unsigned long long int val) noexcept
+            {
+                return scalar<zettameter>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_Ym(long double val) noexcept
+            {
+                return scalar<yottameter>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_Ym(unsigned long long int val) noexcept
+            {
+                return scalar<yottameter>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_Rm(long double val) noexcept
+            {
+                return scalar<ronnameter>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_Rm(unsigned long long int val) noexcept
+            {
+                return scalar<ronnameter>{ static_cast<double>(val) };
+            }
+
+
+            [[nodiscard]] constexpr auto operator""_Qm(long double val) noexcept
+            {
+                return scalar<quettameter>{ static_cast<double>(val) };
+            }
+
+            [[nodiscard]] constexpr auto operator""_Qm(unsigned long long int val) noexcept
+            {
+                return scalar<quettameter>{ static_cast<double>(val) };
             }
 
         }
