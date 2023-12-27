@@ -121,6 +121,12 @@ namespace zollstock
     static_assert(Mm   == megameter  {});
     static_assert(Gm   == gigameter  {});
     static_assert(Tm   == terameter  {});
+    static_assert(Pm   == petameter  {});
+    static_assert(Em   == exameter   {});
+    static_assert(Zm   == zettameter {});
+    static_assert(Ym   == yottameter {});
+    static_assert(Rm   == ronnameter {});
+    static_assert(Qm   == quettameter{});
 
 
     static_assert(1.0_qm   == 1.0 * qm  );
