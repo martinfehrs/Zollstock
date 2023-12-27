@@ -104,6 +104,7 @@ namespace zollstock
     static_assert(quettameter::factors   == unit_factors  { 1e30L    , 0.0L , 0.0L  });
     static_assert(quettameter::symbols   == unit_symbols  { "Qm"_us  , ""_us, ""_us });
 
+
     static_assert(qm   == quektometer{});
     static_assert(rm   == rontometer {});
     static_assert(ym   == yoktometer {});
