@@ -162,13 +162,13 @@ namespace zollstock
         }
 
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
-        [[nodiscard]] constexpr auto operator*(ThatUnit) const noexcept
+        [[nodiscard]] constexpr auto operator*(ThatUnit) && noexcept
         {
             return scalar<unit_product<ThisUnit, ThatUnit>>{ this->value_ };
         }
 
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
-        [[nodiscard]] constexpr auto operator/(ThatUnit) const noexcept
+        [[nodiscard]] constexpr auto operator/(ThatUnit) && noexcept
         {
             return scalar<unit_division<ThisUnit, ThatUnit>>{ this->value_ };
         }
