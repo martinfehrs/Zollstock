@@ -4,105 +4,105 @@
 namespace zollstock
 {
 
-    static_assert(quektometer::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(quektometer::factors   == unit_factors  { 1e-30L   , 0.0L , 0.0L  });
-    static_assert(quektometer::symbols   == unit_symbols  { "qm"_us  , ""_us, ""_us });
+    static_assert(quektometer::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(quektometer::factors   == quantity_factors  { 1e-30L   , 0.0L , 0.0L  });
+    static_assert(quektometer::symbols   == quantity_symbols  { "qm"_us  , ""_us, ""_us });
 
-    static_assert(rontometer ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(rontometer ::factors   == unit_factors  { 1e-27L   , 0.0L , 0.0L  });
-    static_assert(rontometer ::symbols   == unit_symbols  { "rm"_us  , ""_us, ""_us });
+    static_assert(rontometer ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(rontometer ::factors   == quantity_factors  { 1e-27L   , 0.0L , 0.0L  });
+    static_assert(rontometer ::symbols   == quantity_symbols  { "rm"_us  , ""_us, ""_us });
 
-    static_assert(yoktometer ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(yoktometer ::factors   == unit_factors  { 1e-24L   , 0.0L , 0.0L  });
-    static_assert(yoktometer ::symbols   == unit_symbols  { "ym"_us  , ""_us, ""_us });
+    static_assert(yoktometer ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(yoktometer ::factors   == quantity_factors  { 1e-24L   , 0.0L , 0.0L  });
+    static_assert(yoktometer ::symbols   == quantity_symbols  { "ym"_us  , ""_us, ""_us });
 
-    static_assert(zeptometer ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(zeptometer ::factors   == unit_factors  { 1e-21L   , 0.0L , 0.0L  });
-    static_assert(zeptometer ::symbols   == unit_symbols  { "zm"_us  , ""_us, ""_us });
+    static_assert(zeptometer ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(zeptometer ::factors   == quantity_factors  { 1e-21L   , 0.0L , 0.0L  });
+    static_assert(zeptometer ::symbols   == quantity_symbols  { "zm"_us  , ""_us, ""_us });
 
-    static_assert(attometer  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(attometer  ::factors   == unit_factors  { 1e-18L   , 0.0L , 0.0L  });
-    static_assert(attometer  ::symbols   == unit_symbols  { "am"_us  , ""_us, ""_us });
+    static_assert(attometer  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(attometer  ::factors   == quantity_factors  { 1e-18L   , 0.0L , 0.0L  });
+    static_assert(attometer  ::symbols   == quantity_symbols  { "am"_us  , ""_us, ""_us });
 
-    static_assert(femtometer ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(femtometer ::factors   == unit_factors  { 1e-15L   , 0.0L , 0.0L  });
-    static_assert(femtometer ::symbols   == unit_symbols  { "fm"_us  , ""_us, ""_us });
+    static_assert(femtometer ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(femtometer ::factors   == quantity_factors  { 1e-15L   , 0.0L , 0.0L  });
+    static_assert(femtometer ::symbols   == quantity_symbols  { "fm"_us  , ""_us, ""_us });
 
-    static_assert(picometer  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(picometer  ::factors   == unit_factors  { 1e-12L   , 0.0L , 0.0L  });
-    static_assert(picometer  ::symbols   == unit_symbols  { "pm"_us  , ""_us, ""_us });
+    static_assert(picometer  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(picometer  ::factors   == quantity_factors  { 1e-12L   , 0.0L , 0.0L  });
+    static_assert(picometer  ::symbols   == quantity_symbols  { "pm"_us  , ""_us, ""_us });
 
-    static_assert(nanometer  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(nanometer  ::factors   == unit_factors  { 1e-9L    , 0.0L , 0.0L  });
-    static_assert(nanometer  ::symbols   == unit_symbols  { "nm"_us  , ""_us, ""_us });
+    static_assert(nanometer  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(nanometer  ::factors   == quantity_factors  { 1e-9L    , 0.0L , 0.0L  });
+    static_assert(nanometer  ::symbols   == quantity_symbols  { "nm"_us  , ""_us, ""_us });
 
-    static_assert(micrometer ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(micrometer ::factors   == unit_factors  { 1e-6L    , 0.0L , 0.0L  });
-    static_assert(micrometer ::symbols   == unit_symbols  { "micm"_us, ""_us, ""_us });
+    static_assert(micrometer ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(micrometer ::factors   == quantity_factors  { 1e-6L    , 0.0L , 0.0L  });
+    static_assert(micrometer ::symbols   == quantity_symbols  { "micm"_us, ""_us, ""_us });
 
-    static_assert(millimeter ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(millimeter ::factors   == unit_factors  { 1e-3L    , 0.0L , 0.0L  });
-    static_assert(millimeter ::symbols   == unit_symbols  { "mm"_us  , ""_us, ""_us });
+    static_assert(millimeter ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(millimeter ::factors   == quantity_factors  { 1e-3L    , 0.0L , 0.0L  });
+    static_assert(millimeter ::symbols   == quantity_symbols  { "mm"_us  , ""_us, ""_us });
 
-    static_assert(centimeter ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(centimeter ::factors   == unit_factors  { 1e-2L    , 0.0L , 0.0L  });
-    static_assert(centimeter ::symbols   == unit_symbols  { "cm"_us  , ""_us, ""_us });
+    static_assert(centimeter ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(centimeter ::factors   == quantity_factors  { 1e-2L    , 0.0L , 0.0L  });
+    static_assert(centimeter ::symbols   == quantity_symbols  { "cm"_us  , ""_us, ""_us });
 
-    static_assert(decimeter  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(decimeter  ::factors   == unit_factors  { 1e-1L    , 0.0L , 0.0L  });
-    static_assert(decimeter  ::symbols   == unit_symbols  { "dm"_us  , ""_us, ""_us });
+    static_assert(decimeter  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(decimeter  ::factors   == quantity_factors  { 1e-1L    , 0.0L , 0.0L  });
+    static_assert(decimeter  ::symbols   == quantity_symbols  { "dm"_us  , ""_us, ""_us });
 
-    static_assert(meter      ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(meter      ::factors   == unit_factors  { 1e0L     , 0.0L , 0.0L  });
-    static_assert(meter      ::symbols   == unit_symbols  { "m"_us   , ""_us, ""_us });
+    static_assert(meter      ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(meter      ::factors   == quantity_factors  { 1e0L     , 0.0L , 0.0L  });
+    static_assert(meter      ::symbols   == quantity_symbols  { "m"_us   , ""_us, ""_us });
 
-    static_assert(decameter  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(decameter  ::factors   == unit_factors  { 1e1L     , 0.0L , 0.0L  });
-    static_assert(decameter  ::symbols   == unit_symbols  { "dam"_us , ""_us, ""_us });
+    static_assert(decameter  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(decameter  ::factors   == quantity_factors  { 1e1L     , 0.0L , 0.0L  });
+    static_assert(decameter  ::symbols   == quantity_symbols  { "dam"_us , ""_us, ""_us });
 
-    static_assert(hectometer ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(hectometer ::factors   == unit_factors  { 1e2L     , 0.0L , 0.0L  });
-    static_assert(hectometer ::symbols   == unit_symbols  { "hm"_us  , ""_us, ""_us });
+    static_assert(hectometer ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(hectometer ::factors   == quantity_factors  { 1e2L     , 0.0L , 0.0L  });
+    static_assert(hectometer ::symbols   == quantity_symbols  { "hm"_us  , ""_us, ""_us });
 
-    static_assert(kilometer  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(kilometer  ::factors   == unit_factors  { 1e3L     , 0.0L , 0.0L  });
-    static_assert(kilometer  ::symbols   == unit_symbols  { "km"_us  , ""_us, ""_us });
+    static_assert(kilometer  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(kilometer  ::factors   == quantity_factors  { 1e3L     , 0.0L , 0.0L  });
+    static_assert(kilometer  ::symbols   == quantity_symbols  { "km"_us  , ""_us, ""_us });
 
-    static_assert(megameter  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(megameter  ::factors   == unit_factors  { 1e6L     , 0.0L , 0.0L  });
-    static_assert(megameter  ::symbols   == unit_symbols  { "Mm"_us  , ""_us, ""_us });
+    static_assert(megameter  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(megameter  ::factors   == quantity_factors  { 1e6L     , 0.0L , 0.0L  });
+    static_assert(megameter  ::symbols   == quantity_symbols  { "Mm"_us  , ""_us, ""_us });
 
-    static_assert(gigameter  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(gigameter  ::factors   == unit_factors  { 1e9L     , 0.0L , 0.0L  });
-    static_assert(gigameter  ::symbols   == unit_symbols  { "Gm"_us  , ""_us, ""_us });
+    static_assert(gigameter  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(gigameter  ::factors   == quantity_factors  { 1e9L     , 0.0L , 0.0L  });
+    static_assert(gigameter  ::symbols   == quantity_symbols  { "Gm"_us  , ""_us, ""_us });
 
-    static_assert(terameter  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(terameter  ::factors   == unit_factors  { 1e12L    , 0.0L , 0.0L  });
-    static_assert(terameter  ::symbols   == unit_symbols  { "Tm"_us  , ""_us, ""_us });
+    static_assert(terameter  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(terameter  ::factors   == quantity_factors  { 1e12L    , 0.0L , 0.0L  });
+    static_assert(terameter  ::symbols   == quantity_symbols  { "Tm"_us  , ""_us, ""_us });
 
-    static_assert(petameter  ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(petameter  ::factors   == unit_factors  { 1e15L    , 0.0L , 0.0L  });
-    static_assert(petameter  ::symbols   == unit_symbols  { "Pm"_us  , ""_us, ""_us });
+    static_assert(petameter  ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(petameter  ::factors   == quantity_factors  { 1e15L    , 0.0L , 0.0L  });
+    static_assert(petameter  ::symbols   == quantity_symbols  { "Pm"_us  , ""_us, ""_us });
 
-    static_assert(exameter   ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(exameter   ::factors   == unit_factors  { 1e18L    , 0.0L , 0.0L  });
-    static_assert(exameter   ::symbols   == unit_symbols  { "Em"_us  , ""_us, ""_us });
+    static_assert(exameter   ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(exameter   ::factors   == quantity_factors  { 1e18L    , 0.0L , 0.0L  });
+    static_assert(exameter   ::symbols   == quantity_symbols  { "Em"_us  , ""_us, ""_us });
 
-    static_assert(zettameter ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(zettameter ::factors   == unit_factors  { 1e21L    , 0.0L , 0.0L  });
-    static_assert(zettameter ::symbols   == unit_symbols  { "Zm"_us  , ""_us, ""_us });
+    static_assert(zettameter ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(zettameter ::factors   == quantity_factors  { 1e21L    , 0.0L , 0.0L  });
+    static_assert(zettameter ::symbols   == quantity_symbols  { "Zm"_us  , ""_us, ""_us });
 
-    static_assert(yottameter ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(yottameter ::factors   == unit_factors  { 1e24L    , 0.0L , 0.0L  });
-    static_assert(yottameter ::symbols   == unit_symbols  { "Ym"_us  , ""_us, ""_us });
+    static_assert(yottameter ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(yottameter ::factors   == quantity_factors  { 1e24L    , 0.0L , 0.0L  });
+    static_assert(yottameter ::symbols   == quantity_symbols  { "Ym"_us  , ""_us, ""_us });
 
-    static_assert(ronnameter ::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(ronnameter ::factors   == unit_factors  { 1e27L    , 0.0L , 0.0L  });
-    static_assert(ronnameter ::symbols   == unit_symbols  { "Rm"_us  , ""_us, ""_us });
+    static_assert(ronnameter ::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(ronnameter ::factors   == quantity_factors  { 1e27L    , 0.0L , 0.0L  });
+    static_assert(ronnameter ::symbols   == quantity_symbols  { "Rm"_us  , ""_us, ""_us });
 
-    static_assert(quettameter::exponents == unit_exponents{ 1        , 0    , 0     });
-    static_assert(quettameter::factors   == unit_factors  { 1e30L    , 0.0L , 0.0L  });
-    static_assert(quettameter::symbols   == unit_symbols  { "Qm"_us  , ""_us, ""_us });
+    static_assert(quettameter::exponents == quantity_exponents{ 1        , 0    , 0     });
+    static_assert(quettameter::factors   == quantity_factors  { 1e30L    , 0.0L , 0.0L  });
+    static_assert(quettameter::symbols   == quantity_symbols  { "Qm"_us  , ""_us, ""_us });
 
 
     static_assert(qm   == quektometer{});

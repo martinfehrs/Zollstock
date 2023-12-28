@@ -2,9 +2,9 @@
 #define __ZOLLSTOCK_UNIT_CONCEPT_HPP__
 
 
-#include "unit_exponents.hpp"
-#include "unit_factors.hpp"
-#include "unit_symbols.hpp"
+#include "quantity_exponents.hpp"
+#include "quantity_factors.hpp"
+#include "quantity_symbols.hpp"
 
 #include <cassert>
 #include <cmath>
@@ -23,7 +23,7 @@ namespace zollstock
     template <typename Candidate>
     inline constexpr bool has_exponents_v<
         Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::exponents)>, unit_exponents>>
+        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::exponents)>, quantity_exponents>>
     > = true;
 
 
@@ -33,7 +33,7 @@ namespace zollstock
     template <typename Candidate>
     inline constexpr bool has_factors_v<
         Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::factors)>, unit_factors>>
+        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::factors)>, quantity_factors>>
     > = true;
 
 
@@ -43,7 +43,7 @@ namespace zollstock
     template <typename Candidate>
     inline constexpr bool has_symbols_v<
         Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::symbols)>, unit_symbols>>
+        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::symbols)>, quantity_symbols>>
     > = true;
 
 
@@ -77,22 +77,22 @@ namespace zollstock
     }
 
     template <typename Unit1, typename Unit2>
-    inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_dimension_index_sequence>::value;
+    inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
 
     template<typename Unit1, typename Unit2>
     struct unit_product
     {
-        static constexpr unit_exponents exponents = Unit1::exponents + Unit2::exponents;
-        static constexpr unit_factors factors{ combined(Unit1::factors, Unit2::factors) };
-        static constexpr unit_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
+        static constexpr quantity_exponents exponents = Unit1::exponents + Unit2::exponents;
+        static constexpr quantity_factors factors{ combined(Unit1::factors, Unit2::factors) };
+        static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
     };
 
     template<typename Unit1, typename Unit2>
     struct unit_division
     {
-        static constexpr unit_exponents exponents = Unit1::exponents - Unit2::exponents;
-        static constexpr unit_factors factors{ combined(Unit1::factors, Unit2::factors) };
-        static constexpr unit_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
+        static constexpr quantity_exponents exponents = Unit1::exponents - Unit2::exponents;
+        static constexpr quantity_factors factors{ combined(Unit1::factors, Unit2::factors) };
+        static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
     };
 
 }

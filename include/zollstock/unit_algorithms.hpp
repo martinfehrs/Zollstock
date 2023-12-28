@@ -128,8 +128,8 @@ namespace zollstock
     [[nodiscard]] std::basic_string<Char> to_basic_string(const Unit& unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
-            detail::to_basic_string_impl<Char>(unit, make_derived_dimension_index_sequence{}),
-            detail::to_basic_string_impl<Char>(unit, make_base_dimension_index_sequence{})
+            detail::to_basic_string_impl<Char>(unit, make_derived_quantity_index_sequence{}),
+            detail::to_basic_string_impl<Char>(unit, make_base_quantity_index_sequence{})
         );
     }
 
@@ -219,7 +219,7 @@ namespace zollstock
     >
     [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
     {
-        return detail::equal(unit_1, unit_2, make_dimension_index_sequence{});
+        return detail::equal(unit_1, unit_2, make_quantity_index_sequence{});
     }
 
 }

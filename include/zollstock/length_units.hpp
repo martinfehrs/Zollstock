@@ -21,9 +21,9 @@ namespace zollstock
             {
                 static_assert(is_prefix_v<Prefix>);
 
-                static constexpr unit_exponents exponents{ 1, 0, 0 };
-                static constexpr unit_factors factors{ Prefix::factor, 0.0L, 0.0L };
-                static constexpr unit_symbols symbols{ Prefix::symbol + "m"_us, ""_us, ""_us };
+                static constexpr quantity_exponents exponents{ 1, 0, 0 };
+                static constexpr quantity_factors factors{ Prefix::factor, 0.0L, 0.0L };
+                static constexpr quantity_symbols symbols{ Prefix::symbol + "m"_us, ""_us, ""_us };
             };
 
             using quektometer = basic_meter<quekto    >;

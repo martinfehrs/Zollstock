@@ -4,105 +4,105 @@
 namespace zollstock
 {
 
-    static_assert(quektosecond::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(quektosecond::factors   == unit_factors  { 0.0L   , 1e-30L , 0.0L  });
-    static_assert(quektosecond::symbols   == unit_symbols  { ""_us  , "qs"_us, ""_us });
+    static_assert(quektosecond::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(quektosecond::factors   == quantity_factors  { 0.0L   , 1e-30L , 0.0L  });
+    static_assert(quektosecond::symbols   == quantity_symbols  { ""_us  , "qs"_us, ""_us });
 
-    static_assert(rontosecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(rontosecond ::factors   == unit_factors  { 0.0L   , 1e-27L , 0.0L  });
-    static_assert(rontosecond ::symbols   == unit_symbols  { ""_us  , "rs"_us, ""_us });
+    static_assert(rontosecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(rontosecond ::factors   == quantity_factors  { 0.0L   , 1e-27L , 0.0L  });
+    static_assert(rontosecond ::symbols   == quantity_symbols  { ""_us  , "rs"_us, ""_us });
 
-    static_assert(yoktosecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(yoktosecond ::factors   == unit_factors  { 0.0L   , 1e-24L , 0.0L  });
-    static_assert(yoktosecond ::symbols   == unit_symbols  { ""_us  , "ys"_us, ""_us });
+    static_assert(yoktosecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(yoktosecond ::factors   == quantity_factors  { 0.0L   , 1e-24L , 0.0L  });
+    static_assert(yoktosecond ::symbols   == quantity_symbols  { ""_us  , "ys"_us, ""_us });
 
-    static_assert(zeptosecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(zeptosecond ::factors   == unit_factors  { 0.0L   , 1e-21L , 0.0L  });
-    static_assert(zeptosecond ::symbols   == unit_symbols  { ""_us  , "zs"_us, ""_us });
+    static_assert(zeptosecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(zeptosecond ::factors   == quantity_factors  { 0.0L   , 1e-21L , 0.0L  });
+    static_assert(zeptosecond ::symbols   == quantity_symbols  { ""_us  , "zs"_us, ""_us });
 
-    static_assert(attosecond  ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(attosecond  ::factors   == unit_factors  { 0.0L   , 1e-18L , 0.0L  });
-    static_assert(attosecond  ::symbols   == unit_symbols  { ""_us  , "as"_us, ""_us });
+    static_assert(attosecond  ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(attosecond  ::factors   == quantity_factors  { 0.0L   , 1e-18L , 0.0L  });
+    static_assert(attosecond  ::symbols   == quantity_symbols  { ""_us  , "as"_us, ""_us });
 
-    static_assert(femtosecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(femtosecond ::factors   == unit_factors  { 0.0L   , 1e-15L , 0.0L  });
-    static_assert(femtosecond ::symbols   == unit_symbols  { ""_us  , "fs"_us, ""_us });
+    static_assert(femtosecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(femtosecond ::factors   == quantity_factors  { 0.0L   , 1e-15L , 0.0L  });
+    static_assert(femtosecond ::symbols   == quantity_symbols  { ""_us  , "fs"_us, ""_us });
 
-    static_assert(picosecond  ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(picosecond  ::factors   == unit_factors  { 0.0L   , 1e-12L , 0.0L  });
-    static_assert(picosecond  ::symbols   == unit_symbols  { ""_us  , "ps"_us, ""_us });
+    static_assert(picosecond  ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(picosecond  ::factors   == quantity_factors  { 0.0L   , 1e-12L , 0.0L  });
+    static_assert(picosecond  ::symbols   == quantity_symbols  { ""_us  , "ps"_us, ""_us });
 
-    static_assert(nanosecond  ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(nanosecond  ::factors   == unit_factors  { 0.0L    , 1e-9L , 0.0L  });
-    static_assert(nanosecond  ::symbols   == unit_symbols  { ""_us  , "ns"_us, ""_us });
+    static_assert(nanosecond  ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(nanosecond  ::factors   == quantity_factors  { 0.0L    , 1e-9L , 0.0L  });
+    static_assert(nanosecond  ::symbols   == quantity_symbols  { ""_us  , "ns"_us, ""_us });
 
-    static_assert(microsecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(microsecond ::factors   == unit_factors  { 0.0L    , 1e-6L , 0.0L  });
-    static_assert(microsecond ::symbols   == unit_symbols  { ""_us, "mics"_us, ""_us });
+    static_assert(microsecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(microsecond ::factors   == quantity_factors  { 0.0L    , 1e-6L , 0.0L  });
+    static_assert(microsecond ::symbols   == quantity_symbols  { ""_us, "mics"_us, ""_us });
 
-    static_assert(millisecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(millisecond ::factors   == unit_factors  { 0.0L    , 1e-3L , 0.0L  });
-    static_assert(millisecond ::symbols   == unit_symbols  { ""_us  , "ms"_us, ""_us });
+    static_assert(millisecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(millisecond ::factors   == quantity_factors  { 0.0L    , 1e-3L , 0.0L  });
+    static_assert(millisecond ::symbols   == quantity_symbols  { ""_us  , "ms"_us, ""_us });
 
-    static_assert(centisecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(centisecond ::factors   == unit_factors  { 0.0L    , 1e-2L , 0.0L  });
-    static_assert(centisecond ::symbols   == unit_symbols  { ""_us  , "cs"_us, ""_us });
+    static_assert(centisecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(centisecond ::factors   == quantity_factors  { 0.0L    , 1e-2L , 0.0L  });
+    static_assert(centisecond ::symbols   == quantity_symbols  { ""_us  , "cs"_us, ""_us });
 
-    static_assert(decisecond  ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(decisecond  ::factors   == unit_factors  { 0.0L    , 1e-1L , 0.0L  });
-    static_assert(decisecond  ::symbols   == unit_symbols  { ""_us  , "ds"_us, ""_us });
+    static_assert(decisecond  ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(decisecond  ::factors   == quantity_factors  { 0.0L    , 1e-1L , 0.0L  });
+    static_assert(decisecond  ::symbols   == quantity_symbols  { ""_us  , "ds"_us, ""_us });
 
-    static_assert(second      ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(second      ::factors   == unit_factors  { 0.0L     , 1e0L , 0.0L  });
-    static_assert(second      ::symbols   == unit_symbols  { ""_us   , "s"_us, ""_us });
+    static_assert(second      ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(second      ::factors   == quantity_factors  { 0.0L     , 1e0L , 0.0L  });
+    static_assert(second      ::symbols   == quantity_symbols  { ""_us   , "s"_us, ""_us });
 
-    static_assert(decasecond  ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(decasecond  ::factors   == unit_factors  { 0.0L     , 1e1L , 0.0L  });
-    static_assert(decasecond  ::symbols   == unit_symbols  { ""_us , "das"_us, ""_us });
+    static_assert(decasecond  ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(decasecond  ::factors   == quantity_factors  { 0.0L     , 1e1L , 0.0L  });
+    static_assert(decasecond  ::symbols   == quantity_symbols  { ""_us , "das"_us, ""_us });
 
-    static_assert(hectosecond ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(hectosecond ::factors   == unit_factors  { 0.0L     , 1e2L , 0.0L  });
-    static_assert(hectosecond ::symbols   == unit_symbols  { ""_us  , "hs"_us, ""_us });
+    static_assert(hectosecond ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(hectosecond ::factors   == quantity_factors  { 0.0L     , 1e2L , 0.0L  });
+    static_assert(hectosecond ::symbols   == quantity_symbols  { ""_us  , "hs"_us, ""_us });
 
-    static_assert(kilosecond  ::exponents == unit_exponents{ 0        , 1    , 0     });
-    static_assert(kilosecond  ::factors   == unit_factors  { 0.0L     , 1e3L , 0.0L  });
-    static_assert(kilosecond  ::symbols   == unit_symbols  { ""_us  , "ks"_us, ""_us });
+    static_assert(kilosecond  ::exponents == quantity_exponents{ 0        , 1    , 0     });
+    static_assert(kilosecond  ::factors   == quantity_factors  { 0.0L     , 1e3L , 0.0L  });
+    static_assert(kilosecond  ::symbols   == quantity_symbols  { ""_us  , "ks"_us, ""_us });
 
-    static_assert(megasecond  ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(megasecond  ::factors   == unit_factors  { 0.0L , 1e6L   , 0.0L  });
-    static_assert(megasecond  ::symbols   == unit_symbols  { ""_us, "Ms"_us, ""_us });
+    static_assert(megasecond  ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(megasecond  ::factors   == quantity_factors  { 0.0L , 1e6L   , 0.0L  });
+    static_assert(megasecond  ::symbols   == quantity_symbols  { ""_us, "Ms"_us, ""_us });
 
-    static_assert(gigasecond  ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(gigasecond  ::factors   == unit_factors  { 0.0L , 1e9L   , 0.0L  });
-    static_assert(gigasecond  ::symbols   == unit_symbols  { ""_us, "Gs"_us, ""_us });
+    static_assert(gigasecond  ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(gigasecond  ::factors   == quantity_factors  { 0.0L , 1e9L   , 0.0L  });
+    static_assert(gigasecond  ::symbols   == quantity_symbols  { ""_us, "Gs"_us, ""_us });
 
-    static_assert(terasecond  ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(terasecond  ::factors   == unit_factors  { 0.0L , 1e12L  , 0.0L  });
-    static_assert(terasecond  ::symbols   == unit_symbols  { ""_us, "Ts"_us, ""_us });
+    static_assert(terasecond  ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(terasecond  ::factors   == quantity_factors  { 0.0L , 1e12L  , 0.0L  });
+    static_assert(terasecond  ::symbols   == quantity_symbols  { ""_us, "Ts"_us, ""_us });
 
-    static_assert(petasecond  ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(petasecond  ::factors   == unit_factors  { 0.0L , 1e15L  , 0.0L  });
-    static_assert(petasecond  ::symbols   == unit_symbols  { ""_us, "Ps"_us, ""_us });
+    static_assert(petasecond  ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(petasecond  ::factors   == quantity_factors  { 0.0L , 1e15L  , 0.0L  });
+    static_assert(petasecond  ::symbols   == quantity_symbols  { ""_us, "Ps"_us, ""_us });
 
-    static_assert(exasecond   ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(exasecond   ::factors   == unit_factors  { 0.0L , 1e18L  , 0.0L  });
-    static_assert(exasecond   ::symbols   == unit_symbols  { ""_us, "Es"_us, ""_us });
+    static_assert(exasecond   ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(exasecond   ::factors   == quantity_factors  { 0.0L , 1e18L  , 0.0L  });
+    static_assert(exasecond   ::symbols   == quantity_symbols  { ""_us, "Es"_us, ""_us });
 
-    static_assert(zettasecond ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(zettasecond ::factors   == unit_factors  { 0.0L , 1e21L  , 0.0L  });
-    static_assert(zettasecond ::symbols   == unit_symbols  { ""_us, "Zs"_us, ""_us });
+    static_assert(zettasecond ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(zettasecond ::factors   == quantity_factors  { 0.0L , 1e21L  , 0.0L  });
+    static_assert(zettasecond ::symbols   == quantity_symbols  { ""_us, "Zs"_us, ""_us });
 
-    static_assert(yottasecond ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(yottasecond ::factors   == unit_factors  { 0.0L , 1e24L  , 0.0L  });
-    static_assert(yottasecond ::symbols   == unit_symbols  { ""_us, "Ys"_us, ""_us });
+    static_assert(yottasecond ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(yottasecond ::factors   == quantity_factors  { 0.0L , 1e24L  , 0.0L  });
+    static_assert(yottasecond ::symbols   == quantity_symbols  { ""_us, "Ys"_us, ""_us });
 
-    static_assert(ronnasecond ::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(ronnasecond ::factors   == unit_factors  { 0.0L , 1e27L  , 0.0L  });
-    static_assert(ronnasecond ::symbols   == unit_symbols  { ""_us, "Rs"_us, ""_us });
+    static_assert(ronnasecond ::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(ronnasecond ::factors   == quantity_factors  { 0.0L , 1e27L  , 0.0L  });
+    static_assert(ronnasecond ::symbols   == quantity_symbols  { ""_us, "Rs"_us, ""_us });
 
-    static_assert(quettasecond::exponents == unit_exponents{ 0    , 1      , 0     });
-    static_assert(quettasecond::factors   == unit_factors  { 0.0L , 1e30L  , 0.0L  });
-    static_assert(quettasecond::symbols   == unit_symbols  { ""_us, "Qs"_us, ""_us });
+    static_assert(quettasecond::exponents == quantity_exponents{ 0    , 1      , 0     });
+    static_assert(quettasecond::factors   == quantity_factors  { 0.0L , 1e30L  , 0.0L  });
+    static_assert(quettasecond::symbols   == quantity_symbols  { ""_us, "Qs"_us, ""_us });
 
 
     static_assert(qs   == quektosecond{});

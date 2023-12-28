@@ -125,7 +125,7 @@ namespace zollstock
         >
         [[nodiscard]] constexpr scalar<ThatUnit> as() const noexcept
         {
-            return this->as_impl<ThatUnit>(make_dimension_index_sequence{});
+            return this->as_impl<ThatUnit>(make_quantity_index_sequence{});
         }
 
         template <
