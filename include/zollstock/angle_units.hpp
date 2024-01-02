@@ -10,6 +10,13 @@
 namespace zollstock
 {
 
+    namespace detail
+    {
+
+        inline constexpr long double pi{ 3.14159265358979323846264338327950288419716939937510L };
+
+    }
+
     inline namespace unit
     {
 
@@ -37,7 +44,7 @@ namespace zollstock
             struct degree
             {
                 static constexpr quantity_exponents exponents{ 0, 0, 1 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, 3.1415926L/180.0L };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, detail::pi/180.0L };
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "deg"_us };
             };
 
@@ -155,7 +162,7 @@ namespace zollstock
     inline namespace math_constants
     {
 
-        inline constexpr scalar<radian> pi_rad{ 3.14159265358979323846264338327950288419716939937510L };
+        inline constexpr scalar<radian> pi_rad{ detail::pi };
 
     }
 
