@@ -21,9 +21,9 @@ namespace zollstock
             {
                 static_assert(is_prefix_v<Prefix>);
 
-                static constexpr unit_exponents exponents{ 0, 0, 1 };
-                static constexpr unit_factors factors{ 0.0L, 0.0L, Prefix::factor };
-                static constexpr unit_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
+                static constexpr quantity_exponents exponents{ 0, 0, 1 };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor };
+                static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
             };
 
             using picoradian  = basic_radian<pico      >;
@@ -36,9 +36,9 @@ namespace zollstock
 
             struct degree
             {
-                static constexpr unit_exponents exponents{ 0, 0, 1 };
-                static constexpr unit_factors factors{ 0.0L, 0.0L, 3.1415926L/180.0L };
-                static constexpr unit_symbols symbols{ ""_us, ""_us, "deg"_us };
+                static constexpr quantity_exponents exponents{ 0, 0, 1 };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, 3.1415926L/180.0L };
+                static constexpr quantity_symbols symbols{ ""_us, ""_us, "deg"_us };
             };
 
         }
