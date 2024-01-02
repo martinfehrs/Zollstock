@@ -2,9 +2,9 @@
 #define __ZOLLSTOCK_ANGLE_UNITS_HPP__
 
 
-#include "scalar.hpp"
-#include "unit_prefix_concept.hpp"
-#include "si_prefixes.hpp"
+#include <zollstock/scalar.hpp>
+#include <zollstock/unit_prefix_concept.hpp>
+#include <zollstock/si_prefixes.hpp>
 
 
 namespace zollstock
