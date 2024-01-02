@@ -155,7 +155,7 @@ namespace zollstock
     inline namespace math_constants
     {
 
-        inline constexpr scalar<radian> pi{ 3.14159265358979323846264338327950288419716939937510L };
+        inline constexpr scalar<radian> pi_rad{ 3.14159265358979323846264338327950288419716939937510L };
 
     }
 
