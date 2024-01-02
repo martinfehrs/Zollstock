@@ -2,9 +2,9 @@
 #define __ZOLLSTOCK_UNIT_CONCEPT_HPP__
 
 
-#include "quantity_exponents.hpp"
-#include "quantity_factors.hpp"
-#include "quantity_symbols.hpp"
+#include <zollstock/quantity_exponents.hpp>
+#include <zollstock/quantity_factors.hpp>
+#include <zollstock/quantity_symbols.hpp>
 
 #include <cassert>
 #include <cmath>

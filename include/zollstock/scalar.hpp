@@ -2,8 +2,8 @@
 #define __ZOLLSTOCK_SCALAR_HPP__
 
 
-#include "unit_concept.hpp"
-#include "unit_algorithms.hpp"
+#include <zollstock/unit_concept.hpp>
+#include <zollstock/unit_algorithms.hpp>
 
 
 namespace zollstock

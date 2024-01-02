@@ -2,8 +2,8 @@
 #define __ZOLLSTOCK_QUANTITY_SYMBOLS_HPP__
 
 
-#include "unit_symbol.hpp"
-#include "quantity_data_concept.hpp"
+#include <zollstock/unit_symbol.hpp>
+#include <zollstock/quantity_data_concept.hpp>
 
 #include <cstddef>
 

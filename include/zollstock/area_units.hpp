@@ -2,8 +2,8 @@
 #define __ZOLLSTOCK_AREA_UNITS_HPP__
 
 
-#include "length_units.hpp"
-#include "scalar.hpp"
+#include <zollstock/length_units.hpp>
+#include <zollstock/scalar.hpp>
 
 
 namespace zollstock

@@ -2,8 +2,8 @@
 #define __ZOLLSTOCK_UNIT_ALGORITHMS_HPP__
 
 
-#include "unit_concept.hpp"
-#include "dimensionless_units.hpp"
+#include <zollstock/unit_concept.hpp>
+#include <zollstock/dimensionless_units.hpp>
 
 #include <string>
 #include <iostream>

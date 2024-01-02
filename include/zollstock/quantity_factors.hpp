@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_QUANTITY_FACTORS_HPP__
 
 
-#include "quantity_data_concept.hpp"
+#include <zollstock/quantity_data_concept.hpp>
 
 
 namespace zollstock

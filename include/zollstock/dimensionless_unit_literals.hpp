@@ -2,8 +2,8 @@
 #define __ZOLLSTOCK_DIMENSIONLESS_UNIT_LITERALS_HPP__
 
 
-#include "scalar.hpp"
-#include "dimensionless_units.hpp"
+#include <zollstock/scalar.hpp>
+#include <zollstock/dimensionless_units.hpp>
 
 
 namespace zollstock
