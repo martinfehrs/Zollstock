@@ -76,5 +76,6 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp"
-    }
+    },
+    "C_Cpp.intelliSenseEngine": "Tag Parser"
 }
