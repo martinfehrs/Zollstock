@@ -10,7 +10,7 @@
 namespace zollstock
 {
 
-    namespace detail
+    inline namespace math_constants
     {
 
         inline constexpr long double pi{ 3.14159265358979323846264338327950288419716939937510L };
@@ -33,18 +33,24 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
             };
 
-            using picoradian  = basic_radian<pico      >;
-            using nanoradian  = basic_radian<nano      >;
-            using microradian = basic_radian<micro     >;
-            using milliradian = basic_radian<milli     >;
-            using centiradian = basic_radian<centi     >;
-            using deciradian  = basic_radian<deci      >;
-            using radian      = basic_radian<unprefixed>;
+            using quektoradian = basic_radian<quekto    >;
+            using rontoradiab  = basic_radian<ronto     >;
+            using yoktoradian  = basic_radian<yokto     >;
+            using zeptoradian  = basic_radian<zepto     >;
+            using attoradian   = basic_radian<atto      >;
+            using femtoradian  = basic_radian<femto     >;
+            using picoradian   = basic_radian<pico      >;
+            using nanoradian   = basic_radian<nano      >;
+            using microradian  = basic_radian<micro     >;
+            using milliradian  = basic_radian<milli     >;
+            using centiradian  = basic_radian<centi     >;
+            using deciradian   = basic_radian<deci      >;
+            using radian       = basic_radian<unprefixed>;
 
             struct degree
             {
                 static constexpr quantity_exponents exponents{ 0, 0, 1 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, detail::pi/180.0L };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/180.0L };
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "deg"_us };
             };
 
@@ -162,7 +168,7 @@ namespace zollstock
     inline namespace math_constants
     {
 
-        inline constexpr scalar<radian> pi_rad{ detail::pi };
+        inline constexpr scalar<radian> pi_rad{ pi };
 
     }
 

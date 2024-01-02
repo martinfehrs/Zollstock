@@ -33,7 +33,7 @@ namespace zollstock
     static_assert(radian     ::symbols   == quantity_symbols  { ""_us , ""_us, "rad"_us          });
 
     static_assert(degree     ::exponents == quantity_exponents{ 0     , 0    , 1                 });
-    static_assert(degree     ::factors   == quantity_factors  { 0.0L  , 0.0L , detail::pi/180.0L });
+    static_assert(degree     ::factors   == quantity_factors  { 0.0L  , 0.0L , pi/180.0L         });
     static_assert(degree     ::symbols   == quantity_symbols  { ""_us , ""_us, "deg"_us          });
 
 
