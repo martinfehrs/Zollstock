@@ -65,31 +65,7 @@ namespace zollstock
         inline namespace literals
         {
 
-            ZOLLSTOCK_DEFINE_LITERAL(quektometer, qm  )
-            ZOLLSTOCK_DEFINE_LITERAL(rontometer , rm  )
-            ZOLLSTOCK_DEFINE_LITERAL(yoktometer , ym  )
-            ZOLLSTOCK_DEFINE_LITERAL(zeptometer , zm  )
-            ZOLLSTOCK_DEFINE_LITERAL(attometer  , am  )
-            ZOLLSTOCK_DEFINE_LITERAL(femtometer , fm  )
-            ZOLLSTOCK_DEFINE_LITERAL(picometer  , pm  )
-            ZOLLSTOCK_DEFINE_LITERAL(nanometer  , nm  )
-            ZOLLSTOCK_DEFINE_LITERAL(micrometer , micm)
-            ZOLLSTOCK_DEFINE_LITERAL(millimeter , mm  )
-            ZOLLSTOCK_DEFINE_LITERAL(centimeter , cm  )
-            ZOLLSTOCK_DEFINE_LITERAL(decimeter  , dm  )
-            ZOLLSTOCK_DEFINE_LITERAL(meter      , m   )
-            ZOLLSTOCK_DEFINE_LITERAL(decameter  , dam )
-            ZOLLSTOCK_DEFINE_LITERAL(hectometer , hm  )
-            ZOLLSTOCK_DEFINE_LITERAL(kilometer  , km  )
-            ZOLLSTOCK_DEFINE_LITERAL(megameter  , Mm  )
-            ZOLLSTOCK_DEFINE_LITERAL(gigameter  , Gm  )
-            ZOLLSTOCK_DEFINE_LITERAL(terameter  , Tm  )
-            ZOLLSTOCK_DEFINE_LITERAL(petameter  , Pm  )
-            ZOLLSTOCK_DEFINE_LITERAL(exameter   , Em  )
-            ZOLLSTOCK_DEFINE_LITERAL(zettameter , Zm  )
-            ZOLLSTOCK_DEFINE_LITERAL(yottameter , Ym  )
-            ZOLLSTOCK_DEFINE_LITERAL(ronnameter , Rm  )
-            ZOLLSTOCK_DEFINE_LITERAL(quettameter, Qm  )
+            ZOLLSTOCK_DEFINE_SI_LITERALS(, meter, m)
 
         }
 

@@ -54,31 +54,7 @@ namespace zollstock
         inline namespace literals
         {
 
-            ZOLLSTOCK_DEFINE_LITERAL(square_quektometer, qm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_rontometer , rm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_yoktometer , ym2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_zeptometer , zm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_attometer  , am2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_femtometer , fm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_picometer  , pm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_nanometer  , nm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_micrometer , micm2)
-            ZOLLSTOCK_DEFINE_LITERAL(square_millimeter , mm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_centimeter , cm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_decimeter  , dm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_meter      , m2   )
-            ZOLLSTOCK_DEFINE_LITERAL(square_decameter  , dam2 )
-            ZOLLSTOCK_DEFINE_LITERAL(square_hectometer , hm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_kilometer  , km2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_megameter  , Mm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_gigameter  , Gm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_terameter  , Tm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_petameter  , Pm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_exameter   , Em2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_zettameter , Zm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_yottameter , Ym2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_ronnameter , Rm2  )
-            ZOLLSTOCK_DEFINE_LITERAL(square_quettameter, Qm2  )
+            ZOLLSTOCK_DEFINE_SI_LITERALS(square_, meter, m2)
 
         }
 

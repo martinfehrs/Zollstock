@@ -81,31 +81,7 @@ namespace zollstock
         inline namespace literals
         {
 
-            ZOLLSTOCK_DEFINE_LITERAL(quektoradian, qrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(rontoradian , rrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(yoktoradian , yrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(zeptoradian , zrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(attoradian  , arad  )
-            ZOLLSTOCK_DEFINE_LITERAL(femtoradian , frad  )
-            ZOLLSTOCK_DEFINE_LITERAL(picoradian  , prad  )
-            ZOLLSTOCK_DEFINE_LITERAL(nanoradian  , nrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(microradian , micrad)
-            ZOLLSTOCK_DEFINE_LITERAL(milliradian , mrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(centiradian , crad  )
-            ZOLLSTOCK_DEFINE_LITERAL(deciradian  , drad  )
-            ZOLLSTOCK_DEFINE_LITERAL(radian      , rad   )
-            ZOLLSTOCK_DEFINE_LITERAL(decaradian  , darad )
-            ZOLLSTOCK_DEFINE_LITERAL(hectoradian , hrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(kiloradian  , krad  )
-            ZOLLSTOCK_DEFINE_LITERAL(megaradian  , Mrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(gigaradian  , Grad  )
-            ZOLLSTOCK_DEFINE_LITERAL(teraradian  , Trad  )
-            ZOLLSTOCK_DEFINE_LITERAL(petaradian  , Prad  )
-            ZOLLSTOCK_DEFINE_LITERAL(exaradian   , Erad  )
-            ZOLLSTOCK_DEFINE_LITERAL(zettaradian , Zrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(yottaradian , Yrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(ronnaradian , Rrad  )
-            ZOLLSTOCK_DEFINE_LITERAL(quettaradian, Qrad  )
+            ZOLLSTOCK_DEFINE_SI_LITERALS(,radian, rad)
 
             ZOLLSTOCK_DEFINE_LITERAL(degree      , deg   )
 

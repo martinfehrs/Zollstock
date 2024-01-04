@@ -56,31 +56,7 @@ namespace zollstock
         inline namespace literals
         {
 
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_quektometer, qm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_rontometer , rm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_yoktometer , ym3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_zeptometer , zm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_attometer  , am3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_femtometer , fm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_picometer  , pm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_nanometer  , nm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_micrometer , micm3)
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_millimeter , mm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_centimeter , cm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_decimeter  , dm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_meter      , m3   )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_decameter  , dam3 )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_hectometer , hm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_kilometer  , km3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_megameter  , Mm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_gigameter  , Gm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_terameter  , Tm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_petameter  , Pm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_exameter   , Em3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_zettameter , Zm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_yottameter , Ym3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_ronnameter , Rm3  )
-            ZOLLSTOCK_DEFINE_LITERAL(cubic_quettameter, Qm3  )
+            ZOLLSTOCK_DEFINE_SI_LITERALS(cubic_, meter, m3)
 
         }
 
