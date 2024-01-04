@@ -5,6 +5,7 @@
 #include <zollstock/scalar.hpp>
 #include <zollstock/unit_prefix_concept.hpp>
 #include <zollstock/si_prefixes.hpp>
+#include <zollstock/definition_helpers.hpp>
 
 
 namespace zollstock
@@ -121,323 +122,36 @@ namespace zollstock
         inline namespace literals
         {
 
-            [[nodiscard]] constexpr auto operator""_qs(long double val) noexcept
-            {
-                return scalar<quektosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_qs(unsigned long long int val) noexcept
-            {
-                return scalar<quektosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_rs(long double val) noexcept
-            {
-                return scalar<rontosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_rs(unsigned long long int val) noexcept
-            {
-                return scalar<rontosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ys(long double val) noexcept
-            {
-                return scalar<yoktosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ys(unsigned long long int val) noexcept
-            {
-                return scalar<yoktosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_zs(long double val) noexcept
-            {
-                return scalar<zeptosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_zs(unsigned long long int val) noexcept
-            {
-                return scalar<zeptosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_as(long double val) noexcept
-            {
-                return scalar<attosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_as(unsigned long long int val) noexcept
-            {
-                return scalar<attosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_fs(long double val) noexcept
-            {
-                return scalar<femtosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_fs(unsigned long long int val) noexcept
-            {
-                return scalar<femtosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ps(long double val) noexcept
-            {
-                return scalar<picosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ps(unsigned long long int val) noexcept
-            {
-                return scalar<picosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ns(long double val) noexcept
-            {
-                return scalar<nanosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ns(unsigned long long int val) noexcept
-            {
-                return scalar<nanosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_mics(long double val) noexcept
-            {
-                return scalar<microsecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_mics(unsigned long long int val) noexcept
-            {
-                return scalar<microsecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ms(long double val) noexcept
-            {
-                return scalar<millisecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ms(unsigned long long int val) noexcept
-            {
-                return scalar<millisecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_cs(long double val) noexcept
-            {
-                return scalar<centisecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_cs(unsigned long long int val) noexcept
-            {
-                return scalar<centisecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ds(long double val) noexcept
-            {
-                return scalar<decisecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ds(unsigned long long int val) noexcept
-            {
-                return scalar<decisecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_s(long double val) noexcept
-            {
-                return scalar<second>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_s(unsigned long long int val) noexcept
-            {
-                return scalar<second>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_das(long double val) noexcept
-            {
-                return scalar<decasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_das(unsigned long long int val) noexcept
-            {
-                return scalar<decasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_hs(long double val) noexcept
-            {
-                return scalar<hectosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_hs(unsigned long long int val) noexcept
-            {
-                return scalar<hectosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ks(long double val) noexcept
-            {
-                return scalar<kilosecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ks(unsigned long long int val) noexcept
-            {
-                return scalar<kilosecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Ms(long double val) noexcept
-            {
-                return scalar<megasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Ms(unsigned long long int val) noexcept
-            {
-                return scalar<megasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Gs(long double val) noexcept
-            {
-                return scalar<gigasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Gs(unsigned long long int val) noexcept
-            {
-                return scalar<gigasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Ts(long double val) noexcept
-            {
-                return scalar<terasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Ts(unsigned long long int val) noexcept
-            {
-                return scalar<terasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Ps(long double val) noexcept
-            {
-                return scalar<petasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Ps(unsigned long long int val) noexcept
-            {
-                return scalar<petasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Es(long double val) noexcept
-            {
-                return scalar<exasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Es(unsigned long long int val) noexcept
-            {
-                return scalar<exasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Zs(long double val) noexcept
-            {
-                return scalar<zettasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Zs(unsigned long long int val) noexcept
-            {
-                return scalar<zettasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Ys(long double val) noexcept
-            {
-                return scalar<yottasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Ys(unsigned long long int val) noexcept
-            {
-                return scalar<yottasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Rs(long double val) noexcept
-            {
-                return scalar<ronnasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Rs(unsigned long long int val) noexcept
-            {
-                return scalar<ronnasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Qs(long double val) noexcept
-            {
-                return scalar<quettasecond>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Qs(unsigned long long int val) noexcept
-            {
-                return scalar<quettasecond>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_min(long double val) noexcept
-            {
-                return scalar<minute>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_min(unsigned long long int val) noexcept
-            {
-                return scalar<minute>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_h(long double val) noexcept
-            {
-                return scalar<hour>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_h(unsigned long long int val) noexcept
-            {
-                return scalar<hour>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_d(long double val) noexcept
-            {
-                return scalar<day>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_d(unsigned long long int val) noexcept
-            {
-                return scalar<day>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_a(long double val) noexcept
-            {
-                return scalar<year>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_a(unsigned long long int val) noexcept
-            {
-                return scalar<year>{ static_cast<double>(val) };
-            }
+            ZOLLSTOCK_DEFINE_LITERAL(quektosecond, qs  )
+            ZOLLSTOCK_DEFINE_LITERAL(rontosecond , rs  )
+            ZOLLSTOCK_DEFINE_LITERAL(yoktosecond , ys  )
+            ZOLLSTOCK_DEFINE_LITERAL(zeptosecond , zs  )
+            ZOLLSTOCK_DEFINE_LITERAL(attosecond  , as  )
+            ZOLLSTOCK_DEFINE_LITERAL(femtosecond , fs  )
+            ZOLLSTOCK_DEFINE_LITERAL(picosecond  , ps  )
+            ZOLLSTOCK_DEFINE_LITERAL(nanosecond  , ns  )
+            ZOLLSTOCK_DEFINE_LITERAL(microsecond , mics)
+            ZOLLSTOCK_DEFINE_LITERAL(millisecond , ms  )
+            ZOLLSTOCK_DEFINE_LITERAL(centisecond , cs  )
+            ZOLLSTOCK_DEFINE_LITERAL(decisecond  , ds  )
+            ZOLLSTOCK_DEFINE_LITERAL(second      , s   )
+            ZOLLSTOCK_DEFINE_LITERAL(decasecond  , das )
+            ZOLLSTOCK_DEFINE_LITERAL(hectosecond , hs  )
+            ZOLLSTOCK_DEFINE_LITERAL(kilosecond  , ks  )
+            ZOLLSTOCK_DEFINE_LITERAL(megasecond  , Ms  )
+            ZOLLSTOCK_DEFINE_LITERAL(gigasecond  , Gs  )
+            ZOLLSTOCK_DEFINE_LITERAL(terasecond  , Ts  )
+            ZOLLSTOCK_DEFINE_LITERAL(petasecond  , Ps  )
+            ZOLLSTOCK_DEFINE_LITERAL(exasecond   , Es  )
+            ZOLLSTOCK_DEFINE_LITERAL(zettasecond , Zs  )
+            ZOLLSTOCK_DEFINE_LITERAL(yottasecond , Ys  )
+            ZOLLSTOCK_DEFINE_LITERAL(ronnasecond , Rs  )
+            ZOLLSTOCK_DEFINE_LITERAL(quettasecond, Qs  )
+
+            ZOLLSTOCK_DEFINE_LITERAL(minute      , min )
+            ZOLLSTOCK_DEFINE_LITERAL(hour        , h   )
+            ZOLLSTOCK_DEFINE_LITERAL(day         , d   )
+            ZOLLSTOCK_DEFINE_LITERAL(year        , a   )
 
         }
 

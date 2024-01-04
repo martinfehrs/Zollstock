@@ -4,6 +4,7 @@
 
 #include <zollstock/length_units.hpp>
 #include <zollstock/scalar.hpp>
+#include <zollstock/definition_helpers.hpp>
 
 
 namespace zollstock
@@ -77,279 +78,31 @@ namespace zollstock
         inline namespace literals
         {
 
-            [[nodiscard]] constexpr auto operator""_qm2(long double val) noexcept
-            {
-                return scalar<square_quektometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_qm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_quektometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_rm2(long double val) noexcept
-            {
-                return scalar<square_rontometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_rm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_rontometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ym2(long double val) noexcept
-            {
-                return scalar<square_yoktometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ym2(unsigned long long int val) noexcept
-            {
-                return scalar<square_yoktometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_zm2(long double val) noexcept
-            {
-                return scalar<square_zeptometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_zm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_zeptometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_am2(long double val) noexcept
-            {
-                return scalar<square_attometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_am2(unsigned long long int val) noexcept
-            {
-                return scalar<square_attometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_fm2(long double val) noexcept
-            {
-                return scalar<square_femtometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_fm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_femtometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_pm2(long double val) noexcept
-            {
-                return scalar<square_picometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_pm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_picometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_nm2(long double val) noexcept
-            {
-                return scalar<square_nanometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_nm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_nanometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_micm2(long double val) noexcept
-            {
-                return scalar<square_micrometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_micm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_micrometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_mm2(long double val) noexcept
-            {
-                return scalar<square_millimeter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_mm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_millimeter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_cm2(long double val) noexcept
-            {
-                return scalar<square_centimeter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_cm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_centimeter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_dm2(long double val) noexcept
-            {
-                return scalar<square_decimeter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_dm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_decimeter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_m2(long double val) noexcept
-            {
-                return scalar<square_meter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_m2(unsigned long long int val) noexcept
-            {
-                return scalar<square_meter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_dam2(long double val) noexcept
-            {
-                return scalar<square_decameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_dam2(unsigned long long int val) noexcept
-            {
-                return scalar<square_decameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_hm2(long double val) noexcept
-            {
-                return scalar<square_hectometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_hm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_hectometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_km2(long double val) noexcept
-            {
-                return scalar<square_kilometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_km2(unsigned long long int val) noexcept
-            {
-                return scalar<square_kilometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Mm2(long double val) noexcept
-            {
-                return scalar<square_megameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Mm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_megameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Gm2(long double val) noexcept
-            {
-                return scalar<square_gigameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Gm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_gigameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Tm2(long double val) noexcept
-            {
-                return scalar<square_terameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Tm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_terameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Pm2(long double val) noexcept
-            {
-                return scalar<square_petameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Pm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_petameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Em2(long double val) noexcept
-            {
-                return scalar<square_exameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Em2(unsigned long long int val) noexcept
-            {
-                return scalar<square_exameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Zm2(long double val) noexcept
-            {
-                return scalar<square_zettameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Zm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_zettameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Ym2(long double val) noexcept
-            {
-                return scalar<square_yottameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Ym2(unsigned long long int val) noexcept
-            {
-                return scalar<square_yottameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Rm2(long double val) noexcept
-            {
-                return scalar<square_ronnameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Rm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_ronnameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Qm2(long double val) noexcept
-            {
-                return scalar<square_quettameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Qm2(unsigned long long int val) noexcept
-            {
-                return scalar<square_quettameter>{ static_cast<double>(val) };
-            }
+            ZOLLSTOCK_DEFINE_LITERAL(square_quektometer, qm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_rontometer , rm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_yoktometer , ym2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_zeptometer , zm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_attometer  , am2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_femtometer , fm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_picometer  , pm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_nanometer  , nm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_micrometer , micm2)
+            ZOLLSTOCK_DEFINE_LITERAL(square_millimeter , mm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_centimeter , cm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_decimeter  , dm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_meter      , m2   )
+            ZOLLSTOCK_DEFINE_LITERAL(square_decameter  , dam2 )
+            ZOLLSTOCK_DEFINE_LITERAL(square_hectometer , hm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_kilometer  , km2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_megameter  , Mm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_gigameter  , Gm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_terameter  , Tm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_petameter  , Pm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_exameter   , Em2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_zettameter , Zm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_yottameter , Ym2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_ronnameter , Rm2  )
+            ZOLLSTOCK_DEFINE_LITERAL(square_quettameter, Qm2  )
 
         }
 

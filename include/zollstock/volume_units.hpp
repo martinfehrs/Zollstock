@@ -6,6 +6,7 @@
 #include <zollstock/scalar.hpp>
 #include <zollstock/length_units.hpp>
 #include <zollstock/area_units.hpp>
+#include <zollstock/definition_helpers.hpp>
 
 
 namespace zollstock
@@ -74,285 +75,36 @@ namespace zollstock
             inline constexpr cubic_ronnameter  Rm3  {};
             inline constexpr cubic_quettameter Qm3  {};
 
-
         }
 
         inline namespace literals
         {
 
-            [[nodiscard]] constexpr auto operator""_qm3(long double val) noexcept
-            {
-                return scalar<cubic_quektometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_qm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_quektometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_rm3(long double val) noexcept
-            {
-                return scalar<cubic_rontometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_rm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_rontometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_ym3(long double val) noexcept
-            {
-                return scalar<cubic_yoktometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_ym3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_yoktometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_zm3(long double val) noexcept
-            {
-                return scalar<cubic_zeptometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_zm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_zeptometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_am3(long double val) noexcept
-            {
-                return scalar<cubic_attometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_am3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_attometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_fm3(long double val) noexcept
-            {
-                return scalar<cubic_femtometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_fm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_femtometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_pm3(long double val) noexcept
-            {
-                return scalar<cubic_picometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_pm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_picometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_nm3(long double val) noexcept
-            {
-                return scalar<cubic_nanometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_nm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_nanometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_micm3(long double val) noexcept
-            {
-                return scalar<cubic_micrometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_micm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_micrometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_mm3(long double val) noexcept
-            {
-                return scalar<cubic_millimeter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_mm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_millimeter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_cm3(long double val) noexcept
-            {
-                return scalar<cubic_centimeter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_cm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_centimeter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_dm3(long double val) noexcept
-            {
-                return scalar<cubic_decimeter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_dm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_decimeter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_m3(long double val) noexcept
-            {
-                return scalar<cubic_meter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_m3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_meter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_dam3(long double val) noexcept
-            {
-                return scalar<cubic_decameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_dam3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_decameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_hm3(long double val) noexcept
-            {
-                return scalar<cubic_hectometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_hm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_hectometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_km3(long double val) noexcept
-            {
-                return scalar<cubic_kilometer>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_km3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_kilometer>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Mm3(long double val) noexcept
-            {
-                return scalar<cubic_megameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Mm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_megameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Gm3(long double val) noexcept
-            {
-                return scalar<cubic_gigameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Gm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_gigameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Tm3(long double val) noexcept
-            {
-                return scalar<cubic_terameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Tm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_terameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Pm3(long double val) noexcept
-            {
-                return scalar<cubic_petameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Pm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_petameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Em3(long double val) noexcept
-            {
-                return scalar<cubic_exameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Em3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_exameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Zm3(long double val) noexcept
-            {
-                return scalar<cubic_zettameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Zm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_zettameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Ym3(long double val) noexcept
-            {
-                return scalar<cubic_yottameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Ym3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_yottameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Rm3(long double val) noexcept
-            {
-                return scalar<cubic_ronnameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Rm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_ronnameter>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Qm3(long double val) noexcept
-            {
-                return scalar<cubic_quettameter>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Qm3(unsigned long long int val) noexcept
-            {
-                return scalar<cubic_quettameter>{ static_cast<double>(val) };
-            }
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_quektometer, qm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_rontometer , rm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_yoktometer , ym3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_zeptometer , zm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_attometer  , am3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_femtometer , fm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_picometer  , pm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_nanometer  , nm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_micrometer , micm3)
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_millimeter , mm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_centimeter , cm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_decimeter  , dm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_meter      , m3   )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_decameter  , dam3 )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_hectometer , hm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_kilometer  , km3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_megameter  , Mm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_gigameter  , Gm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_terameter  , Tm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_petameter  , Pm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_exameter   , Em3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_zettameter , Zm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_yottameter , Ym3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_ronnameter , Rm3  )
+            ZOLLSTOCK_DEFINE_LITERAL(cubic_quettameter, Qm3  )
 
         }
 

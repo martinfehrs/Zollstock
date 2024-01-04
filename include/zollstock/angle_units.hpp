@@ -5,6 +5,7 @@
 #include <zollstock/scalar.hpp>
 #include <zollstock/unit_prefix_concept.hpp>
 #include <zollstock/si_prefixes.hpp>
+#include <zollstock/definition_helpers.hpp>
 
 
 namespace zollstock
@@ -104,290 +105,33 @@ namespace zollstock
         inline namespace literals
         {
 
-            [[nodiscard]] constexpr auto operator""_qrad(long double val) noexcept
-            {
-                return scalar<quektoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_qrad(unsigned long long int val) noexcept
-            {
-                return scalar<quektoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_rrad(long double val) noexcept
-            {
-                return scalar<rontoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_rrad(unsigned long long int val) noexcept
-            {
-                return scalar<rontoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_yrad(long double val) noexcept
-            {
-                return scalar<yoktoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_yrad(unsigned long long int val) noexcept
-            {
-                return scalar<yoktoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_zrad(long double val) noexcept
-            {
-                return scalar<zeptoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_zrad(unsigned long long int val) noexcept
-            {
-                return scalar<zeptoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_arad(long double val) noexcept
-            {
-                return scalar<attoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_arad(unsigned long long int val) noexcept
-            {
-                return scalar<attoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_frad(long double val) noexcept
-            {
-                return scalar<femtoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_frad(unsigned long long int val) noexcept
-            {
-                return scalar<femtoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_prad(long double val) noexcept
-            {
-                return scalar<picoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_prad(unsigned long long int val) noexcept
-            {
-                return scalar<picoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_nrad(long double val) noexcept
-            {
-                return scalar<nanoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_nrad(unsigned long long int val) noexcept
-            {
-                return scalar<nanoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_micrad(long double val) noexcept
-            {
-                return scalar<microradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_micrad(unsigned long long int val) noexcept
-            {
-                return scalar<microradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_mrad(long double val) noexcept
-            {
-                return scalar<milliradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_mrad(unsigned long long int val) noexcept
-            {
-                return scalar<milliradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_crad(long double val) noexcept
-            {
-                return scalar<centiradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_crad(unsigned long long int val) noexcept
-            {
-                return scalar<centiradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_drad(long double val) noexcept
-            {
-                return scalar<deciradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_drad(unsigned long long int val) noexcept
-            {
-                return scalar<deciradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_rad(long double val) noexcept
-            {
-                return scalar<radian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_rad(unsigned long long int val) noexcept
-            {
-                return scalar<radian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_darad(long double val) noexcept
-            {
-                return scalar<decaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_darad(unsigned long long int val) noexcept
-            {
-                return scalar<decaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_hrad(long double val) noexcept
-            {
-                return scalar<hectoradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_hrad(unsigned long long int val) noexcept
-            {
-                return scalar<hectoradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_krad(long double val) noexcept
-            {
-                return scalar<kiloradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_krad(unsigned long long int val) noexcept
-            {
-                return scalar<kiloradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Mrad(long double val) noexcept
-            {
-                return scalar<megaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Mrad(unsigned long long int val) noexcept
-            {
-                return scalar<megaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Grad(long double val) noexcept
-            {
-                return scalar<gigaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Grad(unsigned long long int val) noexcept
-            {
-                return scalar<gigaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Trad(long double val) noexcept
-            {
-                return scalar<teraradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Trad(unsigned long long int val) noexcept
-            {
-                return scalar<teraradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Prad(long double val) noexcept
-            {
-                return scalar<petaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Prad(unsigned long long int val) noexcept
-            {
-                return scalar<petaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Erad(long double val) noexcept
-            {
-                return scalar<exaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Erad(unsigned long long int val) noexcept
-            {
-                return scalar<exaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Zrad(long double val) noexcept
-            {
-                return scalar<zettaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Zrad(unsigned long long int val) noexcept
-            {
-                return scalar<zettaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Yrad(long double val) noexcept
-            {
-                return scalar<yottaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Yrad(unsigned long long int val) noexcept
-            {
-                return scalar<yottaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Rrad(long double val) noexcept
-            {
-                return scalar<ronnaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Rrad(unsigned long long int val) noexcept
-            {
-                return scalar<ronnaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_Qrad(long double val) noexcept
-            {
-                return scalar<quettaradian>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_Qrad(unsigned long long int val) noexcept
-            {
-                return scalar<quettaradian>{ static_cast<double>(val) };
-            }
-
-
-            [[nodiscard]] constexpr auto operator""_deg(long double val) noexcept
-            {
-                return scalar<degree>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_deg(unsigned long long int val) noexcept
-            {
-                return scalar<degree>{ static_cast<double>(val) };
-            }
+            ZOLLSTOCK_DEFINE_LITERAL(quektoradian, qrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(rontoradian , rrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(yoktoradian , yrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(zeptoradian , zrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(attoradian  , arad  )
+            ZOLLSTOCK_DEFINE_LITERAL(femtoradian , frad  )
+            ZOLLSTOCK_DEFINE_LITERAL(picoradian  , prad  )
+            ZOLLSTOCK_DEFINE_LITERAL(nanoradian  , nrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(microradian , micrad)
+            ZOLLSTOCK_DEFINE_LITERAL(milliradian , mrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(centiradian , crad  )
+            ZOLLSTOCK_DEFINE_LITERAL(deciradian  , drad  )
+            ZOLLSTOCK_DEFINE_LITERAL(radian      , rad   )
+            ZOLLSTOCK_DEFINE_LITERAL(decaradian  , darad )
+            ZOLLSTOCK_DEFINE_LITERAL(hectoradian , hrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(kiloradian  , krad  )
+            ZOLLSTOCK_DEFINE_LITERAL(megaradian  , Mrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(gigaradian  , Grad  )
+            ZOLLSTOCK_DEFINE_LITERAL(teraradian  , Trad  )
+            ZOLLSTOCK_DEFINE_LITERAL(petaradian  , Prad  )
+            ZOLLSTOCK_DEFINE_LITERAL(exaradian   , Erad  )
+            ZOLLSTOCK_DEFINE_LITERAL(zettaradian , Zrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(yottaradian , Yrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(ronnaradian , Rrad  )
+            ZOLLSTOCK_DEFINE_LITERAL(quettaradian, Qrad  )
+
+            ZOLLSTOCK_DEFINE_LITERAL(degree      , deg   )
 
         }
 
