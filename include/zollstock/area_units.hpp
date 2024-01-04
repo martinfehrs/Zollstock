@@ -47,31 +47,7 @@ namespace zollstock
         inline namespace constants
         {
 
-            inline constexpr square_quektometer qm2  {};
-            inline constexpr square_rontometer  rm2  {};
-            inline constexpr square_yoktometer  ym2  {};
-            inline constexpr square_zeptometer  zm2  {};
-            inline constexpr square_attometer   am2  {};
-            inline constexpr square_femtometer  fm2  {};
-            inline constexpr square_picometer   pm2  {};
-            inline constexpr square_nanometer   nm2  {};
-            inline constexpr square_micrometer  micm2{};
-            inline constexpr square_millimeter  mm2  {};
-            inline constexpr square_centimeter  cm2  {};
-            inline constexpr square_decimeter   dm2  {};
-            inline constexpr square_meter       m2   {};
-            inline constexpr square_decameter   dam2 {};
-            inline constexpr square_hectometer  hm2  {};
-            inline constexpr square_kilometer   km2  {};
-            inline constexpr square_megameter   Mm2  {};
-            inline constexpr square_gigameter   Gm2  {};
-            inline constexpr square_terameter   Tm2  {};
-            inline constexpr square_petameter   Pm2  {};
-            inline constexpr square_exameter    Em2  {};
-            inline constexpr square_zettameter  Zm2  {};
-            inline constexpr square_yottameter  Ym2  {};
-            inline constexpr square_ronnameter  Rm2  {};
-            inline constexpr square_quettameter Qm2  {};
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(square_, meter, m2)
 
         }
 

@@ -49,31 +49,7 @@ namespace zollstock
         inline namespace constants
         {
 
-            inline constexpr cubic_quektometer qm3  {};
-            inline constexpr cubic_rontometer  rm3  {};
-            inline constexpr cubic_yoktometer  ym3  {};
-            inline constexpr cubic_zeptometer  zm3  {};
-            inline constexpr cubic_attometer   am3  {};
-            inline constexpr cubic_femtometer  fm3  {};
-            inline constexpr cubic_picometer   pm3  {};
-            inline constexpr cubic_nanometer   nm3  {};
-            inline constexpr cubic_micrometer  micm3{};
-            inline constexpr cubic_millimeter  mm3  {};
-            inline constexpr cubic_centimeter  cm3  {};
-            inline constexpr cubic_decimeter   dm3  {};
-            inline constexpr cubic_meter       m3   {};
-            inline constexpr cubic_decameter   dam3 {};
-            inline constexpr cubic_hectometer  hm3  {};
-            inline constexpr cubic_kilometer   km3  {};
-            inline constexpr cubic_megameter   Mm3  {};
-            inline constexpr cubic_gigameter   Gm3  {};
-            inline constexpr cubic_terameter   Tm3  {};
-            inline constexpr cubic_petameter   Pm3  {};
-            inline constexpr cubic_exameter    Em3  {};
-            inline constexpr cubic_zettameter  Zm3  {};
-            inline constexpr cubic_yottameter  Ym3  {};
-            inline constexpr cubic_ronnameter  Rm3  {};
-            inline constexpr cubic_quettameter Qm3  {};
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(cubic_, meter, m3)
 
         }
 

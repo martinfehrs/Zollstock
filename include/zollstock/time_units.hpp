@@ -86,31 +86,7 @@ namespace zollstock
         inline namespace constants
         {
 
-            inline constexpr quektosecond qs  {};
-            inline constexpr rontosecond  rs  {};
-            inline constexpr yoktosecond  ys  {};
-            inline constexpr zeptosecond  zs  {};
-            inline constexpr attosecond   as  {};
-            inline constexpr femtosecond  fs  {};
-            inline constexpr picosecond   ps  {};
-            inline constexpr nanosecond   ns  {};
-            inline constexpr microsecond  mics{};
-            inline constexpr millisecond  ms  {};
-            inline constexpr centisecond  cs  {};
-            inline constexpr decisecond   ds  {};
-            inline constexpr second       s   {};
-            inline constexpr decasecond   das {};
-            inline constexpr hectosecond  hs  {};
-            inline constexpr kilosecond   ks  {};
-            inline constexpr megasecond   Ms  {};
-            inline constexpr gigasecond   Gs  {};
-            inline constexpr terasecond   Ts  {};
-            inline constexpr petasecond   Ps  {};
-            inline constexpr exasecond    Es  {};
-            inline constexpr zettasecond  Zs  {};
-            inline constexpr yottasecond  Ys  {};
-            inline constexpr ronnasecond  Rs  {};
-            inline constexpr quettasecond Qs  {};
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(,second, s)
 
             inline constexpr minute      min  {};
             inline constexpr hour        h    {};

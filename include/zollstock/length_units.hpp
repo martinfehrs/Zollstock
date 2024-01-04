@@ -58,31 +58,7 @@ namespace zollstock
         inline namespace constants
         {
 
-            inline constexpr quektometer qm   {};
-            inline constexpr rontometer  rm   {};
-            inline constexpr yoktometer  ym   {};
-            inline constexpr zeptometer  zm   {};
-            inline constexpr attometer   am   {};
-            inline constexpr femtometer  fm   {};
-            inline constexpr picometer   pm   {};
-            inline constexpr nanometer   nm   {};
-            inline constexpr micrometer  micm {};
-            inline constexpr millimeter  mm   {};
-            inline constexpr centimeter  cm   {};
-            inline constexpr decimeter   dm   {};
-            inline constexpr meter       m    {};
-            inline constexpr decameter   dam  {};
-            inline constexpr hectometer  hm   {};
-            inline constexpr kilometer   km   {};
-            inline constexpr megameter   Mm   {};
-            inline constexpr gigameter   Gm   {};
-            inline constexpr terameter   Tm   {};
-            inline constexpr petameter   Pm   {};
-            inline constexpr exameter    Em   {};
-            inline constexpr zettameter  Zm   {};
-            inline constexpr yottameter  Ym   {};
-            inline constexpr ronnameter  Rm   {};
-            inline constexpr quettameter Qm   {};
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(,meter, m)
 
         }
 

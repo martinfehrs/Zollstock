@@ -72,31 +72,7 @@ namespace zollstock
         inline namespace constants
         {
 
-            inline constexpr quektoradian qrad   {};
-            inline constexpr rontoradian  rrad   {};
-            inline constexpr yoktoradian  yrad   {};
-            inline constexpr zeptoradian  zrad   {};
-            inline constexpr attoradian   arad   {};
-            inline constexpr femtoradian  frad   {};
-            inline constexpr picoradian   prad   {};
-            inline constexpr nanoradian   nrad   {};
-            inline constexpr microradian  micrad {};
-            inline constexpr milliradian  mrad   {};
-            inline constexpr centiradian  crad   {};
-            inline constexpr deciradian   drad   {};
-            inline constexpr radian       rad    {};
-            inline constexpr decaradian   darad  {};
-            inline constexpr hectoradian  hrad   {};
-            inline constexpr kiloradian   krad   {};
-            inline constexpr megaradian   Mrad   {};
-            inline constexpr gigaradian   Grad   {};
-            inline constexpr teraradian   Trad   {};
-            inline constexpr petaradian   Prad   {};
-            inline constexpr exaradian    Erad   {};
-            inline constexpr zettaradian  Zrad   {};
-            inline constexpr yottaradian  Yrad   {};
-            inline constexpr ronnaradian  Rrad   {};
-            inline constexpr quettaradian Qrad   {};
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(,radian, rad)
 
             inline constexpr degree       deg    {};
 
