@@ -4,6 +4,7 @@
 
 #include <zollstock/scalar.hpp>
 #include <zollstock/dimensionless_units.hpp>
+#include <zollstock/definition_helpers.hpp>
 
 
 namespace zollstock
@@ -15,15 +16,7 @@ namespace zollstock
         inline namespace literals
         {
 
-            [[nodiscard]] constexpr auto operator""_1(long double val) noexcept
-            {
-                return scalar<one>{ static_cast<double>(val) };
-            }
-
-            [[nodiscard]] constexpr auto operator""_1(unsigned long long int val) noexcept
-            {
-                return scalar<one>{ static_cast<double>(val) };
-            }
+            ZOLLSTOCK_DEFINE_LITERAL(one, _1)
 
         }
 
