@@ -11,7 +11,7 @@ Dimensionless:
   - Type for unit 1
   - Constant for unit 1
   - Literal for unit 1
-  
+
 Length:
   - Types for meter and all prefixed variants
   - Constants for meter and all prefixed variants
@@ -42,7 +42,9 @@ Time:
   - Literal for day
 
 Angle:
-  - Types for radian and all prefixed variants from milli down to pico
+  - Types for radian and all prefixed variants
+  - Constants for radian and all prefixed variants
+  - Literals for radian and all prefixed variants
   - Type for degree
   - Constant for degree
   - Literal for degree
