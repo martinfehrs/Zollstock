@@ -70,15 +70,29 @@ namespace zollstock
             struct arcminute
             {
                 static constexpr quantity_exponents exponents{ 0, 0, 1 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/(60.0L * 180.0L) };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/10.8e3L };
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcmin"_us };
             };
 
             struct arcsecond
             {
                 static constexpr quantity_exponents exponents{ 0, 0, 1 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/(3600.0L * 180.0L) };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/648e3L };
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcsec"_us };
+            };
+
+            struct milliarcsecond
+            {
+                static constexpr quantity_exponents exponents{ 0, 0, 1 };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/648e6L };
+                static constexpr quantity_symbols symbols{ ""_us, ""_us, "mas"_us };
+            };
+
+            struct microarcsecond
+            {
+                static constexpr quantity_exponents exponents{ 0, 0, 1 };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/648e9L };
+                static constexpr quantity_symbols symbols{ ""_us, ""_us, "micas"_us };
             };
 
         }
@@ -88,9 +102,11 @@ namespace zollstock
 
             ZOLLSTOCK_DEFINE_SI_CONSTANTS(,radian, rad)
 
-            inline constexpr degree    deg   {};
-            inline constexpr arcminute arcmin{};
-            inline constexpr arcsecond arcsec{};
+            inline constexpr degree         deg   {};
+            inline constexpr arcminute      arcmin{};
+            inline constexpr arcsecond      arcsec{};
+            inline constexpr milliarcsecond mas   {};
+            inline constexpr microarcsecond micas {};
 
         }
 
@@ -99,9 +115,11 @@ namespace zollstock
 
             ZOLLSTOCK_DEFINE_SI_LITERALS(,radian, rad)
 
-            ZOLLSTOCK_DEFINE_LITERAL(degree   , deg   )
-            ZOLLSTOCK_DEFINE_LITERAL(arcminute, arcmin)
-            ZOLLSTOCK_DEFINE_LITERAL(arcsecond, arcsec)
+            ZOLLSTOCK_DEFINE_LITERAL(degree        , deg   )
+            ZOLLSTOCK_DEFINE_LITERAL(arcminute     , arcmin)
+            ZOLLSTOCK_DEFINE_LITERAL(arcsecond     , arcsec)
+            ZOLLSTOCK_DEFINE_LITERAL(milliarcsecond, mas   )
+            ZOLLSTOCK_DEFINE_LITERAL(microarcsecond, micas )
 
         }
 
