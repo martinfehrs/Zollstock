@@ -63,11 +63,19 @@ namespace zollstock
         }
     }
 
+    namespace detail
+    {
+
+        template <typename T>
+        using remove_cvref_t = std::remove_cv_t<std::remove_reference_t<T>>;
+
+    }
+
 
     template<std::size_t pos, typename QuantityData>
     struct quantity_data_element
     {
-        using type = std::remove_const_t<std::remove_reference_t<decltype(get<pos>(std::declval<QuantityData>()))>>;
+        using type = detail::remove_cvref_t<decltype(get<pos>(std::declval<QuantityData>()))>;
     };
 
     template<std::size_t pos, typename QuantityData>
