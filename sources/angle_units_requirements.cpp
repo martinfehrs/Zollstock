@@ -129,6 +129,7 @@ namespace zollstock
     static_assert(micas          == microarcsecond{});
     static_assert(gon            == gradian       {});
 
+
     static_assert(1.0_prad   == 1.0 * prad  );
     static_assert(1_prad     == 1.0 * prad  );
 
