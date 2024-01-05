@@ -18,21 +18,27 @@ namespace zollstock
     inline constexpr bool has_length_member_v = false;
 
     template<typename Candidate>
-    inline constexpr bool has_length_member_v<Candidate, std::void_t<decltype(std::declval<Candidate>().length)>> = true;
+    inline constexpr bool has_length_member_v<
+        Candidate, std::void_t<decltype(std::declval<Candidate>().length)>
+    > = true;
 
 
     template<typename Candidate, typename = void>
     inline constexpr bool has_time_member_v = false;
 
     template<typename Candidate>
-    inline constexpr bool has_time_member_v<Candidate, std::void_t<decltype(std::declval<Candidate>().time)>> = true;
+    inline constexpr bool has_time_member_v<
+        Candidate, std::void_t<decltype(std::declval<Candidate>().time)>
+    > = true;
 
 
     template<typename Candidate, typename = void>
     inline constexpr bool has_angle_member_v = false;
 
     template<typename Candidate>
-    inline constexpr bool has_angle_member_v<Candidate, std::void_t<decltype(std::declval<Candidate>().angle)>> = true;
+    inline constexpr bool has_angle_member_v<
+        Candidate, std::void_t<decltype(std::declval<Candidate>().angle)>
+    > = true;
 
 
     template <typename Candidate>
@@ -90,7 +96,9 @@ namespace zollstock
     >
     [[nodiscard]] constexpr auto& get(QuantityData& data) noexcept
     {
-        return const_cast<quantity_data_element_t<pos, QuantityData>&>(get<pos>(std::as_const(data)));
+        return const_cast<quantity_data_element_t<pos, QuantityData>&>(
+            get<pos>(std::as_const(data))
+        );
     }
 
     template <typename IndexSequence, std::size_t offset>
