@@ -48,6 +48,18 @@ Angle:
   - Type for degree
   - Constant for degree
   - Literal for degree
+  - Type for arcsecond
+  - Constant for arcsecond
+  - Literal for arcsecond
+  - Type for arcminute
+  - Constant for arcminute
+  - Literal for arcminute
+  - Type for milliarcsecond
+  - Constant for milliarcsecond
+  - Literal for milliarcsecond
+  - Type for microarcsecond
+  - Constant for microarcsecond
+  - Literal for microarcsecond
 
 Furthermore you can combine all units as needed to represent all derived units but without any special support.
 Arithmetic whould work as expected.
