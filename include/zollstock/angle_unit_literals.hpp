@@ -23,6 +23,8 @@ namespace zollstock
             ZOLLSTOCK_DEFINE_LITERAL(arcsecond     , arcsec)
             ZOLLSTOCK_DEFINE_LITERAL(milliarcsecond, mas   )
             ZOLLSTOCK_DEFINE_LITERAL(microarcsecond, micas )
+            ZOLLSTOCK_DEFINE_LITERAL(gradian       , gon   )
+
 
         }
 

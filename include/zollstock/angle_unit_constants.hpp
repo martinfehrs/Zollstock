@@ -22,6 +22,7 @@ namespace zollstock
             inline constexpr arcsecond      arcsec{};
             inline constexpr milliarcsecond mas   {};
             inline constexpr microarcsecond micas {};
+            inline constexpr gradian        gon   {};
 
         }
 

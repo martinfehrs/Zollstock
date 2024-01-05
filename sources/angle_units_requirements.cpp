@@ -100,6 +100,11 @@ namespace zollstock
     static_assert(microarcsecond::factors   == quantity_factors  { 0.0L  , 0.0L , pi/648e9L   });
     static_assert(microarcsecond::symbols   == quantity_symbols  { ""_us , ""_us, "micas"_us  });
 
+    static_assert(gradian       ::exponents == quantity_exponents{ 0     , 0    , 1           });
+    static_assert(gradian       ::factors   == quantity_factors  { 0.0L  , 0.0L , pi/200.0L   });
+    static_assert(gradian       ::symbols   == quantity_symbols  { ""_us , ""_us, "gon"_us    });
+
+
     static_assert(prad           == picoradian    {});
     static_assert(micrad         == microradian   {});
     static_assert(mrad           == milliradian   {});
@@ -122,7 +127,7 @@ namespace zollstock
     static_assert(arcsec         == arcsecond     {});
     static_assert(mas            == milliarcsecond{});
     static_assert(micas          == microarcsecond{});
-
+    static_assert(gon            == gradian       {});
 
     static_assert(1.0_prad   == 1.0 * prad  );
     static_assert(1_prad     == 1.0 * prad  );
@@ -195,5 +200,8 @@ namespace zollstock
 
     static_assert(1.0_micas  == 1.0 * micas );
     static_assert(1_micas    == 1.0 * micas );
+
+    static_assert(1.0_gon    == 1.0 * gon   );
+    static_assert(1_gon      == 1.0 * gon   );
 
 }

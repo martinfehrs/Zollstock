@@ -88,6 +88,13 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "micas"_us };
             };
 
+            struct gradian
+            {
+                static constexpr quantity_exponents exponents{ 0, 0, 1 };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/200.0L };
+                static constexpr quantity_symbols symbols{ ""_us, ""_us, "gon"_us };
+            };
+
         }
 
     }
