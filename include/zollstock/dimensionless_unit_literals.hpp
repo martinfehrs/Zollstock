@@ -2,9 +2,9 @@
 #define __ZOLLSTOCK_DIMENSIONLESS_UNIT_LITERALS_HPP__
 
 
-#include <zollstock/scalar.hpp>
-#include <zollstock/dimensionless_units.hpp>
+#include <zollstock/dimensionless_unit_types.hpp>
 #include <zollstock/definition_helpers.hpp>
+#include <zollstock/scalar.hpp>
 
 
 namespace zollstock
