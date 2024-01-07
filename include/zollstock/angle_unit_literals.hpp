@@ -19,12 +19,14 @@ namespace zollstock
             ZOLLSTOCK_DEFINE_SI_LITERALS(,radian, rad)
 
             ZOLLSTOCK_DEFINE_LITERAL(degree        , deg   )
+
             ZOLLSTOCK_DEFINE_LITERAL(arcminute     , arcmin)
+
             ZOLLSTOCK_DEFINE_LITERAL(arcsecond     , arcsec)
             ZOLLSTOCK_DEFINE_LITERAL(milliarcsecond, mas   )
             ZOLLSTOCK_DEFINE_LITERAL(microarcsecond, micas )
-            ZOLLSTOCK_DEFINE_LITERAL(gradian       , gon   )
 
+            ZOLLSTOCK_DEFINE_SI_LITERALS(,gradian, gon)
 
         }
 

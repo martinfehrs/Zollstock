@@ -88,12 +88,41 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "micas"_us };
             };
 
-            struct gradian
+            template <typename Prefix>
+            struct basic_gradian
             {
+                static_assert(is_prefix_v<Prefix>);
+
                 static constexpr quantity_exponents exponents{ 0, 0, 1 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/200.0L };
-                static constexpr quantity_symbols symbols{ ""_us, ""_us, "gon"_us };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/200.0L };
+                static constexpr quantity_symbols symbols{ ""_us, ""_us, Prefix::symbol + "gon"_us };
             };
+
+            using quektogradian = basic_gradian<quekto    >;
+            using rontogradian  = basic_gradian<ronto     >;
+            using yoktogradian  = basic_gradian<yokto     >;
+            using zeptogradian  = basic_gradian<zepto     >;
+            using attogradian   = basic_gradian<atto      >;
+            using femtogradian  = basic_gradian<femto     >;
+            using picogradian   = basic_gradian<pico      >;
+            using nanogradian   = basic_gradian<nano      >;
+            using microgradian  = basic_gradian<micro     >;
+            using milligradian  = basic_gradian<milli     >;
+            using centigradian  = basic_gradian<centi     >;
+            using decigradian   = basic_gradian<deci      >;
+            using gradian       = basic_gradian<unprefixed>;
+            using decagradian   = basic_gradian<deca      >;
+            using hectogradian  = basic_gradian<hecto     >;
+            using kilogradian   = basic_gradian<kilo      >;
+            using megagradian   = basic_gradian<mega      >;
+            using gigagradian   = basic_gradian<giga      >;
+            using teragradian   = basic_gradian<tera      >;
+            using petagradian   = basic_gradian<peta      >;
+            using exagradian    = basic_gradian<exa       >;
+            using zettagradian  = basic_gradian<zetta     >;
+            using yottagradian  = basic_gradian<yotta     >;
+            using ronnagradian  = basic_gradian<ronna     >;
+            using quettagradian = basic_gradian<quetta    >;
 
         }
 

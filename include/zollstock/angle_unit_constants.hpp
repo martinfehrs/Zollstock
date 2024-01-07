@@ -15,14 +15,17 @@ namespace zollstock
         inline namespace constants
         {
 
-            ZOLLSTOCK_DEFINE_SI_CONSTANTS(,radian, rad)
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(, radian, rad)
 
             inline constexpr degree         deg   {};
+
             inline constexpr arcminute      arcmin{};
+
             inline constexpr arcsecond      arcsec{};
             inline constexpr milliarcsecond mas   {};
             inline constexpr microarcsecond micas {};
-            inline constexpr gradian        gon   {};
+
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(, gradian, gon)
 
         }
 
