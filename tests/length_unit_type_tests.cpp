@@ -1,5 +1,5 @@
 #include <catch2/catch_all.hpp>
-#include <zollstock/length_units.hpp>
+#include <zollstock/length_unit_types.hpp>
 
 
 using namespace zollstock;
