@@ -45,6 +45,9 @@ Angle:
   - Types for radian and all prefixed variants
   - Constants for radian and all prefixed variants
   - Literals for radian and all prefixed variants
+  - Types for gradian and all prefixed variants
+  - Constants for gradian and all prefixed variants
+  - Literals for gradian and all prefixedd variants
   - Type for degree
   - Constant for degree
   - Literal for degree
