@@ -16,3 +16,6 @@ target_sources(zollstock PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/sources/velocity_un
 
 
 target_compile_features(zollstock PUBLIC cxx_std_17)
+
+add_subdirectory(dependencies/Catch2)
+add_subdirectory(tests)
