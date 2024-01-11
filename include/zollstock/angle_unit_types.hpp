@@ -67,26 +67,49 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcmin"_us };
             };
 
-            struct arcsecond
+            template <typename Prefix>
+            struct basic_arcsecond
+            {
+                static_assert(is_prefix_v<Prefix>);
+
+                static constexpr quantity_exponents exponents{ 0, 0, 1 };
+                static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/648e3L };
+                static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "as"_us };
+            };
+
+            template <>
+            struct basic_arcsecond<unprefixed>
             {
                 static constexpr quantity_exponents exponents{ 0, 0, 1 };
                 static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/648e3L };
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcsec"_us };
             };
 
-            struct milliarcsecond
-            {
-                static constexpr quantity_exponents exponents{ 0, 0, 1 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/648e6L };
-                static constexpr quantity_symbols symbols{ ""_us, ""_us, "mas"_us };
-            };
-
-            struct microarcsecond
-            {
-                static constexpr quantity_exponents exponents{ 0, 0, 1 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/648e9L };
-                static constexpr quantity_symbols symbols{ ""_us, ""_us, "micas"_us };
-            };
+            using quektoarcsecond = basic_arcsecond<quekto    >;
+            using rontoarcsecond  = basic_arcsecond<ronto     >;
+            using yoktoarcsecond  = basic_arcsecond<yokto     >;
+            using zeptoarcsecond  = basic_arcsecond<zepto     >;
+            using attoarcsecond   = basic_arcsecond<atto      >;
+            using femtoarcsecond  = basic_arcsecond<femto     >;
+            using picoarcsecond   = basic_arcsecond<pico      >;
+            using nanoarcsecond   = basic_arcsecond<nano      >;
+            using microarcsecond  = basic_arcsecond<micro     >;
+            using milliarcsecond  = basic_arcsecond<milli     >;
+            using centiarcsecond  = basic_arcsecond<centi     >;
+            using deciarcsecond   = basic_arcsecond<deci      >;
+            using arcsecond       = basic_arcsecond<unprefixed>;
+            using decaarcsecond   = basic_arcsecond<deca      >;
+            using hectoarcsecond  = basic_arcsecond<hecto     >;
+            using kiloarcsecond   = basic_arcsecond<kilo      >;
+            using megaarcsecond   = basic_arcsecond<mega      >;
+            using gigaarcsecond   = basic_arcsecond<giga      >;
+            using teraarcsecond   = basic_arcsecond<tera      >;
+            using petaarcsecond   = basic_arcsecond<peta      >;
+            using exaarcsecond    = basic_arcsecond<exa       >;
+            using zettaarcsecond  = basic_arcsecond<zetta     >;
+            using yottaarcsecond  = basic_arcsecond<yotta     >;
+            using ronnaarcsecond  = basic_arcsecond<ronna     >;
+            using quettaarcsecond = basic_arcsecond<quetta    >;
 
             template <typename Prefix>
             struct basic_gradian

@@ -29,10 +29,31 @@ TEST_CASE("angle-unit-constants", "[angle][unit][constants]")
 
     REQUIRE(deg            == degree        {});
 
-    REQUIRE(arcmin         == arcminute     {});
-    REQUIRE(arcsec         == arcsecond     {});
-    REQUIRE(mas            == milliarcsecond{});
-    REQUIRE(micas          == microarcsecond{});
+    REQUIRE(qas           == quektoarcsecond {});
+    REQUIRE(ras           == rontoarcsecond  {});
+    REQUIRE(yas           == yoktoarcsecond  {});
+    REQUIRE(zas           == zeptoarcsecond  {});
+    REQUIRE(aas           == attoarcsecond   {});
+    REQUIRE(fas           == femtoarcsecond  {});
+    REQUIRE(pas           == picoarcsecond   {});
+    REQUIRE(nas           == nanoarcsecond   {});
+    REQUIRE(micas         == microarcsecond  {});
+    REQUIRE(mas           == milliarcsecond  {});
+    REQUIRE(cas           == centiarcsecond  {});
+    REQUIRE(das           == deciarcsecond   {});
+    REQUIRE(arcsec        == arcsecond       {});
+    REQUIRE(daas          == decaarcsecond   {});
+    REQUIRE(has           == hectoarcsecond  {});
+    REQUIRE(kas           == kiloarcsecond   {});
+    REQUIRE(Mas           == megaarcsecond   {});
+    REQUIRE(Gas           == gigaarcsecond   {});
+    REQUIRE(Tas           == teraarcsecond   {});
+    REQUIRE(Pas           == petaarcsecond   {});
+    REQUIRE(Eas           == exaarcsecond    {});
+    REQUIRE(Zas           == zettaarcsecond  {});
+    REQUIRE(Yas           == yottaarcsecond  {});
+    REQUIRE(Ras           == ronnaarcsecond  {});
+    REQUIRE(Qas           == quettaarcsecond {});
 
     REQUIRE(qgon           == quektogradian {});
     REQUIRE(rgon           == rontogradian  {});
