@@ -79,12 +79,12 @@ namespace zollstock
     template <typename Unit1, typename Unit2>
     inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
 
-    template <typename Unit1, int exponent>
+    template <typename Unit, int exponent>
     struct unit_exponentiation
     {
-        static constexpr quantity_exponents exponents = Unit1::exponents * exponent;
-        static constexpr quantity_factors factors{ Unit1::factors };
-        static constexpr quantity_symbols symbols{ Unit1::symbols };
+        static constexpr quantity_exponents exponents = Unit::exponents * exponent;
+        static constexpr quantity_factors factors{ Unit::factors };
+        static constexpr quantity_symbols symbols{ Unit::symbols };
     };
 
     template<typename Unit1, typename Unit2>
@@ -96,12 +96,7 @@ namespace zollstock
     };
 
     template<typename Unit1, typename Unit2>
-    struct unit_division
-    {
-        static constexpr quantity_exponents exponents = Unit1::exponents - Unit2::exponents;
-        static constexpr quantity_factors factors{ combined(Unit1::factors, Unit2::factors) };
-        static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
-    };
+    using unit_division = unit_product<Unit1, unit_exponentiation<Unit2, -1>>;
 
 }
 
