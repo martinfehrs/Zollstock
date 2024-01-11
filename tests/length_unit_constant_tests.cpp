@@ -6,7 +6,7 @@
 using namespace zollstock;
 
 
-TEST_CASE( "length-unit-constants", "[length][unit][constants]" )
+TEST_CASE("length-unit-constants", "[length][unit][constants]")
 {
 
     REQUIRE(qm   == quektometer{});

@@ -5,7 +5,7 @@
 using namespace zollstock;
 
 
-TEST_CASE( "length-unit-types", "[length][unit][types]" )
+TEST_CASE("length-unit-types", "[length][unit][types]")
 {
 
     REQUIRE(quektometer::exponents == quantity_exponents{ 1        , 0    , 0     });
