@@ -52,6 +52,23 @@ namespace zollstock
         return sub(exponents_1, exponents_2, make_quantity_index_sequence{});
     }
 
+    template <std::size_t... indices>
+    [[nodiscard]] constexpr quantity_exponents mul(
+        const quantity_exponents& exponents,
+        int factor,
+        std::index_sequence<indices...>
+    ) noexcept
+    {
+        return { (get<indices>(exponents) * factor)... };
+    }
+
+    [[nodiscard]] constexpr auto operator*(
+        const quantity_exponents& exponents,
+        int factor
+    ) noexcept
+    {
+        return mul(exponents, factor, make_quantity_index_sequence{});
+    }
 }
 
 

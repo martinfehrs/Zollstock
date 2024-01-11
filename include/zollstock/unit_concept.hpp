@@ -79,6 +79,14 @@ namespace zollstock
     template <typename Unit1, typename Unit2>
     inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
 
+    template <typename Unit1, int exponent>
+    struct unit_exponentiation
+    {
+        static constexpr quantity_exponents exponents = Unit1::exponents * exponent;
+        static constexpr quantity_factors factors{ Unit1::factors };
+        static constexpr quantity_symbols symbols{ Unit1::symbols };
+    };
+
     template<typename Unit1, typename Unit2>
     struct unit_product
     {
