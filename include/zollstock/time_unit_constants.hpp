@@ -15,12 +15,12 @@ namespace zollstock
         inline namespace constants
         {
 
-            ZOLLSTOCK_DEFINE_SI_CONSTANTS(,second, s)
+            ZOLLSTOCK_DEFINE_SI_CONSTANTS(, second, s)
 
-            inline constexpr minute min  {};
-            inline constexpr hour   h    {};
-            inline constexpr day    d    {};
-            inline constexpr year   a    {};
+            inline constexpr minute min{};
+            inline constexpr hour   h  {};
+            inline constexpr day    d  {};
+            inline constexpr year   a  {};
 
         }
 

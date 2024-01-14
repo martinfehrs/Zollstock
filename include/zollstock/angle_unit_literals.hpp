@@ -16,11 +16,11 @@ namespace zollstock
         inline namespace literals
         {
 
-            ZOLLSTOCK_DEFINE_SI_LITERALS(,radian, rad)
+            ZOLLSTOCK_DEFINE_SI_LITERALS(, radian, rad)
 
-            ZOLLSTOCK_DEFINE_LITERAL(degree        , deg   )
+            ZOLLSTOCK_DEFINE_LITERAL(degree, deg)
 
-            ZOLLSTOCK_DEFINE_LITERAL(arcminute     , arcmin)
+            ZOLLSTOCK_DEFINE_LITERAL(arcminute, arcmin)
 
             ZOLLSTOCK_DEFINE_LITERAL(arcsecond, arcsec)
             ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(, arcsecond, as)
