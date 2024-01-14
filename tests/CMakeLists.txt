@@ -1,5 +1,7 @@
 add_executable(tests)
 
+target_include_directories(tests PRIVATE include)
+
 target_sources(tests PRIVATE si_prefix_tests.cpp)
 target_sources(tests PRIVATE length_unit_type_tests.cpp)
 target_sources(tests PRIVATE length_unit_constant_tests.cpp)
