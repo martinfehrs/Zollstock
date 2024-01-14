@@ -9,6 +9,8 @@ target_include_directories(zollstock INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/inclu
 target_compile_features(zollstock INTERFACE cxx_std_17)
 
 add_subdirectory(dependencies/Catch2)
+
+include(CTest)
 add_subdirectory(tests)
 
 install(

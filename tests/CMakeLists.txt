@@ -7,7 +7,5 @@ target_link_libraries(tests PRIVATE zollstock)
 
 add_subdirectory(sources)
 
-include(CTest)
 include(Catch)
-
 catch_discover_tests(tests)
