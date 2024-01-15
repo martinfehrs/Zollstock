@@ -42,6 +42,9 @@ Time:
   - Type for day
   - Constant for day
   - Literal for day
+  - Type for year
+  - Constant for year
+  - Literal for year
 
 Angle:
   - Types for radian and all prefixed variants
