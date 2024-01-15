@@ -14,9 +14,9 @@
     } \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(type_prefix, base_type, base_symbol) \
-    ZOLLSTOCK_DEFINE_LITERAL(type_prefix##quekto##base_type, q##base_symbol  ) \
+    ZOLLSTOCK_DEFINE_LITERAL(type_prefix##quecto##base_type, q##base_symbol  ) \
     ZOLLSTOCK_DEFINE_LITERAL(type_prefix##ronto##base_type , r##base_symbol  ) \
-    ZOLLSTOCK_DEFINE_LITERAL(type_prefix##yokto##base_type , y##base_symbol  ) \
+    ZOLLSTOCK_DEFINE_LITERAL(type_prefix##yocto##base_type , y##base_symbol  ) \
     ZOLLSTOCK_DEFINE_LITERAL(type_prefix##zepto##base_type , z##base_symbol  ) \
     ZOLLSTOCK_DEFINE_LITERAL(type_prefix##atto##base_type  , a##base_symbol  ) \
     ZOLLSTOCK_DEFINE_LITERAL(type_prefix##femto##base_type , f##base_symbol  ) \
@@ -44,9 +44,9 @@
     ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(type_prefix, base_type, base_symbol)
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_CONSTANTS(type_prefix, base_type, base_symbol) \
-    inline constexpr type_prefix##quekto##base_type q##base_symbol  {}; \
+    inline constexpr type_prefix##quecto##base_type q##base_symbol  {}; \
     inline constexpr type_prefix##ronto##base_type  r##base_symbol  {}; \
-    inline constexpr type_prefix##yokto##base_type  y##base_symbol  {}; \
+    inline constexpr type_prefix##yocto##base_type  y##base_symbol  {}; \
     inline constexpr type_prefix##zepto##base_type  z##base_symbol  {}; \
     inline constexpr type_prefix##atto##base_type   a##base_symbol  {}; \
     inline constexpr type_prefix##femto##base_type  f##base_symbol  {}; \

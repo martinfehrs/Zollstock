@@ -26,9 +26,9 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ Prefix::symbol + "m"_us, ""_us, ""_us };
             };
 
-            using quektometer = basic_meter<quekto    >;
+            using quectometer = basic_meter<quecto    >;
             using rontometer  = basic_meter<ronto     >;
-            using yoktometer  = basic_meter<yokto     >;
+            using yoctometer  = basic_meter<yocto     >;
             using zeptometer  = basic_meter<zepto     >;
             using attometer   = basic_meter<atto      >;
             using femtometer  = basic_meter<femto     >;

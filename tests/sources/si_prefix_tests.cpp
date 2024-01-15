@@ -8,9 +8,9 @@ using namespace zollstock;
 TEST_CASE("si-prefixes", "[si-prefixes]")
 {
 
-    REQUIRE(quekto    ::factor == 1e-30L);
+    REQUIRE(quecto    ::factor == 1e-30L);
     REQUIRE(ronto     ::factor == 1e-27L);
-    REQUIRE(yokto     ::factor == 1e-24L);
+    REQUIRE(yocto     ::factor == 1e-24L);
     REQUIRE(zepto     ::factor == 1e-21L);
     REQUIRE(atto      ::factor == 1e-18L);
     REQUIRE(femto     ::factor == 1e-15L);
@@ -34,9 +34,9 @@ TEST_CASE("si-prefixes", "[si-prefixes]")
     REQUIRE(ronna     ::factor == 1e+27L);
     REQUIRE(quetta    ::factor == 1e+30L);
 
-    REQUIRE(quekto    ::symbol == "q"_us  );
+    REQUIRE(quecto    ::symbol == "q"_us  );
     REQUIRE(ronto     ::symbol == "r"_us  );
-    REQUIRE(yokto     ::symbol == "y"_us  );
+    REQUIRE(yocto     ::symbol == "y"_us  );
     REQUIRE(zepto     ::symbol == "z"_us  );
     REQUIRE(atto      ::symbol == "a"_us  );
     REQUIRE(femto     ::symbol == "f"_us  );

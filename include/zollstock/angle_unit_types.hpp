@@ -27,9 +27,9 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
             };
 
-            using quektoradian = basic_radian<quekto    >;
+            using quectoradian = basic_radian<quecto    >;
             using rontoradian  = basic_radian<ronto     >;
-            using yoktoradian  = basic_radian<yokto     >;
+            using yoctoradian  = basic_radian<yocto     >;
             using zeptoradian  = basic_radian<zepto     >;
             using attoradian   = basic_radian<atto      >;
             using femtoradian  = basic_radian<femto     >;
@@ -85,9 +85,9 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcsec"_us };
             };
 
-            using quektoarcsecond = basic_arcsecond<quekto    >;
+            using quectoarcsecond = basic_arcsecond<quecto    >;
             using rontoarcsecond  = basic_arcsecond<ronto     >;
-            using yoktoarcsecond  = basic_arcsecond<yokto     >;
+            using yoctoarcsecond  = basic_arcsecond<yocto     >;
             using zeptoarcsecond  = basic_arcsecond<zepto     >;
             using attoarcsecond   = basic_arcsecond<atto      >;
             using femtoarcsecond  = basic_arcsecond<femto     >;
@@ -121,9 +121,9 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us, ""_us, Prefix::symbol + "gon"_us };
             };
 
-            using quektogradian = basic_gradian<quekto    >;
+            using quectogradian = basic_gradian<quecto    >;
             using rontogradian  = basic_gradian<ronto     >;
-            using yoktogradian  = basic_gradian<yokto     >;
+            using yoctogradian  = basic_gradian<yocto     >;
             using zeptogradian  = basic_gradian<zepto     >;
             using attogradian   = basic_gradian<atto      >;
             using femtogradian  = basic_gradian<femto     >;

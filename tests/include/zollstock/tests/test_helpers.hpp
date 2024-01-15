@@ -3,9 +3,9 @@
 
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_CONSTANTS(type_prefix, base_type, base_symbol) \
-    REQUIRE(q##base_symbol   == type_prefix##quekto##base_type{}); \
+    REQUIRE(q##base_symbol   == type_prefix##quecto##base_type{}); \
     REQUIRE(r##base_symbol   == type_prefix##ronto##base_type {}); \
-    REQUIRE(y##base_symbol   == type_prefix##yokto##base_type {}); \
+    REQUIRE(y##base_symbol   == type_prefix##yocto##base_type {}); \
     REQUIRE(z##base_symbol   == type_prefix##zepto##base_type {}); \
     REQUIRE(a##base_symbol   == type_prefix##atto##base_type  {}); \
     REQUIRE(f##base_symbol   == type_prefix##femto##base_type {}); \
@@ -97,9 +97,9 @@
 
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_TYPES(quantity, type_prefix, base_type, base_factor, base_symbol) \
-    ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##quekto##base_type, 1e-30L * base_factor, q##base_symbol  ) \
+    ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##quecto##base_type, 1e-30L * base_factor, q##base_symbol  ) \
     ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##ronto##base_type , 1e-27L * base_factor, r##base_symbol  ) \
-    ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##yokto##base_type , 1e-24L * base_factor, y##base_symbol  ) \
+    ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##yocto##base_type , 1e-24L * base_factor, y##base_symbol  ) \
     ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##zepto##base_type , 1e-21L * base_factor, z##base_symbol  ) \
     ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##atto##base_type  , 1e-18L * base_factor, a##base_symbol  ) \
     ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##femto##base_type , 1e-15L * base_factor, f##base_symbol  ) \

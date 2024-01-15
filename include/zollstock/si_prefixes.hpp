@@ -8,7 +8,7 @@
 namespace zollstock
 {
 
-    struct quekto
+    struct quecto
     {
         static constexpr long double factor = 1e-30L;
         static constexpr auto symbol = "q"_us;
@@ -20,7 +20,7 @@ namespace zollstock
         static constexpr auto symbol = "r"_us;
     };
 
-    struct yokto
+    struct yocto
     {
         static constexpr long double factor = 1e-24L;
         static constexpr auto symbol = "y"_us;

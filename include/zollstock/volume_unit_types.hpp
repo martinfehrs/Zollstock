@@ -15,9 +15,9 @@ namespace zollstock
         inline namespace types
         {
 
-            using cubic_quektometer = raise_unit_v<quektometer, 3>;
+            using cubic_quectometer = raise_unit_v<quectometer, 3>;
             using cubic_rontometer  = raise_unit_v<rontometer , 3>;
-            using cubic_yoktometer  = raise_unit_v<yoktometer , 3>;
+            using cubic_yoctometer  = raise_unit_v<yoctometer , 3>;
             using cubic_zeptometer  = raise_unit_v<zeptometer , 3>;
             using cubic_attometer   = raise_unit_v<attometer  , 3>;
             using cubic_femtometer  = raise_unit_v<femtometer , 3>;

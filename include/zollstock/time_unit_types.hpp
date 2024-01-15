@@ -26,9 +26,9 @@ namespace zollstock
                 static constexpr quantity_symbols symbols{ ""_us, Prefix::symbol + "s"_us, ""_us };
             };
 
-            using quektosecond = basic_second<quekto    >;
+            using quectosecond = basic_second<quecto    >;
             using rontosecond  = basic_second<ronto     >;
-            using yoktosecond  = basic_second<yokto     >;
+            using yoctosecond  = basic_second<yocto     >;
             using zeptosecond  = basic_second<zepto     >;
             using attosecond   = basic_second<atto      >;
             using femtosecond  = basic_second<femto     >;
