@@ -1,9 +1,11 @@
 # Zollstock
 A header-only type-safe zero overhead compile-time physical units C++20 library.
 
-Zollstock is German for folding rule. It's a funny word, because it's a lie. Zoll means inch but the so called Zollstock normaly shows centimeters these days.
+Zollstock is German for folding rule. It's a funny word, because it's a lie. Zoll means inch but the
+so called Zollstock normaly shows centimeters these days.
 
-The library is still in a very early development stage. So please be careful when using it in production code.
+The library is still in a very early development stage. So please be careful when using it in
+production code.
 
 these units for the following quantities are currently supported:
 
@@ -47,22 +49,20 @@ Angle:
   - Literals for radian and all prefixed variants
   - Types for gradian and all prefixed variants
   - Constants for gradian and all prefixed variants
-  - Literals for gradian and all prefixedd variants
+  - Literals for gradian and all prefixed variants
   - Type for degree
   - Constant for degree
   - Literal for degree
-  - Type for arcsecond
-  - Constant for arcsecond
-  - Literal for arcsecond
   - Type for arcminute
   - Constant for arcminute
   - Literal for arcminute
-  - Type for milliarcsecond
-  - Constant for milliarcsecond
-  - Literal for milliarcsecond
-  - Type for microarcsecond
-  - Constant for microarcsecond
-  - Literal for microarcsecond
+  - Types for arcsecond and all prefixed variants
+  - Constants for arcsecond and all prefixed variants
+  - Literals for arcsecond and all prefixed variants
+  - Types for gradian and all prefixed variants
+  - Constants for gradian and all prefixed variants
+  - Literals for gradian and all prefixed variants
 
-Furthermore you can combine all units as needed to represent all derived units but without any special support.
-Arithmetic whould work as expected.
+
+Furthermore you can combine all units as needed to represent all derived units but without any
+special support. Arithmetic would work as expected.
