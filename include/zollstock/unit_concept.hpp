@@ -130,6 +130,24 @@ namespace zollstock
         using type = raise_unit_v<Unit, 2>;
     };
 
+    template <typename Unit, int exponent>
+    struct multiply_units<Unit, unit_exponentiation<Unit, exponent>>
+    {
+        using type = raise_unit_v<Unit, exponent + 1>;
+    };
+
+    template <typename Unit, int exponent>
+    struct multiply_units<unit_exponentiation<Unit, exponent>, Unit>
+    {
+        using type = raise_unit_v<Unit, exponent + 1>;
+    };
+
+    template <typename Unit, int exponent_1, int exponent_2>
+    struct multiply_units<unit_exponentiation<Unit, exponent_1>, unit_exponentiation<Unit, exponent_2>>
+    {
+        using type = raise_unit_v<Unit, exponent_1 + exponent_2>;
+    };
+
     template <typename Unit1, typename Unit2>
     using multiply_units_v = typename multiply_units<Unit1, Unit2>::type;
 
