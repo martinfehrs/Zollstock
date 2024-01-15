@@ -167,7 +167,7 @@ namespace zollstock
         typename Unit2,
         typename = std::enable_if_t<is_unit_v<Unit1> && is_unit_v<Unit2>>
     >
-    [[nodiscard]] constexpr unit_division<Unit1, Unit2> operator/(Unit1, Unit2) noexcept
+    [[nodiscard]] constexpr unit_fraction<Unit1, Unit2> operator/(Unit1, Unit2) noexcept
     {
         return {};
     }

@@ -96,7 +96,7 @@ namespace zollstock
     };
 
     template<typename Unit1, typename Unit2>
-    using unit_division = unit_product<Unit1, unit_exponentiation<Unit2, -1>>;
+    using unit_fraction = unit_product<Unit1, unit_exponentiation<Unit2, -1>>;
 
 }
 

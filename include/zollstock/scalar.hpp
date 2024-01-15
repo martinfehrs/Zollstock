@@ -170,7 +170,7 @@ namespace zollstock
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
         [[nodiscard]] constexpr auto operator/(ThatUnit) && noexcept
         {
-            return scalar<unit_division<ThisUnit, ThatUnit>>{ this->value_ };
+            return scalar<unit_fraction<ThisUnit, ThatUnit>>{ this->value_ };
         }
 
         [[nodiscard]] constexpr this_type operator*(double that) const noexcept
@@ -187,7 +187,7 @@ namespace zollstock
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
         [[nodiscard]] constexpr auto operator/(scalar<ThatUnit> that) const noexcept
         {
-            return scalar<unit_division<ThisUnit, ThatUnit>>{ this->cvalue() / that.cvalue() };
+            return scalar<unit_fraction<ThisUnit, ThatUnit>>{ this->cvalue() / that.cvalue() };
         }
 
     private:
