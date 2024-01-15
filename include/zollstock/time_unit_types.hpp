@@ -62,7 +62,7 @@ namespace zollstock
             struct hour
             {
                 static constexpr quantity_exponents exponents{ 0, 1, 0 };
-                static constexpr quantity_factors factors{ 0.0L, 3600.0L, 0.0L };
+                static constexpr quantity_factors factors{ 0.0L, 3'600.0L, 0.0L };
                 static constexpr quantity_symbols symbols{ ""_us, "h"_us, ""_us };
             };
 
@@ -77,7 +77,7 @@ namespace zollstock
             {
                 static constexpr quantity_exponents exponents{ 0, 1, 0 };
                 static constexpr quantity_factors factors{ 0.0L, 31'536'000.0L, 0.0L };
-                static constexpr quantity_symbols symbols{ ""_us, "d"_us, ""_us };
+                static constexpr quantity_symbols symbols{ ""_us, "a"_us, ""_us };
             };
 
         }
