@@ -97,12 +97,16 @@ namespace zollstock
     template <typename Unit>
     struct raise_unit<Unit, 1>
     {
+        static_assert(is_unit_v<Unit>);
+
         using type = Unit;
     };
 
     template <typename Unit, int exponent_1, int exponent_2>
     struct raise_unit<unit_exponentiation<Unit, exponent_1>, exponent_2>
     {
+        static_assert(is_unit_v<Unit>);
+
         using type = unit_exponentiation<Unit, exponent_1 * exponent_2>;
     };
 
@@ -113,6 +117,8 @@ namespace zollstock
     template<typename Unit1, typename Unit2>
     struct unit_product
     {
+        static_assert(is_unit_v<Unit1> && is_unit_v<Unit2>);
+
         static constexpr quantity_exponents exponents = Unit1::exponents + Unit2::exponents;
         static constexpr quantity_factors factors{ combined(Unit1::factors, Unit2::factors) };
         static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
@@ -121,30 +127,40 @@ namespace zollstock
     template <typename Unit1, typename Unit2>
     struct multiply_units
     {
+        static_assert(is_unit_v<Unit1> && is_unit_v<Unit2>);
+
         using type = unit_product<Unit1, Unit2>;
     };
 
     template <typename Unit>
     struct multiply_units<Unit, Unit>
     {
+        static_assert(is_unit_v<Unit>);
+
         using type = raise_unit_v<Unit, 2>;
     };
 
     template <typename Unit, int exponent>
     struct multiply_units<Unit, unit_exponentiation<Unit, exponent>>
     {
+        static_assert(is_unit_v<Unit>);
+
         using type = raise_unit_v<Unit, exponent + 1>;
     };
 
     template <typename Unit, int exponent>
     struct multiply_units<unit_exponentiation<Unit, exponent>, Unit>
     {
+        static_assert(is_unit_v<Unit>);
+
         using type = raise_unit_v<Unit, exponent + 1>;
     };
 
     template <typename Unit, int exponent_1, int exponent_2>
     struct multiply_units<unit_exponentiation<Unit, exponent_1>, unit_exponentiation<Unit, exponent_2>>
     {
+        static_assert(is_unit_v<Unit>);
+
         using type = raise_unit_v<Unit, exponent_1 + exponent_2>;
     };
 
@@ -158,6 +174,8 @@ namespace zollstock
     template <typename Unit1, typename Unit2>
     struct divide_units
     {
+        static_assert(is_unit_v<Unit1> && is_unit_v<Unit2>);
+
         using type = unit_fraction<Unit1, Unit2>;
     };
 
