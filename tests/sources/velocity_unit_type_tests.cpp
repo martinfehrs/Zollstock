@@ -1,5 +1,6 @@
 #include <catch2/catch_all.hpp>
 #include <zollstock/velocity_unit_types.hpp>
+#include <zollstock/tests/test_helpers.hpp>
 
 
 using namespace zollstock;
