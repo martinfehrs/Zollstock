@@ -15,31 +15,31 @@ namespace zollstock
         inline namespace types
         {
 
-            using cubic_quektometer = unit_exponentiation<quektometer, 3>;
-            using cubic_rontometer  = unit_exponentiation<rontometer , 3>;
-            using cubic_yoktometer  = unit_exponentiation<yoktometer , 3>;
-            using cubic_zeptometer  = unit_exponentiation<zeptometer , 3>;
-            using cubic_attometer   = unit_exponentiation<attometer  , 3>;
-            using cubic_femtometer  = unit_exponentiation<femtometer , 3>;
-            using cubic_picometer   = unit_exponentiation<picometer  , 3>;
-            using cubic_nanometer   = unit_exponentiation<nanometer  , 3>;
-            using cubic_micrometer  = unit_exponentiation<micrometer , 3>;
-            using cubic_millimeter  = unit_exponentiation<millimeter , 3>;
-            using cubic_centimeter  = unit_exponentiation<centimeter , 3>;
-            using cubic_decimeter   = unit_exponentiation<decimeter  , 3>;
-            using cubic_meter       = unit_exponentiation<meter      , 3>;
-            using cubic_decameter   = unit_exponentiation<decameter  , 3>;
-            using cubic_hectometer  = unit_exponentiation<hectometer , 3>;
-            using cubic_kilometer   = unit_exponentiation<kilometer  , 3>;
-            using cubic_megameter   = unit_exponentiation<megameter  , 3>;
-            using cubic_gigameter   = unit_exponentiation<gigameter  , 3>;
-            using cubic_terameter   = unit_exponentiation<terameter  , 3>;
-            using cubic_petameter   = unit_exponentiation<petameter  , 3>;
-            using cubic_exameter    = unit_exponentiation<exameter   , 3>;
-            using cubic_zettameter  = unit_exponentiation<zettameter , 3>;
-            using cubic_yottameter  = unit_exponentiation<yottameter , 3>;
-            using cubic_ronnameter  = unit_exponentiation<ronnameter , 3>;
-            using cubic_quettameter = unit_exponentiation<quettameter, 3>;
+            using cubic_quektometer = raise_unit_v<quektometer, 3>;
+            using cubic_rontometer  = raise_unit_v<rontometer , 3>;
+            using cubic_yoktometer  = raise_unit_v<yoktometer , 3>;
+            using cubic_zeptometer  = raise_unit_v<zeptometer , 3>;
+            using cubic_attometer   = raise_unit_v<attometer  , 3>;
+            using cubic_femtometer  = raise_unit_v<femtometer , 3>;
+            using cubic_picometer   = raise_unit_v<picometer  , 3>;
+            using cubic_nanometer   = raise_unit_v<nanometer  , 3>;
+            using cubic_micrometer  = raise_unit_v<micrometer , 3>;
+            using cubic_millimeter  = raise_unit_v<millimeter , 3>;
+            using cubic_centimeter  = raise_unit_v<centimeter , 3>;
+            using cubic_decimeter   = raise_unit_v<decimeter  , 3>;
+            using cubic_meter       = raise_unit_v<meter      , 3>;
+            using cubic_decameter   = raise_unit_v<decameter  , 3>;
+            using cubic_hectometer  = raise_unit_v<hectometer , 3>;
+            using cubic_kilometer   = raise_unit_v<kilometer  , 3>;
+            using cubic_megameter   = raise_unit_v<megameter  , 3>;
+            using cubic_gigameter   = raise_unit_v<gigameter  , 3>;
+            using cubic_terameter   = raise_unit_v<terameter  , 3>;
+            using cubic_petameter   = raise_unit_v<petameter  , 3>;
+            using cubic_exameter    = raise_unit_v<exameter   , 3>;
+            using cubic_zettameter  = raise_unit_v<zettameter , 3>;
+            using cubic_yottameter  = raise_unit_v<yottameter , 3>;
+            using cubic_ronnameter  = raise_unit_v<ronnameter , 3>;
+            using cubic_quettameter = raise_unit_v<quettameter, 3>;
 
         }
 

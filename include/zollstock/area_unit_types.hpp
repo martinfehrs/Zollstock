@@ -15,31 +15,31 @@ namespace zollstock
         inline namespace types
         {
 
-            using square_quektometer = unit_exponentiation<quektometer, 2>;
-            using square_rontometer  = unit_exponentiation<rontometer , 2>;
-            using square_yoktometer  = unit_exponentiation<yoktometer , 2>;
-            using square_zeptometer  = unit_exponentiation<zeptometer , 2>;
-            using square_attometer   = unit_exponentiation<attometer  , 2>;
-            using square_femtometer  = unit_exponentiation<femtometer , 2>;
-            using square_picometer   = unit_exponentiation<picometer  , 2>;
-            using square_nanometer   = unit_exponentiation<nanometer  , 2>;
-            using square_micrometer  = unit_exponentiation<micrometer , 2>;
-            using square_millimeter  = unit_exponentiation<millimeter , 2>;
-            using square_centimeter  = unit_exponentiation<centimeter , 2>;
-            using square_decimeter   = unit_exponentiation<decimeter  , 2>;
-            using square_meter       = unit_exponentiation<meter      , 2>;
-            using square_decameter   = unit_exponentiation<decameter  , 2>;
-            using square_hectometer  = unit_exponentiation<hectometer , 2>;
-            using square_kilometer   = unit_exponentiation<kilometer  , 2>;
-            using square_megameter   = unit_exponentiation<megameter  , 2>;
-            using square_gigameter   = unit_exponentiation<gigameter  , 2>;
-            using square_terameter   = unit_exponentiation<terameter  , 2>;
-            using square_petameter   = unit_exponentiation<petameter  , 2>;
-            using square_exameter    = unit_exponentiation<exameter   , 2>;
-            using square_zettameter  = unit_exponentiation<zettameter , 2>;
-            using square_yottameter  = unit_exponentiation<yottameter , 2>;
-            using square_ronnameter  = unit_exponentiation<ronnameter , 2>;
-            using square_quettameter = unit_exponentiation<quettameter, 2>;
+            using square_quektometer = raise_unit_v<quektometer, 2>;
+            using square_rontometer  = raise_unit_v<rontometer , 2>;
+            using square_yoktometer  = raise_unit_v<yoktometer , 2>;
+            using square_zeptometer  = raise_unit_v<zeptometer , 2>;
+            using square_attometer   = raise_unit_v<attometer  , 2>;
+            using square_femtometer  = raise_unit_v<femtometer , 2>;
+            using square_picometer   = raise_unit_v<picometer  , 2>;
+            using square_nanometer   = raise_unit_v<nanometer  , 2>;
+            using square_micrometer  = raise_unit_v<micrometer , 2>;
+            using square_millimeter  = raise_unit_v<millimeter , 2>;
+            using square_centimeter  = raise_unit_v<centimeter , 2>;
+            using square_decimeter   = raise_unit_v<decimeter  , 2>;
+            using square_meter       = raise_unit_v<meter      , 2>;
+            using square_decameter   = raise_unit_v<decameter  , 2>;
+            using square_hectometer  = raise_unit_v<hectometer , 2>;
+            using square_kilometer   = raise_unit_v<kilometer  , 2>;
+            using square_megameter   = raise_unit_v<megameter  , 2>;
+            using square_gigameter   = raise_unit_v<gigameter  , 2>;
+            using square_terameter   = raise_unit_v<terameter  , 2>;
+            using square_petameter   = raise_unit_v<petameter  , 2>;
+            using square_exameter    = raise_unit_v<exameter   , 2>;
+            using square_zettameter  = raise_unit_v<zettameter , 2>;
+            using square_yottameter  = raise_unit_v<yottameter , 2>;
+            using square_ronnameter  = raise_unit_v<ronnameter , 2>;
+            using square_quettameter = raise_unit_v<quettameter, 2>;
 
         }
 

@@ -79,6 +79,7 @@ namespace zollstock
     template <typename Unit1, typename Unit2>
     inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
 
+
     template <typename Unit, int exponent>
     struct unit_exponentiation
     {
@@ -86,6 +87,16 @@ namespace zollstock
         static constexpr quantity_factors factors{ Unit::factors };
         static constexpr quantity_symbols symbols{ Unit::symbols };
     };
+
+    template <typename Unit, int exponent>
+    struct raise_unit
+    {
+        using type = unit_exponentiation<Unit, exponent>;
+    };
+
+    template <typename Unit, int exponent>
+    using raise_unit_v = typename raise_unit<Unit, exponent>::type;
+
 
     template<typename Unit1, typename Unit2>
     struct unit_product
@@ -95,8 +106,27 @@ namespace zollstock
         static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
     };
 
+    template <typename Unit1, typename Unit2>
+    struct multiply_units
+    {
+        using type = unit_product<Unit1, Unit2>;
+    };
+
+    template <typename Unit1, typename Unit2>
+    using multiply_units_v = typename multiply_units<Unit1, Unit2>::type;
+
+
     template<typename Unit1, typename Unit2>
-    using unit_fraction = unit_product<Unit1, unit_exponentiation<Unit2, -1>>;
+    using unit_fraction = multiply_units_v<Unit1, raise_unit_v<Unit2, -1>>;
+
+    template <typename Unit1, typename Unit2>
+    struct divide_units
+    {
+        using type = unit_fraction<Unit1, Unit2>;
+    };
+
+    template <typename Unit1, typename Unit2>
+    using divide_units_v = typename divide_units<Unit1, Unit2>::type;
 
 }
 

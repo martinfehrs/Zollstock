@@ -164,13 +164,13 @@ namespace zollstock
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
         [[nodiscard]] constexpr auto operator*(ThatUnit) && noexcept
         {
-            return scalar<unit_product<ThisUnit, ThatUnit>>{ this->value_ };
+            return scalar<multiply_units_v<ThisUnit, ThatUnit>>{ this->value_ };
         }
 
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
         [[nodiscard]] constexpr auto operator/(ThatUnit) && noexcept
         {
-            return scalar<unit_fraction<ThisUnit, ThatUnit>>{ this->value_ };
+            return scalar<divide_units_v<ThisUnit, ThatUnit>>{ this->value_ };
         }
 
         [[nodiscard]] constexpr this_type operator*(double that) const noexcept
@@ -181,13 +181,13 @@ namespace zollstock
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
         [[nodiscard]] constexpr auto operator*(scalar<ThatUnit> that) const noexcept
         {
-            return scalar<unit_product<ThisUnit, ThatUnit>>{ this->cvalue() * that.cvalue() };
+            return scalar<multiply_units_v<ThisUnit, ThatUnit>>{ this->cvalue() * that.cvalue() };
         }
 
         template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
         [[nodiscard]] constexpr auto operator/(scalar<ThatUnit> that) const noexcept
         {
-            return scalar<unit_fraction<ThisUnit, ThatUnit>>{ this->cvalue() / that.cvalue() };
+            return scalar<divide_units_v<ThisUnit, ThatUnit>>{ this->cvalue() / that.cvalue() };
         }
 
     private:
