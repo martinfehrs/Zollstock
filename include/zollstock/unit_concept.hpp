@@ -51,7 +51,8 @@ namespace zollstock
     }
 
     template <typename Unit1, typename Unit2>
-    inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
+    concept convertible_units_c =
+        detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
 
 
     template <unit_c Unit, int exponent>

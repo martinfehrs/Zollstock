@@ -56,19 +56,13 @@ namespace zollstock
             return -this->value_;
         }
 
-        template <
-            unit_c ThatUnit,
-            typename = std::enable_if_t<convertible_units_v<ThisUnit, ThatUnit>>
-        >
+        template <unit_c ThatUnit> requires convertible_units_c<ThisUnit, ThatUnit>
         [[nodiscard]] constexpr scalar<ThatUnit> as() const noexcept
         {
             return this->as_impl<ThatUnit>(make_quantity_index_sequence{});
         }
 
-        template <
-            unit_c ThatUnit,
-            typename = std::enable_if_t<convertible_units_v<ThisUnit, ThatUnit>>
-        >
+        template <unit_c ThatUnit> requires convertible_units_c<ThisUnit, ThatUnit>
         [[nodiscard]] constexpr operator scalar<ThatUnit>() const noexcept
         {
             return this->as<ThatUnit>();
