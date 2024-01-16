@@ -10,26 +10,12 @@
 namespace zollstock
 {
 
-    template <typename Candidate, typename = void>
-    constexpr bool has_factor_v = false;
-
     template <typename Candidate>
-    constexpr bool has_factor_v<
-        Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::factor)>, long double>>
-    > = true;
-
-    template <typename Candidate, typename = void>
-    inline constexpr bool has_symbol_v = false;
-
-    template <typename Candidate>
-    inline constexpr bool has_symbol_v<
-        Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::symbol)>, unit_symbol>>
-    > = true;
-
-    template <typename Candidate>
-    concept prefix_c = has_factor_v<Candidate> && has_symbol_v<Candidate>;
+    concept prefix_c = requires()
+    {
+        { Candidate::symbol } -> std::same_as<const unit_symbol&>;
+        { Candidate::factor } -> std::same_as<const long double&>;
+    };
 
 }
 
