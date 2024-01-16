@@ -17,47 +17,15 @@
 namespace zollstock
 {
 
-    template <typename Candidate, typename = void>
-    inline constexpr bool has_exponents_v = false;
-
     template <typename Candidate>
-    inline constexpr bool has_exponents_v<
-        Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::exponents)>, quantity_exponents>>
-    > = true;
+    concept unit_c = requires()
+    {
+        requires std::is_constructible_v<Candidate>;
+        { Candidate::exponents } -> std::same_as<const quantity_exponents&>;
+        { Candidate::factors   } -> std::same_as<const quantity_factors  &>;
+        { Candidate::symbols   } -> std::same_as<const quantity_symbols  &>;
+    };
 
-
-    template <typename Candidate, typename = void>
-    inline constexpr bool has_factors_v = false;
-
-    template <typename Candidate>
-    inline constexpr bool has_factors_v<
-        Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::factors)>, quantity_factors>>
-    > = true;
-
-
-    template <typename Candidate, typename = void>
-    inline constexpr bool has_symbols_v = false;
-
-    template <typename Candidate>
-    inline constexpr bool has_symbols_v<
-        Candidate,
-        std::enable_if_t<std::is_same_v<std::remove_cv_t<decltype(Candidate::symbols)>, quantity_symbols>>
-    > = true;
-
-
-    template <typename Candidate>
-    inline constexpr bool is_unit_v = std::is_constructible_v<Candidate>
-                                   && has_exponents_v<Candidate>
-                                   && has_factors_v<Candidate>
-                                   && has_symbols_v<Candidate>;
-
-    template <typename Candidate>
-    concept unit_c = std::is_constructible_v<Candidate>
-                  && has_exponents_v<Candidate>
-                  && has_factors_v<Candidate>
-                  && has_symbols_v<Candidate>;
 
     namespace detail
     {
