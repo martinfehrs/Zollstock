@@ -29,8 +29,7 @@ namespace zollstock
     > = true;
 
     template <typename Candidate>
-    inline constexpr bool is_prefix_v = has_factor_v<Candidate>
-                                     && has_symbol_v<Candidate>;
+    concept prefix_c = has_factor_v<Candidate> && has_symbol_v<Candidate>;
 
 }
 
