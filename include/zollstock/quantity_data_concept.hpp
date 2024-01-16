@@ -46,8 +46,12 @@ namespace zollstock
                            && has_angle_member_v<Candidate>;
 
 
-    template <std::size_t pos, typename = std::enable_if_t<(pos < quantity_count)>>
-    [[nodiscard]] constexpr const auto& get(const quantity_data_c auto& data)
+    template <
+        std::size_t pos,
+        quantity_data_c QuantityData,
+        typename = std::enable_if_t<(pos < quantity_count)>
+    >
+    [[nodiscard]] constexpr const auto& get(const QuantityData& data)
     {
         if constexpr(pos == 0)
         {
