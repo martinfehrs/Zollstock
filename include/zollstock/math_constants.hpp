@@ -2,15 +2,10 @@
 #define __ZOLLSTOCK_MATH_CONSTANTS_HPP__
 
 
-namespace zollstock
+namespace zollstock::inline math_constants
 {
 
-    inline namespace math_constants
-    {
-
-        inline constexpr long double pi{ 3.14159265358979323846264338327950288419716939937510L };
-
-    }
+    inline constexpr long double pi{ 3.14159265358979323846264338327950288419716939937510L };
 
 }
 

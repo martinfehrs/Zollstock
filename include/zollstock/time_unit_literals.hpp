@@ -7,25 +7,15 @@
 #include <zollstock/scalar.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline literals
 {
 
-    inline namespace unit
-    {
+    ZOLLSTOCK_DEFINE_SI_LITERALS(, second, s)
 
-        inline namespace literals
-        {
-
-            ZOLLSTOCK_DEFINE_SI_LITERALS(, second, s)
-
-            ZOLLSTOCK_DEFINE_LITERAL(minute, min )
-            ZOLLSTOCK_DEFINE_LITERAL(hour  , h   )
-            ZOLLSTOCK_DEFINE_LITERAL(day   , d   )
-            ZOLLSTOCK_DEFINE_LITERAL(year  , a   )
-
-        }
-
-    }
+    ZOLLSTOCK_DEFINE_LITERAL(minute, min )
+    ZOLLSTOCK_DEFINE_LITERAL(hour  , h   )
+    ZOLLSTOCK_DEFINE_LITERAL(day   , d   )
+    ZOLLSTOCK_DEFINE_LITERAL(year  , a   )
 
 }
 

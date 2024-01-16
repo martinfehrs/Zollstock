@@ -7,15 +7,10 @@
 #include <zollstock/scalar.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline math_constants
 {
 
-    inline namespace math_constants
-    {
-
-        inline constexpr scalar<radian> pi_rad{ pi };
-
-    }
+    inline constexpr scalar<radian> pi_rad{ pi };
 
 }
 

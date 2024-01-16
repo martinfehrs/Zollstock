@@ -7,29 +7,19 @@
 #include <zollstock/scalar.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline literals
 {
 
-    inline namespace unit
-    {
+    ZOLLSTOCK_DEFINE_SI_LITERALS(, radian, rad)
 
-        inline namespace literals
-        {
+    ZOLLSTOCK_DEFINE_LITERAL(degree, deg)
 
-            ZOLLSTOCK_DEFINE_SI_LITERALS(, radian, rad)
+    ZOLLSTOCK_DEFINE_LITERAL(arcminute, arcmin)
 
-            ZOLLSTOCK_DEFINE_LITERAL(degree, deg)
+    ZOLLSTOCK_DEFINE_LITERAL(arcsecond, arcsec)
+    ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(, arcsecond, as)
 
-            ZOLLSTOCK_DEFINE_LITERAL(arcminute, arcmin)
-
-            ZOLLSTOCK_DEFINE_LITERAL(arcsecond, arcsec)
-            ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(, arcsecond, as)
-
-            ZOLLSTOCK_DEFINE_SI_LITERALS(, gradian, gon)
-
-        }
-
-    }
+    ZOLLSTOCK_DEFINE_SI_LITERALS(, gradian, gon)
 
 }
 

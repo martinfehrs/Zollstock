@@ -7,42 +7,32 @@
 #include <zollstock/time_units.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline types
 {
 
-    inline namespace unit
-    {
+    using centimeter_per_second = divide_units_v<centimeter , second>;
+    using centimeter_per_minute = divide_units_v<centimeter , minute>;
+    using centimeter_per_hour   = divide_units_v<centimeter , hour  >;
 
-        inline namespace types
-        {
+    using decimeter_per_second  = divide_units_v<decimeter  , second>;
+    using decimeter_per_minute  = divide_units_v<decimeter  , minute>;
+    using decimeter_per_hour    = divide_units_v<decimeter  , hour  >;
 
-            using centimeter_per_second = divide_units_v<centimeter , second>;
-            using centimeter_per_minute = divide_units_v<centimeter , minute>;
-            using centimeter_per_hour   = divide_units_v<centimeter , hour  >;
+    using meter_per_second      = divide_units_v<meter      , second>;
+    using meter_per_minute      = divide_units_v<meter      , minute>;
+    using meter_per_hour        = divide_units_v<meter      , hour  >;
 
-            using decimeter_per_second  = divide_units_v<decimeter  , second>;
-            using decimeter_per_minute  = divide_units_v<decimeter  , minute>;
-            using decimeter_per_hour    = divide_units_v<decimeter  , hour  >;
+    using decameter_per_second  = divide_units_v<decameter  , second>;
+    using decameter_per_minute  = divide_units_v<decameter  , minute>;
+    using decameter_per_hour    = divide_units_v<decameter  , hour  >;
 
-            using meter_per_second      = divide_units_v<meter      , second>;
-            using meter_per_minute      = divide_units_v<meter      , minute>;
-            using meter_per_hour        = divide_units_v<meter      , hour  >;
+    using hectometer_per_second = divide_units_v<hectometer , second>;
+    using hectometer_per_minute = divide_units_v<hectometer , minute>;
+    using hectometer_per_hour   = divide_units_v<hectometer , hour  >;
 
-            using decameter_per_second  = divide_units_v<decameter  , second>;
-            using decameter_per_minute  = divide_units_v<decameter  , minute>;
-            using decameter_per_hour    = divide_units_v<decameter  , hour  >;
-
-            using hectometer_per_second = divide_units_v<hectometer , second>;
-            using hectometer_per_minute = divide_units_v<hectometer , minute>;
-            using hectometer_per_hour   = divide_units_v<hectometer , hour  >;
-
-            using kilometer_per_second  = divide_units_v<kilometer  , second>;
-            using kilometer_per_minute  = divide_units_v<kilometer  , minute>;
-            using kilometer_per_hour    = divide_units_v<kilometer  , hour  >;
-
-        }
-
-    }
+    using kilometer_per_second  = divide_units_v<kilometer  , second>;
+    using kilometer_per_minute  = divide_units_v<kilometer  , minute>;
+    using kilometer_per_hour    = divide_units_v<kilometer  , hour  >;
 
 }
 

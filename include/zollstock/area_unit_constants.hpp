@@ -6,20 +6,10 @@
 #include <zollstock/definition_helpers.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline constants
 {
 
-    inline namespace unit
-    {
-
-        inline namespace constants
-        {
-
-            ZOLLSTOCK_DEFINE_SI_CONSTANTS(square_, meter, m2)
-
-        }
-
-    }
+    ZOLLSTOCK_DEFINE_SI_CONSTANTS(square_, meter, m2)
 
 }
 

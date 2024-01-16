@@ -6,30 +6,19 @@
 #include <zollstock/definition_helpers.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline constants
 {
 
-    inline namespace unit
-    {
+    ZOLLSTOCK_DEFINE_SI_CONSTANTS(, radian, rad)
 
-        inline namespace constants
-        {
+    inline constexpr degree deg   {};
 
-            ZOLLSTOCK_DEFINE_SI_CONSTANTS(, radian, rad)
+    inline constexpr arcminute arcmin{};
 
-            inline constexpr degree deg   {};
+    inline constexpr arcsecond arcsec{};
+    ZOLLSTOCK_DEFINE_SI_PREFIXED_CONSTANTS(, arcsecond, as);
 
-            inline constexpr arcminute arcmin{};
-
-            inline constexpr arcsecond arcsec{};
-            ZOLLSTOCK_DEFINE_SI_PREFIXED_CONSTANTS(, arcsecond, as);
-
-            ZOLLSTOCK_DEFINE_SI_CONSTANTS(, gradian, gon)
-
-        }
-
-    }
-
+    ZOLLSTOCK_DEFINE_SI_CONSTANTS(, gradian, gon)
 
 }
 

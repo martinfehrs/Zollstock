@@ -7,20 +7,10 @@
 #include <zollstock/scalar.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline literals
 {
 
-    inline namespace unit
-    {
-
-        inline namespace literals
-        {
-
-            ZOLLSTOCK_DEFINE_SI_LITERALS(, meter, m)
-
-        }
-
-    }
+    ZOLLSTOCK_DEFINE_SI_LITERALS(, meter, m)
 
 }
 

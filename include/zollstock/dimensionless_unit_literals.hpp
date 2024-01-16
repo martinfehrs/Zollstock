@@ -7,20 +7,10 @@
 #include <zollstock/scalar.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline literals
 {
 
-    inline namespace unit
-    {
-
-        inline namespace literals
-        {
-
-            ZOLLSTOCK_DEFINE_LITERAL(one, _1)
-
-        }
-
-    }
+    ZOLLSTOCK_DEFINE_LITERAL(one, _1)
 
 }
 

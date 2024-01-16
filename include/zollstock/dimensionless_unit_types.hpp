@@ -5,27 +5,17 @@
 #include <zollstock/unit_concept.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline types
 {
 
-    inline namespace unit
+    struct one
     {
 
-        inline namespace types
-        {
+        static constexpr quantity_exponents exponents{ 0, 0, 0 };
+        static constexpr quantity_factors factors{ 0.0L, 0.0L, 0.0L };
+        static constexpr quantity_symbols symbols{ ""_us, ""_us, ""_us };
 
-            struct one
-            {
-
-                static constexpr quantity_exponents exponents{ 0, 0, 0 };
-                static constexpr quantity_factors factors{ 0.0L, 0.0L, 0.0L };
-                static constexpr quantity_symbols symbols{ ""_us, ""_us, ""_us };
-
-            };
-
-        }
-
-    }
+    };
 
 }
 

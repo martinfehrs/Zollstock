@@ -5,20 +5,10 @@
 #include <zollstock/dimensionless_unit_types.hpp>
 
 
-namespace zollstock
+namespace zollstock::inline unit::inline constants
 {
 
-    inline namespace unit
-    {
-
-        inline namespace constants
-        {
-
-            inline constexpr one _1{};
-
-        }
-
-    }
+    inline constexpr one _1{};
 
 }
 
