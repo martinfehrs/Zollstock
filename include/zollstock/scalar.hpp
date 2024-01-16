@@ -9,43 +9,6 @@
 namespace zollstock
 {
 
-    namespace detail
-    {
-
-        [[nodiscard]] constexpr long double pow(long double base, int exponent) noexcept
-        {
-            if (exponent > 0)
-            {
-                long double result = 1;
-
-                while(exponent > 0)
-                {
-                    result *= base;
-                    --exponent;
-                }
-
-                return result;
-            }
-            else if (exponent < 0)
-            {
-                long double result = 1;
-
-                while(exponent < 0)
-                {
-                    result /= base;
-                    ++exponent;
-                }
-
-                return result;
-            }
-            else
-            {
-                return 1.0L;
-            }
-        }
-
-    }
-
     template <unit_c ThisUnit>
     class scalar
     {
@@ -200,8 +163,8 @@ namespace zollstock
 
             if constexpr(this_exponent != 0 && that_exponent != 0)
             {
-                return detail::pow(get<pos>(ThisUnit::factors), this_exponent) /
-                       detail::pow(get<pos>(ThatUnit::factors), that_exponent);
+                return std::pow(get<pos>(ThisUnit::factors), this_exponent) /
+                       std::pow(get<pos>(ThatUnit::factors), that_exponent);
             }
             else if constexpr(get<pos>(ThisUnit::exponents) != 0)
             {
