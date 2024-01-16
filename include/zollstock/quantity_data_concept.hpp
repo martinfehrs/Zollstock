@@ -13,38 +13,13 @@ namespace zollstock
     inline constexpr std::size_t derived_quantity_count = 1;
     inline constexpr std::size_t quantity_count = base_quantity_count + derived_quantity_count;
 
-
-    template<typename Candidate, typename = void>
-    inline constexpr bool has_length_member_v = false;
-
-    template<typename Candidate>
-    inline constexpr bool has_length_member_v<
-        Candidate, std::void_t<decltype(std::declval<Candidate>().length)>
-    > = true;
-
-
-    template<typename Candidate, typename = void>
-    inline constexpr bool has_time_member_v = false;
-
-    template<typename Candidate>
-    inline constexpr bool has_time_member_v<
-        Candidate, std::void_t<decltype(std::declval<Candidate>().time)>
-    > = true;
-
-
-    template<typename Candidate, typename = void>
-    inline constexpr bool has_angle_member_v = false;
-
-    template<typename Candidate>
-    inline constexpr bool has_angle_member_v<
-        Candidate, std::void_t<decltype(std::declval<Candidate>().angle)>
-    > = true;
-
     template <typename Candidate>
-    concept quantity_data_c = has_length_member_v<Candidate>
-                           && has_time_member_v<Candidate>
-                           && has_angle_member_v<Candidate>;
-
+    concept quantity_data_c = requires(const Candidate& candidate)
+    {
+        candidate.length;
+        candidate.time;
+        candidate.angle;
+    };
 
     template <
         std::size_t pos,
