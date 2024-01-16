@@ -10,11 +10,9 @@
 namespace zollstock::inline unit::inline types
 {
 
-    template <typename Prefix>
+    template <prefix_c Prefix>
     struct basic_second
     {
-        static_assert(is_prefix_v<Prefix>);
-
         static constexpr quantity_exponents exponents{ 0, 1, 0 };
         static constexpr quantity_factors factors{ 0.0L, Prefix::factor, 0.0L };
         static constexpr quantity_symbols symbols{ ""_us, Prefix::symbol + "s"_us, ""_us };
