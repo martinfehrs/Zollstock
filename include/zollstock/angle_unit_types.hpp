@@ -11,11 +11,9 @@
 namespace zollstock::inline unit::inline types
 {
 
-    template <typename Prefix>
+    template <prefix_c Prefix>
     struct basic_radian
     {
-        static_assert(is_prefix_v<Prefix>);
-
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor };
         static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
@@ -61,11 +59,9 @@ namespace zollstock::inline unit::inline types
         static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcmin"_us };
     };
 
-    template <typename Prefix>
+    template <prefix_c Prefix>
     struct basic_arcsecond
     {
-        static_assert(is_prefix_v<Prefix>);
-
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/648e3L };
         static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "as"_us };
@@ -105,11 +101,9 @@ namespace zollstock::inline unit::inline types
     using ronnaarcsecond  = basic_arcsecond<ronna     >;
     using quettaarcsecond = basic_arcsecond<quetta    >;
 
-    template <typename Prefix>
+    template <prefix_c Prefix>
     struct basic_gradian
     {
-        static_assert(is_prefix_v<Prefix>);
-
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/200.0L };
         static constexpr quantity_symbols symbols{ ""_us, ""_us, Prefix::symbol + "gon"_us };
