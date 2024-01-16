@@ -46,11 +46,9 @@ namespace zollstock
 
     }
 
-    template <typename ThisUnit>
+    template <unit_c ThisUnit>
     class scalar
     {
-
-        static_assert(is_unit_v<ThisUnit>);
 
         using this_type = scalar<ThisUnit>;
 
@@ -120,7 +118,7 @@ namespace zollstock
         }
 
         template <
-            typename ThatUnit,
+            unit_c ThatUnit,
             typename = std::enable_if_t<convertible_units_v<ThisUnit, ThatUnit>>
         >
         [[nodiscard]] constexpr scalar<ThatUnit> as() const noexcept
@@ -129,7 +127,7 @@ namespace zollstock
         }
 
         template <
-            typename ThatUnit,
+            unit_c ThatUnit,
             typename = std::enable_if_t<convertible_units_v<ThisUnit, ThatUnit>>
         >
         [[nodiscard]] constexpr operator scalar<ThatUnit>() const noexcept
@@ -161,13 +159,13 @@ namespace zollstock
             return { this->cvalue() - that.cvalue() };
         }
 
-        template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
+        template <unit_c ThatUnit>
         [[nodiscard]] constexpr auto operator*(ThatUnit) && noexcept
         {
             return scalar<multiply_units_v<ThisUnit, ThatUnit>>{ this->value_ };
         }
 
-        template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
+        template <unit_c ThatUnit>
         [[nodiscard]] constexpr auto operator/(ThatUnit) && noexcept
         {
             return scalar<divide_units_v<ThisUnit, ThatUnit>>{ this->value_ };
@@ -178,13 +176,13 @@ namespace zollstock
             return { this->cvalue() * that };
         }
 
-        template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
+        template <unit_c ThatUnit>
         [[nodiscard]] constexpr auto operator*(scalar<ThatUnit> that) const noexcept
         {
             return scalar<multiply_units_v<ThisUnit, ThatUnit>>{ this->cvalue() * that.cvalue() };
         }
 
-        template <typename ThatUnit, typename = std::enable_if_t<is_unit_v<ThatUnit>>>
+        template <unit_c ThatUnit>
         [[nodiscard]] constexpr auto operator/(scalar<ThatUnit> that) const noexcept
         {
             return scalar<divide_units_v<ThisUnit, ThatUnit>>{ this->cvalue() / that.cvalue() };
@@ -192,7 +190,7 @@ namespace zollstock
 
     private:
 
-        template <typename ThatUnit, std::size_t pos>
+        template <unit_c ThatUnit, std::size_t pos>
         [[nodiscard]] constexpr double dimension_factor() const noexcept
         {
             // muss der Exponent mit einbezogen werden?
@@ -215,7 +213,7 @@ namespace zollstock
             }
         }
 
-        template <typename ThatUnit, std::size_t... indices>
+        template <unit_c ThatUnit, std::size_t... indices>
         [[nodiscard]] constexpr scalar<ThatUnit> as_impl(
             std::index_sequence<indices...>
         ) const noexcept
@@ -228,26 +226,26 @@ namespace zollstock
 
     };
 
-    template <typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
+    template <unit_c Unit>
     [[nodiscard]] constexpr auto operator*(double factor, Unit) noexcept
     {
         return scalar<Unit>{ factor };
     }
 
 
-    template <typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
+    template <unit_c Unit>
     [[nodiscard]] constexpr auto operator*(double factor_1, scalar<Unit> factor_2) noexcept
     {
         return scalar<Unit>{ factor_1 * factor_2.cvalue() };
     }
 
-    template <typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
+    template <unit_c Unit>
     [[nodiscard]] constexpr auto operator/(scalar<Unit> dividend, double divisor) noexcept
     {
         return scalar<Unit>{ dividend.cvalue() / divisor };
     }
 
-    template <typename Char, typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
+    template <typename Char, unit_c Unit>
     std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<Unit> scalar)
     {
         static constexpr Unit unit{};

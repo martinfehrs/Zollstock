@@ -53,6 +53,12 @@ namespace zollstock
                                    && has_factors_v<Candidate>
                                    && has_symbols_v<Candidate>;
 
+    template <typename Candidate>
+    concept unit_c = std::is_constructible_v<Candidate>
+                  && has_exponents_v<Candidate>
+                  && has_factors_v<Candidate>
+                  && has_symbols_v<Candidate>;
+
     namespace detail
     {
 
@@ -69,7 +75,7 @@ namespace zollstock
             Unit1,
             Unit2,
             IndexSequence<std::size_t, indices...>,
-            std::enable_if_t<is_unit_v<Unit1> &&  is_unit_v<Unit2>>
+            std::enable_if_t<unit_c<Unit1> &&  unit_c<Unit2>>
         >
             : std::bool_constant<(true && ... && (get<indices>(Unit1::exponents) == get<indices>(Unit2::exponents)))>
         {};
@@ -80,7 +86,7 @@ namespace zollstock
     inline constexpr bool convertible_units_v = detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
 
 
-    template <typename Unit, int exponent>
+    template <unit_c Unit, int exponent>
     struct unit_exponentiation
     {
         static constexpr quantity_exponents exponents = Unit::exponents * exponent;
@@ -88,98 +94,80 @@ namespace zollstock
         static constexpr quantity_symbols symbols{ Unit::symbols };
     };
 
-    template <typename Unit, int exponent>
+    template <unit_c Unit, int exponent>
     struct raise_unit
     {
         using type = unit_exponentiation<Unit, exponent>;
     };
 
-    template <typename Unit>
+    template <unit_c Unit>
     struct raise_unit<Unit, 1>
     {
-        static_assert(is_unit_v<Unit>);
-
         using type = Unit;
     };
 
-    template <typename Unit, int exponent_1, int exponent_2>
+    template <unit_c Unit, int exponent_1, int exponent_2>
     struct raise_unit<unit_exponentiation<Unit, exponent_1>, exponent_2>
     {
-        static_assert(is_unit_v<Unit>);
-
         using type = unit_exponentiation<Unit, exponent_1 * exponent_2>;
     };
 
-    template <typename Unit, int exponent>
+    template <unit_c Unit, int exponent>
     using raise_unit_v = typename raise_unit<Unit, exponent>::type;
 
 
-    template<typename Unit1, typename Unit2>
+    template<unit_c Unit1, unit_c Unit2>
     struct unit_product
     {
-        static_assert(is_unit_v<Unit1> && is_unit_v<Unit2>);
-
         static constexpr quantity_exponents exponents = Unit1::exponents + Unit2::exponents;
         static constexpr quantity_factors factors{ combined(Unit1::factors, Unit2::factors) };
         static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
     };
 
-    template <typename Unit1, typename Unit2>
+    template <unit_c Unit1, unit_c Unit2>
     struct multiply_units
     {
-        static_assert(is_unit_v<Unit1> && is_unit_v<Unit2>);
-
         using type = unit_product<Unit1, Unit2>;
     };
 
-    template <typename Unit>
+    template <unit_c Unit>
     struct multiply_units<Unit, Unit>
     {
-        static_assert(is_unit_v<Unit>);
-
         using type = raise_unit_v<Unit, 2>;
     };
 
-    template <typename Unit, int exponent>
+    template <unit_c Unit, int exponent>
     struct multiply_units<Unit, unit_exponentiation<Unit, exponent>>
     {
-        static_assert(is_unit_v<Unit>);
-
         using type = raise_unit_v<Unit, exponent + 1>;
     };
 
-    template <typename Unit, int exponent>
+    template <unit_c Unit, int exponent>
     struct multiply_units<unit_exponentiation<Unit, exponent>, Unit>
     {
-        static_assert(is_unit_v<Unit>);
-
         using type = raise_unit_v<Unit, exponent + 1>;
     };
 
-    template <typename Unit, int exponent_1, int exponent_2>
+    template <unit_c Unit, int exponent_1, int exponent_2>
     struct multiply_units<unit_exponentiation<Unit, exponent_1>, unit_exponentiation<Unit, exponent_2>>
     {
-        static_assert(is_unit_v<Unit>);
-
         using type = raise_unit_v<Unit, exponent_1 + exponent_2>;
     };
 
-    template <typename Unit1, typename Unit2>
+    template <unit_c Unit1, unit_c Unit2>
     using multiply_units_v = typename multiply_units<Unit1, Unit2>::type;
 
 
-    template<typename Unit1, typename Unit2>
+    template<unit_c Unit1, unit_c Unit2>
     using unit_fraction = multiply_units_v<Unit1, raise_unit_v<Unit2, -1>>;
 
-    template <typename Unit1, typename Unit2>
+    template <unit_c Unit1, unit_c Unit2>
     struct divide_units
     {
-        static_assert(is_unit_v<Unit1> && is_unit_v<Unit2>);
-
         using type = unit_fraction<Unit1, Unit2>;
     };
 
-    template <typename Unit1, typename Unit2>
+    template <unit_c Unit1, unit_c Unit2>
     using divide_units_v = typename divide_units<Unit1, Unit2>::type;
 
 }

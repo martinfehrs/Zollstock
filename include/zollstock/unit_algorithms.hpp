@@ -31,7 +31,7 @@ namespace zollstock
             return string_representation;
         }
 
-        template <std::size_t pos, typename Char, typename Unit>
+        template <std::size_t pos, typename Char, unit_c Unit>
         [[nodiscard]] std::basic_string<Char> unit_entry_to_string(const Unit& unit)
         {
             std::basic_string<Char> unit_representation;
@@ -112,7 +112,7 @@ namespace zollstock
 
         };
 
-        template <typename Char, typename Unit, std::size_t... indices>
+        template <typename Char, unit_c Unit, std::size_t... indices>
         [[nodiscard]] std::basic_string<Char> to_basic_string_impl(
             const Unit& unit, std::index_sequence<indices...>
             )
@@ -124,7 +124,7 @@ namespace zollstock
 
     }
 
-    template <typename Char, typename Unit>
+    template <typename Char, unit_c Unit>
     [[nodiscard]] std::basic_string<Char> to_basic_string(const Unit& unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
@@ -133,50 +133,38 @@ namespace zollstock
         );
     }
 
-    template <typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
+    template <unit_c Unit>
     [[nodiscard]] std::string to_string(Unit unit)
     {
         return to_basic_string<char>(unit);
     }
 
-    template <typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
+    template <unit_c Unit>
     [[nodiscard]] std::wstring to_wstring(Unit unit)
     {
         return to_basic_string<wchar_t>(unit);
     }
 
-    template <typename Char, typename Unit, typename = std::enable_if_t<is_unit_v<Unit>>>
+    template <typename Char, unit_c Unit>
     std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, Unit unit)
     {
         return os << to_basic_string<Char>(unit);
     }
 
 
-    template <
-        typename Unit1,
-        typename Unit2,
-        typename = std::enable_if_t<is_unit_v<Unit1> && is_unit_v<Unit2>>
-    >
+    template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr multiply_units_v<Unit1, Unit2> operator*(Unit1, Unit2) noexcept
     {
         return {};
     }
 
-    template <
-        typename Unit1,
-        typename Unit2,
-        typename = std::enable_if_t<is_unit_v<Unit1> && is_unit_v<Unit2>>
-    >
+    template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr divide_units_v<Unit1, Unit2> operator/(Unit1, Unit2) noexcept
     {
         return {};
     }
 
-    template <
-        int exponent,
-        typename Unit,
-        typename = std::enable_if_t<is_unit_v<Unit>>
-    >
+    template <int exponent, unit_c Unit>
     [[nodiscard]] constexpr auto pow(Unit unit) noexcept
     {
         if constexpr(exponent == 0)
@@ -196,12 +184,7 @@ namespace zollstock
 
     namespace detail
     {
-        template <
-            typename Unit1,
-            typename Unit2,
-            std::size_t... indices,
-            typename = std::enable_if_t<is_unit_v<Unit1> && is_unit_v<Unit2>>
-        >
+        template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
         [[nodiscard]] constexpr bool equal(
             const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
         ) noexcept
@@ -212,11 +195,7 @@ namespace zollstock
         }
     }
 
-    template <
-        typename Unit1,
-        typename Unit2,
-        typename = std::enable_if_t<is_unit_v<Unit1> && is_unit_v<Unit2>>
-    >
+    template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
     {
         return detail::equal(unit_1, unit_2, make_quantity_index_sequence{});
