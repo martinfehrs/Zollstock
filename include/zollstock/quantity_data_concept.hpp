@@ -40,20 +40,14 @@ namespace zollstock
         Candidate, std::void_t<decltype(std::declval<Candidate>().angle)>
     > = true;
 
-
     template <typename Candidate>
-    inline constexpr bool is_quantity_data_v = has_length_member_v<Candidate>
-                                            && has_time_member_v<Candidate>
-                                            && has_angle_member_v<Candidate>;
+    concept quantity_data_c = has_length_member_v<Candidate>
+                           && has_time_member_v<Candidate>
+                           && has_angle_member_v<Candidate>;
 
 
-    template <
-        std::size_t pos,
-        typename QuantityData,
-        typename = std::enable_if_t<(pos < quantity_count)>,
-        typename = std::enable_if_t<is_quantity_data_v<QuantityData>>
-    >
-    [[nodiscard]] constexpr const auto& get(const QuantityData& data)
+    template <std::size_t pos, typename = std::enable_if_t<(pos < quantity_count)>>
+    [[nodiscard]] constexpr const auto& get(const quantity_data_c auto& data)
     {
         if constexpr(pos == 0)
         {
@@ -78,21 +72,20 @@ namespace zollstock
     }
 
 
-    template<std::size_t pos, typename QuantityData>
+    template<std::size_t pos, quantity_data_c QuantityData>
     struct quantity_data_element
     {
         using type = detail::remove_cvref_t<decltype(get<pos>(std::declval<QuantityData>()))>;
     };
 
-    template<std::size_t pos, typename QuantityData>
+    template<std::size_t pos, quantity_data_c QuantityData>
     using quantity_data_element_t = typename quantity_data_element<pos, QuantityData>::type;
 
 
     template <
         std::size_t pos,
-        typename QuantityData,
-        typename = std::enable_if_t<(pos < quantity_count)>,
-        typename = std::enable_if_t<is_quantity_data_v<QuantityData>>
+        quantity_data_c QuantityData,
+        typename = std::enable_if_t<(pos < quantity_count)>
     >
     [[nodiscard]] constexpr auto& get(QuantityData& data) noexcept
     {
@@ -127,11 +120,7 @@ namespace zollstock
 
     namespace detail
     {
-        template <
-            typename QuantityData,
-            std::size_t... indices,
-            typename = std::enable_if_t<is_quantity_data_v<QuantityData>>
-        >
+        template <quantity_data_c QuantityData, std::size_t... indices>
         [[nodiscard]] constexpr bool equal(
             const QuantityData& data_1, const QuantityData& data_2, std::index_sequence<indices...>
         ) noexcept
@@ -140,7 +129,7 @@ namespace zollstock
         }
     }
 
-    template <typename QuantityData, typename = std::enable_if_t<is_quantity_data_v<QuantityData>>>
+    template <quantity_data_c QuantityData>
     [[nodiscard]] constexpr bool operator==(
         const QuantityData& data_1, const QuantityData& data_2
     ) noexcept
