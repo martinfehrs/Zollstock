@@ -47,7 +47,7 @@ namespace zollstock
 
         [[nodiscard]] constexpr bool operator==(const this_type& that) const noexcept = default;
 
-        [[nodiscard]] constexpr std::strong_ordering operator<=>(
+        [[nodiscard]] constexpr std::partial_ordering operator<=>(
             const this_type& that
         ) const noexcept = default;
 
