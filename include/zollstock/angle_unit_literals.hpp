@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_ANGLE_UNIT_LITERALS_HPP__
 
 
-#include <zollstock/angle_unit_types.hpp>
+#include <zollstock/angle_unit_constants.hpp>
 #include <zollstock/definition_helpers.hpp>
 #include <zollstock/scalar.hpp>
 
@@ -10,16 +10,16 @@
 namespace zollstock::inline unit::inline literals
 {
 
-    ZOLLSTOCK_DEFINE_SI_LITERALS(, radian, rad)
+    ZOLLSTOCK_DEFINE_SI_LITERALS(rad)
 
-    ZOLLSTOCK_DEFINE_LITERAL(degree, deg)
+    ZOLLSTOCK_DEFINE_LITERAL(deg)
 
-    ZOLLSTOCK_DEFINE_LITERAL(arcminute, arcmin)
+    ZOLLSTOCK_DEFINE_LITERAL(arcmin)
 
-    ZOLLSTOCK_DEFINE_LITERAL(arcsecond, arcsec)
-    ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(, arcsecond, as)
+    ZOLLSTOCK_DEFINE_LITERAL(arcsec)
+    ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(as)
 
-    ZOLLSTOCK_DEFINE_SI_LITERALS(, gradian, gon)
+    ZOLLSTOCK_DEFINE_SI_LITERALS(gon)
 
 }
 
