@@ -9,12 +9,12 @@
 namespace zollstock::inline unit::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_SI_CONSTANTS(, second, s)
+    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(second, s)
 
-    inline constexpr minute min{};
-    inline constexpr hour   h  {};
-    inline constexpr day    d  {};
-    inline constexpr year   a  {};
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(minute, min)
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(hour  , h  )
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(day   , d  )
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(year  , a  )
 
 }
 

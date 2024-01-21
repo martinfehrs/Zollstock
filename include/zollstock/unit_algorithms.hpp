@@ -153,19 +153,19 @@ namespace zollstock
 
 
     template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] constexpr multiply_units_v<Unit1, Unit2> operator*(Unit1, Unit2) noexcept
+    [[nodiscard]] consteval multiply_units_v<Unit1, Unit2> operator*(Unit1, Unit2) noexcept
     {
         return {};
     }
 
     template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] constexpr divide_units_v<Unit1, Unit2> operator/(Unit1, Unit2) noexcept
+    [[nodiscard]] consteval divide_units_v<Unit1, Unit2> operator/(Unit1, Unit2) noexcept
     {
         return {};
     }
 
-    template <int exponent, unit_c Unit>
-    [[nodiscard]] constexpr auto pow(Unit unit) noexcept
+    template<int exponent, unit_c Unit>
+    [[nodiscard]] consteval auto pow(Unit unit) noexcept
     {
         if constexpr(exponent == 0)
         {
@@ -179,7 +179,6 @@ namespace zollstock
         {
             return (_1 / unit) * pow<exponent + 1>(unit);
         }
-
     }
 
     namespace detail

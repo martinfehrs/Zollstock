@@ -2,14 +2,15 @@
 #define __ZOLLSTOCK_VOLUME_UNIT_CONSTANTS_HPP__
 
 
-#include <zollstock/volume_unit_types.hpp>
+#include <zollstock/length_unit_constants.hpp>
 #include <zollstock/definition_helpers.hpp>
+#include <zollstock/unit_algorithms.hpp>
 
 
 namespace zollstock::inline unit::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_SI_CONSTANTS(cubic_, meter, m3)
+    ZOLLSTOCK_DEFINE_SI_DERIVED_UNIT_CONSTANTS(m, 3)
 
 }
 

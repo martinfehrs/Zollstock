@@ -9,7 +9,7 @@
 namespace zollstock::inline unit::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_SI_CONSTANTS(, meter, m)
+    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(meter, m)
 
 }
 

@@ -9,16 +9,16 @@
 namespace zollstock::inline unit::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_SI_CONSTANTS(, radian, rad)
+    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(radian, rad)
 
     inline constexpr degree deg   {};
 
     inline constexpr arcminute arcmin{};
 
     inline constexpr arcsecond arcsec{};
-    ZOLLSTOCK_DEFINE_SI_PREFIXED_CONSTANTS(, arcsecond, as);
+    ZOLLSTOCK_DEFINE_SI_PREFIXED_BASE_UNIT_CONSTANTS(arcsecond, as)
 
-    ZOLLSTOCK_DEFINE_SI_CONSTANTS(, gradian, gon)
+    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(gradian, gon)
 
 }
 

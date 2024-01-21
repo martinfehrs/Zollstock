@@ -10,6 +10,6 @@ using namespace zollstock;
 TEST_CASE("time-unit-constants", "[time][unit][constants]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_SI_CONSTANTS(, second, s)
+    ZOLLSTOCK_TESTS_TEST_SI_BASE_UNIT_CONSTANTS(second, s)
 
 }
