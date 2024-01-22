@@ -164,22 +164,30 @@ namespace zollstock
         return {};
     }
 
-    template<int exponent, unit_c Unit>
-    [[nodiscard]] consteval auto pow(Unit unit) noexcept
+    namespace detail
     {
-        if constexpr(exponent == 0)
+
+        template<int exponent>
+        [[nodiscard]] consteval auto pow(unit_c auto unit) noexcept
         {
-            return _1;
+            if constexpr(exponent == 0)
+            {
+                return _1;
+            }
+            else if constexpr(exponent > 0)
+            {
+                return unit * pow<exponent - 1>(unit);
+            }
+            else if constexpr(exponent < 0)
+            {
+                return (_1 / unit) * pow<exponent + 1>(unit);
+            }
         }
-        else if constexpr(exponent > 0)
-        {
-            return unit * pow<exponent - 1>(unit);
-        }
-        else if constexpr(exponent < 0)
-        {
-            return (_1 / unit) * pow<exponent + 1>(unit);
-        }
+
     }
+
+    template<unit_c auto unit, int exponent>
+    inline constexpr unit_c auto pow_v = detail::pow<exponent>(unit);
 
     namespace detail
     {

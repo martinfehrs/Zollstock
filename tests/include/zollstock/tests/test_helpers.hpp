@@ -31,7 +31,7 @@
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
 
 #define ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(symbol, exponent) \
-    REQUIRE(symbol##exponent == zollstock::pow<exponent>(symbol));   \
+    REQUIRE(symbol##exponent == zollstock::pow_v<symbol, exponent>);   \
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_DERIVED_UNIT_CONSTANTS(base_symbol, exponent) \
     ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(q##base_symbol  , exponent)             \

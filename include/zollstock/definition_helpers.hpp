@@ -76,8 +76,8 @@
     ZOLLSTOCK_DEFINE_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
     ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(base_type, base_symbol)              \
 
-#define ZOLLSTOCK_DEFINE_DERIVED_UNIT_CONSTANT(base_symbol, exponent)               \
-    inline constexpr auto base_symbol##exponent = zollstock::pow<exponent>(base_symbol); \
+#define ZOLLSTOCK_DEFINE_DERIVED_UNIT_CONSTANT(base_symbol, exponent)                      \
+    inline constexpr auto base_symbol##exponent = zollstock::pow_v<base_symbol, exponent>; \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_DERIVED_UNIT_CONSTANTS(base_symbol, exponent) \
     ZOLLSTOCK_DEFINE_DERIVED_UNIT_CONSTANT(q##base_symbol  , exponent)             \
