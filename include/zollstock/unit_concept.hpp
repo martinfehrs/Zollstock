@@ -26,34 +26,10 @@ namespace zollstock
         { Candidate::symbols   } -> std::same_as<const quantity_symbols  &>;
     };
 
-
-    namespace detail
-    {
-
-        template <typename Unit1, typename Unit2, typename IndexSequence, typename = void>
-        struct convertible_units_impl;
-
-        template <
-            typename Unit1,
-            typename Unit2,
-            template <typename, std::size_t...> typename IndexSequence,
-            std::size_t... indices
-        >
-        struct convertible_units_impl<
-            Unit1,
-            Unit2,
-            IndexSequence<std::size_t, indices...>,
-            std::enable_if_t<unit_c<Unit1> &&  unit_c<Unit2>>
-        >
-            : std::bool_constant<(true && ... && (get<indices>(Unit1::exponents) == get<indices>(Unit2::exponents)))>
-        {};
-
-    }
-
     template <typename Unit1, typename Unit2>
-    concept convertible_units_c =
-        detail::convertible_units_impl<Unit1, Unit2, make_base_quantity_index_sequence>::value;
-
+    concept convertible_units_c = unit_c<Unit1>
+                               && unit_c<Unit2>
+                               && Unit1::exponents == Unit2::exponents;
 
     template <unit_c Unit, int exponent>
     struct unit_exponentiation
