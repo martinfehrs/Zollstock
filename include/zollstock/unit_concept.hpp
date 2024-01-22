@@ -17,10 +17,18 @@
 namespace zollstock
 {
 
+    enum class unit_type
+    {
+        basic,
+        exponentiation,
+        product
+    };
+
     template <typename Candidate>
     concept unit_c = requires()
     {
         requires std::is_constructible_v<Candidate>;
+        { Candidate::type      } -> std::same_as<const unit_type         &>;
         { Candidate::exponents } -> std::same_as<const quantity_exponents&>;
         { Candidate::factors   } -> std::same_as<const quantity_factors  &>;
         { Candidate::symbols   } -> std::same_as<const quantity_symbols  &>;
@@ -34,6 +42,7 @@ namespace zollstock
     template <unit_c Unit, int exponent>
     struct unit_exponentiation
     {
+        static constexpr unit_type type = unit_type::exponentiation;
         static constexpr quantity_exponents exponents = Unit::exponents * exponent;
         static constexpr quantity_factors factors{ Unit::factors };
         static constexpr quantity_symbols symbols{ Unit::symbols };
@@ -64,6 +73,7 @@ namespace zollstock
     template<unit_c Unit1, unit_c Unit2>
     struct unit_product
     {
+        static constexpr unit_type type = unit_type::product;
         static constexpr quantity_exponents exponents = Unit1::exponents + Unit2::exponents;
         static constexpr quantity_factors factors{ combined(Unit1::factors, Unit2::factors) };
         static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };

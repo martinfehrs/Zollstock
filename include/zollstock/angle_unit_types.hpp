@@ -14,6 +14,7 @@ namespace zollstock::inline unit::inline types
     template <prefix_c Prefix>
     struct basic_radian
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor };
         static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
@@ -47,6 +48,7 @@ namespace zollstock::inline unit::inline types
 
     struct degree
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/180.0L };
         static constexpr quantity_symbols symbols{ ""_us, ""_us, "deg"_us };
@@ -54,6 +56,7 @@ namespace zollstock::inline unit::inline types
 
     struct arcminute
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/10.8e3L };
         static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcmin"_us };
@@ -62,6 +65,7 @@ namespace zollstock::inline unit::inline types
     template <prefix_c Prefix>
     struct basic_arcsecond
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/648e3L };
         static constexpr quantity_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "as"_us };
@@ -70,6 +74,7 @@ namespace zollstock::inline unit::inline types
     template <>
     struct basic_arcsecond<unprefixed>
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, pi/648e3L };
         static constexpr quantity_symbols symbols{ ""_us, ""_us, "arcsec"_us };
@@ -104,6 +109,7 @@ namespace zollstock::inline unit::inline types
     template <prefix_c Prefix>
     struct basic_gradian
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 0, 1 };
         static constexpr quantity_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/200.0L };
         static constexpr quantity_symbols symbols{ ""_us, ""_us, Prefix::symbol + "gon"_us };

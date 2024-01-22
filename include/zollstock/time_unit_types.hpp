@@ -13,6 +13,7 @@ namespace zollstock::inline unit::inline types
     template <prefix_c Prefix>
     struct basic_second
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 1, 0 };
         static constexpr quantity_factors factors{ 0.0L, Prefix::factor, 0.0L };
         static constexpr quantity_symbols symbols{ ""_us, Prefix::symbol + "s"_us, ""_us };
@@ -46,6 +47,7 @@ namespace zollstock::inline unit::inline types
 
     struct minute
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 1, 0 };
         static constexpr quantity_factors factors{ 0.0L, 60.0L, 0.0L };
         static constexpr quantity_symbols symbols{ ""_us, "min"_us, ""_us };
@@ -53,6 +55,7 @@ namespace zollstock::inline unit::inline types
 
     struct hour
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 1, 0 };
         static constexpr quantity_factors factors{ 0.0L, 3'600.0L, 0.0L };
         static constexpr quantity_symbols symbols{ ""_us, "h"_us, ""_us };
@@ -60,6 +63,7 @@ namespace zollstock::inline unit::inline types
 
     struct day
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 1, 0 };
         static constexpr quantity_factors factors{ 0.0L, 86'400.0L, 0.0L };
         static constexpr quantity_symbols symbols{ ""_us, "d"_us, ""_us };
@@ -67,6 +71,7 @@ namespace zollstock::inline unit::inline types
 
     struct year
     {
+        static constexpr unit_type type = unit_type::basic;
         static constexpr quantity_exponents exponents{ 0, 1, 0 };
         static constexpr quantity_factors factors{ 0.0L, 31'536'000.0L, 0.0L };
         static constexpr quantity_symbols symbols{ ""_us, "a"_us, ""_us };

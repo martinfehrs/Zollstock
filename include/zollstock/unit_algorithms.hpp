@@ -167,20 +167,16 @@ namespace zollstock
     namespace detail
     {
 
-        template<int exponent>
-        [[nodiscard]] consteval auto pow(unit_c auto unit) noexcept
+        template<int exponent, unit_c Unit>
+        [[nodiscard]] consteval auto pow(Unit unit) noexcept
         {
             if constexpr(exponent == 0)
             {
                 return _1;
             }
-            else if constexpr(exponent > 0)
+            else
             {
-                return unit * pow<exponent - 1>(unit);
-            }
-            else if constexpr(exponent < 0)
-            {
-                return (_1 / unit) * pow<exponent + 1>(unit);
+                return unit_exponentiation<Unit, exponent>{};
             }
         }
 
