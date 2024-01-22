@@ -189,23 +189,12 @@ namespace zollstock
     template<unit_c auto unit, int exponent>
     inline constexpr unit_c auto pow_v = detail::pow<exponent>(unit);
 
-    namespace detail
-    {
-        template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
-        [[nodiscard]] constexpr bool equal(
-            const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
-        ) noexcept
-        {
-            return (... && (get<indices>(unit_1.exponents) == get<indices>(unit_2.exponents)))
-                && (... && (get<indices>(unit_1.factors  ) == get<indices>(unit_2.factors  )))
-                && (... && (get<indices>(unit_1.symbols  ) == get<indices>(unit_2.symbols  )));
-        }
-    }
-
     template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
     {
-        return detail::equal(unit_1, unit_2, make_quantity_index_sequence{});
+        return unit_1.exponents == unit_2.exponents
+            && unit_1.factors   == unit_2.factors
+            && unit_1.symbols   == unit_2.symbols;
     }
 
 }
