@@ -96,13 +96,13 @@ namespace zollstock
         template <unit_c ThatUnit>
         [[nodiscard]] constexpr auto operator*(ThatUnit) && noexcept
         {
-            return scalar<multiply_units_v<unit_type, ThatUnit>{}>{ this->value_ };
+            return scalar<this_unit * ThatUnit{}>{ this->value_ };
         }
 
         template <unit_c ThatUnit>
         [[nodiscard]] constexpr auto operator/(ThatUnit) && noexcept
         {
-            return scalar<divide_units_v<unit_type, ThatUnit>{}>{ this->value_ };
+            return scalar<this_unit / ThatUnit{}>{ this->value_ };
         }
 
         [[nodiscard]] constexpr this_type operator*(double that) const noexcept
@@ -113,13 +113,13 @@ namespace zollstock
         template <unit_c auto that_unit>
         [[nodiscard]] constexpr auto operator*(scalar<that_unit> that) const noexcept
         {
-            return scalar<multiply_units_v<unit_type, decltype(that_unit)>{}>{ this->cvalue() * that.cvalue() };
+            return scalar<this_unit * that_unit>{ this->cvalue() * that.cvalue() };
         }
 
         template <unit_c auto that_unit>
         [[nodiscard]] constexpr auto operator/(scalar<that_unit> that) const noexcept
         {
-            return scalar<divide_units_v<unit_type, decltype(that_unit)>{}>{ this->cvalue() / that.cvalue() };
+            return scalar<this_unit / that_unit>{ this->cvalue() / that.cvalue() };
         }
 
     private:

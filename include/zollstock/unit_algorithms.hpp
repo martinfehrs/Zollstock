@@ -151,17 +151,39 @@ namespace zollstock
         return os << to_basic_string<Char>(unit);
     }
 
-
     template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] consteval multiply_units_v<Unit1, Unit2> operator*(Unit1, Unit2) noexcept
+    [[nodiscard]] consteval auto operator*(Unit1, Unit2) noexcept
     {
-        return {};
-    }
-
-    template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] consteval divide_units_v<Unit1, Unit2> operator/(Unit1, Unit2) noexcept
-    {
-        return {};
+        if constexpr(std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit_2>)
+        {
+            return unit_exponentiation<Unit1, 2>{};
+        }
+        else if constexpr(
+            Unit1::type == unit_type::exponentiation &&
+            std::same_as<typename Unit1::base_unit, Unit2>
+        )
+        {
+            return unit_exponentiation<typename Unit1::base_unit, Unit1::exponent + 1>{};
+        }
+        else if constexpr(
+            Unit2::type == unit_type::exponentiation &&
+            std::same_as<typename Unit2::base_unit, Unit1>
+        )
+        {
+            return unit_exponentiation<typename Unit2::base_unit, Unit2::exponent + 1>{};
+        }
+        else if constexpr(
+            Unit1::type == unit_type::exponentiation &&
+            Unit2::type == unit_type::exponentiation &&
+            std::same_as<typename Unit1::base_unit, typename Unit2::base_unit>
+        )
+        {
+            return unit_exponentiation<typename Unit1::base_unit, Unit1::exponent + Unit2::exponent>{};
+        }
+        else
+        {
+            return unit_product<Unit1, Unit2>{};
+        }
     }
 
     namespace detail
@@ -170,9 +192,17 @@ namespace zollstock
         template<int exponent, unit_c Unit>
         [[nodiscard]] consteval auto pow(Unit unit) noexcept
         {
-            if constexpr(exponent == 0)
+            if constexpr(exponent == 0 || std::same_as<Unit, one>)
             {
                 return _1;
+            }
+            else if constexpr(exponent == 1)
+            {
+                return unit;
+            }
+            else if constexpr(Unit::type == unit_type::exponentiation)
+            {
+                return unit_exponentiation<typename Unit::base_unit, Unit::exponent * exponent>{};
             }
             else
             {
@@ -184,6 +214,12 @@ namespace zollstock
 
     template<unit_c auto unit, int exponent>
     inline constexpr unit_c auto pow_v = detail::pow<exponent>(unit);
+
+    template <unit_c Unit1, unit_c Unit2>
+    [[nodiscard]] consteval auto operator/(Unit1 unit_1, Unit2 unit_2) noexcept
+    {
+        return unit_1 * pow_v<unit_2, -1>;
+    }
 
     template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
