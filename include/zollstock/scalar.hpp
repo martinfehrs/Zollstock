@@ -41,7 +41,7 @@ namespace zollstock
             return this->value_;
         }
 
-        [[nodiscard]] static constexpr const unit_type& unit() noexcept
+        [[nodiscard]] static consteval const unit_type& unit() noexcept
         {
             return this_unit;
         }
@@ -94,13 +94,13 @@ namespace zollstock
         }
 
         template <unit_c ThatUnit>
-        [[nodiscard]] constexpr auto operator*(ThatUnit) && noexcept
+        [[nodiscard]] consteval auto operator*(ThatUnit) && noexcept
         {
             return scalar<this_unit * ThatUnit{}>{ this->value_ };
         }
 
         template <unit_c ThatUnit>
-        [[nodiscard]] constexpr auto operator/(ThatUnit) && noexcept
+        [[nodiscard]] consteval auto operator/(ThatUnit) && noexcept
         {
             return scalar<this_unit / ThatUnit{}>{ this->value_ };
         }
@@ -154,7 +154,7 @@ namespace zollstock
     };
 
     template <unit_c Unit>
-    [[nodiscard]] constexpr auto operator*(double factor, Unit) noexcept
+    [[nodiscard]] consteval auto operator*(double factor, Unit) noexcept
     {
         return scalar<Unit{}>{ factor };
     }
