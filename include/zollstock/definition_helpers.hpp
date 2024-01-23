@@ -5,12 +5,12 @@
 #define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                    \
     [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept \
     {                                                                                       \
-        return scalar<symbol>{ static_cast<double>(value) };                                \
+        return scalar<symbol, double>{ static_cast<double>(value) };                                \
     }                                                                                       \
                                                                                             \
     [[nodiscard]] consteval auto operator""_##symbol(long double value) noexcept            \
     {                                                                                       \
-        return scalar<symbol>{ static_cast<double>(value) };                                \
+        return scalar<symbol, double>{ static_cast<double>(value) };                                \
     }                                                                                       \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol) \

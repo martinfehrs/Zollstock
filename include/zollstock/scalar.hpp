@@ -5,16 +5,19 @@
 #include <zollstock/unit_concept.hpp>
 #include <zollstock/unit_algorithms.hpp>
 
+#include <concepts>
+
 
 namespace zollstock
 {
 
-    template <unit_c auto this_unit>
+    template <unit_c auto this_unit, std::floating_point ThisValue>
     class scalar
     {
 
+        using value_type = ThisValue;
         using unit_type = decltype(this_unit);
-        using this_type = scalar<this_unit>;
+        using this_type = scalar<this_unit, ThisValue>;
 
     public:
 
@@ -22,21 +25,21 @@ namespace zollstock
             : value_{}
         {}
 
-        constexpr scalar(double value) noexcept
+        constexpr scalar(value_type value) noexcept
             : value_{ value }
         {}
 
-        [[nodiscard]] constexpr double& value() noexcept
+        [[nodiscard]] constexpr value_type& value() noexcept
         {
             return this->value_;
         }
 
-        [[nodiscard]] constexpr const double& value() const noexcept
+        [[nodiscard]] constexpr const value_type& value() const noexcept
         {
             return this->value_;
         }
 
-        [[nodiscard]] constexpr const double& cvalue() const noexcept
+        [[nodiscard]] constexpr const value_type& cvalue() const noexcept
         {
             return this->value_;
         }
@@ -58,13 +61,13 @@ namespace zollstock
         }
 
         template <unit_c auto that_unit> requires convertible_units_c<unit_type, decltype(that_unit)>
-        [[nodiscard]] constexpr scalar<that_unit> as() const noexcept
+        [[nodiscard]] constexpr scalar<that_unit, value_type> as() const noexcept
         {
             return this->as_impl<that_unit>(make_quantity_index_sequence{});
         }
 
         template <unit_c auto that_unit> requires convertible_units_c<unit_type, decltype(that_unit)>
-        [[nodiscard]] constexpr operator scalar<that_unit>() const noexcept
+        [[nodiscard]] constexpr operator scalar<that_unit, value_type>() const noexcept
         {
             return this->as<that_unit>();
         }
@@ -96,36 +99,36 @@ namespace zollstock
         template <unit_c ThatUnit>
         [[nodiscard]] consteval auto operator*(ThatUnit) && noexcept
         {
-            return scalar<this_unit * ThatUnit{}>{ this->value_ };
+            return scalar<this_unit * ThatUnit{}, value_type>{ this->value_ };
         }
 
         template <unit_c ThatUnit>
         [[nodiscard]] consteval auto operator/(ThatUnit) && noexcept
         {
-            return scalar<this_unit / ThatUnit{}>{ this->value_ };
+            return scalar<this_unit / ThatUnit{}, value_type>{ this->value_ };
         }
 
-        [[nodiscard]] constexpr this_type operator*(double that) const noexcept
+        [[nodiscard]] constexpr this_type operator*(value_type that) const noexcept
         {
             return { this->cvalue() * that };
         }
 
         template <unit_c auto that_unit>
-        [[nodiscard]] constexpr auto operator*(scalar<that_unit> that) const noexcept
+        [[nodiscard]] constexpr auto operator*(scalar<that_unit, value_type> that) const noexcept
         {
-            return scalar<this_unit * that_unit>{ this->cvalue() * that.cvalue() };
+            return scalar<this_unit * that_unit, value_type>{ this->cvalue() * that.cvalue() };
         }
 
         template <unit_c auto that_unit>
-        [[nodiscard]] constexpr auto operator/(scalar<that_unit> that) const noexcept
+        [[nodiscard]] constexpr auto operator/(scalar<that_unit, value_type> that) const noexcept
         {
-            return scalar<this_unit / that_unit>{ this->cvalue() / that.cvalue() };
+            return scalar<this_unit / that_unit, value_type>{ this->cvalue() / that.cvalue() };
         }
 
     private:
 
         template <unit_c auto that_unit, std::size_t pos>
-        [[nodiscard]] constexpr double dimension_factor() const noexcept
+        [[nodiscard]] constexpr value_type dimension_factor() const noexcept
         {
             constexpr auto this_exponent = get<pos>(this_unit.exponents);
             constexpr auto that_exponent = get<pos>(that_unit.exponents);
@@ -137,42 +140,42 @@ namespace zollstock
             }
             else
             {
-                return 1.0L;
+                return value_type{ 1.0L };
             }
         }
 
         template <unit_c auto that_unit, std::size_t... indices>
-        [[nodiscard]] constexpr scalar<that_unit> as_impl(
+        [[nodiscard]] constexpr scalar<that_unit, value_type> as_impl(
             std::index_sequence<indices...>
         ) const noexcept
         {
             return { (this->value_ * ... * this->dimension_factor<that_unit, indices>()) };
         }
 
-        double value_;
+        value_type value_;
 
     };
 
-    template <unit_c Unit>
-    [[nodiscard]] consteval auto operator*(double&& factor, Unit) noexcept
+    template <unit_c Unit, std::floating_point Factor>
+    [[nodiscard]] consteval auto operator*(Factor&& factor, Unit) noexcept
     {
-        return scalar<Unit{}>{ factor };
+        return scalar<Unit{}, Factor>{ factor };
     }
 
-    template <unit_c auto unit>
-    [[nodiscard]] constexpr auto operator*(double factor_1, scalar<unit> factor_2) noexcept
+    template <unit_c auto unit, typename ValueType>
+    [[nodiscard]] constexpr auto operator*(ValueType factor_1, scalar<unit, ValueType> factor_2) noexcept
     {
-        return scalar<unit>{ factor_1 * factor_2.cvalue() };
+        return scalar<unit, ValueType>{ factor_1 * factor_2.cvalue() };
     }
 
-    template <unit_c auto unit>
-    [[nodiscard]] constexpr auto operator/(scalar<unit> dividend, double divisor) noexcept
+    template <unit_c auto unit, typename ValueType>
+    [[nodiscard]] constexpr auto operator/(scalar<unit, ValueType> dividend, ValueType divisor) noexcept
     {
-        return scalar<unit>{ dividend.cvalue() / divisor };
+        return scalar<unit, ValueType>{ dividend.cvalue() / divisor };
     }
 
-    template <typename Char, unit_c auto unit>
-    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit> scalar)
+    template <typename Char, unit_c auto unit, typename ValueType>
+    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, ValueType> scalar)
     {
         const std::basic_string<Char> unit_representation = to_basic_string<Char>(unit);
 
