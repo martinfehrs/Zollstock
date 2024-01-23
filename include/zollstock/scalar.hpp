@@ -162,20 +162,20 @@ namespace zollstock
         return scalar<Unit{}, Factor>{ factor };
     }
 
-    template <unit_c auto unit, typename ValueType>
-    [[nodiscard]] constexpr auto operator*(ValueType factor_1, scalar<unit, ValueType> factor_2) noexcept
+    template <unit_c auto unit, std::floating_point Value>
+    [[nodiscard]] constexpr auto operator*(Value factor_1, scalar<unit, Value> factor_2) noexcept
     {
-        return scalar<unit, ValueType>{ factor_1 * factor_2.cvalue() };
+        return scalar<unit, Value>{ factor_1 * factor_2.cvalue() };
     }
 
-    template <unit_c auto unit, typename ValueType>
-    [[nodiscard]] constexpr auto operator/(scalar<unit, ValueType> dividend, ValueType divisor) noexcept
+    template <unit_c auto unit, std::floating_point Value>
+    [[nodiscard]] constexpr auto operator/(scalar<unit, Value> dividend, Value divisor) noexcept
     {
-        return scalar<unit, ValueType>{ dividend.cvalue() / divisor };
+        return scalar<unit, Value>{ dividend.cvalue() / divisor };
     }
 
-    template <typename Char, unit_c auto unit, typename ValueType>
-    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, ValueType> scalar)
+    template <typename Char, unit_c auto unit, std::floating_point Value>
+    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, Value> scalar)
     {
         const std::basic_string<Char> unit_representation = to_basic_string<Char>(unit);
 
