@@ -137,13 +137,9 @@ namespace zollstock
                 return std::pow(get<pos>(this_unit.factors), this_exponent) /
                        std::pow(get<pos>(that_unit.factors), that_exponent);
             }
-            else if constexpr(get<pos>(this_unit.exponents) != 0)
-            {
-                return get<pos>(this_unit.factors);
-            }
             else
             {
-                return 1.0;
+                return 1.0L;
             }
         }
 
