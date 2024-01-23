@@ -154,35 +154,112 @@ namespace zollstock
     template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] consteval auto operator*(Unit1, Unit2) noexcept
     {
-        if constexpr(std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit_2>)
-        {
-            return unit_exponentiation<Unit1, 2>{};
-        }
-        else if constexpr(
+        if constexpr(
             Unit1::type == unit_type::exponentiation &&
-            std::same_as<typename Unit1::base_unit, Unit2>
+            Unit2::type == unit_type::exponentiation
         )
         {
-            return unit_exponentiation<typename Unit1::base_unit, Unit1::exponent + 1>{};
-        }
-        else if constexpr(
-            Unit2::type == unit_type::exponentiation &&
-            std::same_as<typename Unit2::base_unit, Unit1>
-        )
-        {
-            return unit_exponentiation<typename Unit2::base_unit, Unit2::exponent + 1>{};
-        }
-        else if constexpr(
-            Unit1::type == unit_type::exponentiation &&
-            Unit2::type == unit_type::exponentiation &&
-            std::same_as<typename Unit1::base_unit, typename Unit2::base_unit>
-        )
-        {
-            return unit_exponentiation<typename Unit1::base_unit, Unit1::exponent + Unit2::exponent>{};
+            if constexpr(std::same_as<typename Unit1::base_unit, typename Unit2::base_unit>)
+            {
+                return unit_exponentiation<
+                    typename Unit1::base_unit,
+                    Unit1::exponent + Unit2::exponent
+                >{};
+            }
+            else
+            {
+                return unit_product<Unit1, Unit2>{};
+            }
         }
         else
+        if constexpr(Unit1::type == unit_type::exponentiation && Unit2::type == unit_type::basic)
         {
-            return unit_product<Unit1, Unit2>{};
+            if constexpr(std::same_as<typename Unit1::base_unit, Unit2>)
+            {
+                return unit_exponentiation<typename Unit1::base_unit, Unit1::exponent + 1>{};
+            }
+            else
+            {
+                return unit_product<Unit1, Unit2>{};
+            }
+        }
+        else
+        if constexpr(Unit1::type == unit_type::basic && Unit2::type == unit_type::exponentiation)
+        {
+            if constexpr(std::same_as<typename Unit2::base_unit, Unit1>)
+            {
+                return unit_exponentiation<typename Unit2::base_unit, Unit2::exponent + 1>{};
+            }
+            else
+            {
+                return unit_product<Unit1, Unit2>{};
+            }
+        }
+        else
+        if constexpr(Unit1::type == unit_type::exponentiation && Unit2::type == unit_type::product)
+        {
+            if constexpr(std::same_as<typename Unit1::base_unit, typename Unit2::base_unit_1>)
+            {
+                return unit_product<
+                    unit_exponentiation<typename Unit1::base_unit, Unit1::exponent + 1>,
+                    typename Unit2::base_unit_2
+                >{};
+            }
+            else
+            if constexpr(std::same_as<typename Unit1::base_unit, typename Unit2::base_unit_2>)
+            {
+                return unit_product<
+                    unit_exponentiation<typename Unit1::base_unit, Unit1::exponent + 1>,
+                    typename Unit2::base_unit_1
+                >{};
+            }
+            else
+            {
+                return unit_product<Unit1, Unit2>{};
+            }
+        }
+        else
+        if constexpr(Unit1::type == unit_type::product && Unit2::type == unit_type::exponentiation)
+        {
+            if constexpr(std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit>)
+            {
+                return unit_product<
+                    unit_exponentiation<typename Unit2::base_unit, Unit2::exponent + 1>,
+                    typename Unit2::base_unit_2
+                >{};
+            }
+            else
+            if constexpr(std::same_as<typename Unit1::base_unit_2, typename Unit2::base_unit>)
+            {
+                return unit_product<
+                    unit_exponentiation<typename Unit2::base_unit, Unit2::exponent + 1>,
+                    typename Unit2::base_unit_1
+                >{};
+            }
+            else
+            {
+                return unit_product<Unit1, Unit2>{};
+            }
+        }
+        else
+        if constexpr(Unit1::type == unit_type::product && Unit2::type == unit_type::product)
+        {
+            if constexpr(
+                std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit_1> &&
+                std::same_as<typename Unit1::base_unit_2, typename Unit2::base_unit_2> ||
+                std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit_2> &&
+                std::same_as<typename Unit1::base_unit_2, typename Unit2::base_unit_1>
+            )
+            {
+                return unit_product<
+                    unit_exponentiation<typename Unit1::base_unit_1, 2>,
+                    unit_exponentiation<typename Unit1::base_unit_2, 2>
+                >{};
+            }
+            else
+            {
+                return unit_product<Unit1, Unit2>{};
+            }
         }
     }
 
