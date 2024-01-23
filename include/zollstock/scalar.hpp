@@ -11,7 +11,7 @@
 namespace zollstock
 {
 
-    template <unit_c auto this_unit, std::floating_point ThisValue>
+    template <unit_c auto this_unit, std::floating_point ThisValue = double>
     class scalar
     {
 
