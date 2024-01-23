@@ -156,6 +156,12 @@ namespace zollstock
 
     };
 
+    template <unit_c auto unit, std::floating_point Value>
+    [[nodiscard]] constexpr auto make_scalar(Value value) noexcept
+    {
+        return scalar<unit, Value>{ value };
+    }
+
     template <unit_c Unit, std::floating_point Factor>
     [[nodiscard]] consteval auto operator*(Factor&& factor, Unit) noexcept
     {
