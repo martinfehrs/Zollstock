@@ -127,8 +127,6 @@ namespace zollstock
         template <unit_c auto that_unit, std::size_t pos>
         [[nodiscard]] constexpr double dimension_factor() const noexcept
         {
-            // muss der Exponent mit einbezogen werden?
-
             constexpr auto this_exponent = get<pos>(this_unit.exponents);
             constexpr auto that_exponent = get<pos>(that_unit.exponents);
 
