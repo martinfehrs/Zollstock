@@ -16,17 +16,21 @@ namespace zollstock
         long double angle;
     };
 
-
-    template<std::size_t... indices>
-    [[nodiscard]] constexpr quantity_factors combined_impl(
-        const quantity_factors& factors_1,
-        const quantity_factors& factors_2,
-        std::index_sequence<indices...>
-    ) noexcept
+    namespace detail
     {
-        return {
-            ((get<indices>(factors_1) != 0) ? get<indices>(factors_1) : get<indices>(factors_2))...
-        };
+
+        template<std::size_t... indices>
+        [[nodiscard]] constexpr quantity_factors combined_impl(
+            const quantity_factors& factors_1,
+            const quantity_factors& factors_2,
+            std::index_sequence<indices...>
+        ) noexcept
+        {
+            return {
+                ((get<indices>(factors_1) != 0) ? get<indices>(factors_1) : get<indices>(factors_2))...
+            };
+        }
+
     }
 
     [[nodiscard]] constexpr quantity_factors combined(
@@ -34,7 +38,7 @@ namespace zollstock
         const quantity_factors& factors_2
     ) noexcept
     {
-        return combined_impl(
+        return detail::combined_impl(
             factors_1,
             factors_2,
             make_quantity_index_sequence{}

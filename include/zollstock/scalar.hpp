@@ -165,7 +165,6 @@ namespace zollstock
         return scalar<Unit{}>{ factor };
     }
 
-
     template <unit_c auto unit>
     [[nodiscard]] constexpr auto operator*(double factor_1, scalar<unit> factor_2) noexcept
     {

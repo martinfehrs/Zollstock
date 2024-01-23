@@ -16,14 +16,19 @@ namespace zollstock
         int angle;
     };
 
-    template <std::size_t... indices>
-    [[nodiscard]] constexpr quantity_exponents add(
-        const quantity_exponents& exponents_1,
-        const quantity_exponents& exponents_2,
-        std::index_sequence<indices...>
-    ) noexcept
+    namespace detail
     {
-        return { (get<indices>(exponents_1) + get<indices>(exponents_2))... };
+
+        template <std::size_t... indices>
+        [[nodiscard]] constexpr quantity_exponents add(
+            const quantity_exponents& exponents_1,
+            const quantity_exponents& exponents_2,
+            std::index_sequence<indices...>
+        ) noexcept
+        {
+            return { (get<indices>(exponents_1) + get<indices>(exponents_2))... };
+        }
+
     }
 
     [[nodiscard]] constexpr auto operator+(
@@ -31,17 +36,22 @@ namespace zollstock
         const quantity_exponents& exponents_2
     ) noexcept
     {
-        return add(exponents_1, exponents_2, make_quantity_index_sequence{});
+        return detail::add(exponents_1, exponents_2, make_quantity_index_sequence{});
     }
 
-    template <std::size_t... indices>
-    [[nodiscard]] constexpr quantity_exponents sub(
-        const quantity_exponents& exponents_1,
-        const quantity_exponents& exponents_2,
-        std::index_sequence<indices...>
-    ) noexcept
+    namespace detail
     {
-        return { (get<indices>(exponents_1) - get<indices>(exponents_2))... };
+
+        template <std::size_t... indices>
+        [[nodiscard]] constexpr quantity_exponents sub(
+            const quantity_exponents& exponents_1,
+            const quantity_exponents& exponents_2,
+            std::index_sequence<indices...>
+        ) noexcept
+        {
+            return { (get<indices>(exponents_1) - get<indices>(exponents_2))... };
+        }
+
     }
 
     [[nodiscard]] constexpr auto operator-(
@@ -49,17 +59,22 @@ namespace zollstock
         const quantity_exponents& exponents_2
     ) noexcept
     {
-        return sub(exponents_1, exponents_2, make_quantity_index_sequence{});
+        return detail::sub(exponents_1, exponents_2, make_quantity_index_sequence{});
     }
 
-    template <std::size_t... indices>
-    [[nodiscard]] constexpr quantity_exponents mul(
-        const quantity_exponents& exponents,
-        int factor,
-        std::index_sequence<indices...>
-    ) noexcept
+    namespace detail
     {
-        return { (get<indices>(exponents) * factor)... };
+
+        template <std::size_t... indices>
+        [[nodiscard]] constexpr quantity_exponents mul(
+            const quantity_exponents& exponents,
+            int factor,
+            std::index_sequence<indices...>
+        ) noexcept
+        {
+            return { (get<indices>(exponents) * factor)... };
+        }
+
     }
 
     [[nodiscard]] constexpr auto operator*(
@@ -67,7 +82,7 @@ namespace zollstock
         int factor
     ) noexcept
     {
-        return mul(exponents, factor, make_quantity_index_sequence{});
+        return detail::mul(exponents, factor, make_quantity_index_sequence{});
     }
 }
 

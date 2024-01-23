@@ -11,7 +11,7 @@ namespace zollstock::inline unit::inline constants
 
     ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(radian, rad)
 
-    inline constexpr degree deg   {};
+    inline constexpr degree deg{};
 
     inline constexpr arcminute arcmin{};
 

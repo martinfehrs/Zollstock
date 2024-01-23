@@ -15,50 +15,58 @@ namespace zollstock
     {
         unit_symbol length;
         unit_symbol time;
+
         unit_symbol angle;
     };
 
-    template <std::size_t pos>
-    [[nodiscard]] constexpr unit_symbol select_symbol_entry(
-        const quantity_exponents& exponents,
-        const quantity_symbols& symbols_1,
-        const quantity_symbols& symbols_2
-    )
+    namespace detail
     {
-        const unit_symbol& symbol_1 = get<pos>(symbols_1);
-        const unit_symbol& symbol_2 = get<pos>(symbols_2);
 
-        if (get<pos>(exponents) == 0)
+        template <std::size_t pos>
+        [[nodiscard]] constexpr unit_symbol select_symbol_entry(
+            const quantity_exponents& exponents,
+            const quantity_symbols& symbols_1,
+            const quantity_symbols& symbols_2
+        )
         {
-            return ""_us;
-        }
-        else if (symbol_1.size() == 0)
-        {
-            return symbol_2;
-        }
-        else if (symbol_2.size() == 0)
-        {
-            return symbol_1;
-        }
-        else if (symbol_1 == symbol_2)
-        {
-            return symbol_1;
-        }
-        else
-        {
-            throw "incompatible symbols";
-        }
-    }
+            const unit_symbol& symbol_1 = get<pos>(symbols_1);
+            const unit_symbol& symbol_2 = get<pos>(symbols_2);
 
-    template<std::size_t... indices>
-    [[nodiscard]] constexpr auto select_symbols(
-        const quantity_exponents& exponents,
-        const quantity_symbols& symbols_1,
-        const quantity_symbols& symbols_2,
-        std::index_sequence<indices...>
-    ) noexcept
-    {
-        return quantity_symbols{ select_symbol_entry<indices>(exponents, symbols_1, symbols_2)... };
+            if (get<pos>(exponents) == 0)
+            {
+                return ""_us;
+            }
+            else if (symbol_1.size() == 0)
+            {
+                return symbol_2;
+            }
+            else if (symbol_2.size() == 0)
+            {
+                return symbol_1;
+            }
+            else if (symbol_1 == symbol_2)
+            {
+                return symbol_1;
+            }
+            else
+            {
+                throw "incompatible symbols";
+            }
+        }
+
+        template<std::size_t... indices>
+        [[nodiscard]] constexpr auto select_symbols_impl(
+            const quantity_exponents& exponents,
+            const quantity_symbols& symbols_1,
+            const quantity_symbols& symbols_2,
+            std::index_sequence<indices...>
+        ) noexcept
+        {
+            return quantity_symbols{
+                select_symbol_entry<indices>(exponents, symbols_1, symbols_2)...
+            };
+        }
+
     }
 
     [[nodiscard]] constexpr inline auto select_symbols(
@@ -67,7 +75,7 @@ namespace zollstock
         const quantity_symbols& symbols_2
     ) noexcept
     {
-        return select_symbols(
+        return detail::select_symbols_impl(
             exponents,
             symbols_1,
             symbols_2,
