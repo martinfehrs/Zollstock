@@ -154,7 +154,7 @@ namespace zollstock
     };
 
     template <unit_c Unit>
-    [[nodiscard]] consteval auto operator*(double factor, Unit) noexcept
+    [[nodiscard]] consteval auto operator*(double&& factor, Unit) noexcept
     {
         return scalar<Unit{}>{ factor };
     }
