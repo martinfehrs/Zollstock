@@ -3,12 +3,12 @@
 
 
 #define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                    \
-    [[nodiscard]] constexpr auto operator""_##symbol(unsigned long long int value) noexcept \
+    [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept \
     {                                                                                       \
         return scalar<symbol>{ static_cast<double>(value) };                                \
     }                                                                                       \
                                                                                             \
-    [[nodiscard]] constexpr auto operator""_##symbol(long double value) noexcept            \
+    [[nodiscard]] consteval auto operator""_##symbol(long double value) noexcept            \
     {                                                                                       \
         return scalar<symbol>{ static_cast<double>(value) };                                \
     }                                                                                       \
