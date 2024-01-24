@@ -86,16 +86,6 @@ namespace zollstock
             return *this;
         }
 
-        [[nodiscard]] constexpr this_type operator+(this_type that) const noexcept
-        {
-            return { this->cvalue() + that.cvalue() };
-        }
-
-        [[nodiscard]] constexpr this_type operator-(this_type that) const noexcept
-        {
-            return { this->cvalue() - that.cvalue() };
-        }
-
         template <unit_c ThatUnit>
         [[nodiscard]] consteval auto operator*(ThatUnit) && noexcept
         {
@@ -106,23 +96,6 @@ namespace zollstock
         [[nodiscard]] consteval auto operator/(ThatUnit) && noexcept
         {
             return scalar<this_unit / ThatUnit{}, value_type>{ this->value_ };
-        }
-
-        [[nodiscard]] constexpr this_type operator*(value_type that) const noexcept
-        {
-            return { this->cvalue() * that };
-        }
-
-        template <unit_c auto that_unit>
-        [[nodiscard]] constexpr auto operator*(scalar<that_unit, value_type> that) const noexcept
-        {
-            return scalar<this_unit * that_unit, value_type>{ this->cvalue() * that.cvalue() };
-        }
-
-        template <unit_c auto that_unit>
-        [[nodiscard]] constexpr auto operator/(scalar<that_unit, value_type> that) const noexcept
-        {
-            return scalar<this_unit / that_unit, value_type>{ this->cvalue() / that.cvalue() };
         }
 
     private:
@@ -162,10 +135,32 @@ namespace zollstock
         return scalar<unit, Value>{ value };
     }
 
+
+    template <unit_c auto unit, std::floating_point Value>
+    [[nodiscard]] constexpr auto operator+(
+        scalar<unit, Value> summand_1, scalar<unit, Value> summand_2) noexcept
+    {
+        return scalar<unit, Value>{ summand_1.cvalue() + summand_2.cvalue() };
+    }
+
+    template <unit_c auto unit, std::floating_point Value>
+    [[nodiscard]] constexpr auto operator-(
+        scalar<unit, Value> minuend, scalar<unit, Value> subtrahend
+    ) noexcept
+    {
+        return scalar<unit, Value>{ minuend.cvalue() - subtrahend.cvalue() };
+    }
+
     template <unit_c Unit, std::floating_point Factor>
     [[nodiscard]] consteval auto operator*(Factor&& factor, Unit) noexcept
     {
         return scalar<Unit{}, Factor>{ factor };
+    }
+
+    template <unit_c auto unit, std::floating_point Value>
+    [[nodiscard]] constexpr auto operator*(scalar<unit, Value> factor_1, Value factor_2) noexcept
+    {
+        return scalar<unit, Value>{ factor_1.cvalue() * factor_2 };
     }
 
     template <unit_c auto unit, std::floating_point Value>
@@ -174,11 +169,28 @@ namespace zollstock
         return scalar<unit, Value>{ factor_1 * factor_2.cvalue() };
     }
 
+    template <unit_c auto unit_1, unit_c auto unit_2, std::floating_point Value>
+    [[nodiscard]] constexpr auto operator*(
+        scalar<unit_1, Value> factor_1, scalar<unit_2, Value> factor_2
+    ) noexcept
+    {
+        return scalar<unit_1 * unit_2, Value>{ factor_1.cvalue() * factor_2.cvalue() };
+    }
+
     template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto operator/(scalar<unit, Value> dividend, Value divisor) noexcept
     {
         return scalar<unit, Value>{ dividend.cvalue() / divisor };
     }
+
+    template <unit_c auto unit_1, unit_c auto unit_2, std::floating_point Value>
+    [[nodiscard]] constexpr auto operator/(
+        scalar<unit_1, Value> dividend, scalar<unit_2, Value> divisor
+    ) noexcept
+    {
+        return scalar<unit_1 / unit_2, Value>{ dividend.cvalue() / divisor.cvalue() };
+    }
+
 
     template <typename Char, unit_c auto unit, std::floating_point Value>
     std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, Value> scalar)
