@@ -60,13 +60,13 @@ namespace zollstock
             return -this->value_;
         }
 
-        template <unit_c auto that_unit> requires convertible_units_c<unit_type, decltype(that_unit)>
+        template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
         [[nodiscard]] constexpr scalar<that_unit, value_type> as() const noexcept
         {
             return this->as_impl<that_unit>(make_quantity_index_sequence{});
         }
 
-        template <unit_c auto that_unit> requires convertible_units_c<unit_type, decltype(that_unit)>
+        template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
         [[nodiscard]] constexpr operator scalar<that_unit, value_type>() const noexcept
         {
             return this->as<that_unit>();

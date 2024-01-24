@@ -34,10 +34,10 @@ namespace zollstock
         { Candidate::symbols   } -> std::same_as<const quantity_symbols  &>;
     };
 
-    template <typename Unit1, typename Unit2>
-    concept convertible_units_c = unit_c<Unit1>
-                               && unit_c<Unit2>
-                               && Unit1::exponents == Unit2::exponents;
+    [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
+    {
+        return unit_1.exponents == unit_2.exponents;
+    }
 
     template <unit_c Unit, int exponent_>
     struct unit_exponentiation
