@@ -158,49 +158,55 @@ namespace zollstock
         return make_scalar<Unit{}>(factor);
     }
 
-    template <unit_c auto unit>
+    template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto operator*(
-        scalar<unit, auto> factor_1, std::floating_point auto factor_2
+        scalar<unit, Value> factor_1, std::floating_point auto factor_2
     ) noexcept
     {
         return make_scalar<unit>(factor_1.cvalue() * factor_2);
     }
 
-    template <unit_c auto unit>
+    template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto operator*(
-        std::floating_point auto factor_1, scalar<unit, auto> factor_2
+        std::floating_point auto factor_1, scalar<unit, Value> factor_2
     ) noexcept
     {
         return make_scalar<unit>(factor_1 * factor_2.cvalue());
     }
 
-    template <unit_c auto unit_1, unit_c auto unit_2>
+    template <
+        unit_c auto unit_1, unit_c auto unit_2,
+        std::floating_point Value1, std::floating_point Value2
+    >
     [[nodiscard]] constexpr auto operator*(
-        scalar<unit_1, auto> factor_1, scalar<unit_2, auto> factor_2
+        scalar<unit_1, Value1> factor_1, scalar<unit_2, Value2> factor_2
     ) noexcept
     {
         return make_scalar<unit_1 * unit_2>(factor_1.cvalue() * factor_2.cvalue());
     }
 
-    template <unit_c auto unit>
+    template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto operator/(
-        scalar<unit, auto> dividend, std::floating_point auto divisor
+        scalar<unit, Value> dividend, std::floating_point auto divisor
     ) noexcept
     {
         return make_scalar<unit>(dividend.cvalue() / divisor);
     }
 
-    template <unit_c auto unit_1, unit_c auto unit_2>
+    template <
+        unit_c auto unit_1, unit_c auto unit_2,
+        std::floating_point Value1, std::floating_point Value2
+    >
     [[nodiscard]] constexpr auto operator/(
-        scalar<unit_1, auto> dividend, scalar<unit_2, auto> divisor
+        scalar<unit_1, Value1> dividend, scalar<unit_2, Value2> divisor
     ) noexcept
     {
         return make_scalar<unit_1 / unit_2>(dividend.cvalue() / divisor.cvalue());
     }
 
 
-    template <typename Char, unit_c auto unit, std::floating_point>
-    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, auto> scalar)
+    template <typename Char, unit_c auto unit, std::floating_point Value>
+    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, Value> scalar)
     {
         const std::basic_string<Char> unit_representation = to_basic_string<Char>(unit);
 
