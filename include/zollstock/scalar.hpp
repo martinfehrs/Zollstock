@@ -137,16 +137,16 @@ namespace zollstock
     }
 
 
-    template <unit_c auto unit, std::floating_point Value>
+    template <unit_c auto unit, std::floating_point Value1, std::floating_point Value2>
     [[nodiscard]] constexpr auto operator+(
-        scalar<unit, Value> summand_1, scalar<unit, Value> summand_2) noexcept
+        scalar<unit, Value1> summand_1, scalar<unit, Value2> summand_2) noexcept
     {
         return make_scalar<unit>(summand_1.cvalue() + summand_2.cvalue());
     }
 
-    template <unit_c auto unit, std::floating_point Value>
+    template <unit_c auto unit, std::floating_point Value1, std::floating_point Value2>
     [[nodiscard]] constexpr auto operator-(
-        scalar<unit, Value> minuend, scalar<unit, Value> subtrahend
+        scalar<unit, Value1> minuend, scalar<unit, Value2> subtrahend
     ) noexcept
     {
         return make_scalar<unit>(minuend.cvalue() - subtrahend.cvalue());
