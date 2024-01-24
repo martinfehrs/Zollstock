@@ -129,6 +129,7 @@ namespace zollstock
 
     };
 
+
     template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto make_scalar(Value value) noexcept
     {
@@ -151,8 +152,8 @@ namespace zollstock
         return make_scalar<unit>(minuend.cvalue() - subtrahend.cvalue());
     }
 
-    template <unit_c Unit, std::floating_point Factor>
-    [[nodiscard]] consteval auto operator*(Factor&& factor, Unit) noexcept
+    template <unit_c Unit>
+    [[nodiscard]] consteval auto operator*(std::floating_point auto&& factor, Unit) noexcept
     {
         return make_scalar<Unit{}>(factor);
     }
@@ -192,8 +193,8 @@ namespace zollstock
     }
 
 
-    template <typename Char, unit_c auto unit, std::floating_point Value>
-    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, Value> scalar)
+    template <typename Char, unit_c auto unit>
+    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, auto> scalar)
     {
         const std::basic_string<Char> unit_representation = to_basic_string<Char>(unit);
 
