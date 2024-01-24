@@ -2,15 +2,18 @@
 #define __ZOLLSTOCK_DEFINITION_HELPERS_HPP__
 
 
+#include <zollstock/floating_point_utilities.hpp>
+
+
 #define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                    \
     [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept \
     {                                                                                       \
-        return scalar<symbol, double>{ static_cast<double>(value) };                                \
+        return scalar<symbol, double>{ static_cast<long double>(value) };                   \
     }                                                                                       \
                                                                                             \
     [[nodiscard]] consteval auto operator""_##symbol(long double value) noexcept            \
     {                                                                                       \
-        return scalar<symbol, double>{ static_cast<double>(value) };                                \
+        return scalar<symbol, double>{ value };                  \
     }                                                                                       \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol) \

@@ -4,6 +4,7 @@
 
 #include <zollstock/unit_concept.hpp>
 #include <zollstock/unit_algorithms.hpp>
+#include <zollstock/floating_point_utilities.hpp>
 
 #include <concepts>
 
@@ -25,9 +26,15 @@ namespace zollstock
             : value_{}
         {}
 
-        constexpr scalar(value_type value) noexcept
-            : value_{ value }
+        template <std::floating_point ThatValue>
+        constexpr scalar(ThatValue value) noexcept(fits_into_v<ThatValue, ThisValue>)
+            : value_{ narrow<ThisValue>(value) }
         {}
+
+        template <std::floating_point ThatValue>
+        constexpr scalar(scalar<this_unit, ThatValue> that) noexcept(fits_into_v<ThatValue, ThisValue>)
+            : value_{ narrow<ThisValue>(that.cvalue()) }
+        { }
 
         [[nodiscard]] constexpr value_type& value() noexcept
         {
