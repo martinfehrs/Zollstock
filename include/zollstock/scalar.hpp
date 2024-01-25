@@ -26,13 +26,13 @@ namespace zollstock
             : value_{}
         {}
 
-        template <std::floating_point ThatValue>
-        constexpr scalar(ThatValue value) noexcept(fits_into_v<ThatValue, ThisValue>)
+        template <arithmetic_c ThatValue>
+        constexpr scalar(ThatValue value) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : value_{ narrow<ThisValue>(value) }
         {}
 
         template <std::floating_point ThatValue>
-        constexpr scalar(scalar<this_unit, ThatValue> that) noexcept(fits_into_v<ThatValue, ThisValue>)
+        constexpr scalar(scalar<this_unit, ThatValue> that) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : value_{ narrow<ThisValue>(that.cvalue()) }
         { }
 

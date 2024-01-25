@@ -8,7 +8,7 @@
 #define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                    \
     [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept \
     {                                                                                       \
-        return scalar<symbol, double>{ static_cast<long double>(value) };                   \
+        return scalar<symbol, double>{ value };                                             \
     }                                                                                       \
                                                                                             \
     [[nodiscard]] consteval auto operator""_##symbol(long double value) noexcept            \
