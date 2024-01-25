@@ -35,6 +35,9 @@ namespace zollstock
         }
     };
 
+    template <std::integral Int>
+    int_range(Int, Int) -> int_range<Int>;
+
 
     template <arithmetic_c Candidate, typename = void>
     struct min_int_range
