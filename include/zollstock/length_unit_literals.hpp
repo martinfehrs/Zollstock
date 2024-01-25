@@ -4,7 +4,7 @@
 
 #include <zollstock/length_unit_constants.hpp>
 #include <zollstock/definition_helpers.hpp>
-#include <zollstock/scalar.hpp>
+#include <zollstock/quantity.hpp>
 
 
 namespace zollstock::inline unit::inline literals
