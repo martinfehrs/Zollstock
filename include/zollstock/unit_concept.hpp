@@ -62,9 +62,11 @@ namespace zollstock
 
         static constexpr unit_exponents exponents = Unit1::exponents + Unit2::exponents;
         static constexpr unit_factors factors{ combined(Unit1::factors, Unit2::factors) };
-        static constexpr unit_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
-    };
 
+        static constexpr unit_symbols symbols{
+            select_symbols(exponents, Unit1::symbols, Unit2::symbols)
+        };
+    };
 
 }
 

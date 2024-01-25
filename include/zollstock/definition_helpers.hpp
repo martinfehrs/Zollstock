@@ -8,12 +8,12 @@
 #define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                    \
     [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept \
     {                                                                                       \
-        return quantity<symbol, double>{ value };                                             \
+        return quantity<symbol, double>{ value };                                           \
     }                                                                                       \
                                                                                             \
     [[nodiscard]] consteval auto operator""_##symbol(long double value) noexcept            \
     {                                                                                       \
-        return quantity<symbol, double>{ value };                  \
+        return quantity<symbol, double>{ value };                                           \
     }                                                                                       \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol) \

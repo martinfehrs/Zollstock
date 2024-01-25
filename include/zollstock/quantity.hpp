@@ -217,7 +217,9 @@ namespace zollstock
 
 
     template <typename Char, unit_c auto unit, std::floating_point Value>
-    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, quantity<unit, Value> quantity)
+    std::basic_ostream<Char>& operator<<(
+        std::basic_ostream<Char>& os, quantity<unit, Value> quantity
+    )
     {
         const std::basic_string<Char> unit_representation = to_basic_string<Char>(unit);
 
