@@ -27,7 +27,7 @@ namespace zollstock
         {}
 
         template <arithmetic_c ThatValue>
-        constexpr scalar(ThatValue value) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
+        explicit constexpr scalar(ThatValue value) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : value_{ narrow<ThisValue>(value) }
         {}
 
