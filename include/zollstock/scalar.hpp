@@ -13,29 +13,29 @@ namespace zollstock
 {
 
     template <unit_c auto this_unit, std::floating_point ThisValue = double>
-    class scalar
+    class quantity
     {
 
         using value_type = ThisValue;
         using unit_type = decltype(this_unit);
-        using this_type = scalar<this_unit, ThisValue>;
+        using this_type = quantity<this_unit, ThisValue>;
 
     public:
 
-        constexpr scalar() noexcept
+        constexpr quantity() noexcept
             : value_{}
         {}
 
         template <arithmetic_c ThatValue>
-        explicit constexpr scalar(
+        explicit constexpr quantity(
             ThatValue value
         ) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : value_{ narrow<ThisValue>(value) }
         {}
 
         template <std::floating_point ThatValue>
-        constexpr scalar(
-            scalar<this_unit, ThatValue> that
+        constexpr quantity(
+            quantity<this_unit, ThatValue> that
         ) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : value_{ narrow<ThisValue>(that.cvalue()) }
         { }
@@ -72,13 +72,13 @@ namespace zollstock
         }
 
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
-        [[nodiscard]] constexpr scalar<that_unit, value_type> as() const noexcept
+        [[nodiscard]] constexpr quantity<that_unit, value_type> as() const noexcept
         {
             return this->as_impl<that_unit>(make_quantity_index_sequence{});
         }
 
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
-        [[nodiscard]] constexpr operator scalar<that_unit, value_type>() const noexcept
+        [[nodiscard]] constexpr operator quantity<that_unit, value_type>() const noexcept
         {
             return this->as<that_unit>();
         }
@@ -100,13 +100,13 @@ namespace zollstock
         template <unit_c ThatUnit>
         [[nodiscard]] consteval auto operator*(ThatUnit) && noexcept
         {
-            return scalar<this_unit * ThatUnit{}, value_type>{ this->value_ };
+            return quantity<this_unit * ThatUnit{}, value_type>{ this->value_ };
         }
 
         template <unit_c ThatUnit>
         [[nodiscard]] consteval auto operator/(ThatUnit) && noexcept
         {
-            return scalar<this_unit / ThatUnit{}, value_type>{ this->value_ };
+            return quantity<this_unit / ThatUnit{}, value_type>{ this->value_ };
         }
 
     private:
@@ -129,7 +129,7 @@ namespace zollstock
         }
 
         template <unit_c auto that_unit, std::size_t... indices>
-        [[nodiscard]] constexpr scalar<that_unit, value_type> as_impl(
+        [[nodiscard]] constexpr quantity<that_unit, value_type> as_impl(
             std::index_sequence<indices...>
         ) const noexcept
         {
@@ -144,20 +144,20 @@ namespace zollstock
     template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto make_scalar(Value value) noexcept
     {
-        return scalar<unit, Value>{ value };
+        return quantity<unit, Value>{ value };
     }
 
 
     template <unit_c auto unit, std::floating_point Value1, std::floating_point Value2>
     [[nodiscard]] constexpr auto operator+(
-        scalar<unit, Value1> summand_1, scalar<unit, Value2> summand_2) noexcept
+        quantity<unit, Value1> summand_1, quantity<unit, Value2> summand_2) noexcept
     {
         return make_scalar<unit>(summand_1.cvalue() + summand_2.cvalue());
     }
 
     template <unit_c auto unit, std::floating_point Value1, std::floating_point Value2>
     [[nodiscard]] constexpr auto operator-(
-        scalar<unit, Value1> minuend, scalar<unit, Value2> subtrahend
+        quantity<unit, Value1> minuend, quantity<unit, Value2> subtrahend
     ) noexcept
     {
         return make_scalar<unit>(minuend.cvalue() - subtrahend.cvalue());
@@ -171,7 +171,7 @@ namespace zollstock
 
     template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto operator*(
-        scalar<unit, Value> factor_1, std::floating_point auto factor_2
+        quantity<unit, Value> factor_1, std::floating_point auto factor_2
     ) noexcept
     {
         return make_scalar<unit>(factor_1.cvalue() * factor_2);
@@ -179,7 +179,7 @@ namespace zollstock
 
     template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto operator*(
-        std::floating_point auto factor_1, scalar<unit, Value> factor_2
+        std::floating_point auto factor_1, quantity<unit, Value> factor_2
     ) noexcept
     {
         return make_scalar<unit>(factor_1 * factor_2.cvalue());
@@ -190,7 +190,7 @@ namespace zollstock
         std::floating_point Value1, std::floating_point Value2
     >
     [[nodiscard]] constexpr auto operator*(
-        scalar<unit_1, Value1> factor_1, scalar<unit_2, Value2> factor_2
+        quantity<unit_1, Value1> factor_1, quantity<unit_2, Value2> factor_2
     ) noexcept
     {
         return make_scalar<unit_1 * unit_2>(factor_1.cvalue() * factor_2.cvalue());
@@ -198,7 +198,7 @@ namespace zollstock
 
     template <unit_c auto unit, std::floating_point Value>
     [[nodiscard]] constexpr auto operator/(
-        scalar<unit, Value> dividend, std::floating_point auto divisor
+        quantity<unit, Value> dividend, std::floating_point auto divisor
     ) noexcept
     {
         return make_scalar<unit>(dividend.cvalue() / divisor);
@@ -209,7 +209,7 @@ namespace zollstock
         std::floating_point Value1, std::floating_point Value2
     >
     [[nodiscard]] constexpr auto operator/(
-        scalar<unit_1, Value1> dividend, scalar<unit_2, Value2> divisor
+        quantity<unit_1, Value1> dividend, quantity<unit_2, Value2> divisor
     ) noexcept
     {
         return make_scalar<unit_1 / unit_2>(dividend.cvalue() / divisor.cvalue());
@@ -217,7 +217,7 @@ namespace zollstock
 
 
     template <typename Char, unit_c auto unit, std::floating_point Value>
-    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, scalar<unit, Value> scalar)
+    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, quantity<unit, Value> quantity)
     {
         const std::basic_string<Char> unit_representation = to_basic_string<Char>(unit);
 
@@ -230,7 +230,7 @@ namespace zollstock
         )
             os.width(os.width() - unit_width_including_space);
 
-        os << scalar.cvalue();
+        os << quantity.cvalue();
 
         if(unit_width > 0)
             os << " " << unit;
