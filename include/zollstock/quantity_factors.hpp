@@ -27,7 +27,9 @@ namespace zollstock
         ) noexcept
         {
             return {
-                ((get<indices>(factors_1) != 0) ? get<indices>(factors_1) : get<indices>(factors_2))...
+                ((get<indices>(factors_1) != 0) ?
+                    get<indices>(factors_1) :
+                    get<indices>(factors_2))...
             };
         }
 
