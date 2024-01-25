@@ -14,9 +14,9 @@ namespace zollstock::inline unit::inline types
     struct basic_meter
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr quantity_exponents exponents{ 1, 0, 0 };
-        static constexpr quantity_factors factors{ Prefix::factor, 0.0L, 0.0L };
-        static constexpr quantity_symbols symbols{ Prefix::symbol + "m"_us, ""_us, ""_us };
+        static constexpr unit_exponents exponents{ 1, 0, 0 };
+        static constexpr unit_factors factors{ Prefix::factor, 0.0L, 0.0L };
+        static constexpr unit_symbols symbols{ Prefix::symbol + "m"_us, ""_us, ""_us };
     };
 
     using quectometer = basic_meter<quecto    >;

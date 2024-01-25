@@ -97,35 +97,35 @@
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_LITERALS(base_symbol) \
 
 
-#define _ZOLLSTOCK_TESTS_MAKE_LENGTH_EXPONENTS()   quantity_exponents{ 1, 0, 0 }
-#define _ZOLLSTOCK_TESTS_MAKE_TIME_EXPONENTS()     quantity_exponents{ 0, 1, 0 }
-#define _ZOLLSTOCK_TESTS_MAKE_ANGLE_EXPONENTS()    quantity_exponents{ 0, 0, 1 }
-#define _ZOLLSTOCK_TESTS_MAKE_AREA_EXPONENTS()     quantity_exponents{ 2, 0, 0 }
-#define _ZOLLSTOCK_TESTS_MAKE_VOLUME_EXPONENTS()   quantity_exponents{ 3, 0, 0 }
+#define _ZOLLSTOCK_TESTS_MAKE_LENGTH_EXPONENTS()   unit_exponents{ 1, 0, 0 }
+#define _ZOLLSTOCK_TESTS_MAKE_TIME_EXPONENTS()     unit_exponents{ 0, 1, 0 }
+#define _ZOLLSTOCK_TESTS_MAKE_ANGLE_EXPONENTS()    unit_exponents{ 0, 0, 1 }
+#define _ZOLLSTOCK_TESTS_MAKE_AREA_EXPONENTS()     unit_exponents{ 2, 0, 0 }
+#define _ZOLLSTOCK_TESTS_MAKE_VOLUME_EXPONENTS()   unit_exponents{ 3, 0, 0 }
 
-#define _ZOLLSTOCK_TESTS_MAKE_LENGTH_FACTORS(factor)         quantity_factors{ factor, 0.0L  , 0.0L   }
-#define _ZOLLSTOCK_TESTS_MAKE_TIME_FACTORS(factor)           quantity_factors{ 0.0L  , factor, 0.0L   }
-#define _ZOLLSTOCK_TESTS_MAKE_ANGLE_FACTORS(factor)          quantity_factors{ 0.0L  , 0.0L  , factor }
-#define _ZOLLSTOCK_TESTS_MAKE_AREA_FACTORS(factor)           quantity_factors{ factor, 0.0L  , 0.0L   }
-#define _ZOLLSTOCK_TESTS_MAKE_VOLUME_FACTORS(factor)         quantity_factors{ factor, 0.0L  , 0.0L   }
-#define _ZOLLSTOCK_TESTS_MAKE_VELOCITY_FACTORS(length, time) quantity_factors{ length, time  , 0.0L   }
+#define _ZOLLSTOCK_TESTS_MAKE_LENGTH_FACTORS(factor)         unit_factors{ factor, 0.0L  , 0.0L   }
+#define _ZOLLSTOCK_TESTS_MAKE_TIME_FACTORS(factor)           unit_factors{ 0.0L  , factor, 0.0L   }
+#define _ZOLLSTOCK_TESTS_MAKE_ANGLE_FACTORS(factor)          unit_factors{ 0.0L  , 0.0L  , factor }
+#define _ZOLLSTOCK_TESTS_MAKE_AREA_FACTORS(factor)           unit_factors{ factor, 0.0L  , 0.0L   }
+#define _ZOLLSTOCK_TESTS_MAKE_VOLUME_FACTORS(factor)         unit_factors{ factor, 0.0L  , 0.0L   }
+#define _ZOLLSTOCK_TESTS_MAKE_VELOCITY_FACTORS(length, time) unit_factors{ length, time  , 0.0L   }
 
-#define _ZOLLSTOCK_TESTS_MAKE_LENGTH_SYMBOLS(symbol) quantity_symbols{ #symbol##_us, ""_us  , ""_us   }
-#define _ZOLLSTOCK_TESTS_MAKE_TIME_SYMBOLS(symbol)   quantity_symbols{ ""_us  , #symbol##_us, ""_us   }
-#define _ZOLLSTOCK_TESTS_MAKE_ANGLE_SYMBOLS(symbol)  quantity_symbols{ ""_us  , ""_us  , #symbol##_us }
-#define _ZOLLSTOCK_TESTS_MAKE_AREA_SYMBOLS(symbol)   quantity_symbols{ #symbol##_us, ""_us  , ""_us   }
-#define _ZOLLSTOCK_TESTS_MAKE_VOLUME_SYMBOLS(symbol) quantity_symbols{ #symbol##_us, ""_us  , ""_us   }
+#define _ZOLLSTOCK_TESTS_MAKE_LENGTH_SYMBOLS(symbol) unit_symbols{ #symbol##_us, ""_us  , ""_us   }
+#define _ZOLLSTOCK_TESTS_MAKE_TIME_SYMBOLS(symbol)   unit_symbols{ ""_us  , #symbol##_us, ""_us   }
+#define _ZOLLSTOCK_TESTS_MAKE_ANGLE_SYMBOLS(symbol)  unit_symbols{ ""_us  , ""_us  , #symbol##_us }
+#define _ZOLLSTOCK_TESTS_MAKE_AREA_SYMBOLS(symbol)   unit_symbols{ #symbol##_us, ""_us  , ""_us   }
+#define _ZOLLSTOCK_TESTS_MAKE_VOLUME_SYMBOLS(symbol) unit_symbols{ #symbol##_us, ""_us  , ""_us   }
 
 
-#define _ZOLLSTOCK_TESTS_MAKE_QUANTITY_EXPONENTS(quantity) _ZOLLSTOCK_TESTS_MAKE_##quantity##_EXPONENTS
-#define _ZOLLSTOCK_TESTS_MAKE_QUANTITY_FACTORS(quantity)   _ZOLLSTOCK_TESTS_MAKE_##quantity##_FACTORS
-#define _ZOLLSTOCK_TESTS_MAKE_QUANTITY_SYMBOLS(quantity)   _ZOLLSTOCK_TESTS_MAKE_##quantity##_SYMBOLS
+#define _ZOLLSTOCK_TESTS_MAKE_UNIT_EXPONENTS(quantity) _ZOLLSTOCK_TESTS_MAKE_##quantity##_EXPONENTS
+#define _ZOLLSTOCK_TESTS_MAKE_UNIT_FACTORS(quantity)   _ZOLLSTOCK_TESTS_MAKE_##quantity##_FACTORS
+#define _ZOLLSTOCK_TESTS_MAKE_UNIT_SYMBOLS(quantity)   _ZOLLSTOCK_TESTS_MAKE_##quantity##_SYMBOLS
 
 
 #define ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type, factor, symbol) \
-    REQUIRE(type::exponents == _ZOLLSTOCK_TESTS_MAKE_QUANTITY_EXPONENTS(quantity)()    ); \
-    REQUIRE(type::factors   == _ZOLLSTOCK_TESTS_MAKE_QUANTITY_FACTORS(quantity)(factor)); \
-    REQUIRE(type::symbols   == _ZOLLSTOCK_TESTS_MAKE_QUANTITY_SYMBOLS(quantity)(symbol)); \
+    REQUIRE(type::exponents == _ZOLLSTOCK_TESTS_MAKE_UNIT_EXPONENTS(quantity)()    ); \
+    REQUIRE(type::factors   == _ZOLLSTOCK_TESTS_MAKE_UNIT_FACTORS(quantity)(factor)); \
+    REQUIRE(type::symbols   == _ZOLLSTOCK_TESTS_MAKE_UNIT_SYMBOLS(quantity)(symbol)); \
 
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_TYPES(quantity, type_prefix, base_type, base_factor, base_symbol)      \

@@ -14,9 +14,9 @@ namespace zollstock::inline unit::inline types
     struct basic_second
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr quantity_exponents exponents{ 0, 1, 0 };
-        static constexpr quantity_factors factors{ 0.0L, Prefix::factor, 0.0L };
-        static constexpr quantity_symbols symbols{ ""_us, Prefix::symbol + "s"_us, ""_us };
+        static constexpr unit_exponents exponents{ 0, 1, 0 };
+        static constexpr unit_factors factors{ 0.0L, Prefix::factor, 0.0L };
+        static constexpr unit_symbols symbols{ ""_us, Prefix::symbol + "s"_us, ""_us };
     };
 
     using quectosecond = basic_second<quecto    >;
@@ -48,33 +48,33 @@ namespace zollstock::inline unit::inline types
     struct minute
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr quantity_exponents exponents{ 0, 1, 0 };
-        static constexpr quantity_factors factors{ 0.0L, 60.0L, 0.0L };
-        static constexpr quantity_symbols symbols{ ""_us, "min"_us, ""_us };
+        static constexpr unit_exponents exponents{ 0, 1, 0 };
+        static constexpr unit_factors factors{ 0.0L, 60.0L, 0.0L };
+        static constexpr unit_symbols symbols{ ""_us, "min"_us, ""_us };
     };
 
     struct hour
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr quantity_exponents exponents{ 0, 1, 0 };
-        static constexpr quantity_factors factors{ 0.0L, 3'600.0L, 0.0L };
-        static constexpr quantity_symbols symbols{ ""_us, "h"_us, ""_us };
+        static constexpr unit_exponents exponents{ 0, 1, 0 };
+        static constexpr unit_factors factors{ 0.0L, 3'600.0L, 0.0L };
+        static constexpr unit_symbols symbols{ ""_us, "h"_us, ""_us };
     };
 
     struct day
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr quantity_exponents exponents{ 0, 1, 0 };
-        static constexpr quantity_factors factors{ 0.0L, 86'400.0L, 0.0L };
-        static constexpr quantity_symbols symbols{ ""_us, "d"_us, ""_us };
+        static constexpr unit_exponents exponents{ 0, 1, 0 };
+        static constexpr unit_factors factors{ 0.0L, 86'400.0L, 0.0L };
+        static constexpr unit_symbols symbols{ ""_us, "d"_us, ""_us };
     };
 
     struct year
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr quantity_exponents exponents{ 0, 1, 0 };
-        static constexpr quantity_factors factors{ 0.0L, 31'536'000.0L, 0.0L };
-        static constexpr quantity_symbols symbols{ ""_us, "a"_us, ""_us };
+        static constexpr unit_exponents exponents{ 0, 1, 0 };
+        static constexpr unit_factors factors{ 0.0L, 31'536'000.0L, 0.0L };
+        static constexpr unit_symbols symbols{ ""_us, "a"_us, ""_us };
     };
 
 }

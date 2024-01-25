@@ -1,14 +1,14 @@
-#ifndef __ZOLLSTOCK_QUANTITY_FACTORS_HPP__
-#define __ZOLLSTOCK_QUANTITY_FACTORS_HPP__
+#ifndef __ZOLLSTOCK_UNIT_FACTORS_HPP__
+#define __ZOLLSTOCK_UNIT_FACTORS_HPP__
 
 
-#include <zollstock/quantity_data_concept.hpp>
+#include <zollstock/unit_data_concept.hpp>
 
 
 namespace zollstock
 {
 
-    struct quantity_factors
+    struct unit_factors
     {
         long double length;
         long double time;
@@ -20,9 +20,9 @@ namespace zollstock
     {
 
         template<std::size_t... indices>
-        [[nodiscard]] constexpr quantity_factors combined_impl(
-            const quantity_factors& factors_1,
-            const quantity_factors& factors_2,
+        [[nodiscard]] constexpr unit_factors combined_impl(
+            const unit_factors& factors_1,
+            const unit_factors& factors_2,
             std::index_sequence<indices...>
         ) noexcept
         {
@@ -35,19 +35,19 @@ namespace zollstock
 
     }
 
-    [[nodiscard]] constexpr quantity_factors combined(
-        const quantity_factors& factors_1,
-        const quantity_factors& factors_2
+    [[nodiscard]] constexpr unit_factors combined(
+        const unit_factors& factors_1,
+        const unit_factors& factors_2
     ) noexcept
     {
         return detail::combined_impl(
             factors_1,
             factors_2,
-            make_quantity_index_sequence{}
+            make_unit_index_sequence{}
         );
     }
 
 }
 
 
-#endif //__ZOLLSTOCK_QUANTITY_FACTORS_HPP__
+#endif //__ZOLLSTOCK_UNIT_FACTORS_HPP__

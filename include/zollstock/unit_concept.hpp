@@ -2,9 +2,9 @@
 #define __ZOLLSTOCK_UNIT_CONCEPT_HPP__
 
 
-#include <zollstock/quantity_exponents.hpp>
-#include <zollstock/quantity_factors.hpp>
-#include <zollstock/quantity_symbols.hpp>
+#include <zollstock/unit_exponents.hpp>
+#include <zollstock/unit_factors.hpp>
+#include <zollstock/unit_symbols.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -28,10 +28,10 @@ namespace zollstock
     concept unit_c = requires()
     {
         requires std::is_constructible_v<Candidate>;
-        { Candidate::type      } -> std::same_as<const unit_type         &>;
-        { Candidate::exponents } -> std::same_as<const quantity_exponents&>;
-        { Candidate::factors   } -> std::same_as<const quantity_factors  &>;
-        { Candidate::symbols   } -> std::same_as<const quantity_symbols  &>;
+        { Candidate::type      } -> std::same_as<const unit_type     &>;
+        { Candidate::exponents } -> std::same_as<const unit_exponents&>;
+        { Candidate::factors   } -> std::same_as<const unit_factors  &>;
+        { Candidate::symbols   } -> std::same_as<const unit_symbols  &>;
     };
 
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
@@ -46,9 +46,9 @@ namespace zollstock
         using base_unit = Unit;
         static constexpr int exponent = exponent_;
 
-        static constexpr quantity_exponents exponents = Unit::exponents * exponent;
-        static constexpr quantity_factors factors{ Unit::factors };
-        static constexpr quantity_symbols symbols{ Unit::symbols };
+        static constexpr unit_exponents exponents = Unit::exponents * exponent;
+        static constexpr unit_factors factors{ Unit::factors };
+        static constexpr unit_symbols symbols{ Unit::symbols };
     };
 
 
@@ -60,9 +60,9 @@ namespace zollstock
         using base_unit_1 = Unit1;
         using base_unit_2 = Unit2;
 
-        static constexpr quantity_exponents exponents = Unit1::exponents + Unit2::exponents;
-        static constexpr quantity_factors factors{ combined(Unit1::factors, Unit2::factors) };
-        static constexpr quantity_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
+        static constexpr unit_exponents exponents = Unit1::exponents + Unit2::exponents;
+        static constexpr unit_factors factors{ combined(Unit1::factors, Unit2::factors) };
+        static constexpr unit_symbols symbols{ select_symbols(exponents, Unit1::symbols, Unit2::symbols) };
     };
 
 

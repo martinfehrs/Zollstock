@@ -74,7 +74,7 @@ namespace zollstock
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
         [[nodiscard]] constexpr quantity<that_unit, value_type> as() const noexcept
         {
-            return this->as_impl<that_unit>(make_quantity_index_sequence{});
+            return this->as_impl<that_unit>(make_unit_index_sequence{});
         }
 
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))

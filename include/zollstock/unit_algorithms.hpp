@@ -128,8 +128,8 @@ namespace zollstock
     [[nodiscard]] std::basic_string<Char> to_basic_string(const Unit& unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
-            detail::to_basic_string_impl<Char>(unit, make_derived_quantity_index_sequence{}),
-            detail::to_basic_string_impl<Char>(unit, make_base_quantity_index_sequence{})
+            detail::to_basic_string_impl<Char>(unit, make_derived_unit_index_sequence{}),
+            detail::to_basic_string_impl<Char>(unit, make_base_unit_index_sequence{})
         );
     }
 
