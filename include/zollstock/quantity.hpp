@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_SCALAR_HPP__
-#define __ZOLLSTOCK_SCALAR_HPP__
+#ifndef __ZOLLSTOCK_QUANTITY_HPP__
+#define __ZOLLSTOCK_QUANTITY_HPP__
 
 
 #include <zollstock/unit_concept.hpp>
@@ -241,4 +241,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_SCALAR_HPP__
+#endif //__ZOLLSTOCK_QUANTITY_HPP__
