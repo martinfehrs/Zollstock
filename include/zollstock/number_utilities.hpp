@@ -5,6 +5,7 @@
 #include <concepts>
 #include <limits>
 #include <sstream>
+#include <utility>
 
 
 namespace zollstock
@@ -249,6 +250,86 @@ namespace zollstock
             }
 
             return target;
+        }
+    }
+
+
+
+    template <arithmetic_c Number1, arithmetic_c Number2>
+    [[nodiscard]] constexpr bool cmp_equal(Number1 number_1, Number2 number_2) noexcept
+    {
+        if constexpr(std::integral<Number1> && std::integral<Number2>)
+        {
+            return std::cmp_equal(number_1, number_2);
+        }
+        else
+        {
+            return number_1 == number_2;
+        }
+    }
+
+    template <arithmetic_c Number1, arithmetic_c Number2>
+    [[nodiscard]] constexpr bool cmp_not_equal(Number1 number_1, Number2 number_2) noexcept
+    {
+        if constexpr(std::integral<Number1> && std::integral<Number2>)
+        {
+            return std::cmp_not_equal(number_1, number_2);
+        }
+        else
+        {
+            return number_1 != number_2;
+        }
+    }
+
+    template <arithmetic_c Number1, arithmetic_c Number2>
+    [[nodiscard]] constexpr bool cmp_less(Number1 number_1, Number2 number_2) noexcept
+    {
+        if constexpr(std::integral<Number1> && std::integral<Number2>)
+        {
+            return std::cmp_less(number_1, number_2);
+        }
+        else
+        {
+            return number_1 < number_2;
+        }
+    }
+
+    template <arithmetic_c Number1, arithmetic_c Number2>
+    [[nodiscard]] constexpr bool cmp_greater(Number1 number_1, Number2 number_2) noexcept
+    {
+        if constexpr(std::integral<Number1> && std::integral<Number2>)
+        {
+            return std::cmp_greater(number_1, number_2);
+        }
+        else
+        {
+            return number_1 > number_2;
+        }
+    }
+
+    template <arithmetic_c Number1, arithmetic_c Number2>
+    [[nodiscard]] constexpr bool cmp_less_equal(Number1 number_1, Number2 number_2) noexcept
+    {
+        if constexpr(std::integral<Number1> && std::integral<Number2>)
+        {
+            return std::cmp_less_equal(number_1, number_2);
+        }
+        else
+        {
+            return number_1 <= number_2;
+        }
+    }
+
+    template <arithmetic_c Number1, arithmetic_c Number2>
+    [[nodiscard]] constexpr bool cmp_greater_equal(Number1 number_1, Number2 number_2) noexcept
+    {
+        if constexpr(std::integral<Number1> && std::integral<Number2>)
+        {
+            return std::cmp_greater_equal(number_1, number_2);
+        }
+        else
+        {
+            return number_1 >= number_2;
         }
     }
 
