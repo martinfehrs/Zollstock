@@ -12,7 +12,7 @@
 namespace zollstock
 {
 
-    template <unit_c auto this_unit, std::floating_point ThisValue = double>
+    template <unit_c auto this_unit, arithmetic_c ThisValue = double>
     class quantity
     {
 
@@ -33,11 +33,11 @@ namespace zollstock
             : value_{ narrow<ThisValue>(value) }
         {}
 
-        template <std::floating_point ThatValue>
+        template <arithmetic_c ThatValue>
         constexpr quantity(
             quantity<this_unit, ThatValue> that
         ) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
-            : value_{ narrow<ThisValue>(that.cvalue()) }
+            : quantity{ that.cvalue() }
         { }
 
         [[nodiscard]] constexpr value_type& value() noexcept
@@ -141,21 +141,21 @@ namespace zollstock
     };
 
 
-    template <unit_c auto unit, std::floating_point Value>
+    template <unit_c auto unit, arithmetic_c Value>
     [[nodiscard]] constexpr auto make_scalar(Value value) noexcept
     {
         return quantity<unit, Value>{ value };
     }
 
 
-    template <unit_c auto unit, std::floating_point Value1, std::floating_point Value2>
+    template <unit_c auto unit, arithmetic_c Value1, arithmetic_c Value2>
     [[nodiscard]] constexpr auto operator+(
         quantity<unit, Value1> summand_1, quantity<unit, Value2> summand_2) noexcept
     {
         return make_scalar<unit>(summand_1.cvalue() + summand_2.cvalue());
     }
 
-    template <unit_c auto unit, std::floating_point Value1, std::floating_point Value2>
+    template <unit_c auto unit, arithmetic_c Value1, arithmetic_c Value2>
     [[nodiscard]] constexpr auto operator-(
         quantity<unit, Value1> minuend, quantity<unit, Value2> subtrahend
     ) noexcept
@@ -164,22 +164,22 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] consteval auto operator*(std::floating_point auto&& factor, Unit) noexcept
+    [[nodiscard]] consteval auto operator*(arithmetic_c auto&& factor, Unit) noexcept
     {
         return make_scalar<Unit{}>(factor);
     }
 
-    template <unit_c auto unit, std::floating_point Value>
+    template <unit_c auto unit, arithmetic_c Value>
     [[nodiscard]] constexpr auto operator*(
-        quantity<unit, Value> factor_1, std::floating_point auto factor_2
+        quantity<unit, Value> factor_1, arithmetic_c auto factor_2
     ) noexcept
     {
         return make_scalar<unit>(factor_1.cvalue() * factor_2);
     }
 
-    template <unit_c auto unit, std::floating_point Value>
+    template <unit_c auto unit, arithmetic_c Value>
     [[nodiscard]] constexpr auto operator*(
-        std::floating_point auto factor_1, quantity<unit, Value> factor_2
+        arithmetic_c auto factor_1, quantity<unit, Value> factor_2
     ) noexcept
     {
         return make_scalar<unit>(factor_1 * factor_2.cvalue());
@@ -187,7 +187,7 @@ namespace zollstock
 
     template <
         unit_c auto unit_1, unit_c auto unit_2,
-        std::floating_point Value1, std::floating_point Value2
+        arithmetic_c Value1, arithmetic_c Value2
     >
     [[nodiscard]] constexpr auto operator*(
         quantity<unit_1, Value1> factor_1, quantity<unit_2, Value2> factor_2
@@ -196,9 +196,9 @@ namespace zollstock
         return make_scalar<unit_1 * unit_2>(factor_1.cvalue() * factor_2.cvalue());
     }
 
-    template <unit_c auto unit, std::floating_point Value>
+    template <unit_c auto unit, arithmetic_c Value>
     [[nodiscard]] constexpr auto operator/(
-        quantity<unit, Value> dividend, std::floating_point auto divisor
+        quantity<unit, Value> dividend, arithmetic_c auto divisor
     ) noexcept
     {
         return make_scalar<unit>(dividend.cvalue() / divisor);
@@ -206,7 +206,7 @@ namespace zollstock
 
     template <
         unit_c auto unit_1, unit_c auto unit_2,
-        std::floating_point Value1, std::floating_point Value2
+        arithmetic_c Value1, arithmetic_c Value2
     >
     [[nodiscard]] constexpr auto operator/(
         quantity<unit_1, Value1> dividend, quantity<unit_2, Value2> divisor
@@ -216,7 +216,7 @@ namespace zollstock
     }
 
 
-    template <typename Char, unit_c auto unit, std::floating_point Value>
+    template <typename Char, unit_c auto unit, arithmetic_c Value>
     std::basic_ostream<Char>& operator<<(
         std::basic_ostream<Char>& os, quantity<unit, Value> quantity
     )

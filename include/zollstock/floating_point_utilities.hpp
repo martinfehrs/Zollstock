@@ -38,76 +38,87 @@ namespace zollstock
     template <std::integral Int>
     int_range(Int, Int) -> int_range<Int>;
 
-
-    template <arithmetic_c Candidate, typename = void>
-    struct min_int_range
+    namespace detail
     {
-        static constexpr int_range value{ 0, 0 };
-    };
 
-    template <arithmetic_c Candidate>
-    struct min_int_range<Candidate, std::enable_if_t<std::is_integral_v<Candidate>>>
-    {
-        static constexpr int_range value{
-            std::numeric_limits<Candidate>::min(),
-            std::numeric_limits<Candidate>::max()
-        };
-    };
+        template <arithmetic_c Number>
+        [[nodiscard]] consteval auto continous_int_range() noexcept
+        {
+            if constexpr(std::integral<Number>)
+            {
+                return int_range{
+                    std::numeric_limits<Number>::min(),
+                    std::numeric_limits<Number>::max()
+                };
+            }
+            else if constexpr(is_iec559_v<Number> && std::same_as<Number, float>)
+            {
+                return int_range{ -16777216LL, 16777216LL };
+            }
+            else if constexpr(is_iec559_v<Number> && std::same_as<Number, double>)
+            {
+                return int_range{ -9'007'199'254'740'992LL, 9'007'199'254'740'992LL };
+            }
+            else if constexpr(is_iec559_v<Number> && std::same_as<Number, long double>)
+            {
+                return int_range{ -9'007'199'254'740'992LL, 9'007'199'254'740'992LL };
+            }
+            else
+            {
+                return int_range{ 0, 0 };
+            }
+        }
 
-    template <>
-    struct min_int_range<float, std::enable_if_t<is_iec559_v<float>>>
-    {
-        static constexpr int_range value{ -16777216LL, 16777216LL };
-    };
-
-    template <>
-    struct min_int_range<double, std::enable_if_t<is_iec559_v<double>>>
-    {
-        static constexpr int_range value{ -9'007'199'254'740'992LL, 9'007'199'254'740'992LL };
-    };
-
-    // Muss überarbeitet werden
-    template <>
-    struct min_int_range<long double, std::enable_if_t<is_iec559_v<double>>>
-    {
-        static constexpr int_range value{ -9'007'199'254'740'992LL, 9'007'199'254'740'992LL };
-    };
+    }
 
     template <typename Candidate>
-    inline constexpr auto min_int_range_v = min_int_range<Candidate>::value;
+    inline constexpr auto continous_int_range_v = detail::continous_int_range<Candidate>();
+
+
+    namespace detail
+    {
+
+        template <arithmetic_c Source, arithmetic_c Target>
+        [[nodiscard]] consteval bool lossless_convertible() noexcept
+        {
+            if constexpr(std::same_as<Source, Target>)
+            {
+                return true;
+            }
+            else if constexpr(std::floating_point<Source> && std::integral<Target>)
+            {
+                return false;
+            }
+            else if constexpr(std::same_as<Source, float>, std::same_as<Target, double>)
+            {
+                return true;
+            }
+            else if constexpr(std::same_as<Source, float>, std::same_as<Target, long double>)
+            {
+                return true;
+            }
+            else if constexpr(std::same_as<Source, double>, std::same_as<Target, long double>)
+            {
+                return true;
+            }
+            else if constexpr(std::integral<Source>)
+            {
+                return continous_int_range_v<Target>.contains(continous_int_range_v<Source>);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    }
+
+    template <arithmetic_c Source, arithmetic_c Target>
+    inline constexpr bool lossless_convertible_v = detail::lossless_convertible<Source, Target>();
 
 
 
-    template <arithmetic_c Source, std::floating_point Target>
-    inline constexpr bool lossless_convertible_v = false;
-
-    template <std::floating_point Float>
-    inline constexpr bool lossless_convertible_v<Float, Float> = true;
-
-    template <>
-    inline constexpr bool lossless_convertible_v<float, double> = true;
-
-    template <>
-    inline constexpr bool lossless_convertible_v<float, long double> = true;
-
-    template <>
-    inline constexpr bool lossless_convertible_v<double, long double> = true;
-
-    template <std::integral Int>
-    inline constexpr bool lossless_convertible_v<Int, float> =
-        min_int_range_v<float>.contains(min_int_range_v<Int>);
-
-    template <std::integral Int>
-    inline constexpr bool lossless_convertible_v<Int, double> =
-        min_int_range_v<double>.contains(min_int_range_v<Int>);
-
-    template <std::integral Int>
-    inline constexpr bool lossless_convertible_v<Int, long double> =
-        min_int_range_v<long double>.contains(min_int_range_v<Int>);
-
-
-
-    template <std::floating_point Target, arithmetic_c Source>
+    template <arithmetic_c Target, arithmetic_c Source>
     [[nodiscard]] constexpr Target narrow(
         Source source
     ) noexcept(lossless_convertible_v<Source, Target>)
@@ -122,6 +133,14 @@ namespace zollstock
 
             if(static_cast<Source>(target) != source)
                 throw "Narrowing conversion";
+
+            if (
+                std::is_signed_v<Source> != std::is_signed_v<Target> &&
+                (target < Target{}) != (source < Source{})
+            )
+            {
+                throw "Narrowing conversion";
+            }
 
             return target;
         }

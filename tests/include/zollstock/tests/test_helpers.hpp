@@ -64,7 +64,7 @@
 
 #define ZOLLSTOCK_TESTS_TEST_LITERAL(symbol) \
     REQUIRE(1.0_##symbol   == 1.0 * symbol); \
-    REQUIRE(1_##symbol     == 1.0 * symbol); \
+    REQUIRE(1_##symbol     == 1   * symbol); \
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_LITERALS(base_symbol) \
     ZOLLSTOCK_TESTS_TEST_LITERAL(q##base_symbol  )             \
