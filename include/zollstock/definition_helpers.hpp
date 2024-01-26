@@ -2,9 +2,6 @@
 #define __ZOLLSTOCK_DEFINITION_HELPERS_HPP__
 
 
-#include <zollstock/floating_point_utilities.hpp>
-
-
 #define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                    \
     [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept \
     {                                                                                       \
