@@ -10,7 +10,9 @@
 namespace zollstock::inline math_constants
 {
 
-    inline constexpr quantity<radian> pi_rad{ pi };
+    inline constexpr quantity<radian, float      > pi_f_rad{ pi_f };
+    inline constexpr quantity<radian, double     > pi_rad  { pi   };
+    inline constexpr quantity<radian, long double> pi_l_rad{ pi_l };
 
 }
 
