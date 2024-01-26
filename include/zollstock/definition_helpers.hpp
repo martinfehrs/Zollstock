@@ -2,16 +2,51 @@
 #define __ZOLLSTOCK_DEFINITION_HELPERS_HPP__
 
 
-#define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                    \
-    [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept \
-    {                                                                                       \
-        return quantity<symbol, int>{ value };                                              \
-    }                                                                                       \
-                                                                                            \
-    [[nodiscard]] consteval auto operator""_##symbol(long double value) noexcept            \
-    {                                                                                       \
-        return quantity<symbol, double>{ value };                                           \
-    }                                                                                       \
+#define ZOLLSTOCK_DEFINE_LITERAL(symbol)                                                        \
+    [[nodiscard]] consteval auto operator""_##symbol(unsigned long long int value) noexcept     \
+    {                                                                                           \
+        return quantity<symbol, int>{ value };                                                  \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_l_##symbol(unsigned long long int value) noexcept   \
+    {                                                                                           \
+        return quantity<symbol, long int>{ value };                                             \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_ll_##symbol(unsigned long long int value) noexcept  \
+    {                                                                                           \
+        return quantity<symbol, long long int>{ value };                                        \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_u_##symbol(unsigned long long int value) noexcept   \
+    {                                                                                           \
+        return quantity<symbol, unsigned int>{ value };                                         \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_ul_##symbol(unsigned long long int value) noexcept  \
+    {                                                                                           \
+        return quantity<symbol, unsigned long int>{ value };                                    \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_ull_##symbol(unsigned long long int value) noexcept \
+    {                                                                                           \
+        return quantity<symbol, unsigned long long int>{ value };                               \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_##symbol(long double value) noexcept                \
+    {                                                                                           \
+        return quantity<symbol, double>{ value };                                               \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_f_##symbol(long double value) noexcept              \
+    {                                                                                           \
+        return quantity<symbol, float>{ value };                                                \
+    }                                                                                           \
+                                                                                                \
+    [[nodiscard]] consteval auto operator""_l_##symbol(long double value) noexcept              \
+    {                                                                                           \
+        return quantity<symbol, long double>{ value };                                          \
+    }                                                                                           \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol) \
     ZOLLSTOCK_DEFINE_LITERAL(q##base_symbol  )             \
