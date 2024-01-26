@@ -113,6 +113,7 @@ namespace zollstock
         ) const noexcept = default;
 
         [[nodiscard]] constexpr this_type operator-() const noexcept
+            requires(std::is_signed_v<ThisValue>)
         {
             return -this->value_;
         }
