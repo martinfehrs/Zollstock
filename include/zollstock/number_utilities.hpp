@@ -4,12 +4,78 @@
 
 #include <concepts>
 #include <limits>
+#include <sstream>
+
 
 namespace zollstock
 {
 
     template <typename Candidate>
     concept arithmetic_c = std::is_arithmetic_v<Candidate>;
+
+
+    template <arithmetic_c Number>
+    [[nodiscard]] consteval const char* number_type_name() noexcept
+    {
+        if constexpr(std::same_as<Number, short int>)
+        {
+            return "short int";
+        }
+        else
+        if constexpr(std::same_as<Number, int>)
+        {
+            return "int";
+        }
+        else
+        if constexpr(std::same_as<Number, long int>)
+        {
+            return "long int";
+        }
+        else
+        if constexpr(std::same_as<Number, long long int>)
+        {
+            return "long long int";
+        }
+        else
+        if constexpr(std::same_as<Number, unsigned short int>)
+        {
+            return "unsigned short int";
+        }
+        else
+        if constexpr(std::same_as<Number, unsigned int>)
+        {
+            return "unsigned int";
+        }
+        else
+        if constexpr(std::same_as<Number, unsigned long int>)
+        {
+            return "unsigned long int";
+        }
+        else
+        if constexpr(std::same_as<Number, unsigned long long int>)
+        {
+            return "unsigned long long int";
+        }
+        else
+        if constexpr(std::same_as<Number, float>)
+        {
+            return "float";
+        }
+        else
+        if constexpr(std::same_as<Number, double>)
+        {
+            return "double";
+        }
+        else
+        if constexpr(std::same_as<Number, long double>)
+        {
+            return "long double";
+        }
+        else
+        {
+            return "unknown";
+        }
+    }
 
 
     template <arithmetic_c Candidate>
@@ -116,7 +182,47 @@ namespace zollstock
     template <arithmetic_c Source, arithmetic_c Target>
     inline constexpr bool lossless_convertible_v = detail::lossless_convertible<Source, Target>();
 
+    template <arithmetic_c Source, arithmetic_c Target>
+    class narrowing_conversion : public std::exception
+    {
 
+    public:
+
+        narrowing_conversion(Source source, Target target)
+            : source{ source }
+            , target{ target }
+            , message{ build_message(source, target) }
+        { }
+
+        [[nodiscard]] const char* what() const noexcept override
+        {
+            return this->message.c_str();
+        }
+
+        Source source;
+        Target target;
+
+    private:
+
+        static std::string build_message(Source source, Target target) noexcept
+        {
+            std::stringstream ss;
+
+            ss << "Narrowing conversion from "
+               << number_type_name<Source>()
+               << " "
+               << source
+               << " to "
+               << number_type_name<Target>()
+               << " "
+               << target;
+
+            return ss.str();
+        }
+
+        std::string message;
+
+    };
 
     template <arithmetic_c Target, arithmetic_c Source>
     [[nodiscard]] constexpr Target narrow(
@@ -132,14 +238,14 @@ namespace zollstock
             auto target = static_cast<Target>(source);
 
             if(static_cast<Source>(target) != source)
-                throw "Narrowing conversion";
+                throw narrowing_conversion{ source, target };
 
             if (
                 std::is_signed_v<Source> != std::is_signed_v<Target> &&
                 (target < Target{}) != (source < Source{})
             )
             {
-                throw "Narrowing conversion";
+                throw narrowing_conversion{ source, target };
             }
 
             return target;
