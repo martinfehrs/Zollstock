@@ -60,7 +60,53 @@ namespace zollstock
             return this_unit;
         }
 
-        [[nodiscard]] constexpr bool operator==(const this_type& that) const noexcept = default;
+        template <arithmetic_c ThatValue>
+        [[nodiscard]] constexpr bool operator==(
+            const quantity<this_unit, ThatValue>& that
+        ) const noexcept
+        {
+            return cmp_equal(this->value_, that.cvalue());
+        }
+
+        template <arithmetic_c ThatValue>
+        [[nodiscard]] constexpr bool operator!=(
+            const quantity<this_unit, ThatValue>& that
+        ) const noexcept
+        {
+            return cmp_not_equal(this->value_, that.cvalue());
+        }
+
+        template <arithmetic_c ThatValue>
+        [[nodiscard]] constexpr bool operator<(
+            const quantity<this_unit, ThatValue>& that
+        ) const noexcept
+        {
+            return cmp_less(this->value_, that.cvalue());
+        }
+
+        template <arithmetic_c ThatValue>
+        [[nodiscard]] constexpr bool operator>(
+            const quantity<this_unit, ThatValue>& that
+        ) const noexcept
+        {
+            return cmp_greater(this->value_, that.cvalue());
+        }
+
+        template <arithmetic_c ThatValue>
+        [[nodiscard]] constexpr bool operator<=(
+            const quantity<this_unit, ThatValue>& that
+        ) const noexcept
+        {
+            return cmp_less_equal(this->value_, that.cvalue());
+        }
+
+        template <arithmetic_c ThatValue>
+        [[nodiscard]] constexpr bool operator>=(
+            const quantity<this_unit, ThatValue>& that
+        ) const noexcept
+        {
+            return cmp_greater_equal(this->value_, that.cvalue());
+        }
 
         [[nodiscard]] constexpr std::partial_ordering operator<=>(
             const this_type& that
