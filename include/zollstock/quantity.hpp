@@ -184,6 +184,67 @@ namespace zollstock
     };
 
 
+
+    template <unit_c auto unit = _1>
+    using int_t = quantity<unit, int>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_int_t = quantity<unit, unsigned int>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_t = quantity<unit, unsigned>;
+
+
+    template <unit_c auto unit = _1>
+    using short_int_t = quantity<unit, short int>;
+
+    template <unit_c auto unit = _1>
+    using short_t= quantity<unit, short>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_short_int_t= quantity<unit, unsigned short int>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_short_t= quantity<unit, unsigned short>;
+
+
+    template <unit_c auto unit = _1>
+    using long_int_t = quantity<unit, long int>;
+
+    template <unit_c auto unit = _1>
+    using long_t= quantity<unit, long>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_long_int_t= quantity<unit, unsigned long int>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_long_t= quantity<unit, unsigned long>;
+
+
+    template <unit_c auto unit = _1>
+    using long_long_int_t = quantity<unit, long long int>;
+
+    template <unit_c auto unit = _1>
+    using long_long_t= quantity<unit, long long>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_long_long_int_t= quantity<unit, unsigned long long int>;
+
+    template <unit_c auto unit = _1>
+    using unsigned_long_long_t= quantity<unit, unsigned long long>;
+
+
+    template <unit_c auto unit = _1>
+    using float_t = quantity<unit, float>;
+
+    template <unit_c auto unit = _1>
+    using double_t = quantity<unit, double>;
+
+    template <unit_c auto unit = _1>
+    using long_double_t = quantity<unit, long double>;
+
+
+
     template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto make_scalar(Value value) noexcept
     {
