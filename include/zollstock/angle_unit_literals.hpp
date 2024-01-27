@@ -12,11 +12,11 @@ namespace zollstock::inline unit::inline literals
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(rad)
 
-    ZOLLSTOCK_DEFINE_LITERAL(deg)
+    ZOLLSTOCK_DEFINE_LITERAL(deg, deg)
 
-    ZOLLSTOCK_DEFINE_LITERAL(arcmin)
+    ZOLLSTOCK_DEFINE_LITERAL(arcmin, arcmin)
 
-    ZOLLSTOCK_DEFINE_LITERAL(arcsec)
+    ZOLLSTOCK_DEFINE_LITERAL(arcsec, arcsec)
     ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(as)
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(gon)

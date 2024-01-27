@@ -10,7 +10,7 @@
 namespace zollstock::inline unit::inline literals
 {
 
-    ZOLLSTOCK_DEFINE_LITERAL(1)
+    ZOLLSTOCK_DEFINE_LITERAL(1, _1)
 
 }
 
