@@ -166,15 +166,15 @@ namespace zollstock
             {
                 return false;
             }
-            else if constexpr(std::same_as<Source, float>, std::same_as<Target, double>)
+            else if constexpr(std::same_as<Source, float> && std::same_as<Target, double>)
             {
                 return true;
             }
-            else if constexpr(std::same_as<Source, float>, std::same_as<Target, long double>)
+            else if constexpr(std::same_as<Source, float> && std::same_as<Target, long double>)
             {
                 return true;
             }
-            else if constexpr(std::same_as<Source, double>, std::same_as<Target, long double>)
+            else if constexpr(std::same_as<Source, double> && std::same_as<Target, long double>)
             {
                 return true;
             }
