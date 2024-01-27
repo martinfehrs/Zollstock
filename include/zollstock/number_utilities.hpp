@@ -12,10 +12,20 @@ namespace zollstock
 {
 
     template <typename Candidate>
-    concept arithmetic_c = std::is_arithmetic_v<Candidate>;
+    concept number_c = std::same_as<Candidate, unsigned              int>
+                    || std::same_as<Candidate,                       int>
+                    || std::same_as<Candidate, unsigned short        int>
+                    || std::same_as<Candidate,          short        int>
+                    || std::same_as<Candidate, unsigned long         int>
+                    || std::same_as<Candidate,          long         int>
+                    || std::same_as<Candidate, unsigned long long    int>
+                    || std::same_as<Candidate,          long long    int>
+                    || std::same_as<Candidate,                     float>
+                    || std::same_as<Candidate,                    double>
+                    || std::same_as<Candidate,          long      double>;
 
 
-    template <arithmetic_c Number>
+    template <number_c Number>
     [[nodiscard]] consteval const char* number_type_name() noexcept
     {
         if constexpr(std::same_as<Number, short int>)
@@ -79,7 +89,7 @@ namespace zollstock
     }
 
 
-    template <arithmetic_c Candidate>
+    template <number_c Candidate>
     inline constexpr bool is_iec559_v = std::numeric_limits<Candidate>::is_iec559;
 
 
@@ -108,7 +118,7 @@ namespace zollstock
     namespace detail
     {
 
-        template <arithmetic_c Number>
+        template <number_c Number>
         [[nodiscard]] consteval auto continous_int_range() noexcept
         {
             if constexpr(std::integral<Number>)
@@ -145,7 +155,7 @@ namespace zollstock
     namespace detail
     {
 
-        template <arithmetic_c Source, arithmetic_c Target>
+        template <number_c Source, number_c Target>
         [[nodiscard]] consteval bool lossless_convertible() noexcept
         {
             if constexpr(std::same_as<Source, Target>)
@@ -180,10 +190,10 @@ namespace zollstock
 
     }
 
-    template <arithmetic_c Source, arithmetic_c Target>
+    template <number_c Source, number_c Target>
     inline constexpr bool lossless_convertible_v = detail::lossless_convertible<Source, Target>();
 
-    template <arithmetic_c Source, arithmetic_c Target>
+    template <number_c Source, number_c Target>
     class narrowing_conversion : public std::exception
     {
 
@@ -225,7 +235,7 @@ namespace zollstock
 
     };
 
-    template <arithmetic_c Target, arithmetic_c Source>
+    template <number_c Target, number_c Source>
     [[nodiscard]] constexpr Target narrow(
         Source source
     ) noexcept(lossless_convertible_v<Source, Target>)
@@ -255,7 +265,7 @@ namespace zollstock
 
 
 
-    template <arithmetic_c Number1, arithmetic_c Number2>
+    template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -268,7 +278,7 @@ namespace zollstock
         }
     }
 
-    template <arithmetic_c Number1, arithmetic_c Number2>
+    template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_not_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -281,7 +291,7 @@ namespace zollstock
         }
     }
 
-    template <arithmetic_c Number1, arithmetic_c Number2>
+    template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_less(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -294,7 +304,7 @@ namespace zollstock
         }
     }
 
-    template <arithmetic_c Number1, arithmetic_c Number2>
+    template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_greater(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -307,7 +317,7 @@ namespace zollstock
         }
     }
 
-    template <arithmetic_c Number1, arithmetic_c Number2>
+    template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_less_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -320,7 +330,7 @@ namespace zollstock
         }
     }
 
-    template <arithmetic_c Number1, arithmetic_c Number2>
+    template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_greater_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
