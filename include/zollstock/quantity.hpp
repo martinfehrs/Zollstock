@@ -111,7 +111,7 @@ namespace zollstock
         [[nodiscard]] constexpr this_type operator-() const noexcept
             requires(std::is_signed_v<ThisValue>)
         {
-            return -this->value_;
+            return this_type{ -this->value_ };
         }
 
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
