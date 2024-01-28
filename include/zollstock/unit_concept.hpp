@@ -111,7 +111,7 @@ namespace zollstock
     {
 
         template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
-        [[nodiscard]] constexpr bool convertible_units_impl(
+        [[nodiscard]] consteval bool convertible_units_impl(
             const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
         ) noexcept
         {
@@ -126,7 +126,7 @@ namespace zollstock
     }
 
 
-    [[nodiscard]] constexpr unit_symbol select_symbol(
+    [[nodiscard]] consteval unit_symbol select_symbol(
         const unit_data& unit_data_1,
         const unit_data& unit_data_2
     )
