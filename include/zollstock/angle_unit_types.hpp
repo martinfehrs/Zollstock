@@ -15,9 +15,12 @@ namespace zollstock::inline unit::inline types
     struct basic_radian
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_exponents exponents{ 0, 0, 1 };
-        static constexpr unit_factors factors{ 0.0L, 0.0L, Prefix::factor };
-        static constexpr unit_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
+        static constexpr unit_data length{};
+        static constexpr unit_data time{};
+        static constexpr unit_data angle{ 1, Prefix::factor, Prefix::symbol + "rad"_us };
+        //static constexpr unit_exponents exponents{ 0, 0, 1 };
+        //static constexpr unit_factors factors{ 0.0L, 0.0L, Prefix::factor };
+        //static constexpr unit_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
     };
 
     using quectoradian = basic_radian<quecto    >;
@@ -49,35 +52,35 @@ namespace zollstock::inline unit::inline types
     struct degree
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_exponents exponents{ 0, 0, 1 };
-        static constexpr unit_factors factors{ 0.0L, 0.0L, pi/180.0L };
-        static constexpr unit_symbols symbols{ ""_us, ""_us, "deg"_us };
+        static constexpr unit_data length{};
+        static constexpr unit_data time{};
+        static constexpr unit_data angle{ 1, pi/180.0L, "deg"_us };
     };
 
     struct arcminute
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_exponents exponents{ 0, 0, 1 };
-        static constexpr unit_factors factors{ 0.0L, 0.0L, pi/10.8e3L };
-        static constexpr unit_symbols symbols{ ""_us, ""_us, "arcmin"_us };
+        static constexpr unit_data length{};
+        static constexpr unit_data time{};
+        static constexpr unit_data angle{ 1, pi/10.8e3L, "arcmin"_us };
     };
 
     template <prefix_c Prefix>
     struct basic_arcsecond
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_exponents exponents{ 0, 0, 1 };
-        static constexpr unit_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/648e3L };
-        static constexpr unit_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "as"_us };
+        static constexpr unit_data length{};
+        static constexpr unit_data time{};
+        static constexpr unit_data angle{ 1, Prefix::factor * pi/648e3L, Prefix::symbol + "as"_us };
     };
 
     template <>
     struct basic_arcsecond<unprefixed>
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_exponents exponents{ 0, 0, 1 };
-        static constexpr unit_factors factors{ 0.0L, 0.0L, pi/648e3L };
-        static constexpr unit_symbols symbols{ ""_us, ""_us, "arcsec"_us };
+        static constexpr unit_data length{};
+        static constexpr unit_data time{};
+        static constexpr unit_data angle{ 1, pi/648e3L, "arcsec"_us };
     };
 
     using quectoarcsecond = basic_arcsecond<quecto    >;
@@ -110,9 +113,9 @@ namespace zollstock::inline unit::inline types
     struct basic_gradian
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_exponents exponents{ 0, 0, 1 };
-        static constexpr unit_factors factors{ 0.0L, 0.0L, Prefix::factor * pi/200.0L };
-        static constexpr unit_symbols symbols{ ""_us, ""_us, Prefix::symbol + "gon"_us };
+        static constexpr unit_data length{};
+        static constexpr unit_data time{};
+        static constexpr unit_data angle{ 1, Prefix::factor * pi/200.0L, Prefix::symbol + "gon"_us };
     };
 
     using quectogradian = basic_gradian<quecto    >;

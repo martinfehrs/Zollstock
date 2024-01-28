@@ -32,21 +32,20 @@ namespace zollstock
         }
 
         template <std::size_t pos, typename Char, unit_c Unit>
-        [[nodiscard]] std::basic_string<Char> unit_entry_to_string(const Unit& unit)
+        [[nodiscard]] std::basic_string<Char> unit_entry_to_string(Unit unit)
         {
             std::basic_string<Char> unit_representation;
 
-            const auto& exponent = get<pos>(unit.exponents);
-            const auto& symbol = get<pos>(unit.symbols);
+            const unit_data& data = get<pos>(unit);
 
-            if(exponent != 0)
+            if(data.exponent != 0)
             {
-                std::string_view symbol_string{ symbol.c_str() };
+                std::string_view symbol_string{ data.symbol.c_str() };
 
                 unit_representation.append(symbol_string.begin(), symbol_string.end());
 
-                if(exponent != 1)
-                    unit_representation += exponent_to_string<Char>(exponent);
+                if(data.exponent != 1)
+                    unit_representation += exponent_to_string<Char>(data.exponent);
             }
 
             return unit_representation;
@@ -301,9 +300,9 @@ namespace zollstock
     template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
     {
-        return unit_1.exponents == unit_2.exponents
-            && unit_1.factors   == unit_2.factors
-            && unit_1.symbols   == unit_2.symbols;
+        return unit_1.length == unit_2.length
+            && unit_1.time   == unit_2.time
+            && unit_1.angle  == unit_2.angle;
     }
 
 }

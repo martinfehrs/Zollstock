@@ -48,7 +48,7 @@ namespace zollstock
             return this->data;
         }
 
-        [[nodiscard]] constexpr bool operator==(const unit_symbol& that) const noexcept
+        /*[[nodiscard]]*/ constexpr bool operator==(const unit_symbol& that) const noexcept
         {
             bool equal = true;
 
