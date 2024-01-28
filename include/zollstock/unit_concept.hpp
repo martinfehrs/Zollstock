@@ -29,7 +29,49 @@ namespace zollstock
         unit_symbol symbol;
 
         [[nodiscard]] constexpr bool operator==(const unit_data&) const noexcept = default;
+
+        [[nodiscard]] consteval unit_data operator*(const unit_data& that) const
+        {
+            return {
+                this->exponent + that.exponent,
+                this->factor != 0 ? this->factor : that.factor,
+                this->select_symbol(that)
+            };
+        }
+
+    private:
+
+        [[nodiscard]] consteval unit_symbol select_symbol(const unit_data& that) const
+        {
+            if (this->exponent + that.exponent == 0)
+            {
+                return ""_us;
+            }
+            else if (this->symbol.size() == 0)
+            {
+                return that.symbol;
+            }
+            else if (that.symbol.size() == 0)
+            {
+                return this->symbol;
+            }
+            else if (this->symbol == that.symbol)
+            {
+                return this->symbol;
+            }
+            else
+            {
+                throw "incompatible symbols";
+            }
+        }
+
     };
+
+    [[nodiscard]] consteval unit_data pow(const unit_data& udat, int exponent) noexcept
+    {
+        return { udat.exponent * exponent, udat.factor, udat.symbol };
+    }
+
 
     inline constexpr std::size_t base_unit_count = 2;
     inline constexpr std::size_t derived_unit_count = 1;
@@ -126,34 +168,6 @@ namespace zollstock
     }
 
 
-    [[nodiscard]] consteval unit_symbol select_symbol(
-        const unit_data& unit_data_1,
-        const unit_data& unit_data_2
-    )
-    {
-        if (unit_data_1.exponent + unit_data_2.exponent == 0)
-        {
-            return ""_us;
-        }
-        else if (unit_data_1.symbol.size() == 0)
-        {
-            return unit_data_2.symbol;
-        }
-        else if (unit_data_2.symbol.size() == 0)
-        {
-            return unit_data_1.symbol;
-        }
-        else if (unit_data_1.symbol == unit_data_2.symbol)
-        {
-            return unit_data_1.symbol;
-        }
-        else
-        {
-            throw "incompatible symbols";
-        }
-    }
-
-
 
     template <unit_c Unit, int exponent_>
     struct unit_exponentiation
@@ -162,12 +176,10 @@ namespace zollstock
         using base_unit = Unit;
         static constexpr int exponent = exponent_;
 
-        static constexpr unit_data length{ Unit::length.exponent * exponent, Unit::length.factor, Unit::length.symbol };
-        static constexpr unit_data time  { Unit::time  .exponent * exponent, Unit::time  .factor, Unit::length.symbol };
-        static constexpr unit_data angle { Unit::angle .exponent * exponent, Unit::angle .factor, Unit::length.symbol };
+        static constexpr unit_data length = pow(Unit::length, exponent_);
+        static constexpr unit_data time   = pow(Unit::time  , exponent_);
+        static constexpr unit_data angle  = pow(Unit::time  , exponent_);
     };
-
-
 
     template<unit_c Unit1, unit_c Unit2>
     struct unit_product
@@ -176,9 +188,9 @@ namespace zollstock
         using base_unit_1 = Unit1;
         using base_unit_2 = Unit2;
 
-        static constexpr unit_data length{ Unit1::length.exponent + Unit2::length.exponent, Unit1::length.factor != 0 ? Unit1::length.factor : Unit2::length.factor, select_symbol(Unit1::length, Unit2::length) };
-        static constexpr unit_data time  { Unit1::time  .exponent + Unit2::time  .exponent, Unit1::time  .factor != 0 ? Unit1::time  .factor : Unit2::time  .factor, select_symbol(Unit1::time  , Unit2::time  ) };
-        static constexpr unit_data angle { Unit1::angle .exponent + Unit2::angle .exponent, Unit1::angle .factor != 0 ? Unit1::angle .factor : Unit2::angle .factor, select_symbol(Unit1::angle , Unit2::angle ) };
+        static constexpr unit_data length = Unit1::length * Unit2::length;
+        static constexpr unit_data time   = Unit1::time   * Unit2::time  ;
+        static constexpr unit_data angle  = Unit1::angle  * Unit2::angle ;
 
     };
 
