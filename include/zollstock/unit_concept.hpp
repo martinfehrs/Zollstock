@@ -45,10 +45,7 @@ namespace zollstock
         { Candidate::angle  } -> std::same_as<const unit_data&>;
     };
 
-    [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
-    {
-        return unit_1.exponents == unit_2.exponents;
-    }
+
 
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
     [[nodiscard]] constexpr const auto& get(const Unit& data)
@@ -108,6 +105,25 @@ namespace zollstock
     >;
 
     using make_unit_index_sequence = make_index_sequence<unit_count>;
+
+
+    namespace detail
+    {
+
+        template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
+        [[nodiscard]] constexpr bool convertible_units_impl(
+            const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
+        ) noexcept
+        {
+            return (... && (get<indices>(unit_1).exponent == get<indices>(unit_2).exponent));
+        }
+
+    }
+
+    [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
+    {
+        return detail::convertible_units_impl(unit_1, unit_2, make_unit_index_sequence{});
+    }
 
 
     [[nodiscard]] constexpr unit_symbol select_symbol(
