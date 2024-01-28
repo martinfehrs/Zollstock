@@ -21,11 +21,7 @@ namespace zollstock
         candidate.angle;
     };
 
-    template <
-        std::size_t pos,
-        unit_data_c UnitData,
-        typename = std::enable_if_t<(pos < unit_count)>
-    >
+    template <std::size_t pos, unit_data_c UnitData> requires(pos < unit_count)
     [[nodiscard]] constexpr const auto& get(const UnitData& data)
     {
         if constexpr(pos == 0)
@@ -52,11 +48,7 @@ namespace zollstock
     using unit_data_element_t = typename unit_data_element<pos, UnitData>::type;
 
 
-    template <
-        std::size_t pos,
-        unit_data_c UnitData,
-        typename = std::enable_if_t<(pos < unit_count)>
-    >
+    template <std::size_t pos, unit_data_c UnitData> requires(pos < unit_count)
     [[nodiscard]] constexpr auto& get(UnitData& data) noexcept
     {
         return const_cast<unit_data_element_t<pos, UnitData>&>(
