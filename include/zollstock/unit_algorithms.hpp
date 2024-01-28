@@ -297,12 +297,21 @@ namespace zollstock
         return unit_1 * pow_v<unit_2, -1>;
     }
 
+    namespace detail
+    {
+        template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
+        [[nodiscard]] constexpr bool equal(
+            const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
+        ) noexcept
+        {
+            return (... && (get<indices>(unit_1) == get<indices>(unit_2)));
+        }
+    }
+
     template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
     {
-        return unit_1.length == unit_2.length
-            && unit_1.time   == unit_2.time
-            && unit_1.angle  == unit_2.angle;
+        return detail::equal(unit_1, unit_2, make_unit_index_sequence{});
     }
 
 }

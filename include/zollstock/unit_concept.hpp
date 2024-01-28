@@ -137,22 +137,7 @@ namespace zollstock
         }
     }
 
-    namespace detail
-    {
-        template <unit_c Unit, std::size_t... indices>
-        [[nodiscard]] constexpr bool equal(
-            const Unit& unit_1, const Unit& unit_2, std::index_sequence<indices...>
-        ) noexcept
-        {
-            return (... && (get<indices>(unit_1) == get<indices>(unit_2)));
-        }
-    }
 
-    template <unit_c Unit>
-    [[nodiscard]] constexpr bool operator==(const Unit& unit_1, const Unit& unit_2) noexcept
-    {
-        return detail::equal(unit_1, unit_2, make_unit_index_sequence{});
-    }
 
     template <unit_c Unit, int exponent_>
     struct unit_exponentiation
