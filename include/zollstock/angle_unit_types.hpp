@@ -16,9 +16,6 @@ namespace zollstock::inline unit::inline types
     {
         static constexpr unit_type type = unit_type::basic;
         static constexpr unit_data angle{ 1, Prefix::factor, Prefix::symbol + "rad"_us };
-        //static constexpr unit_exponents exponents{ 0, 0, 1 };
-        //static constexpr unit_factors factors{ 0.0L, 0.0L, Prefix::factor };
-        //static constexpr unit_symbols symbols{ ""_us,  ""_us, Prefix::symbol + "rad"_us };
     };
 
     using quectoradian = basic_radian<quecto    >;
