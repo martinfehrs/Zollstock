@@ -90,7 +90,7 @@ namespace zollstock
 
 
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] constexpr const auto& get(const Unit& data)
+    [[nodiscard]] constexpr const unit_data& get(const Unit& data) noexcept
     {
         if constexpr(pos == 0)
         {
@@ -106,23 +106,7 @@ namespace zollstock
         }
     }
 
-    template<std::size_t pos, unit_c Unit>
-    struct unit_data_element
-    {
-        using type = std::remove_cvref_t<decltype(get<pos>(std::declval<Unit>()))>;
-    };
 
-    template<std::size_t pos, unit_c Unit>
-    using unit_data_element_t = typename unit_data_element<pos, Unit>::type;
-
-
-    template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] constexpr auto& get(Unit& unit) noexcept
-    {
-        return const_cast<unit_data_element_t<pos, Unit>&>(
-            get<pos>(std::as_const(unit))
-        );
-    }
 
     template <typename IndexSequence, std::size_t offset>
     struct shift_right;
