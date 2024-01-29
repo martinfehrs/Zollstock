@@ -113,8 +113,8 @@ namespace zollstock
 
         template <typename Char, unit_c Unit, std::size_t... indices>
         [[nodiscard]] std::basic_string<Char> to_basic_string_impl(
-            const Unit& unit, std::index_sequence<indices...>
-            )
+            Unit unit, std::index_sequence<indices...>
+        )
         {
             return detail::basic_concatenator<Char>{ '*' }(
                 detail::unit_entry_to_string<indices, Char>(unit)...
@@ -124,7 +124,7 @@ namespace zollstock
     }
 
     template <typename Char, unit_c Unit>
-    [[nodiscard]] std::basic_string<Char> to_basic_string(const Unit& unit)
+    [[nodiscard]] std::basic_string<Char> to_basic_string(Unit unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
             detail::to_basic_string_impl<Char>(unit, make_derived_unit_index_sequence{}),
@@ -301,7 +301,7 @@ namespace zollstock
     {
         template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
         [[nodiscard]] constexpr bool equal(
-            const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
+            Unit1 unit_1, Unit2 unit_2, std::index_sequence<indices...>
         ) noexcept
         {
             return (... && (get<indices>(unit_1) == get<indices>(unit_2)));
@@ -309,7 +309,7 @@ namespace zollstock
     }
 
     template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] constexpr bool operator==(const Unit1& unit_1, const Unit2& unit_2) noexcept
+    [[nodiscard]] constexpr bool operator==(Unit1 unit_1, Unit2 unit_2) noexcept
     {
         return detail::equal(unit_1, unit_2, make_unit_index_sequence{});
     }

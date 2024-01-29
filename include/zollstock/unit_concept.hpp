@@ -197,7 +197,7 @@ namespace zollstock
 
         template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
         [[nodiscard]] consteval bool convertible_units_impl(
-            const Unit1& unit_1, const Unit2& unit_2, std::index_sequence<indices...>
+            Unit1 unit_1, Unit2 unit_2, std::index_sequence<indices...>
         ) noexcept
         {
             return (... && (get<indices>(unit_1).exponent == get<indices>(unit_2).exponent));
