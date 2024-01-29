@@ -157,13 +157,13 @@ namespace zollstock
         template <unit_c auto that_unit, std::size_t pos>
         [[nodiscard]] constexpr value_type dimension_factor() const noexcept
         {
-            constexpr auto this_exponent = get<pos>(this_unit.exponents);
-            constexpr auto that_exponent = get<pos>(that_unit.exponents);
+            constexpr auto this_exponent = get<pos>(this_unit).exponent;
+            constexpr auto that_exponent = get<pos>(that_unit).exponent;
 
             if constexpr(this_exponent != 0 && that_exponent != 0)
             {
-                return std::pow(get<pos>(this_unit.factors), this_exponent) /
-                       std::pow(get<pos>(that_unit.factors), that_exponent);
+                return std::pow(get<pos>(this_unit).factor, this_exponent) /
+                       std::pow(get<pos>(that_unit).factor, that_exponent);
             }
             else
             {
