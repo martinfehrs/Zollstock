@@ -62,9 +62,9 @@
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_DERIVED_UNIT_CONSTANTS(base_symbol, exponent) \
     ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(base_symbol, exponent)              \
 
-#define ZOLLSTOCK_TESTS_TEST_LITERAL(symbol) \
-    REQUIRE(1.0_##symbol   == 1.0 * symbol); \
-    REQUIRE(1_##symbol     == 1   * symbol); \
+#define ZOLLSTOCK_TESTS_TEST_LITERAL(symbol)        \
+    STATIC_REQUIRE(1.0_##symbol   == 1.0 * symbol); \
+    STATIC_REQUIRE(1_##symbol     == 1   * symbol); \
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_LITERALS(base_symbol) \
     ZOLLSTOCK_TESTS_TEST_LITERAL(q##base_symbol  )             \
@@ -97,9 +97,9 @@
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_LITERALS(base_symbol) \
 
 #define ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type, factor_, symbol_) \
-    REQUIRE(type::quantity.exponent == 1            );              \
-    REQUIRE(type::quantity.factor   == factor_      );              \
-    REQUIRE(type::quantity.symbol   == #symbol_##_us);              \
+    STATIC_REQUIRE(type::quantity.exponent == 1            );       \
+    STATIC_REQUIRE(type::quantity.factor   == factor_      );       \
+    STATIC_REQUIRE(type::quantity.symbol   == #symbol_##_us);       \
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_TYPES(quantity, type_prefix, base_type, base_factor, base_symbol)      \
     ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##quecto##base_type, 1e-30L * base_factor, q##base_symbol  ) \
