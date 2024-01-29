@@ -106,19 +106,19 @@ namespace zollstock
     };
 
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] constexpr unit_data get(const Unit& data) noexcept
+    [[nodiscard]] constexpr unit_data get(Unit) noexcept
     {
         if constexpr(pos == 0 && length_based_unit_c<Unit>)
         {
-            return data.length;
+            return Unit::length;
         }
         else if constexpr(pos == 1 && time_based_unit_c<Unit>)
         {
-            return data.time;
+            return Unit::time;
         }
         else if constexpr(pos == 2 && angle_based_unit_c<Unit>)
         {
-            return data.angle;
+            return Unit::angle;
         }
         else
         {
