@@ -131,7 +131,7 @@ namespace zollstock
     {
         if constexpr(length_based_unit(unit))
         {
-            return Unit::length;
+            return unit.length;
         }
         else
         {
@@ -143,7 +143,7 @@ namespace zollstock
     {
         if constexpr(time_based_unit(unit))
         {
-            return Unit::time;
+            return unit.time;
         }
         else
         {
@@ -155,7 +155,7 @@ namespace zollstock
     {
         if constexpr(angle_based_unit(unit))
         {
-            return Unit::angle;
+            return unit.angle;
         }
         else
         {
