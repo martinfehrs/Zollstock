@@ -14,9 +14,7 @@ namespace zollstock::inline unit::inline types
     struct basic_second
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
         static constexpr unit_data time{ 1, Prefix::factor, Prefix::symbol + "s"_us };
-        static constexpr unit_data angle{};
     };
 
     using quectosecond = basic_second<quecto    >;
@@ -48,33 +46,25 @@ namespace zollstock::inline unit::inline types
     struct minute
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
         static constexpr unit_data time{ 1, 60.0L, "min"_us };
-        static constexpr unit_data angle{};
     };
 
     struct hour
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
         static constexpr unit_data time{ 1, 3'600.0L, "h"_us };
-        static constexpr unit_data angle{};
     };
 
     struct day
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
         static constexpr unit_data time{ 1, 86'400.0L, "d"_us };
-        static constexpr unit_data angle{};
     };
 
     struct year
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
         static constexpr unit_data time{ 1, 31'536'000.0L, "a"_us };
-        static constexpr unit_data angle{};
     };
 
 }

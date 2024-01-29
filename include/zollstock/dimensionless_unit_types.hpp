@@ -11,10 +11,6 @@ namespace zollstock::inline unit::inline types
     struct one
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
-        static constexpr unit_data time{};
-        static constexpr unit_data angle{};
-
     };
 
 }

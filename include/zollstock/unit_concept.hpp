@@ -128,7 +128,7 @@ namespace zollstock
 
 
     template <unit_c Unit>
-    [[nodiscard]] unit_data unit_length(Unit) noexcept
+    [[nodiscard]] constexpr unit_data unit_length(Unit) noexcept
     {
         if constexpr(length_based_unit_c<Unit>)
         {
@@ -141,7 +141,7 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] unit_data unit_time(Unit) noexcept
+    [[nodiscard]] constexpr unit_data unit_time(Unit) noexcept
     {
         if constexpr(time_based_unit_c<Unit>)
         {
@@ -154,7 +154,7 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] unit_data unit_angle(Unit) noexcept
+    [[nodiscard]] constexpr unit_data unit_angle(Unit) noexcept
     {
         if constexpr(time_based_unit_c<Unit>)
         {
@@ -219,9 +219,9 @@ namespace zollstock
         using base_unit = Unit;
         static constexpr int exponent = exponent_;
 
-        static constexpr unit_data length = pow(Unit::length, exponent_);
-        static constexpr unit_data time   = pow(Unit::time  , exponent_);
-        static constexpr unit_data angle  = pow(Unit::time  , exponent_);
+        static constexpr unit_data length = pow(unit_length(Unit{}), exponent_);
+        static constexpr unit_data time   = pow(unit_time  (Unit{}), exponent_);
+        static constexpr unit_data angle  = pow(unit_angle (Unit{}), exponent_);
     };
 
     template<unit_c Unit1, unit_c Unit2>
@@ -231,9 +231,9 @@ namespace zollstock
         using base_unit_1 = Unit1;
         using base_unit_2 = Unit2;
 
-        static constexpr unit_data length = Unit1::length * Unit2::length;
-        static constexpr unit_data time   = Unit1::time   * Unit2::time  ;
-        static constexpr unit_data angle  = Unit1::angle  * Unit2::angle ;
+        static constexpr unit_data length = unit_length(Unit1{}) * unit_length(Unit2{});
+        static constexpr unit_data time   = unit_time  (Unit1{}) * unit_time  (Unit2{});
+        static constexpr unit_data angle  = unit_angle (Unit1{}) * unit_angle (Unit2{});
 
     };
 

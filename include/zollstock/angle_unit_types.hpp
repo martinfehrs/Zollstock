@@ -15,8 +15,6 @@ namespace zollstock::inline unit::inline types
     struct basic_radian
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
-        static constexpr unit_data time{};
         static constexpr unit_data angle{ 1, Prefix::factor, Prefix::symbol + "rad"_us };
         //static constexpr unit_exponents exponents{ 0, 0, 1 };
         //static constexpr unit_factors factors{ 0.0L, 0.0L, Prefix::factor };
@@ -52,16 +50,12 @@ namespace zollstock::inline unit::inline types
     struct degree
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
-        static constexpr unit_data time{};
         static constexpr unit_data angle{ 1, pi/180.0L, "deg"_us };
     };
 
     struct arcminute
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
-        static constexpr unit_data time{};
         static constexpr unit_data angle{ 1, pi/10.8e3L, "arcmin"_us };
     };
 
@@ -69,8 +63,6 @@ namespace zollstock::inline unit::inline types
     struct basic_arcsecond
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
-        static constexpr unit_data time{};
         static constexpr unit_data angle{ 1, Prefix::factor * pi/648e3L, Prefix::symbol + "as"_us };
     };
 
@@ -78,8 +70,6 @@ namespace zollstock::inline unit::inline types
     struct basic_arcsecond<unprefixed>
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
-        static constexpr unit_data time{};
         static constexpr unit_data angle{ 1, pi/648e3L, "arcsec"_us };
     };
 
@@ -113,8 +103,6 @@ namespace zollstock::inline unit::inline types
     struct basic_gradian
     {
         static constexpr unit_type type = unit_type::basic;
-        static constexpr unit_data length{};
-        static constexpr unit_data time{};
         static constexpr unit_data angle{ 1, Prefix::factor * pi/200.0L, Prefix::symbol + "gon"_us };
     };
 
