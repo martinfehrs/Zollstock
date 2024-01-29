@@ -158,7 +158,7 @@ namespace zollstock
             unit_2.type == unit_type::exponentiation
         )
         {
-            if constexpr(std::same_as<typename Unit1::base_unit, typename Unit2::base_unit>)
+            if constexpr(unit_1.base_unit == unit_2.base_unit)
             {
                 return unit_exponentiation<
                     unit_1.base_unit,
@@ -173,7 +173,7 @@ namespace zollstock
         else
         if constexpr(unit_1.type == unit_type::exponentiation && unit_2.type == unit_type::basic)
         {
-            if constexpr(std::same_as<typename Unit1::base_unit, Unit2>)
+            if constexpr(unit_1.base_unit == unit_2)
             {
                 return unit_exponentiation<unit_1.base_unit, unit_1.exponent + 1>{};
             }
@@ -195,9 +195,9 @@ namespace zollstock
             }
         }
         else
-        if constexpr(Unit1::type == unit_type::exponentiation && unit_2.type == unit_type::product)
+        if constexpr(unit_1.type == unit_type::exponentiation && unit_2.type == unit_type::product)
         {
-            if constexpr(std::same_as<typename Unit1::base_unit, typename Unit2::base_unit_1>)
+            if constexpr(unit_1.base_unit == unit_2.base_unit_1)
             {
                 return unit_product<
                     unit_exponentiation<unit_1.base_unit, unit_1.exponent + 1>{},
@@ -205,7 +205,7 @@ namespace zollstock
                 >{};
             }
             else
-            if constexpr(std::same_as<typename Unit1::base_unit, typename Unit2::base_unit_2>)
+            if constexpr(unit_1 == unit_2)
             {
                 return unit_product<
                     unit_exponentiation<unit_1.base_unit, unit_1.exponent + 1>{},
@@ -220,7 +220,7 @@ namespace zollstock
         else
         if constexpr(unit_1.type == unit_type::product && unit_2.type == unit_type::exponentiation)
         {
-            if constexpr(std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit>)
+            if constexpr(unit_1.base_unit_1 == unit_2.base_unit)
             {
                 return unit_product<
                     unit_exponentiation<unit_2.base_unit, unit_2.exponent + 1>{},
@@ -228,7 +228,7 @@ namespace zollstock
                 >{};
             }
             else
-            if constexpr(std::same_as<typename Unit1::base_unit_2, typename Unit2::base_unit>)
+            if constexpr(unit_1.base_unit_2, unit_2.base_unit)
             {
                 return unit_product<
                     unit_exponentiation<unit_2.base_unit, unit_2.exponent + 1>{},
@@ -240,14 +240,13 @@ namespace zollstock
                 return unit_product<unit_1, unit_2>{};
             }
         }
-        else
         if constexpr(unit_1.type == unit_type::product && unit_2.type == unit_type::product)
         {
             if constexpr(
-                std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit_1> &&
-                std::same_as<typename Unit1::base_unit_2, typename Unit2::base_unit_2> ||
-                std::same_as<typename Unit1::base_unit_1, typename Unit2::base_unit_2> &&
-                std::same_as<typename Unit1::base_unit_2, typename Unit2::base_unit_1>
+                unit_1.base_unit_1 == unit_2.base_unit_1 &&
+                unit_1.base_unit_2 == unit_2.base_unit_2 ||
+                unit_1.base_unit_1 == unit_2.base_unit_2 &&
+                unit_1.base_unit_2 == unit_2.base_unit_1
             )
             {
                 return unit_product<
@@ -260,6 +259,8 @@ namespace zollstock
                 return unit_product<unit_1, unit_2>{};
             }
         }
+
+        return unit_product<unit_1, unit_2>{};
     }
 
     namespace detail
@@ -268,7 +269,7 @@ namespace zollstock
         template<int exponent, unit_c Unit>
         [[nodiscard]] consteval auto pow(Unit unit) noexcept
         {
-            if constexpr(exponent == 0 || std::same_as<Unit, one>)
+            if constexpr(exponent == 0 || unit == _1)
             {
                 return _1;
             }
@@ -276,7 +277,7 @@ namespace zollstock
             {
                 return unit;
             }
-            else if constexpr(Unit::type == unit_type::exponentiation)
+            else if constexpr(unit.type == unit_type::exponentiation)
             {
                 return unit_exponentiation<unit.base_unit, unit.exponent * exponent>{};
             }
