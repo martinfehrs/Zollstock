@@ -82,9 +82,6 @@ namespace zollstock
     {
         requires std::is_constructible_v<Candidate>;
         { Candidate::type   } -> std::same_as<const unit_type&>;
-        //{ Candidate::length } -> std::same_as<const unit_data&>;
-        //{ Candidate::time   } -> std::same_as<const unit_data&>;
-        //{ Candidate::angle  } -> std::same_as<const unit_data&>;
     };
 
     template <typename Candidate>
