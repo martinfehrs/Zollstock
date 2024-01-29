@@ -36,7 +36,7 @@ namespace zollstock
         {
             std::basic_string<Char> unit_representation;
 
-            const unit_data& data = get<pos>(unit);
+            constexpr unit_data data = get_v<pos, Unit>;
 
             if(data.exponent != 0)
             {
@@ -300,18 +300,16 @@ namespace zollstock
     namespace detail
     {
         template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
-        [[nodiscard]] constexpr bool equal(
-            Unit1 unit_1, Unit2 unit_2, std::index_sequence<indices...>
-        ) noexcept
+        [[nodiscard]] constexpr bool equal(std::index_sequence<indices...>) noexcept
         {
-            return (... && (get<indices>(unit_1) == get<indices>(unit_2)));
+            return (... && (get_v<indices, Unit1> == get_v<indices, Unit2>));
         }
     }
 
     template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] constexpr bool operator==(Unit1 unit_1, Unit2 unit_2) noexcept
     {
-        return detail::equal(unit_1, unit_2, make_unit_index_sequence{});
+        return detail::equal<Unit1, Unit2>(make_unit_index_sequence{});
     }
 
 }

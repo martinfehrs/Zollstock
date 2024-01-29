@@ -105,6 +105,8 @@ namespace zollstock
         { Candidate::angle } -> std::same_as<const unit_data&>;
     };
 
+
+
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
     [[nodiscard]] constexpr unit_data get(Unit) noexcept
     {
@@ -126,6 +128,10 @@ namespace zollstock
         }
     }
 
+    template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
+    inline constexpr unit_data get_v = get<pos>(Unit{});
+
+
 
     template <unit_c Unit>
     [[nodiscard]] consteval unit_data unit_length(Unit) noexcept
@@ -141,6 +147,11 @@ namespace zollstock
     }
 
     template <unit_c Unit>
+    inline constexpr unit_data unit_length_v = unit_length(Unit{});
+
+
+
+    template <unit_c Unit>
     [[nodiscard]] consteval unit_data unit_time(Unit) noexcept
     {
         if constexpr(time_based_unit_c<Unit>)
@@ -154,6 +165,11 @@ namespace zollstock
     }
 
     template <unit_c Unit>
+    inline constexpr unit_data unit_time_v = unit_time(Unit{});
+
+
+
+    template <unit_c Unit>
     [[nodiscard]] consteval unit_data unit_angle(Unit) noexcept
     {
         if constexpr(time_based_unit_c<Unit>)
@@ -165,6 +181,10 @@ namespace zollstock
             return {};
         }
     }
+
+    template <unit_c Unit>
+    inline constexpr unit_data unit_angle_v = unit_angle(Unit{});
+
 
 
     template <typename IndexSequence, std::size_t offset>
@@ -197,17 +217,18 @@ namespace zollstock
 
         template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
         [[nodiscard]] consteval bool convertible_units_impl(
-            Unit1 unit_1, Unit2 unit_2, std::index_sequence<indices...>
+            std::index_sequence<indices...>
         ) noexcept
         {
-            return (... && (get<indices>(unit_1).exponent == get<indices>(unit_2).exponent));
+            return (... && (get_v<indices, Unit1>.exponent == get_v<indices, Unit2>.exponent));
         }
 
     }
 
-    [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
+    template <unit_c Unit1, unit_c Unit2>
+    [[nodiscard]] consteval bool convertible_units(Unit1, Unit2) noexcept
     {
-        return detail::convertible_units_impl(unit_1, unit_2, make_unit_index_sequence{});
+        return detail::convertible_units_impl<Unit1, Unit2>(make_unit_index_sequence{});
     }
 
 
@@ -219,9 +240,9 @@ namespace zollstock
         using base_unit = Unit;
         static constexpr int exponent = exponent_;
 
-        static constexpr unit_data length = pow(unit_length(Unit{}), exponent_);
-        static constexpr unit_data time   = pow(unit_time  (Unit{}), exponent_);
-        static constexpr unit_data angle  = pow(unit_angle (Unit{}), exponent_);
+        static constexpr unit_data length = pow(unit_length_v<Unit>, exponent_);
+        static constexpr unit_data time   = pow(unit_time_v  <Unit>, exponent_);
+        static constexpr unit_data angle  = pow(unit_angle_v <Unit>, exponent_);
     };
 
     template<unit_c Unit1, unit_c Unit2>
@@ -231,9 +252,9 @@ namespace zollstock
         using base_unit_1 = Unit1;
         using base_unit_2 = Unit2;
 
-        static constexpr unit_data length = unit_length(Unit1{}) * unit_length(Unit2{});
-        static constexpr unit_data time   = unit_time  (Unit1{}) * unit_time  (Unit2{});
-        static constexpr unit_data angle  = unit_angle (Unit1{}) * unit_angle (Unit2{});
+        static constexpr unit_data length = unit_length_v<Unit1> * unit_length_v<Unit2>;
+        static constexpr unit_data time   = unit_time_v  <Unit1> * unit_time_v  <Unit2>;
+        static constexpr unit_data angle  = unit_angle_v <Unit1> * unit_angle_v <Unit2>;
 
     };
 

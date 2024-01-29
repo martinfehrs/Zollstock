@@ -8,8 +8,8 @@ using namespace zollstock;
 TEST_CASE("dimensionless-unit-types", "[dimensionless][unit][types]")
 {
 
-    REQUIRE(unit_length(one{}) == unit_data{});
-    REQUIRE(unit_time  (one{}) == unit_data{});
-    REQUIRE(unit_angle (one{}) == unit_data{});
+    REQUIRE(unit_length_v<one> == unit_data{});
+    REQUIRE(unit_time_v  <one> == unit_data{});
+    REQUIRE(unit_angle_v <one> == unit_data{});
 
 }
