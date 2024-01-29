@@ -107,32 +107,6 @@ namespace zollstock
 
 
 
-    template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] constexpr unit_data get(Unit) noexcept
-    {
-        if constexpr(pos == 0 && length_based_unit_c<Unit>)
-        {
-            return Unit::length;
-        }
-        else if constexpr(pos == 1 && time_based_unit_c<Unit>)
-        {
-            return Unit::time;
-        }
-        else if constexpr(pos == 2 && angle_based_unit_c<Unit>)
-        {
-            return Unit::angle;
-        }
-        else
-        {
-            return {};
-        }
-    }
-
-    template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    inline constexpr unit_data get_v = get<pos>(Unit{});
-
-
-
     template <unit_c Unit>
     [[nodiscard]] consteval unit_data unit_length(Unit) noexcept
     {
@@ -172,7 +146,7 @@ namespace zollstock
     template <unit_c Unit>
     [[nodiscard]] consteval unit_data unit_angle(Unit) noexcept
     {
-        if constexpr(time_based_unit_c<Unit>)
+        if constexpr(angle_based_unit_c<Unit>)
         {
             return Unit::angle;
         }
@@ -184,6 +158,28 @@ namespace zollstock
 
     template <unit_c Unit>
     inline constexpr unit_data unit_angle_v = unit_angle(Unit{});
+
+
+
+    template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
+    [[nodiscard]] constexpr unit_data get(Unit) noexcept
+    {
+        if constexpr(pos == 0)
+        {
+            return unit_length_v<Unit>;
+        }
+        else if constexpr(pos == 1)
+        {
+            return unit_time_v<Unit>;
+        }
+        else if constexpr(pos == 2)
+        {
+            return unit_angle_v<Unit>;
+        }
+    }
+
+    template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
+    inline constexpr unit_data get_v = get<pos>(Unit{});
 
 
 
