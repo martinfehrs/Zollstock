@@ -127,6 +127,45 @@ namespace zollstock
     }
 
 
+    template <unit_c Unit>
+    [[nodiscard]] unit_data unit_length(Unit) noexcept
+    {
+        if constexpr(length_based_unit_c<Unit>)
+        {
+            return Unit::length;
+        }
+        else
+        {
+            return {};
+        }
+    }
+
+    template <unit_c Unit>
+    [[nodiscard]] unit_data unit_time(Unit) noexcept
+    {
+        if constexpr(time_based_unit_c<Unit>)
+        {
+            return Unit::time;
+        }
+        else
+        {
+            return {};
+        }
+    }
+
+    template <unit_c Unit>
+    [[nodiscard]] unit_data unit_angle(Unit) noexcept
+    {
+        if constexpr(time_based_unit_c<Unit>)
+        {
+            return Unit::angle;
+        }
+        else
+        {
+            return {};
+        }
+    }
+
 
     template <typename IndexSequence, std::size_t offset>
     struct shift_right;
