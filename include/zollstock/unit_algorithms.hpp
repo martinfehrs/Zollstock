@@ -36,7 +36,7 @@ namespace zollstock
         {
             std::basic_string<Char> unit_representation;
 
-            constexpr unit_data data = unit_data_at_v<pos, Unit>;
+            constexpr unit_data data = unit_data_at<pos>(unit);
 
             if(data.exponent != 0)
             {
@@ -298,16 +298,16 @@ namespace zollstock
     namespace detail
     {
         template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
-        [[nodiscard]] consteval bool equal(std::index_sequence<indices...>) noexcept
+        [[nodiscard]] consteval bool equal(Unit1 unit_1, Unit2 unit_2, std::index_sequence<indices...>) noexcept
         {
-            return (... && (unit_data_at_v<indices, Unit1> == unit_data_at_v<indices, Unit2>));
+            return (... && (unit_data_at<indices>(unit_1) == unit_data_at<indices>(unit_2)));
         }
     }
 
     template <unit_c Unit1, unit_c Unit2>
     [[nodiscard]] consteval bool operator==(Unit1 unit_1, Unit2 unit_2) noexcept
     {
-        return detail::equal<Unit1, Unit2>(make_unit_index_sequence{});
+        return detail::equal<Unit1, Unit2>(unit_1, unit_2, make_unit_index_sequence{});
     }
 
 }
