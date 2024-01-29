@@ -253,7 +253,6 @@ namespace zollstock
         static constexpr unit_data length = unit_length_v<Unit1> * unit_length_v<Unit2>;
         static constexpr unit_data time   = unit_time_v  <Unit1> * unit_time_v  <Unit2>;
         static constexpr unit_data angle  = unit_angle_v <Unit1> * unit_angle_v <Unit2>;
-
     };
 
 }
