@@ -152,8 +152,8 @@ namespace zollstock
 
 
 
-    template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] consteval unit_data unit_data_at(Unit unit) noexcept
+    template <std::size_t pos> requires(pos < unit_count)
+    [[nodiscard]] consteval unit_data unit_data_at(unit_c auto unit) noexcept
     {
         if constexpr(pos == 0)
         {
@@ -199,9 +199,9 @@ namespace zollstock
     namespace detail
     {
 
-        template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
+        template <std::size_t... indices>
         [[nodiscard]] consteval bool convertible_units_impl(
-            Unit1 unit_1, Unit2 unit_2, std::index_sequence<indices...>
+            unit_c auto unit_1, unit_c auto unit_2, std::index_sequence<indices...>
         ) noexcept
         {
             return (
@@ -212,8 +212,7 @@ namespace zollstock
 
     }
 
-    template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] consteval bool convertible_units(Unit1 unit_1, Unit2 unit_2) noexcept
+    [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
         return detail::convertible_units_impl(unit_1, unit_2, make_unit_index_sequence{});
     }

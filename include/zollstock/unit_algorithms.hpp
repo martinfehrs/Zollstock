@@ -31,8 +31,8 @@ namespace zollstock
             return string_representation;
         }
 
-        template <std::size_t pos, typename Char, unit_c Unit>
-        [[nodiscard]] std::basic_string<Char> unit_entry_to_string(Unit unit)
+        template <std::size_t pos, typename Char>
+        [[nodiscard]] std::basic_string<Char> unit_entry_to_string(unit_c auto unit)
         {
             std::basic_string<Char> unit_representation;
 
@@ -111,9 +111,9 @@ namespace zollstock
 
         };
 
-        template <typename Char, unit_c Unit, std::size_t... indices>
+        template <typename Char, std::size_t... indices>
         [[nodiscard]] std::basic_string<Char> to_basic_string_impl(
-            Unit unit, std::index_sequence<indices...>
+            unit_c auto unit, std::index_sequence<indices...>
         )
         {
             return detail::basic_concatenator<Char>{ '*' }(
@@ -123,8 +123,8 @@ namespace zollstock
 
     }
 
-    template <typename Char, unit_c Unit>
-    [[nodiscard]] std::basic_string<Char> to_basic_string(Unit unit)
+    template <typename Char>
+    [[nodiscard]] std::basic_string<Char> to_basic_string(unit_c auto unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
             detail::to_basic_string_impl<Char>(unit, make_derived_unit_index_sequence{}),
@@ -132,26 +132,23 @@ namespace zollstock
         );
     }
 
-    template <unit_c Unit>
-    [[nodiscard]] std::string to_string(Unit unit)
+    [[nodiscard]] std::string to_string(unit_c auto unit)
     {
         return to_basic_string<char>(unit);
     }
 
-    template <unit_c Unit>
-    [[nodiscard]] std::wstring to_wstring(Unit unit)
+    [[nodiscard]] std::wstring to_wstring(unit_c auto unit)
     {
         return to_basic_string<wchar_t>(unit);
     }
 
-    template <typename Char, unit_c Unit>
-    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, Unit unit)
+    template <typename Char>
+    std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, unit_c auto unit)
     {
         return os << to_basic_string<Char>(unit);
     }
 
-    template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] consteval auto operator*(Unit1 unit_1, Unit2 unit_2) noexcept
+    [[nodiscard]] consteval auto operator*(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
         if constexpr(
             unit_1.type == unit_type::exponentiation &&
@@ -263,8 +260,8 @@ namespace zollstock
     namespace detail
     {
 
-        template<int exponent, unit_c Unit>
-        [[nodiscard]] consteval auto pow(Unit unit) noexcept
+        template<int exponent>
+        [[nodiscard]] consteval auto pow(unit_c auto unit) noexcept
         {
             if constexpr(exponent == 0 || unit == _1)
             {
@@ -289,25 +286,31 @@ namespace zollstock
     template<unit_c auto unit, int exponent>
     inline constexpr unit_c auto pow_v = detail::pow<exponent>(unit);
 
-    template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] consteval auto operator/(Unit1 unit_1, Unit2 unit_2) noexcept
+
+
+    [[nodiscard]] consteval auto operator/(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
         return unit_1 * pow_v<unit_2, -1>;
     }
 
+
+
     namespace detail
     {
-        template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
-        [[nodiscard]] consteval bool equal(Unit1 unit_1, Unit2 unit_2, std::index_sequence<indices...>) noexcept
+
+        template <std::size_t... indices>
+        [[nodiscard]] consteval bool equal(
+            unit_c auto unit_1, unit_c auto unit_2, std::index_sequence<indices...>
+        ) noexcept
         {
             return (... && (unit_data_at<indices>(unit_1) == unit_data_at<indices>(unit_2)));
         }
+
     }
 
-    template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] consteval bool operator==(Unit1 unit_1, Unit2 unit_2) noexcept
+    [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return detail::equal<Unit1, Unit2>(unit_1, unit_2, make_unit_index_sequence{});
+        return detail::equal(unit_1, unit_2, make_unit_index_sequence{});
     }
 
 }

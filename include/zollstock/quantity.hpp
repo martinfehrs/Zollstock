@@ -140,16 +140,14 @@ namespace zollstock
             return *this;
         }
 
-        template <unit_c ThatUnit>
-        [[nodiscard]] consteval auto operator*(ThatUnit) && noexcept
+        [[nodiscard]] consteval auto operator*(unit_c auto that_unit) && noexcept
         {
-            return quantity<this_unit * ThatUnit{}, value_type>{ this->value_ };
+            return quantity<this_unit * that_unit, value_type>{ this->value_ };
         }
 
-        template <unit_c ThatUnit>
-        [[nodiscard]] consteval auto operator/(ThatUnit) && noexcept
+        [[nodiscard]] consteval auto operator/(unit_c auto that_unit) && noexcept
         {
-            return quantity<this_unit / ThatUnit{}, value_type>{ this->value_ };
+            return quantity<this_unit / that_unit, value_type>{ this->value_ };
         }
 
     private:
@@ -267,10 +265,9 @@ namespace zollstock
         return make_scalar<unit>(minuend.cvalue() - subtrahend.cvalue());
     }
 
-    template <unit_c Unit>
-    [[nodiscard]] consteval auto operator*(number_c auto&& factor, Unit) noexcept
+    [[nodiscard]] consteval auto operator*(number_c auto&& factor, unit_c auto unit) noexcept
     {
-        return make_scalar<Unit{}>(factor);
+        return make_scalar<unit>(factor);
     }
 
     template <unit_c auto unit, number_c Value>
