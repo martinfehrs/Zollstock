@@ -231,28 +231,28 @@ namespace zollstock
 
 
 
-    template <unit_c Unit, int exponent_>
+    template <unit_c auto unit, int exponent_>
     struct unit_exponentiation
     {
-        static constexpr unit_type type = unit_type::exponentiation;
-        using base_unit = Unit;
-        static constexpr int exponent = exponent_;
+        static constexpr auto type = unit_type::exponentiation;
+        static constexpr auto base_unit = unit;
+        static constexpr auto exponent = exponent_;
 
-        static constexpr unit_data length = pow(unit_length_v<Unit>, exponent_);
-        static constexpr unit_data time   = pow(unit_time_v  <Unit>, exponent_);
-        static constexpr unit_data angle  = pow(unit_angle_v <Unit>, exponent_);
+        static constexpr auto length = pow(unit_length(unit), exponent_);
+        static constexpr auto time   = pow(unit_time  (unit), exponent_);
+        static constexpr auto angle  = pow(unit_angle (unit), exponent_);
     };
 
-    template<unit_c Unit1, unit_c Unit2>
+    template<unit_c auto unit_1, unit_c auto unit_2>
     struct unit_product
     {
-        static constexpr unit_type type = unit_type::product;
-        using base_unit_1 = Unit1;
-        using base_unit_2 = Unit2;
+        static constexpr auto type = unit_type::product;
+        static constexpr auto base_unit_1 = unit_1;
+        static constexpr auto base_unit_2 = unit_2;
 
-        static constexpr unit_data length = unit_length_v<Unit1> * unit_length_v<Unit2>;
-        static constexpr unit_data time   = unit_time_v  <Unit1> * unit_time_v  <Unit2>;
-        static constexpr unit_data angle  = unit_angle_v <Unit1> * unit_angle_v <Unit2>;
+        static constexpr auto length = unit_length(unit_1) * unit_length(unit_2);
+        static constexpr auto time   = unit_time  (unit_1) * unit_time  (unit_2);
+        static constexpr auto angle  = unit_angle (unit_1) * unit_angle (unit_2);
     };
 
 }
