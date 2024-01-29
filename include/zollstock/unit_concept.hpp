@@ -160,9 +160,8 @@ namespace zollstock
     inline constexpr unit_data unit_angle_v = unit_angle(Unit{});
 
 
-
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] constexpr unit_data get(Unit) noexcept
+    [[nodiscard]] constexpr unit_data unit_data_at(Unit) noexcept
     {
         if constexpr(pos == 0)
         {
@@ -179,7 +178,7 @@ namespace zollstock
     }
 
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    inline constexpr unit_data get_v = get<pos>(Unit{});
+    inline constexpr unit_data unit_data_at_v = unit_data_at<pos>(Unit{});
 
 
 
@@ -216,7 +215,10 @@ namespace zollstock
             std::index_sequence<indices...>
         ) noexcept
         {
-            return (... && (get_v<indices, Unit1>.exponent == get_v<indices, Unit2>.exponent));
+            return (
+                ... &&
+                (unit_data_at_v<indices, Unit1>.exponent == unit_data_at_v<indices, Unit2>.exponent)
+            );
         }
 
     }
