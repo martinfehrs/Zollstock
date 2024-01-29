@@ -243,6 +243,11 @@ namespace zollstock
         static constexpr auto angle  = pow(unit_angle (unit), exponent_);
     };
 
+    template <unit_c auto unit, int exponent_>
+    inline constexpr auto unit_exponentiation_v = unit_exponentiation<unit, exponent_>{};
+
+
+
     template<unit_c auto unit_1, unit_c auto unit_2>
     struct unit_product
     {
@@ -254,6 +259,9 @@ namespace zollstock
         static constexpr auto time   = unit_time  (unit_1) * unit_time  (unit_2);
         static constexpr auto angle  = unit_angle (unit_1) * unit_angle (unit_2);
     };
+
+    template <unit_c auto unit, int exponent_>
+    inline constexpr auto unit_product_v = unit_product<unit, exponent_>{};
 
 }
 

@@ -160,14 +160,11 @@ namespace zollstock
         {
             if constexpr(unit_1.base_unit == unit_2.base_unit)
             {
-                return unit_exponentiation<
-                    unit_1.base_unit,
-                    unit_1.exponent + unit_2.exponent
-                >{};
+                return unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + unit_2.exponent>;
             }
             else
             {
-                return unit_product<unit_1, unit_2>{};
+                return unit_product_v<unit_1, unit_2>;
             }
         }
         else
@@ -175,11 +172,11 @@ namespace zollstock
         {
             if constexpr(unit_1.base_unit == unit_2)
             {
-                return unit_exponentiation<unit_1.base_unit, unit_1.exponent + 1>{};
+                return unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + 1>;
             }
             else
             {
-                return unit_product<unit_1, unit_2>{};
+                return unit_product_v<unit_1, unit_2>;
             }
         }
         else
@@ -187,11 +184,11 @@ namespace zollstock
         {
             if constexpr(unit_2.base_unit == unit_1)
             {
-                return unit_exponentiation<unit_2.base_unit, unit_2.exponent + 1>{};
+                return unit_exponentiation_v<unit_2.base_unit, unit_2.exponent + 1>;
             }
             else
             {
-                return unit_product<unit_1, unit_2>{};
+                return unit_product_v<unit_1, unit_2>;
             }
         }
         else
@@ -199,22 +196,22 @@ namespace zollstock
         {
             if constexpr(unit_1.base_unit == unit_2.base_unit_1)
             {
-                return unit_product<
-                    unit_exponentiation<unit_1.base_unit, unit_1.exponent + 1>{},
+                return unit_product_v<
+                    unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + 1>,
                     unit_2.base_unit_2
-                >{};
+                >;
             }
             else
             if constexpr(unit_1 == unit_2)
             {
-                return unit_product<
-                    unit_exponentiation<unit_1.base_unit, unit_1.exponent + 1>{},
+                return unit_product_v<
+                    unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + 1>,
                     unit_2.base_unit_1
-                >{};
+                >;
             }
             else
             {
-                return unit_product<unit_1, unit_2>{};
+                return unit_product_v<unit_1, unit_2>;
             }
         }
         else
@@ -222,22 +219,22 @@ namespace zollstock
         {
             if constexpr(unit_1.base_unit_1 == unit_2.base_unit)
             {
-                return unit_product<
-                    unit_exponentiation<unit_2.base_unit, unit_2.exponent + 1>{},
+                return unit_product_v<
+                    unit_exponentiation_v<unit_2.base_unit, unit_2.exponent + 1>,
                     unit_2.base_unit_2
-                >{};
+                >;
             }
             else
             if constexpr(unit_1.base_unit_2, unit_2.base_unit)
             {
-                return unit_product<
-                    unit_exponentiation<unit_2.base_unit, unit_2.exponent + 1>{},
+                return unit_product_v<
+                    unit_exponentiation_v<unit_2.base_unit, unit_2.exponent + 1>,
                     unit_2.base_unit_1
-                >{};
+                >;
             }
             else
             {
-                return unit_product<unit_1, unit_2>{};
+                return unit_product_v<unit_1, unit_2>;
             }
         }
         if constexpr(unit_1.type == unit_type::product && unit_2.type == unit_type::product)
@@ -249,18 +246,18 @@ namespace zollstock
                 unit_1.base_unit_2 == unit_2.base_unit_1
             )
             {
-                return unit_product<
-                    unit_exponentiation<unit_1.base_unit_1, 2>{},
-                    unit_exponentiation<unit_1.base_unit_2, 2>{}
-                >{};
+                return unit_product_v<
+                    unit_exponentiation_v<unit_1.base_unit_1, 2>,
+                    unit_exponentiation_v<unit_1.base_unit_2, 2>
+                >;
             }
             else
             {
-                return unit_product<unit_1, unit_2>{};
+                return unit_product_v<unit_1, unit_2>;
             }
         }
 
-        return unit_product<unit_1, unit_2>{};
+        return unit_product_v<unit_1, unit_2>;
     }
 
     namespace detail
@@ -279,11 +276,11 @@ namespace zollstock
             }
             else if constexpr(unit.type == unit_type::exponentiation)
             {
-                return unit_exponentiation<unit.base_unit, unit.exponent * exponent>{};
+                return unit_exponentiation_v<unit.base_unit, unit.exponent * exponent>;
             }
             else
             {
-                return unit_exponentiation<unit, exponent>{};
+                return unit_exponentiation_v<unit, exponent>;
             }
         }
 
