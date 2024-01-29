@@ -3,35 +3,35 @@
 
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
-    REQUIRE(q##base_symbol   == quecto##base_type{});                                \
-    REQUIRE(r##base_symbol   == ronto##base_type {});                                \
-    REQUIRE(y##base_symbol   == yocto##base_type {});                                \
-    REQUIRE(z##base_symbol   == zepto##base_type {});                                \
-    REQUIRE(a##base_symbol   == atto##base_type  {});                                \
-    REQUIRE(f##base_symbol   == femto##base_type {});                                \
-    REQUIRE(p##base_symbol   == pico##base_type  {});                                \
-    REQUIRE(mic##base_symbol == micro##base_type {});                                \
-    REQUIRE(m##base_symbol   == milli##base_type {});                                \
-    REQUIRE(c##base_symbol   == centi##base_type {});                                \
-    REQUIRE(da##base_symbol  == deca##base_type  {});                                \
-    REQUIRE(h##base_symbol   == hecto##base_type {});                                \
-    REQUIRE(k##base_symbol   == kilo##base_type  {});                                \
-    REQUIRE(M##base_symbol   == mega##base_type  {});                                \
-    REQUIRE(G##base_symbol   == giga##base_type  {});                                \
-    REQUIRE(T##base_symbol   == tera##base_type  {});                                \
-    REQUIRE(P##base_symbol   == peta##base_type  {});                                \
-    REQUIRE(E##base_symbol   == exa##base_type   {});                                \
-    REQUIRE(Z##base_symbol   == zetta##base_type {});                                \
-    REQUIRE(Y##base_symbol   == yotta##base_type {});                                \
-    REQUIRE(R##base_symbol   == ronna##base_type {});                                \
-    REQUIRE(Q##base_symbol   == quetta##base_type{});                                \
+    STATIC_REQUIRE(q##base_symbol   == quecto##base_type{});                         \
+    STATIC_REQUIRE(r##base_symbol   == ronto##base_type {});                         \
+    STATIC_REQUIRE(y##base_symbol   == yocto##base_type {});                         \
+    STATIC_REQUIRE(z##base_symbol   == zepto##base_type {});                         \
+    STATIC_REQUIRE(a##base_symbol   == atto##base_type  {});                         \
+    STATIC_REQUIRE(f##base_symbol   == femto##base_type {});                         \
+    STATIC_REQUIRE(p##base_symbol   == pico##base_type  {});                         \
+    STATIC_REQUIRE(mic##base_symbol == micro##base_type {});                         \
+    STATIC_REQUIRE(m##base_symbol   == milli##base_type {});                         \
+    STATIC_REQUIRE(c##base_symbol   == centi##base_type {});                         \
+    STATIC_REQUIRE(da##base_symbol  == deca##base_type  {});                         \
+    STATIC_REQUIRE(h##base_symbol   == hecto##base_type {});                         \
+    STATIC_REQUIRE(k##base_symbol   == kilo##base_type  {});                         \
+    STATIC_REQUIRE(M##base_symbol   == mega##base_type  {});                         \
+    STATIC_REQUIRE(G##base_symbol   == giga##base_type  {});                         \
+    STATIC_REQUIRE(T##base_symbol   == tera##base_type  {});                         \
+    STATIC_REQUIRE(P##base_symbol   == peta##base_type  {});                         \
+    STATIC_REQUIRE(E##base_symbol   == exa##base_type   {});                         \
+    STATIC_REQUIRE(Z##base_symbol   == zetta##base_type {});                         \
+    STATIC_REQUIRE(Y##base_symbol   == yotta##base_type {});                         \
+    STATIC_REQUIRE(R##base_symbol   == ronna##base_type {});                         \
+    STATIC_REQUIRE(Q##base_symbol   == quetta##base_type{});                         \
 
 #define ZOLLSTOCK_TESTS_TEST_SI_BASE_UNIT_CONSTANTS(base_type, base_symbol)      \
-    REQUIRE(base_symbol == base_type{});                                         \
+    STATIC_REQUIRE(base_symbol == base_type{});                                  \
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
 
 #define ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(symbol, exponent) \
-    REQUIRE(symbol##exponent == zollstock::pow_v<symbol, exponent>);   \
+    STATIC_REQUIRE(symbol##exponent == zollstock::pow_v<symbol, exponent>);   \
 
 #define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_DERIVED_UNIT_CONSTANTS(base_symbol, exponent) \
     ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(q##base_symbol  , exponent)             \

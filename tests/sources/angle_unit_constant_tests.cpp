@@ -12,11 +12,11 @@ TEST_CASE("angle-unit-constants", "[angle][unit][constants]")
 
     ZOLLSTOCK_TESTS_TEST_SI_BASE_UNIT_CONSTANTS(radian, rad)
 
-    REQUIRE(deg == degree{});
+    STATIC_REQUIRE(deg == degree{});
 
-    REQUIRE(arcmin == arcminute{});
+    STATIC_REQUIRE(arcmin == arcminute{});
 
-    REQUIRE(arcsec == arcsecond{});
+    STATIC_REQUIRE(arcsec == arcsecond{});
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_BASE_UNIT_CONSTANTS(arcsecond, as)
 
     ZOLLSTOCK_TESTS_TEST_SI_BASE_UNIT_CONSTANTS(gradian, gon)

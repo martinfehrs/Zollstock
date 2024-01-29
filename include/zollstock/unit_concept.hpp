@@ -28,7 +28,7 @@ namespace zollstock
         long double factor;
         unit_symbol symbol;
 
-        [[nodiscard]] constexpr bool operator==(const unit_data&) const noexcept = default;
+        [[nodiscard]] consteval bool operator==(const unit_data&) const noexcept = default;
 
         [[nodiscard]] consteval unit_data operator*(const unit_data& that) const
         {
@@ -161,7 +161,7 @@ namespace zollstock
 
 
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] constexpr unit_data unit_data_at(Unit) noexcept
+    [[nodiscard]] consteval unit_data unit_data_at(Unit) noexcept
     {
         if constexpr(pos == 0)
         {

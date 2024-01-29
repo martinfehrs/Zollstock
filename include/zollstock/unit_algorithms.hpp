@@ -300,14 +300,14 @@ namespace zollstock
     namespace detail
     {
         template <unit_c Unit1, unit_c Unit2, std::size_t... indices>
-        [[nodiscard]] constexpr bool equal(std::index_sequence<indices...>) noexcept
+        [[nodiscard]] consteval bool equal(std::index_sequence<indices...>) noexcept
         {
             return (... && (unit_data_at_v<indices, Unit1> == unit_data_at_v<indices, Unit2>));
         }
     }
 
     template <unit_c Unit1, unit_c Unit2>
-    [[nodiscard]] constexpr bool operator==(Unit1 unit_1, Unit2 unit_2) noexcept
+    [[nodiscard]] consteval bool operator==(Unit1 unit_1, Unit2 unit_2) noexcept
     {
         return detail::equal<Unit1, Unit2>(make_unit_index_sequence{});
     }

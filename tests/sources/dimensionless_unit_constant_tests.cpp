@@ -10,6 +10,6 @@ using namespace zollstock;
 TEST_CASE("dimensionless-unit-constants", "[dimensionless][unit][constants]")
 {
 
-    REQUIRE(_1 == one{});
+    STATIC_REQUIRE(_1 == one{});
 
 }
