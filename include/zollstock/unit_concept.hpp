@@ -108,9 +108,29 @@ namespace zollstock
 
 
     template <unit_c Unit>
-    [[nodiscard]] consteval unit_data unit_length(Unit) noexcept
+    [[nodiscard]] consteval bool length_based_unit(Unit) noexcept
     {
-        if constexpr(length_based_unit_c<Unit>)
+        return length_based_unit_c<Unit>;
+    }
+
+    template <unit_c Unit>
+    [[nodiscard]] consteval bool time_based_unit(Unit) noexcept
+    {
+        return time_based_unit_c<Unit>;
+    }
+
+    template <unit_c Unit>
+    [[nodiscard]] consteval bool angle_based_unit(Unit) noexcept
+    {
+        return angle_based_unit_c<Unit>;
+    }
+
+
+
+    template <unit_c Unit>
+    [[nodiscard]] consteval unit_data unit_length(Unit unit) noexcept
+    {
+        if constexpr(length_based_unit(unit))
         {
             return Unit::length;
         }
@@ -123,9 +143,9 @@ namespace zollstock
 
 
     template <unit_c Unit>
-    [[nodiscard]] consteval unit_data unit_time(Unit) noexcept
+    [[nodiscard]] consteval unit_data unit_time(Unit unit) noexcept
     {
-        if constexpr(time_based_unit_c<Unit>)
+        if constexpr(time_based_unit(unit))
         {
             return Unit::time;
         }
@@ -138,9 +158,9 @@ namespace zollstock
 
 
     template <unit_c Unit>
-    [[nodiscard]] consteval unit_data unit_angle(Unit) noexcept
+    [[nodiscard]] consteval unit_data unit_angle(Unit unit) noexcept
     {
-        if constexpr(angle_based_unit_c<Unit>)
+        if constexpr(angle_based_unit(unit))
         {
             return Unit::angle;
         }
