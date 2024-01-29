@@ -82,27 +82,50 @@ namespace zollstock
     {
         requires std::is_constructible_v<Candidate>;
         { Candidate::type   } -> std::same_as<const unit_type&>;
-        { Candidate::length } -> std::same_as<const unit_data&>;
-        { Candidate::time   } -> std::same_as<const unit_data&>;
-        { Candidate::angle  } -> std::same_as<const unit_data&>;
+        //{ Candidate::length } -> std::same_as<const unit_data&>;
+        //{ Candidate::time   } -> std::same_as<const unit_data&>;
+        //{ Candidate::angle  } -> std::same_as<const unit_data&>;
     };
 
+    template <typename Candidate>
+    concept length_based_unit_c = requires()
+    {
+        requires unit_c<Candidate>;
+        { Candidate::length } -> std::same_as<const unit_data&>;
+    };
 
+    template <typename Candidate>
+    concept time_based_unit_c = requires()
+    {
+        requires unit_c<Candidate>;
+        { Candidate::time } -> std::same_as<const unit_data&>;
+    };
+
+    template <typename Candidate>
+    concept angle_based_unit_c = requires()
+    {
+        requires unit_c<Candidate>;
+        { Candidate::angle } -> std::same_as<const unit_data&>;
+    };
 
     template <std::size_t pos, unit_c Unit> requires(pos < unit_count)
-    [[nodiscard]] constexpr const unit_data& get(const Unit& data) noexcept
+    [[nodiscard]] constexpr unit_data get(const Unit& data) noexcept
     {
-        if constexpr(pos == 0)
+        if constexpr(pos == 0 && length_based_unit_c<Unit>)
         {
             return data.length;
         }
-        else if constexpr(pos == 1)
+        else if constexpr(pos == 1 && time_based_unit_c<Unit>)
         {
             return data.time;
         }
-        else if constexpr(pos == 2)
+        else if constexpr(pos == 2 && angle_based_unit_c<Unit>)
         {
             return data.angle;
+        }
+        else
+        {
+            return {};
         }
     }
 
