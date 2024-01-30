@@ -80,7 +80,7 @@ namespace zollstock
     template <typename Candidate>
     concept unit_c = requires()
     {
-        requires std::is_constructible_v<Candidate>;
+        requires std::semiregular<Candidate>;
         { Candidate::type } -> std::same_as<const unit_type&>;
     };
 
