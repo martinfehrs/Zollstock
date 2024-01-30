@@ -81,7 +81,7 @@ namespace zollstock
     concept unit_c = requires()
     {
         requires std::is_constructible_v<Candidate>;
-        { Candidate::type   } -> std::same_as<const unit_type&>;
+        { Candidate::type } -> std::same_as<const unit_type&>;
     };
 
     template <typename Candidate>
