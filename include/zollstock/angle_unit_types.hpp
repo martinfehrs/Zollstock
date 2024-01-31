@@ -12,7 +12,7 @@ namespace zollstock::inline units::inline types
 {
 
     template <prefix_c Prefix>
-    struct basic_radian : unit
+    struct basic_radian
     {
         static constexpr unit_data angle{ 1, Prefix::factor, Prefix::symbol + "rad"_us };
     };
@@ -43,24 +43,24 @@ namespace zollstock::inline units::inline types
     using ronnaradian  = basic_radian<ronna     >;
     using quettaradian = basic_radian<quetta    >;
 
-    struct degree : unit
+    struct degree
     {
         static constexpr unit_data angle{ 1, pi/180.0L, "deg"_us };
     };
 
-    struct arcminute : unit
+    struct arcminute
     {
         static constexpr unit_data angle{ 1, pi/10.8e3L, "arcmin"_us };
     };
 
     template <prefix_c Prefix>
-    struct basic_arcsecond : unit
+    struct basic_arcsecond
     {
         static constexpr unit_data angle{ 1, Prefix::factor * pi/648e3L, Prefix::symbol + "as"_us };
     };
 
     template <>
-    struct basic_arcsecond<unprefixed> : unit
+    struct basic_arcsecond<unprefixed>
     {
         static constexpr unit_data angle{ 1, pi/648e3L, "arcsec"_us };
     };
@@ -92,7 +92,7 @@ namespace zollstock::inline units::inline types
     using quettaarcsecond = basic_arcsecond<quetta    >;
 
     template <prefix_c Prefix>
-    struct basic_gradian : unit
+    struct basic_gradian
     {
         static constexpr unit_data angle{ 1, Prefix::factor * pi/200.0L, Prefix::symbol + "gon"_us };
     };

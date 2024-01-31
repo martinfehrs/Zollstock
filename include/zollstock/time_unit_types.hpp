@@ -11,7 +11,7 @@ namespace zollstock::inline units::inline types
 {
 
     template <prefix_c Prefix>
-    struct basic_second : unit
+    struct basic_second
     {
         static constexpr unit_data time{ 1, Prefix::factor, Prefix::symbol + "s"_us };
     };
@@ -42,22 +42,22 @@ namespace zollstock::inline units::inline types
     using ronnasecond  = basic_second<ronna     >;
     using quettasecond = basic_second<quetta    >;
 
-    struct minute : unit
+    struct minute
     {
         static constexpr unit_data time{ 1, 60.0L, "min"_us };
     };
 
-    struct hour : unit
+    struct hour
     {
         static constexpr unit_data time{ 1, 3'600.0L, "h"_us };
     };
 
-    struct day : unit
+    struct day
     {
         static constexpr unit_data time{ 1, 86'400.0L, "d"_us };
     };
 
-    struct year : unit
+    struct year
     {
         static constexpr unit_data time{ 1, 31'536'000.0L, "a"_us };
     };

@@ -8,7 +8,7 @@
 namespace zollstock::inline units::inline types
 {
 
-    struct one : unit
+    struct one
     {
     };
 

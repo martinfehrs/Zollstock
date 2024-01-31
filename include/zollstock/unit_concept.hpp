@@ -73,20 +73,18 @@ namespace zollstock
     }
 
 
-    struct unit
-    {
-    };
-
 
     inline constexpr std::size_t base_unit_count = 2;
     inline constexpr std::size_t derived_unit_count = 1;
     inline constexpr std::size_t unit_count = base_unit_count + derived_unit_count;
 
+
+
     template <typename Candidate>
     concept unit_c = requires()
     {
-        requires std::semiregular<Candidate>;
-        requires std::derived_from<Candidate, unit>;
+        requires std::is_trivial_v<Candidate>;
+        requires std::is_empty_v<Candidate>;
     };
 
     template <typename Candidate>
@@ -243,7 +241,7 @@ namespace zollstock
 
 
     template <unit_c auto base_unit_, int exponent_>
-    struct unit_exponentiation : unit
+    struct unit_exponentiation
     {
         static constexpr auto type = unit_type::exponentiation;
         static constexpr auto base_unit = base_unit_;
@@ -255,7 +253,7 @@ namespace zollstock
     };
 
     template<unit_c auto base_unit_1_, unit_c auto base_unit_2_>
-    struct unit_product : unit
+    struct unit_product
     {
         static constexpr auto type = unit_type::product;
         static constexpr auto base_unit_1 = base_unit_1_;
