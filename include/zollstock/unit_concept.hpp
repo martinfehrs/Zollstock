@@ -72,7 +72,10 @@ namespace zollstock
         return { udat.exponent * exponent, udat.factor, udat.symbol };
     }
 
-
+    [[nodiscard]] consteval unit_data operator/(const unit_data& udat_1,const unit_data& udat_2) noexcept
+    {
+        return udat_1 * pow(udat_2, -1);
+    }
 
     inline constexpr std::size_t base_unit_count = 2;
     inline constexpr std::size_t derived_unit_count = 1;
