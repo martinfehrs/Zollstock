@@ -75,11 +75,6 @@ namespace zollstock
 
     struct unit
     {
-
-    protected:
-
-        ~unit() = default;
-
     };
 
 
