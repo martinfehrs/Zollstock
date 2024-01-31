@@ -151,4 +151,5 @@
     ZOLLSTOCK_TESTS_TEST_TYPE(quantity, type_prefix##base_type, base_factor, base_symbol)        \
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_TYPES(quantity, type_prefix, base_type, base_factor, base_symbol) \
 
+
 #endif //__ZOLLSTOCK_TESTS_TEST_HELPERS_HPP__
