@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_HPP__
 
 
-#include <zollstock/dimensionless_units.hpp>
+#include <zollstock/dimensionless_unit.hpp>
 #include <zollstock/angle_units.hpp>
 #include <zollstock/length_units.hpp>
 #include <zollstock/time_units.hpp>
