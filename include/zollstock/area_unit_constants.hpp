@@ -10,7 +10,7 @@
 namespace zollstock::inline units::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_SI_DERIVED_UNIT_CONSTANTS(m, 2)
+    ZOLLSTOCK_DEFINE_SI_RAISED_UNIT_CONSTANTS(m, 2)
 
 }
 
