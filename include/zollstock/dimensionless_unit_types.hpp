@@ -5,12 +5,11 @@
 #include <zollstock/unit_concept.hpp>
 
 
-namespace zollstock::inline unit::inline types
+namespace zollstock::inline units::inline types
 {
 
-    struct one
+    struct one : unit
     {
-        static constexpr unit_type type = unit_type::basic;
     };
 
 }

@@ -5,7 +5,7 @@
 #include <zollstock/dimensionless_unit_types.hpp>
 
 
-namespace zollstock::inline unit::inline constants
+namespace zollstock::inline units::inline constants
 {
 
     inline constexpr one _1{};

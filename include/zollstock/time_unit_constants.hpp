@@ -6,7 +6,7 @@
 #include <zollstock/definition_helpers.hpp>
 
 
-namespace zollstock::inline unit::inline constants
+namespace zollstock::inline units::inline constants
 {
 
     ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(second, s)

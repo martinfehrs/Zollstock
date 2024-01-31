@@ -7,13 +7,12 @@
 #include <zollstock/si_prefixes.hpp>
 
 
-namespace zollstock::inline unit::inline types
+namespace zollstock::inline units::inline types
 {
 
     template <prefix_c Prefix>
-    struct basic_second
+    struct basic_second : unit
     {
-        static constexpr unit_type type = unit_type::basic;
         static constexpr unit_data time{ 1, Prefix::factor, Prefix::symbol + "s"_us };
     };
 
@@ -43,27 +42,23 @@ namespace zollstock::inline unit::inline types
     using ronnasecond  = basic_second<ronna     >;
     using quettasecond = basic_second<quetta    >;
 
-    struct minute
+    struct minute : unit
     {
-        static constexpr unit_type type = unit_type::basic;
         static constexpr unit_data time{ 1, 60.0L, "min"_us };
     };
 
-    struct hour
+    struct hour : unit
     {
-        static constexpr unit_type type = unit_type::basic;
         static constexpr unit_data time{ 1, 3'600.0L, "h"_us };
     };
 
-    struct day
+    struct day : unit
     {
-        static constexpr unit_type type = unit_type::basic;
         static constexpr unit_data time{ 1, 86'400.0L, "d"_us };
     };
 
-    struct year
+    struct year : unit
     {
-        static constexpr unit_type type = unit_type::basic;
         static constexpr unit_data time{ 1, 31'536'000.0L, "a"_us };
     };
 

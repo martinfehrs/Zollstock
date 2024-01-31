@@ -7,7 +7,7 @@
 #include <zollstock/quantity.hpp>
 
 
-namespace zollstock::inline unit::inline literals
+namespace zollstock::inline units::inline literals
 {
 
     ZOLLSTOCK_DEFINE_LITERAL(1, _1)

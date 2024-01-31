@@ -151,8 +151,8 @@ namespace zollstock
     [[nodiscard]] consteval auto operator*(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
         if constexpr(
-            unit_1.type == unit_type::exponentiation &&
-            unit_2.type == unit_type::exponentiation
+            type_of(unit_1) == unit_type::exponentiation &&
+            type_of(unit_2) == unit_type::exponentiation
         )
         {
             if constexpr(unit_1.base_unit == unit_2.base_unit)
@@ -165,7 +165,7 @@ namespace zollstock
             }
         }
         else
-        if constexpr(unit_1.type == unit_type::exponentiation && unit_2.type == unit_type::basic)
+        if constexpr(type_of(unit_1) == unit_type::exponentiation && type_of(unit_2) == unit_type::basic)
         {
             if constexpr(unit_1.base_unit == unit_2)
             {
@@ -177,7 +177,7 @@ namespace zollstock
             }
         }
         else
-        if constexpr(unit_1.type == unit_type::basic && unit_2.type == unit_type::exponentiation)
+        if constexpr(type_of(unit_1) == unit_type::basic && type_of(unit_2) == unit_type::exponentiation)
         {
             if constexpr(unit_2.base_unit == unit_1)
             {
@@ -189,7 +189,7 @@ namespace zollstock
             }
         }
         else
-        if constexpr(unit_1.type == unit_type::exponentiation && unit_2.type == unit_type::product)
+        if constexpr(type_of(unit_1) == unit_type::exponentiation && type_of(unit_2) == unit_type::product)
         {
             if constexpr(unit_1.base_unit == unit_2.base_unit_1)
             {
@@ -212,7 +212,10 @@ namespace zollstock
             }
         }
         else
-        if constexpr(unit_1.type == unit_type::product && unit_2.type == unit_type::exponentiation)
+        if constexpr(
+            type_of(unit_1) == unit_type::product &&
+            type_of(unit_2) == unit_type::exponentiation
+        )
         {
             if constexpr(unit_1.base_unit_1 == unit_2.base_unit)
             {
@@ -234,7 +237,7 @@ namespace zollstock
                 return unit_product_v<unit_1, unit_2>;
             }
         }
-        if constexpr(unit_1.type == unit_type::product && unit_2.type == unit_type::product)
+        if constexpr(type_of(unit_1) == unit_type::product && type_of(unit_2) == unit_type::product)
         {
             if constexpr(
                 unit_1.base_unit_1 == unit_2.base_unit_1 &&
@@ -271,7 +274,7 @@ namespace zollstock
             {
                 return unit;
             }
-            else if constexpr(unit.type == unit_type::exponentiation)
+            else if constexpr(type_of(unit) == unit_type::exponentiation)
             {
                 return unit_exponentiation_v<unit.base_unit, unit.exponent * exponent>;
             }

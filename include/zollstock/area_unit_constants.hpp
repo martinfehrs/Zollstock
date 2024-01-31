@@ -7,7 +7,7 @@
 #include <zollstock/unit_algorithms.hpp>
 
 
-namespace zollstock::inline unit::inline constants
+namespace zollstock::inline units::inline constants
 {
 
     ZOLLSTOCK_DEFINE_SI_DERIVED_UNIT_CONSTANTS(m, 2)

@@ -73,6 +73,16 @@ namespace zollstock
     }
 
 
+    struct unit
+    {
+
+    protected:
+
+        ~unit() = default;
+
+    };
+
+
     inline constexpr std::size_t base_unit_count = 2;
     inline constexpr std::size_t derived_unit_count = 1;
     inline constexpr std::size_t unit_count = base_unit_count + derived_unit_count;
@@ -81,6 +91,13 @@ namespace zollstock
     concept unit_c = requires()
     {
         requires std::semiregular<Candidate>;
+        requires std::derived_from<Candidate, unit>;
+    };
+
+    template <typename Candidate>
+    concept typed_unit_c = requires()
+    {
+        requires unit_c<Candidate>;
         { Candidate::type } -> std::same_as<const unit_type&>;
     };
 
@@ -108,28 +125,24 @@ namespace zollstock
 
 
     template <unit_c Unit>
-    [[nodiscard]] consteval bool length_based_unit(Unit) noexcept
+    [[nodiscard]] consteval unit_type type_of(Unit unit) noexcept
     {
-        return length_based_unit_c<Unit>;
+        if constexpr(typed_unit_c<Unit>)
+        {
+            return unit.type;
+        }
+        else
+        {
+            return unit_type::basic;
+        }
     }
+
+
 
     template <unit_c Unit>
-    [[nodiscard]] consteval bool time_based_unit(Unit) noexcept
+    [[nodiscard]] consteval unit_data unit_length(Unit unit) noexcept
     {
-        return time_based_unit_c<Unit>;
-    }
-
-    template <unit_c Unit>
-    [[nodiscard]] consteval bool angle_based_unit(Unit) noexcept
-    {
-        return angle_based_unit_c<Unit>;
-    }
-
-
-
-    [[nodiscard]] consteval unit_data unit_length(unit_c auto unit) noexcept
-    {
-        if constexpr(length_based_unit(unit))
+        if constexpr(length_based_unit_c<Unit>)
         {
             return unit.length;
         }
@@ -139,9 +152,10 @@ namespace zollstock
         }
     }
 
-    [[nodiscard]] consteval unit_data unit_time(unit_c auto unit) noexcept
+    template <unit_c Unit>
+    [[nodiscard]] consteval unit_data unit_time(Unit unit) noexcept
     {
-        if constexpr(time_based_unit(unit))
+        if constexpr(time_based_unit_c<Unit>)
         {
             return unit.time;
         }
@@ -151,9 +165,10 @@ namespace zollstock
         }
     }
 
-    [[nodiscard]] consteval unit_data unit_angle(unit_c auto unit) noexcept
+    template <unit_c Unit>
+    [[nodiscard]] consteval unit_data unit_angle(Unit unit) noexcept
     {
-        if constexpr(angle_based_unit(unit))
+        if constexpr(angle_based_unit_c<Unit>)
         {
             return unit.angle;
         }
@@ -232,34 +247,34 @@ namespace zollstock
 
 
 
-    template <unit_c auto unit, int exponent_>
-    struct unit_exponentiation
+    template <unit_c auto base_unit_, int exponent_>
+    struct unit_exponentiation : unit
     {
         static constexpr auto type = unit_type::exponentiation;
-        static constexpr auto base_unit = unit;
+        static constexpr auto base_unit = base_unit_;
         static constexpr auto exponent = exponent_;
 
-        static constexpr auto length = pow(unit_length(unit), exponent_);
-        static constexpr auto time   = pow(unit_time  (unit), exponent_);
-        static constexpr auto angle  = pow(unit_angle (unit), exponent_);
+        static constexpr auto length = pow(unit_length(base_unit), exponent_);
+        static constexpr auto time   = pow(unit_time  (base_unit), exponent_);
+        static constexpr auto angle  = pow(unit_angle (base_unit), exponent_);
     };
+
+    template<unit_c auto base_unit_1_, unit_c auto base_unit_2_>
+    struct unit_product : unit
+    {
+        static constexpr auto type = unit_type::product;
+        static constexpr auto base_unit_1 = base_unit_1_;
+        static constexpr auto base_unit_2 = base_unit_2_;
+
+        static constexpr auto length = unit_length(base_unit_1) * unit_length(base_unit_2);
+        static constexpr auto time   = unit_time  (base_unit_1) * unit_time  (base_unit_2);
+        static constexpr auto angle  = unit_angle (base_unit_1) * unit_angle (base_unit_2);
+    };
+
+
 
     template <unit_c auto unit, int exponent_>
     inline constexpr auto unit_exponentiation_v = unit_exponentiation<unit, exponent_>{};
-
-
-
-    template<unit_c auto unit_1, unit_c auto unit_2>
-    struct unit_product
-    {
-        static constexpr auto type = unit_type::product;
-        static constexpr auto base_unit_1 = unit_1;
-        static constexpr auto base_unit_2 = unit_2;
-
-        static constexpr auto length = unit_length(unit_1) * unit_length(unit_2);
-        static constexpr auto time   = unit_time  (unit_1) * unit_time  (unit_2);
-        static constexpr auto angle  = unit_angle (unit_1) * unit_angle (unit_2);
-    };
 
     template <unit_c auto unit, int exponent_>
     inline constexpr auto unit_product_v = unit_product<unit, exponent_>{};

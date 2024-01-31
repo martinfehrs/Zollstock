@@ -7,11 +7,11 @@
 #include <zollstock/si_prefixes.hpp>
 
 
-namespace zollstock::inline unit::inline types
+namespace zollstock::inline units::inline types
 {
 
     template <prefix_c Prefix>
-    struct basic_meter
+    struct basic_meter : unit
     {
         static constexpr unit_type type = unit_type::basic;
         static constexpr unit_data length{ 1, Prefix::factor, Prefix::symbol + "m"_us };
