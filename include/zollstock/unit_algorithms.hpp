@@ -316,6 +316,11 @@ namespace zollstock
         return detail::equal(unit_1, unit_2, make_unit_index_sequence{});
     }
 
+    [[nodiscard]] consteval bool operator!=(unit_c auto unit_1, unit_c auto unit_2) noexcept
+    {
+        return !detail::equal(unit_1, unit_2, make_unit_index_sequence{});
+    }
+
 }
 
 
