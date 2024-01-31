@@ -30,37 +30,37 @@
     STATIC_REQUIRE(base_symbol == base_type{});                                  \
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
 
-#define ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(symbol, exponent) \
-    STATIC_REQUIRE(symbol##exponent == zollstock::pow_v<symbol, exponent>);   \
+#define ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(symbol, exponent)         \
+    STATIC_REQUIRE(symbol##exponent == zollstock::pow_v<symbol, exponent>); \
 
-#define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_DERIVED_UNIT_CONSTANTS(base_symbol, exponent) \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(q##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(r##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(y##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(z##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(a##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(f##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(p##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(mic##base_symbol, exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(m##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(c##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(d##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(da##base_symbol , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(h##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(k##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(M##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(G##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(T##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(P##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(E##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(Z##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(Y##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(R##base_symbol  , exponent)             \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(Q##base_symbol  , exponent)             \
+#define ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_RAISED_UNIT_CONSTANTS(base_symbol, exponent) \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(q##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(r##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(y##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(z##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(a##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(f##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(p##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(mic##base_symbol, exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(m##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(c##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(d##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(da##base_symbol , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(h##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(k##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(M##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(G##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(T##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(P##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(E##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(Z##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(Y##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(R##base_symbol  , exponent)             \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(Q##base_symbol  , exponent)             \
 
-#define ZOLLSTOCK_TESTS_TEST_SI_DERIVED_UNIT_CONSTANTS(base_symbol, exponent)      \
-    ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_DERIVED_UNIT_CONSTANTS(base_symbol, exponent) \
-    ZOLLSTOCK_TESTS_TEST_DERIVED_UNIT_CONSTANT(base_symbol, exponent)              \
+#define ZOLLSTOCK_TESTS_TEST_SI_RAISED_UNIT_CONSTANTS(base_symbol, exponent)      \
+    ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_RAISED_UNIT_CONSTANTS(base_symbol, exponent) \
+    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(base_symbol, exponent)              \
 
 #define ZOLLSTOCK_TESTS_TEST_LITERAL(symbol)        \
     STATIC_REQUIRE(1.0_##symbol   == 1.0 * symbol); \

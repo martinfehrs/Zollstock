@@ -9,6 +9,6 @@ using namespace zollstock;
 TEST_CASE("area-unit-constants", "[area][unit][constants]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_SI_DERIVED_UNIT_CONSTANTS(m, 2)
+    ZOLLSTOCK_TESTS_TEST_SI_RAISED_UNIT_CONSTANTS(m, 2)
 
 }
