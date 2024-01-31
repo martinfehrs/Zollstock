@@ -30,6 +30,8 @@
     STATIC_REQUIRE(base_symbol == base_type{});                                  \
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
 
+
+
 #define ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(symbol, exponent)         \
     STATIC_REQUIRE(symbol##exponent == zollstock::pow_v<symbol, exponent>); \
 
@@ -61,6 +63,24 @@
 #define ZOLLSTOCK_TESTS_TEST_SI_RAISED_UNIT_CONSTANTS(base_symbol, exponent)      \
     ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_RAISED_UNIT_CONSTANTS(base_symbol, exponent) \
     ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANT(base_symbol, exponent)              \
+
+
+
+#define ZOLLSTOCK_TESTS_TEST_MIXED_DIVISION_UNIT_CONSTANT(symbol_1, symbol_2)                \
+    {                                                                                        \
+        static_assert(symbol_1 != symbol_2);                                                 \
+                                                                                             \
+        constexpr auto mixed = symbol_1 / symbol_2;                                          \
+                                                                                             \
+        STATIC_REQUIRE(type_of(mixed)     == unit_type::product                           ); \
+        STATIC_REQUIRE(mixed.base_unit_1  == symbol_1                                     ); \
+        STATIC_REQUIRE(mixed.base_unit_2  == pow_v<symbol_2, -1>                          ); \
+        STATIC_REQUIRE(unit_length(mixed) == unit_length(symbol_1) / unit_length(symbol_2)); \
+        STATIC_REQUIRE(unit_time  (mixed) == unit_time  (symbol_1) / unit_time  (symbol_2)); \
+        STATIC_REQUIRE(unit_angle (mixed) == unit_angle (symbol_1) / unit_angle (symbol_2)); \
+    }                                                                                        \
+
+
 
 #define ZOLLSTOCK_TESTS_TEST_LITERAL(symbol)        \
     STATIC_REQUIRE(1.0_##symbol   == 1.0 * symbol); \
