@@ -19,3 +19,7 @@ target_sources(tests PRIVATE squared_time_unit_constant_tests.cpp)
 target_sources(tests PRIVATE velocity_unit_constant_tests.cpp)
 target_sources(tests PRIVATE acceleration_unit_constant_tests.cpp)
 target_sources(tests PRIVATE quantity_tests.cpp)
+
+if (MSVC)
+    set_target_properties(tests PROPERTIES LINK_FLAGS /STACK:"10000000")
+endif(MSVC)
