@@ -11,6 +11,6 @@ using namespace zollstock;
 TEST_CASE("velocity-unit-constants", "[velocity][unit][constants]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_MIXED_DIVISION_UNIT_CONSTANT(m, s)
+    ZOLLSTOCK_TESTS_TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL, ALL, m, s)
 
 }
