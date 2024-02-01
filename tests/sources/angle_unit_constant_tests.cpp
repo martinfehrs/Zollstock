@@ -10,15 +10,15 @@ using namespace zollstock;
 TEST_CASE("angle-unit-constants", "[angle][unit][constants]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_SI_BASE_UNIT_CONSTANTS(radian, rad)
+    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(ALL, radian, rad)
 
-    STATIC_REQUIRE(deg == degree{});
+    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, degree, deg)
 
-    STATIC_REQUIRE(arcmin == arcminute{});
+    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, arcminute, arcmin)
 
-    STATIC_REQUIRE(arcsec == arcsecond{});
-    ZOLLSTOCK_TESTS_TEST_SI_PREFIXED_BASE_UNIT_CONSTANTS(arcsecond, as)
+    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, arcsecond, arcsec)
+    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(PREFIXED  , arcsecond, as    )
 
-    ZOLLSTOCK_TESTS_TEST_SI_BASE_UNIT_CONSTANTS(gradian, gon)
+    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(ALL, gradian, gon)
 
 }
