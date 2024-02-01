@@ -90,6 +90,7 @@
         STATIC_REQUIRE(type_of(mixed)     == unit_type::product                           ); \
         STATIC_REQUIRE(mixed.base_unit_1  == symbol_1                                     ); \
         STATIC_REQUIRE(mixed.base_unit_2  == pow_v<symbol_2, -1>                          ); \
+        STATIC_REQUIRE(unit_length(mixed) == unit_length(symbol_1) / unit_length(symbol_2)); \
     }                                                                                        \
 
 #define ZOLLSTOCK_TESTS_TEST_MIXED_DIVISION_UNIT_CONSTANTS_UNPREFIXED_UNPREFIXED(symbol_1, symbol_2) \
