@@ -16,8 +16,7 @@ namespace zollstock::inline units::inline literals
 
     ZOLLSTOCK_DEFINE_LITERAL(arcmin, arcmin)
 
-    ZOLLSTOCK_DEFINE_LITERAL(arcsec, arcsec)
-    ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(as)
+    ZOLLSTOCK_DEFINE_SI_LITERALS(asec)
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(gon)
 

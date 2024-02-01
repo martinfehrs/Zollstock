@@ -15,8 +15,7 @@ namespace zollstock::inline units::inline constants
 
     inline constexpr arcminute arcmin{};
 
-    inline constexpr arcsecond arcsec{};
-    ZOLLSTOCK_DEFINE_SI_PREFIXED_BASE_UNIT_CONSTANTS(arcsecond, as)
+    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(arcsecond, asec)
 
     ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(gradian, gon)
 
