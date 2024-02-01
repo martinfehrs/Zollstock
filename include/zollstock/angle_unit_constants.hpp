@@ -13,7 +13,7 @@ namespace zollstock::inline units::inline constants
 
     inline constexpr degree deg{};
 
-    inline constexpr arcminute arcmin{};
+    inline constexpr arcminute amin{};
 
     ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(arcsecond, asec)
 

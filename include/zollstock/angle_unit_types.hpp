@@ -50,7 +50,7 @@ namespace zollstock::inline units::inline types
 
     struct arcminute
     {
-        static constexpr unit_data angle{ 1, pi/10.8e3L, "arcmin"_us };
+        static constexpr unit_data angle{ 1, pi/10.8e3L, "amin"_us };
     };
 
     template <prefix_c Prefix>
