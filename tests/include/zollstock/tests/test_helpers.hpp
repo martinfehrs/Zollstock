@@ -87,6 +87,7 @@
                                                                                              \
         constexpr auto mixed = symbol_1 / symbol_2;                                          \
                                                                                              \
+        STATIC_REQUIRE(type_of(mixed)     == unit_type::product                           ); \
     }                                                                                        \
 
 #define ZOLLSTOCK_TESTS_TEST_MIXED_DIVISION_UNIT_CONSTANTS_UNPREFIXED_UNPREFIXED(symbol_1, symbol_2) \
