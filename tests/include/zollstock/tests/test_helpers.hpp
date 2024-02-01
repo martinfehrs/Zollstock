@@ -87,6 +87,8 @@
                                                                                              \
         constexpr auto mixed = symbol_1 / symbol_2;                                          \
         constexpr auto t1 = unit_time  (mixed);                                              \
+        constexpr auto t2 = unit_time(symbol_1);                                             \
+        constexpr auto t3 = unit_time(symbol_2);                                             \
                                                                                              \
         STATIC_REQUIRE(type_of(mixed)     == unit_type::product                           ); \
         STATIC_REQUIRE(mixed.base_unit_1  == symbol_1                                     ); \
