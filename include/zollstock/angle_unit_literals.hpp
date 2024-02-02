@@ -14,7 +14,7 @@ namespace zollstock::inline units::inline literals
 
     ZOLLSTOCK_DEFINE_LITERAL(deg, deg)
 
-    ZOLLSTOCK_DEFINE_LITERAL(arcmin, arcmin)
+    ZOLLSTOCK_DEFINE_LITERAL(arcmin, amin)
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(asec)
 
