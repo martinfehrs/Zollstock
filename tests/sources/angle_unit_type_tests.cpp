@@ -12,7 +12,7 @@ TEST_CASE("angle-unit-types", "[angle][unit][types]")
 
     ZOLLSTOCK_TESTS_TEST_TYPES(UNPREFIXED, angle, degree, pi/18e1L, deg)
 
-    ZOLLSTOCK_TESTS_TEST_TYPES(UNPREFIXED, angle, arcminute, pi/108e2L, arcmin)
+    ZOLLSTOCK_TESTS_TEST_TYPES(UNPREFIXED, angle, arcminute, pi/108e2L, amin)
 
     ZOLLSTOCK_TESTS_TEST_TYPES(UNPREFIXED, angle, arcsecond, pi/648e3L, arcsec)
     ZOLLSTOCK_TESTS_TEST_TYPES(PREFIXED  , angle, arcsecond, pi/648e3L, as    )
