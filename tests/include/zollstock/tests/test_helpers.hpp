@@ -88,7 +88,7 @@ using namespace zollstock;
 
 
 
-inline void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
+void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
 {
     static_assert(unit_1 != unit_2);
 
