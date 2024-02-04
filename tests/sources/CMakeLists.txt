@@ -23,6 +23,6 @@ target_sources(tests PRIVATE angular_velocity_unit_constant_tests.cpp)
 target_sources(tests PRIVATE quantity_tests.cpp)
 
 if (MSVC)
-    set_target_properties(tests PROPERTIES LINK_FLAGS /stack:"10000000")
-    target_compile_options(tests PRIVATE "/bigobj")
+    target_link_options   (tests PRIVATE /stack:"10000000")
+    target_compile_options(tests PRIVATE "/bigobj"        )
 endif(MSVC)
