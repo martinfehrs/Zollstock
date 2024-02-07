@@ -9,6 +9,6 @@ using namespace zollstock;
 TEST_CASE("volume-unit-constants", "[volume][unit][constants]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_RAISED_UNIT_CONSTANTS(ALL, m, 3)
+    TEST_RAISED_UNIT_CONSTANTS(ALL, m, 3)
 
 }

@@ -10,7 +10,7 @@ using namespace zollstock;
 TEST_CASE("volume-unit-literals", "[volume][unit][literals]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_LITERALS(ALL, m3)
+    TEST_LITERALS(ALL, m3)
 
 
 }

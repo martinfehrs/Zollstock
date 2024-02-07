@@ -10,14 +10,10 @@ using namespace zollstock;
 TEST_CASE("angle-unit-constants", "[angle][unit][constants]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(ALL, radian, rad)
-
-    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, degree, deg)
-
-    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, arcminute, amin)
-
-    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, arcsecond, asec)
-
-    ZOLLSTOCK_TESTS_TEST_BASE_UNIT_CONSTANTS(ALL, gradian, gon)
+    TEST_BASE_UNIT_CONSTANTS(ALL       , radian   , rad )
+    TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, degree   , deg )
+    TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, arcminute, amin)
+    TEST_BASE_UNIT_CONSTANTS(UNPREFIXED, arcsecond, asec)
+    TEST_BASE_UNIT_CONSTANTS(ALL       , gradian  , gon )
 
 }

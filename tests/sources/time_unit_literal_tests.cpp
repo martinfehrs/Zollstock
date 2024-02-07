@@ -10,6 +10,6 @@ using namespace zollstock;
 TEST_CASE("time-unit-literals", "[time][unit][literals]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_LITERALS(ALL, s)
+    TEST_LITERALS(ALL, s)
 
 }

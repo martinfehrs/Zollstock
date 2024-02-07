@@ -10,6 +10,6 @@ using namespace zollstock;
 TEST_CASE("area-unit-literals", "[area][unit][literals]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_LITERALS(ALL, m2)
+    TEST_LITERALS(ALL, m2)
 
 }

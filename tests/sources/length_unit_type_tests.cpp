@@ -9,6 +9,6 @@ using namespace zollstock;
 TEST_CASE("length-unit-types", "[length][unit][types]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_TYPES(ALL, length, meter, 1e0L, m)
+    TEST_TYPES(ALL, length, meter, 1e0L, m)
 
 }

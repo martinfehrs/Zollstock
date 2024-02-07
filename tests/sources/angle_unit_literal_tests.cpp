@@ -9,14 +9,10 @@ using namespace zollstock;
 TEST_CASE("angle-unit-literals", "[angle][unit][literals]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_LITERALS(ALL, rad)
-
-    ZOLLSTOCK_TESTS_TEST_LITERALS(UNPREFIXED, deg)
-
-    ZOLLSTOCK_TESTS_TEST_LITERALS(UNPREFIXED, amin)
-
-    ZOLLSTOCK_TESTS_TEST_LITERALS(ALL, asec)
-
-    ZOLLSTOCK_TESTS_TEST_LITERALS(ALL, gon)
+    TEST_LITERALS(ALL       , rad )
+    TEST_LITERALS(UNPREFIXED, deg )
+    TEST_LITERALS(UNPREFIXED, amin)
+    TEST_LITERALS(ALL       , asec)
+    TEST_LITERALS(ALL       , gon )
 
 }

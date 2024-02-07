@@ -10,6 +10,6 @@ using namespace zollstock;
 TEST_CASE("length-unit-literals", "[length][unit][literals]")
 {
 
-    ZOLLSTOCK_TESTS_TEST_LITERALS(ALL, m)
+    TEST_LITERALS(ALL, m)
 
 }
