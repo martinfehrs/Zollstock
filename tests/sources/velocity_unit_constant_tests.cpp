@@ -2,7 +2,7 @@
 #include <zollstock/length_unit_constants.hpp>
 #include <zollstock/time_unit_constants.hpp>
 #include <zollstock/unit_algorithms.hpp>
-#include <zollstock/tests/test_helpers.hpp>
+#include <zollstock/tests/constant_test_helpers.hpp>
 
 
 using namespace zollstock;

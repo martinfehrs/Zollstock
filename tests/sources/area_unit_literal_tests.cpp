@@ -1,6 +1,6 @@
 #include <catch2/catch_all.hpp>
 #include <zollstock/area_unit_literals.hpp>
-#include <zollstock/tests/test_helpers.hpp>
+#include <zollstock/tests/literal_test_helpers.hpp>
 #include <zollstock/unit_algorithms.hpp>
 
 

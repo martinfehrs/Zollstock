@@ -2,7 +2,7 @@
 #include <zollstock/angle_unit_constants.hpp>
 #include <zollstock/time_unit_constants.hpp>
 #include <zollstock/unit_algorithms.hpp>
-#include <zollstock/tests/test_helpers.hpp>
+#include <zollstock/tests/constant_test_helpers.hpp>
 
 
 using namespace zollstock;
@@ -16,25 +16,21 @@ TEST_CASE("angular-velocity-unit-constants", "[angular-velocity][unit][constants
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, rad , h  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, rad , d  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, rad , a  )
-
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, ALL       , deg , s  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, deg , min)
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, deg , h  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, deg , d  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, deg , a  )
-
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, ALL       , amin, s  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, amin, min)
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, amin, h  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, amin, d  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(UNPREFIXED, UNPREFIXED, amin, a  )
-
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , ALL       , asec, s  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, asec, min)
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, asec, h  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, asec, d  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, asec, a  )
-
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , ALL       , gon , s  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, gon , min)
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, gon , h  )

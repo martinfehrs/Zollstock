@@ -1,7 +1,7 @@
 #include <catch2/catch_all.hpp>
 #include <zollstock/angle_unit_constants.hpp>
 #include <zollstock/angle_unit_literals.hpp>
-#include <zollstock/tests/test_helpers.hpp>
+#include <zollstock/tests/literal_test_helpers.hpp>
 
 using namespace zollstock;
 
