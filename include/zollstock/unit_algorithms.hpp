@@ -36,7 +36,7 @@ namespace zollstock
         {
             std::basic_string<Char> unit_representation;
 
-            constexpr unit_data data = unit_data_at<pos>(unit);
+            constexpr quantity_data data = quantity_data_at<pos>(unit);
 
             if(data.exponent != 0)
             {
@@ -306,7 +306,7 @@ namespace zollstock
             unit_c auto unit_1, unit_c auto unit_2, std::index_sequence<indices...>
         ) noexcept
         {
-            return (... && (unit_data_at<indices>(unit_1) == unit_data_at<indices>(unit_2)));
+            return (... && (quantity_data_at<indices>(unit_1) == quantity_data_at<indices>(unit_2)));
         }
 
     }

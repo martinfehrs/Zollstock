@@ -22,15 +22,15 @@ namespace zollstock
         product
     };
 
-    struct unit_data
+    struct quantity_data
     {
         int exponent;
         long double factor;
         unit_symbol symbol;
 
-        [[nodiscard]] consteval bool operator==(const unit_data&) const noexcept = default;
+        [[nodiscard]] consteval bool operator==(const quantity_data&) const noexcept = default;
 
-        [[nodiscard]] consteval unit_data operator*(const unit_data& that) const
+        [[nodiscard]] consteval quantity_data operator*(const quantity_data& that) const
         {
             return {
                 this->exponent + that.exponent,
@@ -41,7 +41,7 @@ namespace zollstock
 
     private:
 
-        [[nodiscard]] consteval unit_symbol select_symbol(const unit_data& that) const
+        [[nodiscard]] consteval unit_symbol select_symbol(const quantity_data& that) const
         {
             if (this->exponent + that.exponent == 0)
             {
@@ -67,12 +67,12 @@ namespace zollstock
 
     };
 
-    [[nodiscard]] consteval unit_data pow(const unit_data& udat, int exponent) noexcept
+    [[nodiscard]] consteval quantity_data pow(const quantity_data& udat, int exponent) noexcept
     {
         return { udat.exponent * exponent, udat.factor, udat.symbol };
     }
 
-    [[nodiscard]] consteval unit_data operator/(const unit_data& udat_1,const unit_data& udat_2) noexcept
+    [[nodiscard]] consteval quantity_data operator/(const quantity_data& udat_1,const quantity_data& udat_2) noexcept
     {
         return udat_1 * pow(udat_2, -1);
     }
@@ -101,21 +101,21 @@ namespace zollstock
     concept length_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
-        { Candidate::length } -> std::same_as<const unit_data&>;
+        { Candidate::length } -> std::same_as<const quantity_data&>;
     };
 
     template <typename Candidate>
     concept time_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
-        { Candidate::time } -> std::same_as<const unit_data&>;
+        { Candidate::time } -> std::same_as<const quantity_data&>;
     };
 
     template <typename Candidate>
     concept angle_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
-        { Candidate::angle } -> std::same_as<const unit_data&>;
+        { Candidate::angle } -> std::same_as<const quantity_data&>;
     };
 
 
@@ -136,7 +136,7 @@ namespace zollstock
 
 
     template <unit_c Unit>
-    [[nodiscard]] consteval unit_data unit_length(Unit unit) noexcept
+    [[nodiscard]] consteval quantity_data unit_length(Unit unit) noexcept
     {
         if constexpr(length_based_unit_c<Unit>)
         {
@@ -149,7 +149,7 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] consteval unit_data unit_time(Unit unit) noexcept
+    [[nodiscard]] consteval quantity_data unit_time(Unit unit) noexcept
     {
         if constexpr(time_based_unit_c<Unit>)
         {
@@ -162,7 +162,7 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] consteval unit_data unit_angle(Unit unit) noexcept
+    [[nodiscard]] consteval quantity_data unit_angle(Unit unit) noexcept
     {
         if constexpr(angle_based_unit_c<Unit>)
         {
@@ -177,7 +177,7 @@ namespace zollstock
 
 
     template <std::size_t pos> requires(pos < unit_count)
-    [[nodiscard]] consteval unit_data unit_data_at(unit_c auto unit) noexcept
+    [[nodiscard]] consteval quantity_data quantity_data_at(unit_c auto unit) noexcept
     {
         if constexpr(pos == 0)
         {
@@ -230,7 +230,7 @@ namespace zollstock
         {
             return (
                 ... &&
-                (unit_data_at<indices>(unit_1).exponent == unit_data_at<indices>(unit_2).exponent)
+                (quantity_data_at<indices>(unit_1).exponent == quantity_data_at<indices>(unit_2).exponent)
             );
         }
 
