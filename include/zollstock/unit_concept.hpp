@@ -79,9 +79,9 @@ namespace zollstock
         return udat_1 * pow(udat_2, -1);
     }
 
-    inline constexpr std::size_t base_unit_count = 2;
-    inline constexpr std::size_t derived_unit_count = 1;
-    inline constexpr std::size_t unit_count = base_unit_count + derived_unit_count;
+    inline constexpr std::size_t base_quantity_count = 2;
+    inline constexpr std::size_t derived_quantity_count = 1;
+    inline constexpr std::size_t quantity_count = base_quantity_count + derived_quantity_count;
 
 
 
@@ -178,7 +178,7 @@ namespace zollstock
 
 
 
-    template <std::size_t pos> requires(pos < unit_count)
+    template <std::size_t pos> requires(pos < quantity_count)
     [[nodiscard]] consteval quantity_data quantity_data_at(unit_c auto unit) noexcept
     {
         if constexpr(pos == 0)
@@ -213,13 +213,13 @@ namespace zollstock
     template <std::size_t count, std::size_t first = 0U>
     using make_index_sequence = shift_right_t<std::make_index_sequence<count>, first>;
 
-    using make_base_quantity_index_sequence = make_index_sequence<base_unit_count>;
+    using make_base_quantity_index_sequence = make_index_sequence<base_quantity_count>;
 
     using make_derived_quantity_index_sequence = make_index_sequence<
-        derived_unit_count, base_unit_count
+        derived_quantity_count, base_quantity_count
     >;
 
-    using make_quantity_index_sequence = make_index_sequence<unit_count>;
+    using make_quantity_index_sequence = make_index_sequence<quantity_count>;
 
 
     namespace detail
