@@ -106,10 +106,6 @@ namespace zollstock
         return udat_1 * pow(udat_2, -1);
     }
 
-    inline constexpr std::size_t base_quantity_count = 2;
-    inline constexpr std::size_t derived_quantity_count = 1;
-    inline constexpr std::size_t quantity_count = base_quantity_count + derived_quantity_count;
-
 
 
     enum class unit_type
