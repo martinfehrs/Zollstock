@@ -4,7 +4,7 @@
 
 #include <zollstock/angle_unit_constants.hpp>
 #include <zollstock/definition_helpers.hpp>
-#include <zollstock/quantity.hpp>
+#include <zollstock/scalar.hpp>
 
 
 namespace zollstock::inline units::inline literals

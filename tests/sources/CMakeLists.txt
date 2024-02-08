@@ -20,7 +20,7 @@ target_sources(tests PRIVATE velocity_unit_constant_tests.cpp)
 target_sources(tests PRIVATE acceleration_unit_constant_tests.cpp)
 target_sources(tests PRIVATE angular_velocity_unit_constant_tests.cpp)
 
-target_sources(tests PRIVATE quantity_tests.cpp)
+target_sources(tests PRIVATE scalar_tests.cpp)
 
 if (MSVC)
     target_link_options   (tests PRIVATE "/stack:10000000")

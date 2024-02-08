@@ -1,5 +1,5 @@
 #include <catch2/catch_all.hpp>
-#include <zollstock/quantity.hpp>
+#include <zollstock/scalar.hpp>
 #include <zollstock/dimensionless_unit.hpp>
 
 #include <climits>
@@ -8,7 +8,7 @@
 using namespace zollstock;
 namespace zs = zollstock;
 
-TEST_CASE("quantity", "[quantity]")
+TEST_CASE("scalar", "[scalar]")
 {
 
     REQUIRE_FALSE(int_t<>{ -1 } == unsigned_t<>{ UINT_MAX });
