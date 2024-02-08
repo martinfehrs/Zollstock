@@ -36,7 +36,7 @@ namespace zollstock
         {
             std::basic_string<Char> unit_representation;
 
-            constexpr quantity_data data = quantity_data_for<quantity_>(unit);
+            constexpr quantity_data data = data_of<quantity_>(unit);
 
             if(data.exponent != 0)
             {
@@ -308,7 +308,7 @@ namespace zollstock
         {
             return (
                 ... &&
-                (quantity_data_for<quantities>(unit_1) == quantity_data_for<quantities>(unit_2))
+                (data_of<quantities>(unit_1) == data_of<quantities>(unit_2))
             );
         }
 

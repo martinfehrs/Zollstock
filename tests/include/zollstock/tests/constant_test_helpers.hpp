@@ -98,9 +98,9 @@ void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
     STATIC_REQUIRE(type_of(mixed)     == unit_type::product                       );
     STATIC_REQUIRE(mixed.base_unit_1  == unit_1                                   );
     STATIC_REQUIRE(mixed.base_unit_2  == pow_v<unit_2, -1>                        );
-    STATIC_REQUIRE(unit_length(mixed) == unit_length(unit_1) / unit_length(unit_2));
-    STATIC_REQUIRE(unit_time  (mixed) == unit_time  (unit_1) / unit_time  (unit_2));
-    STATIC_REQUIRE(unit_angle (mixed) == unit_angle (unit_1) / unit_angle (unit_2));
+    STATIC_REQUIRE(length_of(mixed) == length_of(unit_1) / length_of(unit_2)      );
+    STATIC_REQUIRE(time_of  (mixed) == time_of  (unit_1) / time_of  (unit_2)      );
+    STATIC_REQUIRE(angle_of (mixed) == angle_of (unit_1) / angle_of (unit_2)      );
 }
 
 #define TEST_MIXED_DIVISION_UNIT_CONSTANT(symbol_1, symbol_2) \

@@ -22,6 +22,8 @@ namespace zollstock
         angle
     };
 
+
+
     template <quantity... quantities>
     struct quantity_sequence
     {
@@ -47,6 +49,7 @@ namespace zollstock
     {
         return quantity_sequence<quantity::angle>{};
     }
+
 
 
     struct quantity_data
@@ -115,6 +118,8 @@ namespace zollstock
         product
     };
 
+
+
     template <typename Candidate>
     concept unit_c = requires()
     {
@@ -168,7 +173,7 @@ namespace zollstock
 
 
     template <unit_c Unit>
-    [[nodiscard]] consteval quantity_data unit_length(Unit unit) noexcept
+    [[nodiscard]] consteval quantity_data length_of(Unit unit) noexcept
     {
         if constexpr(length_based_unit_c<Unit>)
         {
@@ -181,7 +186,7 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] consteval quantity_data unit_time(Unit unit) noexcept
+    [[nodiscard]] consteval quantity_data time_of(Unit unit) noexcept
     {
         if constexpr(time_based_unit_c<Unit>)
         {
@@ -194,7 +199,7 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] consteval quantity_data unit_angle(Unit unit) noexcept
+    [[nodiscard]] consteval quantity_data angle_of(Unit unit) noexcept
     {
         if constexpr(angle_based_unit_c<Unit>)
         {
@@ -209,19 +214,19 @@ namespace zollstock
 
 
     template <quantity quantity_>
-    [[nodiscard]] consteval quantity_data quantity_data_for(unit_c auto unit) noexcept
+    [[nodiscard]] consteval quantity_data data_of(unit_c auto unit) noexcept
     {
         if constexpr(quantity_ == quantity::length)
         {
-            return unit_length(unit);
+            return length_of(unit);
         }
         else if constexpr(quantity_ == quantity::time)
         {
-            return unit_time(unit);
+            return time_of(unit);
         }
         else if constexpr(quantity_ == quantity::angle)
         {
-            return unit_angle(unit);
+            return angle_of(unit);
         }
     }
 
@@ -237,8 +242,8 @@ namespace zollstock
         {
             return (
                 ... &&
-                (quantity_data_for<quantities>(unit_1).exponent ==
-                 quantity_data_for<quantities>(unit_2).exponent)
+                (data_of<quantities>(unit_1).exponent ==
+                 data_of<quantities>(unit_2).exponent)
             );
         }
 
@@ -258,9 +263,9 @@ namespace zollstock
         static constexpr auto base_unit = base_unit_;
         static constexpr auto exponent = exponent_;
 
-        static constexpr auto length = pow(unit_length(base_unit), exponent_);
-        static constexpr auto time   = pow(unit_time  (base_unit), exponent_);
-        static constexpr auto angle  = pow(unit_angle (base_unit), exponent_);
+        static constexpr auto length = pow(length_of(base_unit), exponent_);
+        static constexpr auto time   = pow(time_of  (base_unit), exponent_);
+        static constexpr auto angle  = pow(angle_of (base_unit), exponent_);
     };
 
     template<unit_c auto base_unit_1_, unit_c auto base_unit_2_>
@@ -270,9 +275,9 @@ namespace zollstock
         static constexpr auto base_unit_1 = base_unit_1_;
         static constexpr auto base_unit_2 = base_unit_2_;
 
-        static constexpr auto length = unit_length(base_unit_1) * unit_length(base_unit_2);
-        static constexpr auto time   = unit_time  (base_unit_1) * unit_time  (base_unit_2);
-        static constexpr auto angle  = unit_angle (base_unit_1) * unit_angle (base_unit_2);
+        static constexpr auto length = length_of(base_unit_1) * length_of(base_unit_2);
+        static constexpr auto time   = time_of  (base_unit_1) * time_of  (base_unit_2);
+        static constexpr auto angle  = angle_of (base_unit_1) * angle_of (base_unit_2);
     };
 
 
