@@ -199,7 +199,7 @@ namespace zollstock
                 >;
             }
             else
-            if constexpr(unit_1 == unit_2)
+            if constexpr(unit_1.base_unit == unit_2.base_unit_2)
             {
                 return unit_product_v<
                     unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + 1>,
