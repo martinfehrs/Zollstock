@@ -15,6 +15,40 @@
 namespace zollstock
 {
 
+    enum class quantity
+    {
+        length,
+        time,
+        angle
+    };
+
+    template <quantity... quantities>
+    struct quantity_sequence
+    {
+        using value_type = quantity;
+
+        static constexpr std::size_t size() noexcept
+        {
+            return sizeof...(quantities);
+        }
+    };
+
+    consteval auto make_quantity_sequence() noexcept
+    {
+        return quantity_sequence<quantity::length, quantity::time, quantity::angle>{};
+    }
+
+    consteval auto make_base_quantity_sequence() noexcept
+    {
+        return quantity_sequence<quantity::length, quantity::time>{};
+    }
+
+    consteval auto make_derived_quantity_sequence() noexcept
+    {
+        return quantity_sequence<quantity::angle>{};
+    }
+
+
     struct quantity_data
     {
         int exponent;
@@ -178,18 +212,18 @@ namespace zollstock
 
 
 
-    template <std::size_t pos> requires(pos < quantity_count)
-    [[nodiscard]] consteval quantity_data quantity_data_at(unit_c auto unit) noexcept
+    template <quantity quantity_>
+    [[nodiscard]] consteval quantity_data quantity_data_for(unit_c auto unit) noexcept
     {
-        if constexpr(pos == 0)
+        if constexpr(quantity_ == quantity::length)
         {
             return unit_length(unit);
         }
-        else if constexpr(pos == 1)
+        else if constexpr(quantity_ == quantity::time)
         {
             return unit_time(unit);
         }
-        else if constexpr(pos == 2)
+        else if constexpr(quantity_ == quantity::angle)
         {
             return unit_angle(unit);
         }
@@ -197,43 +231,18 @@ namespace zollstock
 
 
 
-    template <typename IndexSequence, std::size_t offset>
-    struct shift_right;
-
-    template <std::size_t... indices, std::size_t offset>
-    struct shift_right<std::index_sequence<indices...>, offset>
-    {
-        using type = std::index_sequence<(indices + offset)...>;
-    };
-
-    template <typename IndexSequence, std::size_t offset>
-    using shift_right_t = typename shift_right<IndexSequence, offset>::type;
-
-
-    template <std::size_t count, std::size_t first = 0U>
-    using make_index_sequence = shift_right_t<std::make_index_sequence<count>, first>;
-
-    using make_base_quantity_index_sequence = make_index_sequence<base_quantity_count>;
-
-    using make_derived_quantity_index_sequence = make_index_sequence<
-        derived_quantity_count, base_quantity_count
-    >;
-
-    using make_quantity_index_sequence = make_index_sequence<quantity_count>;
-
-
     namespace detail
     {
 
-        template <std::size_t... indices>
+        template <quantity... quantities>
         [[nodiscard]] consteval bool convertible_units_impl(
-            unit_c auto unit_1, unit_c auto unit_2, std::index_sequence<indices...>
+            unit_c auto unit_1, unit_c auto unit_2, quantity_sequence<quantities...>
         ) noexcept
         {
             return (
                 ... &&
-                (quantity_data_at<indices>(unit_1).exponent ==
-                 quantity_data_at<indices>(unit_2).exponent)
+                (quantity_data_for<quantities>(unit_1).exponent ==
+                 quantity_data_for<quantities>(unit_2).exponent)
             );
         }
 
@@ -241,7 +250,7 @@ namespace zollstock
 
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return detail::convertible_units_impl(unit_1, unit_2, make_quantity_index_sequence{});
+        return detail::convertible_units_impl(unit_1, unit_2, make_quantity_sequence());
     }
 
 

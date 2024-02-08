@@ -117,7 +117,7 @@ namespace zollstock
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
         [[nodiscard]] constexpr scalar<that_unit, value_type> as() const noexcept
         {
-            return this->as_impl<that_unit>(make_quantity_index_sequence{});
+            return this->as_impl<that_unit>(make_quantity_sequence());
         }
 
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
@@ -152,16 +152,16 @@ namespace zollstock
 
     private:
 
-        template <unit_c auto that_unit, std::size_t pos>
+        template <unit_c auto that_unit, quantity quantity_>
         [[nodiscard]] constexpr value_type dimension_factor() const noexcept
         {
-            constexpr auto this_exponent = get<pos>(this_unit).exponent;
-            constexpr auto that_exponent = get<pos>(that_unit).exponent;
+            constexpr auto this_exponent = get<quantity_>(this_unit).exponent;
+            constexpr auto that_exponent = get<quantity_>(that_unit).exponent;
 
             if constexpr(this_exponent != 0 && that_exponent != 0)
             {
-                return std::pow(get<pos>(this_unit).factor, this_exponent) /
-                       std::pow(get<pos>(that_unit).factor, that_exponent);
+                return std::pow(get<quantity_>(this_unit).factor, this_exponent) /
+                       std::pow(get<quantity_>(that_unit).factor, that_exponent);
             }
             else
             {
@@ -169,12 +169,12 @@ namespace zollstock
             }
         }
 
-        template <unit_c auto that_unit, std::size_t... indices>
+        template <unit_c auto that_unit, quantity... quantities>
         [[nodiscard]] constexpr scalar<that_unit, value_type> as_impl(
-            std::index_sequence<indices...>
+            quantity_sequence<quantities...>
         ) const noexcept
         {
-            return { (this->value_ * ... * this->dimension_factor<that_unit, indices>()) };
+            return { (this->value_ * ... * this->dimension_factor<that_unit, quantities>()) };
         }
 
         value_type value_;

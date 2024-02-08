@@ -31,12 +31,12 @@ namespace zollstock
             return string_representation;
         }
 
-        template <std::size_t pos, typename Char>
-        [[nodiscard]] std::basic_string<Char> unit_entry_to_string(unit_c auto unit)
+        template <quantity quantity_, typename Char>
+        [[nodiscard]] std::basic_string<Char> quantity_entry_to_string(unit_c auto unit)
         {
             std::basic_string<Char> unit_representation;
 
-            constexpr quantity_data data = quantity_data_at<pos>(unit);
+            constexpr quantity_data data = quantity_data_for<quantity_>(unit);
 
             if(data.exponent != 0)
             {
@@ -111,13 +111,13 @@ namespace zollstock
 
         };
 
-        template <typename Char, std::size_t... indices>
+        template <typename Char, quantity... quantities>
         [[nodiscard]] std::basic_string<Char> to_basic_string_impl(
-            unit_c auto unit, std::index_sequence<indices...>
+            unit_c auto unit, quantity_sequence<quantities...>
         )
         {
             return detail::basic_concatenator<Char>{ '*' }(
-                detail::unit_entry_to_string<indices, Char>(unit)...
+                detail::quantity_entry_to_string<quantities, Char>(unit)...
             );
         }
 
@@ -127,8 +127,8 @@ namespace zollstock
     [[nodiscard]] std::basic_string<Char> to_basic_string(unit_c auto unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
-            detail::to_basic_string_impl<Char>(unit, make_derived_quantity_index_sequence{}),
-            detail::to_basic_string_impl<Char>(unit, make_base_quantity_index_sequence{})
+            detail::to_basic_string_impl<Char>(unit, make_derived_quantity_sequence()),
+            detail::to_basic_string_impl<Char>(unit, make_base_quantity_sequence())
         );
     }
 
@@ -301,24 +301,27 @@ namespace zollstock
     namespace detail
     {
 
-        template <std::size_t... indices>
+        template <quantity... quantities>
         [[nodiscard]] consteval bool equal(
-            unit_c auto unit_1, unit_c auto unit_2, std::index_sequence<indices...>
+            unit_c auto unit_1, unit_c auto unit_2, quantity_sequence<quantities...>
         ) noexcept
         {
-            return (... && (quantity_data_at<indices>(unit_1) == quantity_data_at<indices>(unit_2)));
+            return (
+                ... &&
+                (quantity_data_for<quantities>(unit_1) == quantity_data_for<quantities>(unit_2))
+            );
         }
 
     }
 
     [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return detail::equal(unit_1, unit_2, make_quantity_index_sequence{});
+        return detail::equal(unit_1, unit_2, make_quantity_sequence());
     }
 
     [[nodiscard]] consteval bool operator!=(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return !detail::equal(unit_1, unit_2, make_quantity_index_sequence{});
+        return !detail::equal(unit_1, unit_2, make_quantity_sequence());
     }
 
 }
