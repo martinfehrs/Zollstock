@@ -165,7 +165,10 @@ namespace zollstock
             }
         }
         else
-        if constexpr(type_of(unit_1) == unit_type::exponentiation && type_of(unit_2) == unit_type::basic)
+        if constexpr(
+            type_of(unit_1) == unit_type::exponentiation &&
+            type_of(unit_2) == unit_type::basic
+        )
         {
             if constexpr(unit_1.base_unit == unit_2)
             {
@@ -177,7 +180,10 @@ namespace zollstock
             }
         }
         else
-        if constexpr(type_of(unit_1) == unit_type::basic && type_of(unit_2) == unit_type::exponentiation)
+        if constexpr(
+            type_of(unit_1) == unit_type::basic &&
+            type_of(unit_2) == unit_type::exponentiation
+        )
         {
             if constexpr(unit_2.base_unit == unit_1)
             {
@@ -189,7 +195,10 @@ namespace zollstock
             }
         }
         else
-        if constexpr(type_of(unit_1) == unit_type::exponentiation && type_of(unit_2) == unit_type::product)
+        if constexpr(
+            type_of(unit_1) == unit_type::exponentiation &&
+            type_of(unit_2) == unit_type::product
+        )
         {
             if constexpr(unit_1.base_unit == unit_2.base_unit_1)
             {
