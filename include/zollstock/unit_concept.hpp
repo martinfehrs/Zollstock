@@ -15,13 +15,6 @@
 namespace zollstock
 {
 
-    enum class unit_type
-    {
-        basic,
-        exponentiation,
-        product
-    };
-
     struct quantity_data
     {
         int exponent;
@@ -84,6 +77,13 @@ namespace zollstock
     inline constexpr std::size_t quantity_count = base_quantity_count + derived_quantity_count;
 
 
+
+    enum class unit_type
+    {
+        basic,
+        exponentiation,
+        product
+    };
 
     template <typename Candidate>
     concept unit_c = requires()
