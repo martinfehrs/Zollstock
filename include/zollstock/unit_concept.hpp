@@ -188,6 +188,11 @@ namespace zollstock
     concept angle_based_unit_c = angle_member_based_unit_c<Candidate>
                               || angle_function_based_unit_c<Candidate>;
 
+    template <typename Candidate>
+    concept base_unit_c = unit_c<Candidate> && type_of(Candidate{}) == unit_type::basic;
+
+    template <typename Candidate>
+    concept homogeneous_unit_c = unit_c<Candidate> && type_of(Candidate{}) != unit_type::product;
 
 
     template <unit_c Unit>
@@ -301,7 +306,7 @@ namespace zollstock
 
 
 
-    template <unit_c auto base_unit_, int exponent_>
+    template <base_unit_c auto base_unit_, int exponent_>
     struct unit_exponentiation
     {
         static constexpr auto type = unit_type::exponentiation;
@@ -325,7 +330,7 @@ namespace zollstock
 
     };
 
-    template<unit_c auto base_unit_1_, unit_c auto base_unit_2_>
+    template<homogeneous_unit_c auto base_unit_1_, homogeneous_unit_c auto base_unit_2_>
     struct unit_product
     {
         static constexpr auto type = unit_type::product;
@@ -350,7 +355,7 @@ namespace zollstock
 
 
 
-    template <unit_c auto unit, int exponent_>
+    template <base_unit_c auto unit, int exponent_>
     inline constexpr auto unit_exponentiation_v = unit_exponentiation<unit, exponent_>{};
 
     template <unit_c auto unit_1, unit_c auto unit_2>
