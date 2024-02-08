@@ -213,13 +213,13 @@ namespace zollstock
     template <std::size_t count, std::size_t first = 0U>
     using make_index_sequence = shift_right_t<std::make_index_sequence<count>, first>;
 
-    using make_base_unit_index_sequence = make_index_sequence<base_unit_count>;
+    using make_base_quantity_index_sequence = make_index_sequence<base_unit_count>;
 
-    using make_derived_unit_index_sequence = make_index_sequence<
+    using make_derived_quantity_index_sequence = make_index_sequence<
         derived_unit_count, base_unit_count
     >;
 
-    using make_unit_index_sequence = make_index_sequence<unit_count>;
+    using make_quantity_index_sequence = make_index_sequence<unit_count>;
 
 
     namespace detail
@@ -241,7 +241,7 @@ namespace zollstock
 
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return detail::convertible_units_impl(unit_1, unit_2, make_unit_index_sequence{});
+        return detail::convertible_units_impl(unit_1, unit_2, make_quantity_index_sequence{});
     }
 
 

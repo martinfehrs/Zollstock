@@ -127,8 +127,8 @@ namespace zollstock
     [[nodiscard]] std::basic_string<Char> to_basic_string(unit_c auto unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
-            detail::to_basic_string_impl<Char>(unit, make_derived_unit_index_sequence{}),
-            detail::to_basic_string_impl<Char>(unit, make_base_unit_index_sequence{})
+            detail::to_basic_string_impl<Char>(unit, make_derived_quantity_index_sequence{}),
+            detail::to_basic_string_impl<Char>(unit, make_base_quantity_index_sequence{})
         );
     }
 
@@ -313,12 +313,12 @@ namespace zollstock
 
     [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return detail::equal(unit_1, unit_2, make_unit_index_sequence{});
+        return detail::equal(unit_1, unit_2, make_quantity_index_sequence{});
     }
 
     [[nodiscard]] consteval bool operator!=(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return !detail::equal(unit_1, unit_2, make_unit_index_sequence{});
+        return !detail::equal(unit_1, unit_2, make_quantity_index_sequence{});
     }
 
 }
