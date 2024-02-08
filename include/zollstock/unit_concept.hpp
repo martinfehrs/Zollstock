@@ -72,7 +72,9 @@ namespace zollstock
         return { udat.exponent * exponent, udat.factor, udat.symbol };
     }
 
-    [[nodiscard]] consteval quantity_data operator/(const quantity_data& udat_1,const quantity_data& udat_2) noexcept
+    [[nodiscard]] consteval quantity_data operator/(
+        const quantity_data& udat_1,const quantity_data& udat_2
+    ) noexcept
     {
         return udat_1 * pow(udat_2, -1);
     }
@@ -230,7 +232,8 @@ namespace zollstock
         {
             return (
                 ... &&
-                (quantity_data_at<indices>(unit_1).exponent == quantity_data_at<indices>(unit_2).exponent)
+                (quantity_data_at<indices>(unit_1).exponent ==
+                 quantity_data_at<indices>(unit_2).exponent)
             );
         }
 
