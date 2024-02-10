@@ -92,12 +92,12 @@ void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
 
     static constexpr auto mixed = unit_1 / unit_2;
 
-    STATIC_REQUIRE(type_of(mixed)     == zollstock::unit_type::product            );
-    STATIC_REQUIRE(mixed.base_unit_1  == unit_1                                   );
-    STATIC_REQUIRE(mixed.base_unit_2  == zollstock::pow_v<unit_2, -1>             );
-    STATIC_REQUIRE(length_of(mixed) == length_of(unit_1) / length_of(unit_2)      );
-    STATIC_REQUIRE(time_of  (mixed) == time_of  (unit_1) / time_of  (unit_2)      );
-    STATIC_REQUIRE(angle_of (mixed) == angle_of (unit_1) / angle_of (unit_2)      );
+    STATIC_REQUIRE(type_of(mixed)        == zollstock::unit_type::product         );
+    STATIC_REQUIRE(first_base_of(mixed)  == unit_1                                );
+    STATIC_REQUIRE(second_base_of(mixed) == zollstock::pow_v<unit_2, -1>          );
+    STATIC_REQUIRE(length_of(mixed)      == length_of(unit_1) / length_of(unit_2) );
+    STATIC_REQUIRE(time_of  (mixed)      == time_of  (unit_1) / time_of  (unit_2) );
+    STATIC_REQUIRE(angle_of (mixed)      == angle_of (unit_1) / angle_of (unit_2) );
 }
 
 #define TEST_MIXED_DIVISION_UNIT_CONSTANT(symbol_1, symbol_2) \

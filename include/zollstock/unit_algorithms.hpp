@@ -6,7 +6,9 @@
 #include <zollstock/dimensionless_unit_constants.hpp>
 
 #include <string>
+#include <string_view>
 #include <iostream>
+#include <sstream>
 
 
 namespace zollstock
