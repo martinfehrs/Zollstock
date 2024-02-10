@@ -230,19 +230,26 @@ namespace zollstock
 
         static consteval auto length() noexcept
         {
-            return (... * length_of(base_units));
+            return (quantity_data{} * ... * length_of(base_units));
         }
 
         static consteval auto time() noexcept
         {
-            return (... * time_of(base_units));
+            return (quantity_data{} * ... * time_of(base_units));
         }
 
         static consteval auto angle() noexcept
         {
-            return (... *  angle_of(base_units));
+            return (quantity_data{} * ... *  angle_of(base_units));
         }
     };
+
+
+
+    using one = unit_product<>;
+
+    inline constexpr one _1{};
+
 
 
 
