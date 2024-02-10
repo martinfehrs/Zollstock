@@ -250,15 +250,6 @@ namespace zollstock
 
     inline constexpr one _1{};
 
-
-
-
-    template <base_unit_c auto unit, int exponent_>
-    inline constexpr auto unit_exponentiation_v = unit_exponentiation<unit, exponent_>{};
-
-    template <homogeneous_unit_c auto... units>
-    inline constexpr auto unit_product_v = unit_product<units...>{};
-
 }
 
 

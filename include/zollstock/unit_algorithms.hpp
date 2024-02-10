@@ -184,7 +184,7 @@ namespace zollstock
             homogeneous_unit_c auto base_unit, unit_product<base_units...>
         ) noexcept
         {
-            return unit_product_v<base_units..., base_unit>;
+            return unit_product<base_units..., base_unit>{};
         }
 
         template <homogeneous_unit_c auto... base_units>
@@ -192,7 +192,7 @@ namespace zollstock
             homogeneous_unit_c auto base_unit, unit_product<base_units...>
         ) noexcept
         {
-            return unit_product_v<base_unit, base_units...>;
+            return unit_product<base_unit, base_units...>{};
         }
 
         template <homogeneous_unit_c auto... base_units_1, homogeneous_unit_c auto... base_units_2>
@@ -201,7 +201,7 @@ namespace zollstock
             unit_product<base_units_2...>
         ) noexcept
         {
-            return unit_product_v<base_units_1..., base_units_2...>;
+            return unit_product<base_units_1..., base_units_2...>{};
         }
 
 
@@ -233,7 +233,7 @@ namespace zollstock
         ) noexcept
         {
             auto[cleared_tail, erasure_count] = erase_product_base(
-                base_unit, unit_product_v<remaining_base_units...>
+                base_unit, unit_product<remaining_base_units...>{}
             );
 
             if constexpr (type_of(first_base_unit) == unit_type::basic)
@@ -281,13 +281,13 @@ namespace zollstock
             {
                 constexpr auto erasure_result = erase_product_base(
                     first_base_unit,
-                    combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
+                    combine_redundant_product_bases(unit_product<remaining_base_units...>{})
                 );
 
                 if constexpr(erasure_result.count > 0)
                 {
                     return prepend_to_product_raw(
-                        unit_exponentiation_v<first_base_unit, erasure_result.count + 1>,
+                        unit_exponentiation<first_base_unit, erasure_result.count + 1>{},
                         erasure_result.unit
                     );
                 }
@@ -300,16 +300,16 @@ namespace zollstock
             {
                 constexpr auto erasure_result = erase_product_base(
                     first_base_unit.base_unit,
-                    combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
+                    combine_redundant_product_bases(unit_product<remaining_base_units...>{})
                 );
 
                 if constexpr(erasure_result.count > 0)
                 {
                     return prepend_to_product_raw(
-                        unit_exponentiation_v<
+                        unit_exponentiation<
                             first_base_unit.base_unit,
                             first_base_unit.exponent + erasure_result.count
-                        >,
+                        >{},
                         erasure_result.unit
                     );
                 }
@@ -413,7 +413,7 @@ namespace zollstock
         }
         else
         {
-            return detail::simplify_combined_unit(unit_product_v<unit_1, unit_2>);
+            return detail::simplify_combined_unit(unit_product<unit_1, unit_2>{});
         }
     }
 
@@ -433,11 +433,11 @@ namespace zollstock
             }
             else if constexpr(type_of(unit) == unit_type::exponentiation)
             {
-                return unit_exponentiation_v<unit.base_unit, unit.exponent * exponent>;
+                return unit_exponentiation<unit.base_unit, unit.exponent * exponent>{};
             }
             else
             {
-                return unit_exponentiation_v<unit, exponent>;
+                return unit_exponentiation<unit, exponent>{};
             }
         }
 
