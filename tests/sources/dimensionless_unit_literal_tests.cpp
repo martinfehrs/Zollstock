@@ -1,5 +1,4 @@
 #include <catch2/catch_all.hpp>
-#include <zollstock/dimensionless_unit_constants.hpp>
 #include <zollstock/dimensionless_unit_literals.hpp>
 
 

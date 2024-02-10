@@ -1,6 +1,5 @@
 #include <catch2/catch_all.hpp>
 #include <zollstock/scalar.hpp>
-#include <zollstock/dimensionless_unit.hpp>
 
 #include <climits>
 
