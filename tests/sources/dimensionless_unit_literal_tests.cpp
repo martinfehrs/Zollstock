@@ -1,5 +1,5 @@
 #include <catch2/catch_all.hpp>
-#include <zollstock/dimensionless_unit_literals.hpp>
+#include <zollstock/scalar.hpp>
 
 
 using namespace zollstock;

@@ -5,8 +5,9 @@
 #include <zollstock/unit_concept.hpp>
 #include <zollstock/unit_algorithms.hpp>
 #include <zollstock/number_utilities.hpp>
+#include <zollstock/definition_helpers.hpp>
 
-#include <concepts>
+#include <cmath>
 
 
 namespace zollstock
@@ -334,6 +335,15 @@ namespace zollstock
 
         return os;
     }
+
+}
+
+
+
+namespace zollstock::inline units::inline literals
+{
+
+    ZOLLSTOCK_DEFINE_LITERAL(1, _1)
 
 }
 
