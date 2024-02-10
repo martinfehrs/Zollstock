@@ -192,6 +192,12 @@ namespace zollstock
     concept base_unit_c = unit_c<Candidate> && type_of(Candidate{}) == unit_type::basic;
 
     template <typename Candidate>
+    concept raised_unit_c = unit_c<Candidate> && type_of(Candidate{}) == unit_type::exponentiation;
+
+    template <typename Candidate>
+    concept multiplied_unit_c = unit_c<Candidate> && type_of(Candidate{}) == unit_type::product;
+
+    template <typename Candidate>
     concept homogeneous_unit_c = unit_c<Candidate> && type_of(Candidate{}) != unit_type::product;
 
 
@@ -304,8 +310,6 @@ namespace zollstock
         return detail::convertible_units_impl(unit_1, unit_2, make_quantity_sequence());
     }
 
-
-
     template <base_unit_c auto base_unit_, int exponent_>
     struct unit_exponentiation
     {
@@ -315,41 +319,41 @@ namespace zollstock
 
         static consteval auto length() noexcept
         {
-            return pow(length_of(base_unit), exponent_);
+            return pow(length_of(base_unit_), exponent_);
         }
 
         static consteval auto time() noexcept
         {
-            return pow(time_of(base_unit), exponent_);
+            return pow(time_of(base_unit_), exponent_);
         }
 
         static consteval auto angle() noexcept
         {
-            return pow(angle_of(base_unit), exponent_);
+            return pow(angle_of(base_unit_), exponent_);
         }
 
     };
 
-    template<homogeneous_unit_c auto base_unit_1_, homogeneous_unit_c auto base_unit_2_>
+
+    template<homogeneous_unit_c auto... base_units>
     struct unit_product
     {
         static constexpr auto type = unit_type::product;
-        static constexpr auto base_unit_1 = base_unit_1_;
-        static constexpr auto base_unit_2 = base_unit_2_;
+        static constexpr auto size = sizeof...(base_units);
 
         static consteval auto length() noexcept
         {
-            return length_of(base_unit_1) * length_of(base_unit_2);
+            return (... * length_of(base_units));
         }
 
         static consteval auto time() noexcept
         {
-            return time_of(base_unit_1) * time_of(base_unit_2);
+            return (... * time_of(base_units));
         }
 
         static consteval auto angle() noexcept
         {
-            return angle_of(base_unit_1) * angle_of(base_unit_2);
+            return (... *  angle_of(base_units));
         }
     };
 
@@ -358,8 +362,8 @@ namespace zollstock
     template <base_unit_c auto unit, int exponent_>
     inline constexpr auto unit_exponentiation_v = unit_exponentiation<unit, exponent_>{};
 
-    template <unit_c auto unit_1, unit_c auto unit_2>
-    inline constexpr auto unit_product_v = unit_product<unit_1, unit_2>{};
+    template <homogeneous_unit_c auto... units>
+    inline constexpr auto unit_product_v = unit_product<units...>{};
 
 }
 

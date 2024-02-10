@@ -148,125 +148,272 @@ namespace zollstock
         return os << to_basic_string<Char>(unit);
     }
 
-    [[nodiscard]] consteval auto operator*(unit_c auto unit_1, unit_c auto unit_2) noexcept
+
+
+    template <
+        homogeneous_unit_c auto first_base_unit,
+        homogeneous_unit_c auto... remaining_base_units
+    >
+    [[nodiscard]] consteval auto first_base_of(
+        unit_product<first_base_unit, remaining_base_units...>
+    ) noexcept
     {
-        if constexpr(
-            type_of(unit_1) == unit_type::exponentiation &&
-            type_of(unit_2) == unit_type::exponentiation
-        )
+        return first_base_unit;
+    }
+
+    template <
+        homogeneous_unit_c auto first_base_unit,
+        homogeneous_unit_c auto second_base_unit,
+        homogeneous_unit_c auto... remaining_base_units
+    >
+    [[nodiscard]] consteval auto second_base_of(
+        unit_product<first_base_unit, second_base_unit, remaining_base_units...>
+    ) noexcept
+    {
+        return second_base_unit;
+    }
+
+
+
+    namespace detail
+    {
+
+        template <homogeneous_unit_c auto... base_units>
+        [[nodiscard]] consteval auto append_to_product_raw(
+            homogeneous_unit_c auto base_unit, unit_product<base_units...>
+        ) noexcept
         {
-            if constexpr(unit_1.base_unit == unit_2.base_unit)
-            {
-                return unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + unit_2.exponent>;
-            }
-            else
-            {
-                return unit_product_v<unit_1, unit_2>;
-            }
+            return unit_product_v<base_units..., base_unit>;
         }
-        else
-        if constexpr(
-            type_of(unit_1) == unit_type::exponentiation &&
-            type_of(unit_2) == unit_type::basic
-        )
+
+        template <homogeneous_unit_c auto... base_units>
+        [[nodiscard]] consteval auto prepend_to_product_raw(
+            homogeneous_unit_c auto base_unit, unit_product<base_units...>
+        ) noexcept
         {
-            if constexpr(unit_1.base_unit == unit_2)
-            {
-                return unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + 1>;
-            }
-            else
-            {
-                return unit_product_v<unit_1, unit_2>;
-            }
+            return unit_product_v<base_unit, base_units...>;
         }
-        else
-        if constexpr(
-            type_of(unit_1) == unit_type::basic &&
-            type_of(unit_2) == unit_type::exponentiation
-        )
+
+        template <homogeneous_unit_c auto... base_units_1, homogeneous_unit_c auto... base_units_2>
+        [[nodiscard]] consteval auto concat_products_raw(
+            unit_product<base_units_1...>,
+            unit_product<base_units_2...>
+        ) noexcept
         {
-            if constexpr(unit_2.base_unit == unit_1)
-            {
-                return unit_exponentiation_v<unit_2.base_unit, unit_2.exponent + 1>;
-            }
-            else
-            {
-                return unit_product_v<unit_1, unit_2>;
-            }
+            return unit_product_v<base_units_1..., base_units_2...>;
         }
-        else
-        if constexpr(
-            type_of(unit_1) == unit_type::exponentiation &&
-            type_of(unit_2) == unit_type::product
-        )
+
+
+
+        template <unit_c Unit>
+        struct erasure_result
         {
-            if constexpr(unit_1.base_unit == unit_2.base_unit_1)
-            {
-                return unit_product_v<
-                    unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + 1>,
-                    unit_2.base_unit_2
-                >;
-            }
-            else
-            if constexpr(unit_1.base_unit == unit_2.base_unit_2)
-            {
-                return unit_product_v<
-                    unit_exponentiation_v<unit_1.base_unit, unit_1.exponent + 1>,
-                    unit_2.base_unit_1
-                >;
-            }
-            else
-            {
-                return unit_product_v<unit_1, unit_2>;
-            }
+            Unit unit;
+            std::size_t count;
+        };
+
+        template <unit_c Unit>
+        erasure_result(Unit, std::size_t) -> erasure_result<Unit>;
+
+
+        [[nodiscard]] consteval auto erase_product_base(
+            base_unit_c auto base_unit, unit_product<> unit
+        ) noexcept
+        {
+            return erasure_result{ unit, 0 };
         }
-        else
-        if constexpr(
-            type_of(unit_1) == unit_type::product &&
-            type_of(unit_2) == unit_type::exponentiation
-        )
+
+        template <
+            homogeneous_unit_c auto first_base_unit,
+            homogeneous_unit_c auto... remaining_base_units
+        >
+        [[nodiscard]] consteval auto erase_product_base(
+            base_unit_c auto base_unit, unit_product<first_base_unit, remaining_base_units...> unit
+        ) noexcept
         {
-            if constexpr(unit_1.base_unit_1 == unit_2.base_unit)
+            auto[cleared_tail, erasure_count] = erase_product_base(
+                base_unit, unit_product_v<remaining_base_units...>
+            );
+
+            if constexpr (type_of(first_base_unit) == unit_type::basic)
             {
-                return unit_product_v<
-                    unit_exponentiation_v<unit_2.base_unit, unit_2.exponent + 1>,
-                    unit_2.base_unit_2
-                >;
+                if constexpr(first_base_unit == base_unit)
+                {
+                    return erasure_result{ cleared_tail, erasure_count + 1 };
+                }
+                else
+                {
+                    return erasure_result{ unit, erasure_count };
+                }
             }
-            else
-            if constexpr(unit_1.base_unit_2, unit_2.base_unit)
+            else if constexpr(type_of(first_base_unit) == unit_type::exponentiation)
             {
-                return unit_product_v<
-                    unit_exponentiation_v<unit_2.base_unit, unit_2.exponent + 1>,
-                    unit_2.base_unit_1
-                >;
-            }
-            else
-            {
-                return unit_product_v<unit_1, unit_2>;
-            }
-        }
-        if constexpr(type_of(unit_1) == unit_type::product && type_of(unit_2) == unit_type::product)
-        {
-            if constexpr(
-                unit_1.base_unit_1 == unit_2.base_unit_1 &&
-                unit_1.base_unit_2 == unit_2.base_unit_2 ||
-                unit_1.base_unit_1 == unit_2.base_unit_2 &&
-                unit_1.base_unit_2 == unit_2.base_unit_1
-            )
-            {
-                return unit_product_v<
-                    unit_exponentiation_v<unit_1.base_unit_1, 2>,
-                    unit_exponentiation_v<unit_1.base_unit_2, 2>
-                >;
-            }
-            else
-            {
-                return unit_product_v<unit_1, unit_2>;
+                if constexpr(first_base_unit.base_unit == base_unit)
+                {
+                    return erasure_result{ cleared_tail, erasure_count + first_base_unit.exponent };
+                }
+                else
+                {
+                    return erasure_result{ unit, erasure_count };
+                }
             }
         }
 
-        return unit_product_v<unit_1, unit_2>;
+        [[nodiscard]] consteval auto combine_redundant_product_bases(unit_product<> unit) noexcept
+        {
+            return unit;
+        }
+
+        template <
+            homogeneous_unit_c auto first_base_unit,
+            homogeneous_unit_c auto... remaining_base_units
+        >
+        [[nodiscard]] consteval auto combine_redundant_product_bases(
+            unit_product<first_base_unit, remaining_base_units...> unit
+        ) noexcept
+        {
+            if constexpr(unit.size == 1)
+            {
+                return unit;
+            }
+            if constexpr (type_of(first_base_unit) == unit_type::basic)
+            {
+                constexpr auto erasure_result = erase_product_base(
+                    first_base_unit,
+                    combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
+                );
+
+                if constexpr(erasure_result.count > 0)
+                {
+                    return prepend_to_product_raw(
+                        unit_exponentiation_v<first_base_unit, erasure_result.count + 1>,
+                        erasure_result.unit
+                    );
+                }
+                else
+                {
+                    return prepend_to_product_raw(first_base_unit, erasure_result.unit);
+                }
+            }
+            else if constexpr(type_of(first_base_unit) == unit_type::exponentiation)
+            {
+                constexpr auto erasure_result = erase_product_base(
+                    first_base_unit.base_unit,
+                    combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
+                );
+
+                if constexpr(erasure_result.count > 0)
+                {
+                    return prepend_to_product_raw(
+                        unit_exponentiation_v<
+                            first_base_unit.base_unit,
+                            first_base_unit.exponent + erasure_result.count
+                        >,
+                        erasure_result.unit
+                    );
+                }
+                else
+                {
+                    return prepend_to_product_raw(first_base_unit, erasure_result.unit);
+                }
+            }
+        }
+
+
+
+        template <raised_unit_c Unit> requires(Unit::exponent == 0)
+        [[nodiscard]] consteval auto simplify_combined_unit(Unit) noexcept
+        {
+            return _1;
+        }
+
+        template <raised_unit_c Unit> requires(Unit::exponent == 1)
+        [[nodiscard]] consteval auto simplify_combined_unit(Unit) noexcept
+        {
+            return Unit::base_unit;
+        }
+
+        template <raised_unit_c Unit>
+        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
+        {
+            return unit;
+        }
+
+        template <multiplied_unit_c Unit> requires(Unit::size == 0)
+        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
+        {
+            return _1;
+        }
+
+        template <multiplied_unit_c Unit> requires(Unit::size == 1)
+        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
+        {
+            return first_base_of(unit);
+        }
+
+        template <multiplied_unit_c Unit>
+        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
+        {
+            constexpr auto reduced_unit = combine_redundant_product_bases(unit);
+
+            if constexpr(reduced_unit.size <= 1)
+            {
+                return simplify_combined_unit(reduced_unit);
+            }
+            else
+            {
+                return reduced_unit;
+            }
+        }
+
+
+
+        [[nodiscard]] consteval auto append_to_product(
+            base_unit_c auto base_unit, multiplied_unit_c auto unit
+        ) noexcept
+        {
+            return simplify_combined_unit(append_to_product_raw(base_unit, unit));
+        }
+
+        [[nodiscard]] consteval auto prepend_to_product(
+            base_unit_c auto base_unit, multiplied_unit_c auto unit
+        ) noexcept
+        {
+            return simplify_combined_unit(prepend_to_product_raw(base_unit, unit));
+        }
+
+        [[nodiscard]] consteval auto concat_products(
+            multiplied_unit_c auto unit_1, multiplied_unit_c auto unit_2
+        ) noexcept
+        {
+            return simplify_combined_unit(concat_products_raw(unit_1, unit_2));
+        }
+
+    }
+
+    [[nodiscard]] consteval auto operator*(unit_c auto unit_1, unit_c auto unit_2) noexcept
+    {
+        if constexpr(
+            type_of(unit_1) == unit_type::product &&
+            type_of(unit_2) == unit_type::product
+        )
+        {
+            return detail::concat_products(unit_1, unit_2);
+        }
+        else
+        if constexpr(type_of(unit_1) == unit_type::product)
+        {
+            return detail::append_to_product(unit_2, unit_1);
+        }
+        else
+        if constexpr(type_of(unit_2) == unit_type::product)
+        {
+            return detail::prepend_to_product(unit_1, unit_2);
+        }
+        else
+        {
+            return detail::simplify_combined_unit(unit_product_v<unit_1, unit_2>);
+        }
     }
 
     namespace detail
