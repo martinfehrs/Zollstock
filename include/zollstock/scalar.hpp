@@ -16,11 +16,13 @@ namespace zollstock
     class scalar
     {
 
-        using value_type = ThisValue;
-        using unit_type = decltype(this_unit);
         using this_type = scalar<this_unit, ThisValue>;
 
     public:
+
+        using value_type = ThisValue;
+        using unit_type = std::remove_const_t<decltype(this_unit)>;
+
 
         constexpr scalar() noexcept
             : value_{}

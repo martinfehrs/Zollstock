@@ -257,11 +257,24 @@ namespace zollstock
     inline constexpr auto unit_product_v = unit_product<units...>{};
 
 
+    inline namespace units
+    {
 
-    using one = unit_product<>;
+        inline namespace types
+        {
 
-    inline constexpr one _1{};
+            using one = unit_product<>;
 
+        }
+
+        inline namespace constants
+        {
+
+            inline constexpr one _1{};
+
+        }
+
+    }
 
 
     namespace detail
