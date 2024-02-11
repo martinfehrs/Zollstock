@@ -1,4 +1,6 @@
 #include <catch2/catch_all.hpp>
+
+#define ZOLLSTOCK_WHITEBOX_TESTING
 #include <zollstock/scalar.hpp>
 
 #include <climits>
@@ -40,7 +42,8 @@ TEST_CASE("scalar construction", "[scalar]")
 TEST_CASE("scalar value access", "[scalar]")
 {
     STATIC_REQUIRE(zs::int_t<>{ 1 }.value() == 1);
-    STATIC_REQUIRE((const zs::int_t<>){ 1 }.value() == 1);
+
+    STATIC_REQUIRE(std::add_const_t<zs::int_t<>>{ 1 }.value() == 1);
     STATIC_REQUIRE(zs::int_t<>{ 1 }.cvalue() == 1);
 }
 
