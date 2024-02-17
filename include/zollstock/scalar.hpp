@@ -33,6 +33,8 @@ namespace zollstock
         using value_type = ThisValue;
         using unit_type = std::remove_const_t<decltype(this_unit)>;
 
+#if !defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION)
+
         explicit constexpr scalar(const uninitialized_&) noexcept
         {}
 
@@ -53,6 +55,8 @@ namespace zollstock
         ) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : scalar{ that.cvalue() }
         { }
+
+#endif //!defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION)
 
         [[nodiscard]] constexpr value_type& value() noexcept
         {
@@ -205,9 +209,9 @@ namespace zollstock
             return { (this->value_ * ... * this->dimension_factor<that_unit, quantities>()) };
         }
 
-#ifdef ZOLLSTOCK_WHITEBOX_TESTING
+#if defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS)
     public:
-#endif //ZOLLSTOCK_WHITEBOX_TESTING
+#endif //defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS)
 
         value_type value_;
 

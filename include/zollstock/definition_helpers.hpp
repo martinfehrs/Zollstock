@@ -5,47 +5,47 @@
 #define ZOLLSTOCK_DEFINE_LITERAL(suffix, constant)                                              \
     [[nodiscard]] consteval auto operator""_##suffix(unsigned long long int value) noexcept     \
     {                                                                                           \
-        return scalar<constant, int>{ value };                                                \
+        return scalar<constant, int>{ narrow<int>(value) };                                     \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_l_##suffix(unsigned long long int value) noexcept   \
     {                                                                                           \
-        return scalar<constant, long int>{ value };                                           \
+        return scalar<constant, long int>{ narrow<long int>(value) };                           \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ll_##suffix(unsigned long long int value) noexcept  \
     {                                                                                           \
-        return scalar<constant, long long int>{ value };                                      \
+        return scalar<constant, long long int>{ narrow<long long int>(value) };                 \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_u_##suffix(unsigned long long int value) noexcept   \
     {                                                                                           \
-        return scalar<constant, unsigned int>{ value };                                       \
+        return scalar<constant, unsigned int>{ narrow<unsigned int>(value) };                   \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ul_##suffix(unsigned long long int value) noexcept  \
     {                                                                                           \
-        return scalar<constant, unsigned long int>{ value };                                  \
+        return scalar<constant, unsigned long int>{ narrow<unsigned long int>(value) };         \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ull_##suffix(unsigned long long int value) noexcept \
     {                                                                                           \
-        return scalar<constant, unsigned long long int>{ value };                             \
+        return scalar<constant, unsigned long long int>{ value };                               \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_##suffix(long double value) noexcept                \
     {                                                                                           \
-        return scalar<constant, double>{ value };                                             \
+        return scalar<constant, double>{ narrow<double>(value) };                               \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_f_##suffix(long double value) noexcept              \
     {                                                                                           \
-        return scalar<constant, float>{ value };                                              \
+        return scalar<constant, float>{ narrow<float>(value) };                                 \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_l_##suffix(long double value) noexcept              \
     {                                                                                           \
-        return scalar<constant, long double>{ value };                                        \
+        return scalar<constant, long double>{ narrow<long double>(value) };                     \
     }                                                                                           \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol)       \
