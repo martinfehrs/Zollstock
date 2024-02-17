@@ -12,6 +12,12 @@
 namespace zollstock
 {
 
+    struct uninitialized
+    {
+        uninitialized(const uninitialized&) = delete;
+        uninitialized& operator=(const uninitialized&) = delete;
+    };
+
     template <unit_c auto this_unit, number_c ThisValue = double>
     class scalar
     {
@@ -23,6 +29,8 @@ namespace zollstock
         using value_type = ThisValue;
         using unit_type = std::remove_const_t<decltype(this_unit)>;
 
+        explicit scalar(uninitialized) noexcept
+        {}
 
         constexpr scalar() noexcept
             : value_{}
@@ -192,6 +200,10 @@ namespace zollstock
         {
             return { (this->value_ * ... * this->dimension_factor<that_unit, quantities>()) };
         }
+
+#ifdef ZOLLSTOCK_WHITEBOX_TESTING
+    public:
+#endif //ZOLLSTOCK_WHITEBOX_TESTING
 
         value_type value_;
 
