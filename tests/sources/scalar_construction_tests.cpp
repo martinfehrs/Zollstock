@@ -16,7 +16,7 @@ TEST_CASE("scalar construction", "[scalar]")
     STATIC_REQUIRE(zs::int_t<>{ 1 }.value_ == 1);
     STATIC_REQUIRE(zs::int_t<>{ zs::int_t<>{ 1 } }.value_ == 1);
     STATIC_REQUIRE(zs::int_t<>{ zs::long_long_int_t<>{ 1 } }.value_ == 1);
-    REQUIRE_THROWS(zs::int_t<>{ zs::long_long_int_t<>{ LONG_LONG_MAX } });
+    REQUIRE_THROWS(zs::int_t<>{ zs::long_long_int_t<>{ LLONG_MAX } });
     STATIC_REQUIRE(zs::int_t<>{ zs::unsigned_int_t<>{ 1 } }.value_ == 1);
     REQUIRE_THROWS(zs::int_t<>{ zs::unsigned_int_t<>{ UINT_MAX } });
 }
