@@ -137,7 +137,7 @@ namespace zollstock
 
         constexpr this_type& operator-=(this_type that) noexcept
         {
-            this->value_ += that.value_;
+            this->value_ -= that.value_;
 
             return *this;
         }
