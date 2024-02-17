@@ -56,9 +56,33 @@ TEST_CASE("scalar value assignment", "[scalar]")
     REQUIRE(s.value() == 1);
 }
 
-TEST_CASE("scalar negation", "[scalar]")
+template <zs::unit_c auto unit, zs::unit_c Unit, zs::number_c Number>
+[[nodiscard]] consteval bool check_scalar(
+    zs::scalar<unit, Number> s,
+    Unit expected_unit,
+    Number expected_value
+) noexcept
+{
+    return s.unit() == expected_unit && s.value() == expected_value;
+}
+
+TEST_CASE("scalar arithmetic", "[scalar]")
 {
     STATIC_REQUIRE((-zs::int_t<>{ 1 }).value() == -1);
+
+    STATIC_REQUIRE((zs::int_t<>{ 0 } += zs::int_t<>{ 1 }).value() == 1);
+    STATIC_REQUIRE((zs::int_t<>{ 0 } + zs::int_t<>{ 1 }).value() == 1);
+
+    STATIC_REQUIRE((zs::int_t<>{ 1 } -= zs::int_t<>{ 1 }).value() == 0);
+    STATIC_REQUIRE((zs::int_t<>{ 1 } - zs::int_t<>{ 1 }).value() == 0);
+
+    STATIC_REQUIRE((zs::int_t<>{ 2 } *= 3).value() == 6);
+    STATIC_REQUIRE((zs::int_t<>{ 2 } * 3).value() == 6);
+
+    STATIC_REQUIRE((zs::int_t<>{ 6 } /= 3).value() == 2);
+    STATIC_REQUIRE((zs::int_t<>{ 6 } / 3).value() == 2);
+
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 6 } / zs::int_t<>{ 3 }, _1, 2));
 }
 
 TEST_CASE("scalar comparison", "[scalar]")
