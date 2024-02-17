@@ -152,14 +152,14 @@ namespace zollstock
             return scalar<this_unit / that_unit, value_type>{ this->value_ };
         }
 
-        consteval this_type& operator*=(value_type that_value) noexcept
+        constexpr this_type& operator*=(value_type that_value) noexcept
         {
             this->value_ *= that_value;
 
             return (*this);
         }
 
-        consteval this_type& operator/=(value_type that_value) noexcept
+        constexpr this_type& operator/=(value_type that_value) noexcept
         {
             this->value_ /= that_value;
 
