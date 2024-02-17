@@ -12,11 +12,15 @@
 namespace zollstock
 {
 
-    struct uninitialized
+    struct uninitialized_
     {
-        uninitialized(const uninitialized&) = delete;
-        uninitialized& operator=(const uninitialized&) = delete;
+        consteval uninitialized_() noexcept = default;
+        uninitialized_(const uninitialized_&) = delete;
+        uninitialized_& operator=(const uninitialized_&) = delete;
     };
+
+    inline constexpr uninitialized_ uninitialized{};
+
 
     template <unit_c auto this_unit, number_c ThisValue = double>
     class scalar
@@ -29,7 +33,7 @@ namespace zollstock
         using value_type = ThisValue;
         using unit_type = std::remove_const_t<decltype(this_unit)>;
 
-        explicit scalar(uninitialized) noexcept
+        explicit scalar(uninitialized_) noexcept
         {}
 
         constexpr scalar() noexcept
