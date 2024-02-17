@@ -1,6 +1,6 @@
 #include <catch2/catch_all.hpp>
 
-#define ZOLLSTOCK_WHITEBOX_TESTING
+#define ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION
 #include <zollstock/scalar.hpp>
 
 #include <climits>
@@ -9,6 +9,17 @@
 namespace zs = zollstock;
 
 using namespace zs::units;
+
+
+template <zs::unit_c auto unit, zs::unit_c Unit, zs::number_c Number>
+[[nodiscard]] consteval bool check_scalar(
+    zs::scalar<unit, Number> s,
+    Unit expected_unit,
+    Number expected_value
+) noexcept
+{
+    return unit == expected_unit && s.value_ == expected_value;
+}
 
 
 TEST_CASE("scalar aliases", "[scalar]")
@@ -33,12 +44,6 @@ TEST_CASE("scalar type requirements", "[scalar]")
     STATIC_REQUIRE(zs::int_t<>::unit() == _1);
 }
 
-TEST_CASE("scalar construction", "[scalar]")
-{
-    STATIC_REQUIRE(zs::int_t<>{}.value() == 0);
-    STATIC_REQUIRE(zs::int_t<>{ 1 }.value() == 1);
-}
-
 TEST_CASE("scalar value access", "[scalar]")
 {
     STATIC_REQUIRE(zs::int_t<>{ 1 }.value() == 1);
@@ -56,32 +61,23 @@ TEST_CASE("scalar value assignment", "[scalar]")
     REQUIRE(s.value() == 1);
 }
 
-template <zs::unit_c auto unit, zs::unit_c Unit, zs::number_c Number>
-[[nodiscard]] consteval bool check_scalar(
-    zs::scalar<unit, Number> s,
-    Unit expected_unit,
-    Number expected_value
-) noexcept
-{
-    return s.unit() == expected_unit && s.value() == expected_value;
-}
-
 TEST_CASE("scalar arithmetic", "[scalar]")
 {
     STATIC_REQUIRE((-zs::int_t<>{ 1 }).value() == -1);
 
-    STATIC_REQUIRE((zs::int_t<>{ 0 } += zs::int_t<>{ 1 }).value() == 1);
-    STATIC_REQUIRE((zs::int_t<>{ 0 } + zs::int_t<>{ 1 }).value() == 1);
+    STATIC_REQUIRE((zs::int_t<>{ 0 } += zs::int_t<>{ 1 }).value_ == 1);
+    STATIC_REQUIRE((zs::int_t<>{ 0 } + zs::int_t<>{ 1 }).value_ == 1);
 
-    STATIC_REQUIRE((zs::int_t<>{ 1 } -= zs::int_t<>{ 1 }).value() == 0);
-    STATIC_REQUIRE((zs::int_t<>{ 1 } - zs::int_t<>{ 1 }).value() == 0);
+    STATIC_REQUIRE((zs::int_t<>{ 1 } -= zs::int_t<>{ 1 }).value_ == 0);
+    STATIC_REQUIRE((zs::int_t<>{ 1 } - zs::int_t<>{ 1 }).value_ == 0);
 
-    STATIC_REQUIRE((zs::int_t<>{ 2 } *= 3).value() == 6);
-    STATIC_REQUIRE((zs::int_t<>{ 2 } * 3).value() == 6);
+    STATIC_REQUIRE((zs::int_t<>{ 2 } *= 3).value_ == 6);
+    STATIC_REQUIRE((zs::int_t<>{ 2 } * 3).value_ == 6);
 
-    STATIC_REQUIRE((zs::int_t<>{ 6 } /= 3).value() == 2);
-    STATIC_REQUIRE((zs::int_t<>{ 6 } / 3).value() == 2);
+    STATIC_REQUIRE((zs::int_t<>{ 6 } /= 3).value_ == 2);
+    STATIC_REQUIRE((zs::int_t<>{ 6 } / 3).value_ == 2);
 
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 2 } * zs::int_t<>{ 3 }, _1, 6));
     STATIC_REQUIRE(check_scalar(zs::int_t<>{ 6 } / zs::int_t<>{ 3 }, _1, 2));
 }
 
