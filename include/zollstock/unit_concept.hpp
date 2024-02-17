@@ -584,7 +584,11 @@ namespace zollstock
             }
         }
 
-
+        template <base_unit_c Unit>
+        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
+        {
+            return unit;
+        }
 
         template <raised_unit_c Unit> requires(Unit::exponent == 0)
         [[nodiscard]] consteval auto simplify_combined_unit(Unit) noexcept
@@ -613,7 +617,7 @@ namespace zollstock
         template <multiplied_unit_c Unit> requires(Unit::size == 1)
         [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
         {
-            return first_base_of(unit);
+            return simplify_combined_unit(first_base_of(unit));
         }
 
         template <multiplied_unit_c Unit>
@@ -634,14 +638,14 @@ namespace zollstock
 
 
         [[nodiscard]] consteval auto append_to_product(
-            base_unit_c auto base_unit, multiplied_unit_c auto unit
+            homogeneous_unit_c auto base_unit, multiplied_unit_c auto unit
         ) noexcept
         {
             return simplify_combined_unit(append_to_product_raw(base_unit, unit));
         }
 
         [[nodiscard]] consteval auto prepend_to_product(
-            base_unit_c auto base_unit, multiplied_unit_c auto unit
+            homogeneous_unit_c auto base_unit, multiplied_unit_c auto unit
         ) noexcept
         {
             return simplify_combined_unit(prepend_to_product_raw(base_unit, unit));
