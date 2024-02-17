@@ -33,7 +33,7 @@ namespace zollstock
         using value_type = ThisValue;
         using unit_type = std::remove_const_t<decltype(this_unit)>;
 
-        explicit scalar(uninitialized_) noexcept
+        explicit constexpr scalar(const uninitialized_&) noexcept
         {}
 
         constexpr scalar() noexcept
