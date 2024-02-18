@@ -14,6 +14,7 @@ namespace zollstock
     {
         length,
         time,
+        mass,
         angle
     };
 

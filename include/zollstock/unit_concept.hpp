@@ -63,6 +63,20 @@ namespace zollstock
     };
 
     template <typename Candidate>
+    concept mass_member_based_unit_c = requires()
+    {
+        requires unit_c<Candidate>;
+        { Candidate::mass } -> std::same_as<const quantity_data&>;
+    };
+
+    template <typename Candidate>
+    concept mass_function_based_unit_c = requires()
+    {
+        requires unit_c<Candidate>;
+        { Candidate::mass() } -> std::same_as<quantity_data>;
+    };
+
+    template <typename Candidate>
     concept angle_member_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
@@ -140,6 +154,23 @@ namespace zollstock
     }
 
     template <unit_c Unit>
+    [[nodiscard]] consteval quantity_data mass_of(Unit unit) noexcept
+    {
+        if constexpr(mass_member_based_unit_c<Unit>)
+        {
+            return unit.mass;
+        }
+        else if constexpr(mass_function_based_unit_c<Unit>)
+        {
+            return unit.mass();
+        }
+        else
+        {
+            return {};
+        }
+    }
+
+    template <unit_c Unit>
     [[nodiscard]] consteval quantity_data angle_of(Unit unit) noexcept
     {
         if constexpr(angle_member_based_unit_c<Unit>)
@@ -168,6 +199,10 @@ namespace zollstock
         else if constexpr(quantity_ == quantity::time)
         {
             return time_of(unit);
+        }
+        else if constexpr(quantity_ == quantity::mass)
+        {
+            return mass_of(unit);
         }
         else if constexpr(quantity_ == quantity::angle)
         {
@@ -218,6 +253,11 @@ namespace zollstock
             return pow(time_of(base_unit_), exponent_);
         }
 
+        static consteval auto mass() noexcept
+        {
+            return pow(mass_of(base_unit_), exponent_);
+        }
+
         static consteval auto angle() noexcept
         {
             return pow(angle_of(base_unit_), exponent_);
@@ -240,6 +280,11 @@ namespace zollstock
         static consteval auto time() noexcept
         {
             return (quantity_data{} * ... * time_of(base_units));
+        }
+
+        static consteval auto mass() noexcept
+        {
+            return (quantity_data{} * ... * mass_of(base_units));
         }
 
         static consteval auto angle() noexcept
