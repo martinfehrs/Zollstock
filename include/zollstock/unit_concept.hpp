@@ -474,11 +474,11 @@ namespace zollstock
         struct erasure_result
         {
             Unit unit;
-            std::size_t count;
+            int exponent;
         };
 
         template <unit_c Unit>
-        erasure_result(Unit, std::size_t) -> erasure_result<Unit>;
+        erasure_result(Unit, int) -> erasure_result<Unit>;
 
 
         [[nodiscard]] consteval auto erase_product_base(
@@ -496,7 +496,7 @@ namespace zollstock
             base_unit_c auto base_unit, unit_product<first_base_unit, remaining_base_units...> unit
         ) noexcept
         {
-            auto[cleared_tail, erasure_count] = erase_product_base(
+            auto[cleared_tail, exponent] = erase_product_base(
                 base_unit, unit_product_v<remaining_base_units...>
             );
 
@@ -504,22 +504,25 @@ namespace zollstock
             {
                 if constexpr(first_base_unit == base_unit)
                 {
-                    return erasure_result{ cleared_tail, erasure_count + 1 };
+                    return erasure_result{ cleared_tail, exponent + 1 };
                 }
                 else
                 {
-                    return erasure_result{ unit, erasure_count };
+                    return erasure_result{ unit, exponent };
                 }
             }
             else if constexpr(type_of(first_base_unit) == unit_type::exponentiation)
             {
                 if constexpr(first_base_unit.base_unit == base_unit)
                 {
-                    return erasure_result{ cleared_tail, erasure_count + first_base_unit.exponent };
+                    return erasure_result{
+                        cleared_tail,
+                        exponent + first_base_unit.exponent
+                    };
                 }
                 else
                 {
-                    return erasure_result{ unit, erasure_count };
+                    return erasure_result{ unit, exponent };
                 }
             }
         }
@@ -548,10 +551,10 @@ namespace zollstock
                     combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
                 );
 
-                if constexpr(erasure_result.count > 0)
+                if constexpr(erasure_result.exponent != 0)
                 {
                     return prepend_to_product_raw(
-                        unit_exponentiation_v<first_base_unit, erasure_result.count + 1>,
+                        unit_exponentiation_v<first_base_unit, erasure_result.exponent + 1>,
                         erasure_result.unit
                     );
                 }
@@ -567,12 +570,12 @@ namespace zollstock
                     combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
                 );
 
-                if constexpr(erasure_result.count > 0)
+                if constexpr(erasure_result.exponent != 0)
                 {
                     return prepend_to_product_raw(
                         unit_exponentiation_v<
                             first_base_unit.base_unit,
-                            first_base_unit.exponent + erasure_result.count
+                            first_base_unit.exponent + erasure_result.exponent
                         >,
                         erasure_result.unit
                     );
