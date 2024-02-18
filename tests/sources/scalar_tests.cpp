@@ -2,6 +2,7 @@
 
 #define ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION
 #include <zollstock/scalar.hpp>
+#include <zollstock/length_units.hpp>
 
 #include <climits>
 
@@ -63,22 +64,58 @@ TEST_CASE("scalar value assignment", "[scalar]")
 
 TEST_CASE("scalar arithmetic", "[scalar]")
 {
-    STATIC_REQUIRE((-zs::int_t<>{ 1 }).value() == -1);
+    STATIC_REQUIRE(check_scalar(-zs::int_t<>{ 1 }, _1, -1));
 
-    STATIC_REQUIRE((zs::int_t<>{ 0 } += zs::int_t<>{ 1 }).value_ == 1);
-    STATIC_REQUIRE((zs::int_t<>{ 0 } + zs::int_t<>{ 1 }).value_ == 1);
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 0 } += zs::int_t<>{ 1 }, _1, 1));
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 0 } +  zs::int_t<>{ 1 }, _1, 1));
 
-    STATIC_REQUIRE((zs::int_t<>{ 1 } -= zs::int_t<>{ 1 }).value_ == 0);
-    STATIC_REQUIRE((zs::int_t<>{ 1 } - zs::int_t<>{ 1 }).value_ == 0);
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 1 } -= zs::int_t<>{ 1 }, _1, 0));
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 1 } -  zs::int_t<>{ 1 }, _1, 0));
 
-    STATIC_REQUIRE((zs::int_t<>{ 2 } *= 3).value_ == 6);
-    STATIC_REQUIRE((zs::int_t<>{ 2 } * 3).value_ == 6);
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 2 } *= 3, _1, 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 2 } *  3, _1, 6));
 
-    STATIC_REQUIRE((zs::int_t<>{ 6 } /= 3).value_ == 2);
-    STATIC_REQUIRE((zs::int_t<>{ 6 } / 3).value_ == 2);
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 6 } /= 3, _1, 2));
+    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 6 } /  3, _1, 2));
 
-    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 2 } * zs::int_t<>{ 3 }, _1, 6));
-    STATIC_REQUIRE(check_scalar(zs::int_t<>{ 6 } / zs::int_t<>{ 3 }, _1, 2));
+    STATIC_REQUIRE(check_scalar(zs::int_t<                 >{ 2 } * zs::int_t<                 >{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m                >{ 2 } * zs::int_t<                 >{ 3 }, m               , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<                 >{ 2 } * zs::int_t<m                >{ 3 }, m               , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<                 >{ 2 } * zs::int_t<zs::pow_v<_1,  0>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<                 >{ 2 } * zs::int_t<zs::pow_v<_1,  1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<                 >{ 2 } * zs::int_t<zs::pow_v<_1, -1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  0>>{ 2 } * zs::int_t<                 >{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  1>>{ 2 } * zs::int_t<                 >{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1, -1>>{ 2 } * zs::int_t<                 >{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  0>>{ 2 } * zs::int_t<zs::pow_v<_1,  0>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  0>>{ 2 } * zs::int_t<zs::pow_v<_1,  1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  0>>{ 2 } * zs::int_t<zs::pow_v<_1, -1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  1>>{ 2 } * zs::int_t<zs::pow_v<_1,  0>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1, -1>>{ 2 } * zs::int_t<zs::pow_v<_1, -0>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  1>>{ 2 } * zs::int_t<zs::pow_v<_1,  1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1, -1>>{ 2 } * zs::int_t<zs::pow_v<_1, -1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1, -1>>{ 2 } * zs::int_t<zs::pow_v<_1,  1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  1>>{ 2 } * zs::int_t<zs::pow_v<_1, -1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m                >{ 2 } * zs::int_t<zs::pow_v<_1,  0>>{ 3 }, m               , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<_1,  0>>{ 2 } * zs::int_t<m                >{ 3 }, m               , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m                >{ 2 } * zs::int_t<m                >{ 3 }, zs::pow_v<m,  2>, 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m                >{ 2 } * zs::int_t<zs::pow_v<m ,  0>>{ 3 }, m               , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m                >{ 2 } * zs::int_t<zs::pow_v<m ,  1>>{ 3 }, zs::pow_v<m,  2>, 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m                >{ 2 } * zs::int_t<zs::pow_v<m , -1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<m ,  0>>{ 2 } * zs::int_t<m                >{ 3 }, m               , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<m ,  1>>{ 2 } * zs::int_t<m                >{ 3 }, zs::pow_v<m,  2>, 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<m , -1>>{ 2 } * zs::int_t<m                >{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m                >{ 2 } * zs::int_t<m                >{ 3 }, zs::pow_v<m,  2>, 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<m ,  1>>{ 2 } * zs::int_t<zs::pow_v<m ,  1>>{ 3 }, zs::pow_v<m,  2>, 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<m , -1>>{ 2 } * zs::int_t<zs::pow_v<m , -1>>{ 3 }, zs::pow_v<m, -2>, 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<m ,  1>>{ 2 } * zs::int_t<zs::pow_v<m , -1>>{ 3 }, _1              , 6));
+    STATIC_REQUIRE(check_scalar(zs::int_t<zs::pow_v<m , -1>>{ 2 } * zs::int_t<zs::pow_v<m ,  1>>{ 3 }, _1              , 6));
+
+    STATIC_REQUIRE(check_scalar(zs::int_t<  >{ 6 } / zs::int_t<  >{ 3 }, _1, 2));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m >{ 6 } / zs::int_t<_1>{ 3 }, m, 2));
+    STATIC_REQUIRE(check_scalar(zs::int_t<_1>{ 6 } / zs::int_t<m >{ 3 }, zs::pow_v<m, -1>, 2));
+    STATIC_REQUIRE(check_scalar(zs::int_t<m >{ 6 } / zs::int_t<m >{ 3 }, _1, 2));
+
 }
 
 TEST_CASE("scalar comparison", "[scalar]")
