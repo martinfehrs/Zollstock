@@ -35,59 +35,31 @@ namespace zollstock
     };
 
     template <typename Candidate>
-    concept length_member_based_unit_c = requires()
+    concept length_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
-        { Candidate::length } -> std::same_as<const quantity_data&>;
+        { Candidate::length() } -> std::convertible_to<quantity_data>;
     };
 
     template <typename Candidate>
-    concept length_function_based_unit_c = requires()
+    concept time_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
-        { Candidate::length() } -> std::same_as<quantity_data>;
+        { Candidate::time() } -> std::convertible_to<quantity_data>;
     };
 
     template <typename Candidate>
-    concept time_member_based_unit_c = requires()
+    concept mass_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
-        { Candidate::time } -> std::same_as<const quantity_data&>;
+        { Candidate::mass() } -> std::convertible_to<quantity_data>;
     };
 
     template <typename Candidate>
-    concept time_function_based_unit_c = requires()
+    concept angle_based_unit_c = requires()
     {
         requires unit_c<Candidate>;
-        { Candidate::time() } -> std::same_as<quantity_data>;
-    };
-
-    template <typename Candidate>
-    concept mass_member_based_unit_c = requires()
-    {
-        requires unit_c<Candidate>;
-        { Candidate::mass } -> std::same_as<const quantity_data&>;
-    };
-
-    template <typename Candidate>
-    concept mass_function_based_unit_c = requires()
-    {
-        requires unit_c<Candidate>;
-        { Candidate::mass() } -> std::same_as<quantity_data>;
-    };
-
-    template <typename Candidate>
-    concept angle_member_based_unit_c = requires()
-    {
-        requires unit_c<Candidate>;
-        { Candidate::angle } -> std::same_as<const quantity_data&>;
-    };
-
-    template <typename Candidate>
-    concept angle_function_based_unit_c = requires()
-    {
-        requires unit_c<Candidate>;
-        { Candidate::angle() } -> std::same_as<quantity_data>;
+        { Candidate::angle() } -> std::convertible_to<quantity_data>;
     };
 
     template <typename Candidate>
@@ -122,11 +94,7 @@ namespace zollstock
     template <unit_c Unit>
     [[nodiscard]] consteval quantity_data length_of(Unit unit) noexcept
     {
-        if constexpr(length_member_based_unit_c<Unit>)
-        {
-            return unit.length;
-        }
-        else if constexpr(length_function_based_unit_c<Unit>)
+        if constexpr(length_based_unit_c<Unit>)
         {
             return unit.length();
         }
@@ -139,11 +107,7 @@ namespace zollstock
     template <unit_c Unit>
     [[nodiscard]] consteval quantity_data time_of(Unit unit) noexcept
     {
-        if constexpr(time_member_based_unit_c<Unit>)
-        {
-            return unit.time;
-        }
-        else if constexpr(time_function_based_unit_c<Unit>)
+        if constexpr(time_based_unit_c<Unit>)
         {
             return unit.time();
         }
@@ -156,11 +120,7 @@ namespace zollstock
     template <unit_c Unit>
     [[nodiscard]] consteval quantity_data mass_of(Unit unit) noexcept
     {
-        if constexpr(mass_member_based_unit_c<Unit>)
-        {
-            return unit.mass;
-        }
-        else if constexpr(mass_function_based_unit_c<Unit>)
+        if constexpr(mass_based_unit_c<Unit>)
         {
             return unit.mass();
         }
@@ -173,11 +133,7 @@ namespace zollstock
     template <unit_c Unit>
     [[nodiscard]] consteval quantity_data angle_of(Unit unit) noexcept
     {
-        if constexpr(angle_member_based_unit_c<Unit>)
-        {
-            return unit.angle;
-        }
-        else if constexpr(angle_function_based_unit_c<Unit>)
+        if constexpr(angle_based_unit_c<Unit>)
         {
             return unit.angle();
         }

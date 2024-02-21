@@ -65,6 +65,11 @@ namespace zollstock
             };
         }
 
+        [[nodiscard]] consteval const quantity_data& operator()() const noexcept
+        {
+            return *this;
+        }
+
     private:
 
         [[nodiscard]] consteval unit_symbol select_symbol(const quantity_data& that) const
