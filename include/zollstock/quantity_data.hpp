@@ -33,12 +33,17 @@ namespace zollstock
 
     consteval auto make_quantity_sequence() noexcept
     {
-        return quantity_sequence<quantity::length, quantity::time, quantity::angle>{};
+        return quantity_sequence<
+            quantity::length,
+            quantity::time,
+            quantity::mass,
+            quantity::angle
+        >{};
     }
 
     consteval auto make_base_quantity_sequence() noexcept
     {
-        return quantity_sequence<quantity::length, quantity::time>{};
+        return quantity_sequence<quantity::length, quantity::time, quantity::mass>{};
     }
 
     consteval auto make_derived_quantity_sequence() noexcept
