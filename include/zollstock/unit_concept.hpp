@@ -89,80 +89,28 @@ namespace zollstock
         }
     }
 
-
-
-    template <unit_c Unit>
-    [[nodiscard]] consteval quantity_data length_of(Unit unit) noexcept
+    template <quantity quantity_, base_unit_c Unit>
+    [[nodiscard]] consteval quantity_data data_of(Unit unit) noexcept
     {
-        if constexpr(length_based_unit_c<Unit>)
+        if constexpr(quantity_ == quantity::length && length_based_unit_c<Unit>)
         {
             return unit.length();
         }
-        else
-        {
-            return {};
-        }
-    }
-
-    template <unit_c Unit>
-    [[nodiscard]] consteval quantity_data time_of(Unit unit) noexcept
-    {
-        if constexpr(time_based_unit_c<Unit>)
+        else if constexpr(quantity_ == quantity::time && time_based_unit_c<Unit>)
         {
             return unit.time();
         }
-        else
-        {
-            return {};
-        }
-    }
-
-    template <unit_c Unit>
-    [[nodiscard]] consteval quantity_data mass_of(Unit unit) noexcept
-    {
-        if constexpr(mass_based_unit_c<Unit>)
+        else if constexpr(quantity_ == quantity::mass && mass_based_unit_c<Unit>)
         {
             return unit.mass();
         }
-        else
-        {
-            return {};
-        }
-    }
-
-    template <unit_c Unit>
-    [[nodiscard]] consteval quantity_data angle_of(Unit unit) noexcept
-    {
-        if constexpr(angle_based_unit_c<Unit>)
+        else if constexpr(quantity_ == quantity::angle && angle_based_unit_c<Unit>)
         {
             return unit.angle();
         }
         else
         {
             return {};
-        }
-    }
-
-
-
-    template <quantity quantity_>
-    [[nodiscard]] consteval quantity_data data_of(unit_c auto unit) noexcept
-    {
-        if constexpr(quantity_ == quantity::length)
-        {
-            return length_of(unit);
-        }
-        else if constexpr(quantity_ == quantity::time)
-        {
-            return time_of(unit);
-        }
-        else if constexpr(quantity_ == quantity::mass)
-        {
-            return mass_of(unit);
-        }
-        else if constexpr(quantity_ == quantity::angle)
-        {
-            return angle_of(unit);
         }
     }
 
@@ -198,27 +146,6 @@ namespace zollstock
         static constexpr auto type = unit_type::exponentiation;
         static constexpr auto base_unit = base_unit_;
         static constexpr auto exponent = exponent_;
-
-        static consteval auto length() noexcept
-        {
-            return pow(length_of(base_unit_), exponent_);
-        }
-
-        static consteval auto time() noexcept
-        {
-            return pow(time_of(base_unit_), exponent_);
-        }
-
-        static consteval auto mass() noexcept
-        {
-            return pow(mass_of(base_unit_), exponent_);
-        }
-
-        static consteval auto angle() noexcept
-        {
-            return pow(angle_of(base_unit_), exponent_);
-        }
-
     };
 
 
@@ -227,26 +154,6 @@ namespace zollstock
     {
         static constexpr auto type = unit_type::product;
         static constexpr auto size = sizeof...(base_units);
-
-        static consteval auto length() noexcept
-        {
-            return (quantity_data{} * ... * length_of(base_units));
-        }
-
-        static consteval auto time() noexcept
-        {
-            return (quantity_data{} * ... * time_of(base_units));
-        }
-
-        static consteval auto mass() noexcept
-        {
-            return (quantity_data{} * ... * mass_of(base_units));
-        }
-
-        static consteval auto angle() noexcept
-        {
-            return (quantity_data{} * ... *  angle_of(base_units));
-        }
     };
 
 
@@ -276,6 +183,23 @@ namespace zollstock
         }
 
     }
+
+
+
+    template <quantity quantity_, base_unit_c auto base_unit, int exponent>
+    [[nodiscard]] consteval quantity_data data_of(
+        unit_exponentiation<base_unit, exponent> unit
+    ) noexcept
+    {
+        return pow(data_of<quantity_>(base_unit), exponent);
+    }
+
+    template <quantity quantity_, homogeneous_unit_c auto... base_units>
+    [[nodiscard]] consteval quantity_data data_of(unit_product<base_units...> unit) noexcept
+    {
+        return (quantity_data{} * ... * data_of<quantity_>(base_units));
+    }
+
 
 
     namespace detail
