@@ -8,11 +8,11 @@ using namespace zollstock;
 TEST_CASE("angle-unit-types", "[angle][unit][types]")
 {
 
-    TEST_TYPES(ALL       , angle  , radian   , 1e0L     , rad   )
-    TEST_TYPES(UNPREFIXED, angle  , degree   , pi/18e1L , deg   )
-    TEST_TYPES(UNPREFIXED, angle  , arcminute, pi/108e2L, amin  )
-    TEST_TYPES(UNPREFIXED, angle  , arcsecond, pi/648e3L, arcsec)
-    TEST_TYPES(PREFIXED  , angle  , arcsecond, pi/648e3L, as    )
-    TEST_TYPES(ALL       , angle  , gradian  , pi/2e2L  , gon   )
+    TEST_BASE_TYPES(ALL       , radian   , quantity::angle, "rad"_us   , 1e0L     )
+    TEST_BASE_TYPES(UNPREFIXED, degree   , quantity::angle, "deg"_us   , pi/18e1L )
+    TEST_BASE_TYPES(UNPREFIXED, arcminute, quantity::angle, "amin"_us  , pi/108e2L)
+    TEST_BASE_TYPES(UNPREFIXED, arcsecond, quantity::angle, "arcsec"_us, pi/648e3L)
+    TEST_BASE_TYPES(PREFIXED  , arcsecond, quantity::angle, "as"_us    , pi/648e3L)
+    TEST_BASE_TYPES(ALL       , gradian  , quantity::angle, "gon"_us   , pi/2e2L  )
 
 }

@@ -15,103 +15,78 @@
 namespace zollstock
 {
 
-    enum class unit_type
-    {
-        basic,
-        exponentiation,
-        product
-    };
-
-
-
     template <typename Candidate>
     concept unit_c = std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
 
     template <typename Candidate>
-    concept typed_unit_c = requires()
+    concept named_unit_c = requires
     {
         requires unit_c<Candidate>;
-        { Candidate::type } -> std::same_as<const unit_type&>;
+        { Candidate::symbol } -> std::same_as<const unit_symbol&>;
     };
 
     template <typename Candidate>
-    concept length_based_unit_c = requires()
+    concept base_unit_c = requires
     {
-        requires unit_c<Candidate>;
-        { Candidate::length() } -> std::convertible_to<quantity_data>;
+        requires named_unit_c<Candidate>;
+        { Candidate::quantity_ } -> std::same_as<const quantity&>;
+        { Candidate::factor } -> std::same_as<const long double&>;
     };
 
     template <typename Candidate>
-    concept time_based_unit_c = requires()
+    concept raised_unit_c = requires
     {
-        requires unit_c<Candidate>;
-        { Candidate::time() } -> std::convertible_to<quantity_data>;
+        requires base_unit_c<std::remove_reference_t<decltype(Candidate::base_unit)>>;
+        { Candidate::exponent } -> std::same_as<const int&>;
     };
 
     template <typename Candidate>
-    concept mass_based_unit_c = requires()
+    concept homogeneous_unit_c = base_unit_c<Candidate >|| raised_unit_c<Candidate>;
+
+
+    template<class Candidate, std::size_t index>
+    concept has_base_unit_tuple_element_c = requires (Candidate candidate)
     {
-        requires unit_c<Candidate>;
-        { Candidate::mass() } -> std::convertible_to<quantity_data>;
+        requires homogeneous_unit_c<typename std::tuple_element<index, Candidate>::type>;
+        { get<index>(candidate) } -> std::convertible_to<std::tuple_element_t<index, Candidate>&>;
+    };
+
+    template<class Candidate>
+    concept is_base_unit_tuple_like_c = requires
+    {
+        requires []<std::size_t... indices>(std::index_sequence<indices...>)
+        {
+            return (has_base_unit_tuple_element_c<Candidate, indices> && ...);
+        }
+        (std::make_index_sequence<std::tuple_size_v<Candidate>>{});
+
     };
 
     template <typename Candidate>
-    concept angle_based_unit_c = requires()
+    concept heterogeneous_unit_c = requires(Candidate candidate)
     {
         requires unit_c<Candidate>;
-        { Candidate::angle() } -> std::convertible_to<quantity_data>;
+        requires is_base_unit_tuple_like_c<std::remove_cvref_t<decltype(Candidate::base_units)>>;
     };
-
-    template <typename Candidate>
-    concept base_unit_c = unit_c<Candidate> && type_of(Candidate{}) == unit_type::basic;
-
-    template <typename Candidate>
-    concept raised_unit_c = unit_c<Candidate> && type_of(Candidate{}) == unit_type::exponentiation;
-
-    template <typename Candidate>
-    concept multiplied_unit_c = unit_c<Candidate> && type_of(Candidate{}) == unit_type::product;
-
-    template <typename Candidate>
-    concept homogeneous_unit_c = unit_c<Candidate> && type_of(Candidate{}) != unit_type::product;
 
 
 
     template <unit_c Unit>
-    [[nodiscard]] consteval unit_type type_of(Unit unit) noexcept
+    [[nodiscard]] consteval bool is_base_unit(Unit unit) noexcept
     {
-        if constexpr(typed_unit_c<Unit>)
-        {
-            return unit.type;
-        }
-        else
-        {
-            return unit_type::basic;
-        }
+        return base_unit_c<Unit>;
     }
 
-    template <quantity quantity_, base_unit_c Unit>
-    [[nodiscard]] consteval quantity_data data_of(Unit unit) noexcept
+    template <unit_c Unit>
+    [[nodiscard]] consteval bool is_raised_unit(Unit unit) noexcept
     {
-        if constexpr(quantity_ == quantity::length && length_based_unit_c<Unit>)
-        {
-            return unit.length();
-        }
-        else if constexpr(quantity_ == quantity::time && time_based_unit_c<Unit>)
-        {
-            return unit.time();
-        }
-        else if constexpr(quantity_ == quantity::mass && mass_based_unit_c<Unit>)
-        {
-            return unit.mass();
-        }
-        else if constexpr(quantity_ == quantity::angle && angle_based_unit_c<Unit>)
-        {
-            return unit.angle();
-        }
-        else
-        {
-            return {};
-        }
+        return raised_unit_c<Unit>;
+    }
+
+    template <unit_c Unit>
+    [[nodiscard]] consteval bool is_heterogeneous_unit(Unit unit) noexcept
+    {
+        return heterogeneous_unit_c<Unit>;
     }
 
 
@@ -143,20 +118,17 @@ namespace zollstock
     template <base_unit_c auto base_unit_, int exponent_>
     struct unit_exponentiation
     {
-        static constexpr auto type = unit_type::exponentiation;
         static constexpr auto base_unit = base_unit_;
         static constexpr auto exponent = exponent_;
     };
 
 
-    template<homogeneous_unit_c auto... base_units>
+    template<homogeneous_unit_c auto... base_units_>
     struct unit_product
     {
-        static constexpr auto type = unit_type::product;
-        static constexpr auto size = sizeof...(base_units);
+        static constexpr auto base_units = std::tuple{ base_units_... };
+        static constexpr std::size_t size = sizeof...(base_units_);
     };
-
-
 
     template <base_unit_c auto unit, int exponent_>
     inline constexpr auto unit_exponentiation_v = unit_exponentiation<unit, exponent_>{};
@@ -186,18 +158,42 @@ namespace zollstock
 
 
 
-    template <quantity quantity_, base_unit_c auto base_unit, int exponent>
-    [[nodiscard]] consteval quantity_data data_of(
-        unit_exponentiation<base_unit, exponent> unit
-    ) noexcept
+    template <quantity quantity_>
+    [[nodiscard]] consteval quantity_data data_of(base_unit_c auto unit) noexcept
     {
-        return pow(data_of<quantity_>(base_unit), exponent);
+        if constexpr(quantity_ == unit.quantity_)
+        {
+            return { 1, unit.factor, unit.symbol };
+        }
+        else
+        {
+            return {};
+        }
     }
 
-    template <quantity quantity_, homogeneous_unit_c auto... base_units>
-    [[nodiscard]] consteval quantity_data data_of(unit_product<base_units...> unit) noexcept
+    template <quantity quantity_>
+    [[nodiscard]] consteval quantity_data data_of(raised_unit_c auto unit) noexcept
     {
-        return (quantity_data{} * ... * data_of<quantity_>(base_units));
+        if constexpr(quantity_ == unit.base_unit.quantity_)
+        {
+            return { unit.exponent, unit.base_unit.factor, unit.base_unit.symbol };
+        }
+        else
+        {
+            return {};
+        }
+    }
+
+    template <quantity quantity_>
+    [[nodiscard]] consteval quantity_data data_of(heterogeneous_unit_c auto unit) noexcept
+    {
+        return [&unit]<std::size_t... indices>(std::index_sequence<indices...>)
+        {
+            return (
+                quantity_data{} * ... * data_of<quantity_>(std::get<indices>(unit.base_units))
+            );
+        }
+        (std::make_index_sequence<unit.size>{});
     }
 
 
@@ -425,18 +421,7 @@ namespace zollstock
                 base_unit, unit_product_v<remaining_base_units...>
             );
 
-            if constexpr (type_of(first_base_unit) == unit_type::basic)
-            {
-                if constexpr(first_base_unit == base_unit)
-                {
-                    return erasure_result{ cleared_tail, exponent + 1 };
-                }
-                else
-                {
-                    return erasure_result{ unit, exponent };
-                }
-            }
-            else if constexpr(type_of(first_base_unit) == unit_type::exponentiation)
+            if constexpr(is_raised_unit(first_base_unit))
             {
                 if constexpr(first_base_unit.base_unit == base_unit)
                 {
@@ -450,6 +435,18 @@ namespace zollstock
                     return erasure_result{ unit, exponent };
                 }
             }
+            else if constexpr (is_base_unit(first_base_unit))
+            {
+                if constexpr(first_base_unit == base_unit)
+                {
+                    return erasure_result{ cleared_tail, exponent + 1 };
+                }
+                else
+                {
+                    return erasure_result{ unit, exponent };
+                }
+            }
+
         }
 
         [[nodiscard]] consteval auto combine_redundant_product_bases(unit_product<> unit) noexcept
@@ -469,7 +466,7 @@ namespace zollstock
             {
                 return unit;
             }
-            if constexpr (type_of(first_base_unit) == unit_type::basic)
+            if constexpr (is_base_unit(first_base_unit))
             {
                 constexpr auto erasure_result = erase_product_base(
                     first_base_unit,
@@ -488,7 +485,7 @@ namespace zollstock
                     return prepend_to_product_raw(first_base_unit, erasure_result.unit);
                 }
             }
-            else if constexpr(type_of(first_base_unit) == unit_type::exponentiation)
+            else if constexpr(is_raised_unit(first_base_unit))
             {
                 constexpr auto erasure_result = erase_product_base(
                     first_base_unit.base_unit,
@@ -512,75 +509,73 @@ namespace zollstock
             }
         }
 
-        template <base_unit_c Unit>
-        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
-        {
-            return unit;
-        }
 
-        template <raised_unit_c Unit> requires(Unit::exponent == 0)
-        [[nodiscard]] consteval auto simplify_combined_unit(Unit) noexcept
-        {
-            return _1;
-        }
 
-        template <raised_unit_c Unit> requires(Unit::exponent == 1)
-        [[nodiscard]] consteval auto simplify_combined_unit(Unit) noexcept
+        [[nodiscard]] consteval auto simplify_combined_unit(unit_c auto unit) noexcept
         {
-            return Unit::base_unit;
-        }
-
-        template <raised_unit_c Unit>
-        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
-        {
-            return unit;
-        }
-
-        template <multiplied_unit_c Unit> requires(Unit::size == 0)
-        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
-        {
-            return _1;
-        }
-
-        template <multiplied_unit_c Unit> requires(Unit::size == 1)
-        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
-        {
-            return simplify_combined_unit(first_base_of(unit));
-        }
-
-        template <multiplied_unit_c Unit>
-        [[nodiscard]] consteval auto simplify_combined_unit(Unit unit) noexcept
-        {
-            constexpr auto reduced_unit = combine_redundant_product_bases(unit);
-
-            if constexpr(reduced_unit.size <= 1)
+            if constexpr(is_base_unit(unit))
             {
-                return simplify_combined_unit(reduced_unit);
+                return unit;
             }
-            else
+            else if constexpr(is_raised_unit(unit))
             {
-                return reduced_unit;
+                if constexpr(unit.exponent == 0)
+                {
+                    return _1;
+                }
+                else if constexpr(unit.exponent == 1)
+                {
+                    return unit.base_unit;
+                }
+                else
+                {
+                    return unit;
+                }
+            }
+            else if constexpr(is_heterogeneous_unit(unit))
+            {
+                if constexpr(unit.size == 0)
+                {
+                    return _1;
+                }
+                else if constexpr(unit.size == 1)
+                {
+                    return simplify_combined_unit(first_base_of(unit));
+                }
+                else
+                {
+                    constexpr auto reduced_unit = combine_redundant_product_bases(unit);
+
+                    if constexpr(reduced_unit.size <= 1)
+                    {
+                        return simplify_combined_unit(reduced_unit);
+                    }
+                    else
+                    {
+                        return reduced_unit;
+                    }
+                }
             }
         }
 
 
 
         [[nodiscard]] consteval auto append_to_product(
-            homogeneous_unit_c auto base_unit, multiplied_unit_c auto unit
+            homogeneous_unit_c auto base_unit, heterogeneous_unit_c auto unit
         ) noexcept
         {
             return simplify_combined_unit(append_to_product_raw(base_unit, unit));
         }
 
         [[nodiscard]] consteval auto prepend_to_product(
-            homogeneous_unit_c auto base_unit, multiplied_unit_c auto unit
+            homogeneous_unit_c auto base_unit, heterogeneous_unit_c auto unit
         ) noexcept
         {
             return simplify_combined_unit(prepend_to_product_raw(base_unit, unit));
         }
 
         [[nodiscard]] consteval auto concat_products(
-            multiplied_unit_c auto unit_1, multiplied_unit_c auto unit_2
+            heterogeneous_unit_c auto unit_1, heterogeneous_unit_c auto unit_2
         ) noexcept
         {
             return simplify_combined_unit(concat_products_raw(unit_1, unit_2));
@@ -590,20 +585,17 @@ namespace zollstock
 
     [[nodiscard]] consteval auto operator*(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        if constexpr(
-            type_of(unit_1) == unit_type::product &&
-            type_of(unit_2) == unit_type::product
-        )
+        if constexpr(is_heterogeneous_unit(unit_1) && is_heterogeneous_unit(unit_2))
         {
             return detail::concat_products(unit_1, unit_2);
         }
         else
-        if constexpr(type_of(unit_1) == unit_type::product)
+        if constexpr(is_heterogeneous_unit(unit_1))
         {
             return detail::append_to_product(unit_2, unit_1);
         }
         else
-        if constexpr(type_of(unit_2) == unit_type::product)
+        if constexpr(is_heterogeneous_unit(unit_2))
         {
             return detail::prepend_to_product(unit_1, unit_2);
         }
@@ -627,7 +619,7 @@ namespace zollstock
             {
                 return unit;
             }
-            else if constexpr(type_of(unit) == unit_type::exponentiation)
+            else if constexpr(is_raised_unit(unit))
             {
                 return unit_exponentiation_v<unit.base_unit, unit.exponent * exponent>;
             }
@@ -651,30 +643,18 @@ namespace zollstock
 
 
 
-    namespace detail
-    {
-
-        template <quantity... quantities>
-        [[nodiscard]] consteval bool equal(
-            unit_c auto unit_1, unit_c auto unit_2, quantity_sequence<quantities...>
-        ) noexcept
-        {
-            return (
-                ... &&
-                (data_of<quantities>(unit_1) == data_of<quantities>(unit_2))
-            );
-        }
-
-    }
-
     [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return detail::equal(unit_1, unit_2, make_quantity_sequence());
+        return [=]<quantity... quantities>(quantity_sequence<quantities...>)
+        {
+            return (... && (data_of<quantities>(unit_1) == data_of<quantities>(unit_2)));
+        }
+        (make_quantity_sequence());
     }
 
     [[nodiscard]] consteval bool operator!=(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return !detail::equal(unit_1, unit_2, make_quantity_sequence());
+        return !(unit_1 == unit_2);
     }
 
 }

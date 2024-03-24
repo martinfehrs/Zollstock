@@ -13,7 +13,9 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_second
     {
-        static constexpr quantity_data time{ 1, Prefix::factor, Prefix::symbol + "s"_us };
+        static constexpr auto quantity_ = quantity::time;
+        static constexpr auto symbol = Prefix::symbol + "s"_us;
+        static constexpr auto factor = Prefix::factor;
     };
 
     using quectosecond = basic_second<quecto    >;
@@ -44,22 +46,30 @@ namespace zollstock::inline units::inline types
 
     struct minute
     {
-        static constexpr quantity_data time{ 1, 60.0L, "min"_us };
+        static constexpr auto quantity_ = quantity::time;
+        static constexpr auto symbol = "min"_us;
+        static constexpr auto factor = 60.0L;
     };
 
     struct hour
     {
-        static constexpr quantity_data time{ 1, 3'600.0L, "h"_us };
+        static constexpr auto quantity_ = quantity::time;
+        static constexpr auto symbol = "h"_us;
+        static constexpr auto factor = 3'600.0L;
     };
 
     struct day
     {
-        static constexpr quantity_data time{ 1, 86'400.0L, "d"_us };
+        static constexpr auto quantity_ = quantity::time;
+        static constexpr auto symbol = "d"_us;
+        static constexpr auto factor = 86'400.0L;
     };
 
     struct year
     {
-        static constexpr quantity_data time{ 1, 31'536'000.0L, "a"_us };
+        static constexpr auto quantity_ = quantity::time;
+        static constexpr auto symbol = "a"_us;
+        static constexpr auto factor = 31'536'000.0L;
     };
 
 }

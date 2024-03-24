@@ -14,7 +14,9 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_radian
     {
-        static constexpr quantity_data angle{ 1, Prefix::factor, Prefix::symbol + "rad"_us };
+        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto symbol = Prefix::symbol + "rad"_us;
+        static constexpr auto factor = Prefix::factor;
     };
 
     using quectoradian = basic_radian<quecto    >;
@@ -45,24 +47,32 @@ namespace zollstock::inline units::inline types
 
     struct degree
     {
-        static constexpr quantity_data angle{ 1, pi/180.0L, "deg"_us };
+        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto symbol = "deg"_us;
+        static constexpr auto factor = pi/180.0L;
     };
 
     struct arcminute
     {
-        static constexpr quantity_data angle{ 1, pi/10.8e3L, "amin"_us };
+        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto symbol = "amin"_us;
+        static constexpr auto factor = pi/10.8e3L;
     };
 
     template <prefix_c Prefix>
     struct basic_arcsecond
     {
-        static constexpr quantity_data angle{ 1, Prefix::factor * pi/648e3L, Prefix::symbol + "as"_us };
+        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto symbol = Prefix::symbol + "as"_us;
+        static constexpr auto factor = Prefix::factor * pi/648e3L;
     };
 
     template <>
     struct basic_arcsecond<unprefixed>
     {
-        static constexpr quantity_data angle{ 1, pi/648e3L, "arcsec"_us };
+        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto symbol = "arcsec"_us;
+        static constexpr auto factor = pi/648e3L;
     };
 
     using quectoarcsecond = basic_arcsecond<quecto    >;
@@ -94,7 +104,9 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_gradian
     {
-        static constexpr quantity_data angle{ 1, Prefix::factor * pi/200.0L, Prefix::symbol + "gon"_us };
+        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto symbol = Prefix::symbol + "gon"_us;
+        static constexpr auto factor = Prefix::factor * pi/200.0L;
     };
 
     using quectogradian = basic_gradian<quecto    >;

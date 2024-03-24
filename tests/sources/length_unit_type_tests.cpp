@@ -3,12 +3,10 @@
 #include <zollstock/tests/type_test_helpers.hpp>
 
 
-using namespace zollstock;
-
 
 TEST_CASE("length-unit-types", "[length][unit][types]")
 {
+    using namespace zollstock;
 
-    TEST_TYPES(ALL, length, meter, 1e0L, m)
-
+    TEST_BASE_TYPES(ALL, meter, quantity::length, "m"_us, 1e0L)
 }
