@@ -650,7 +650,7 @@ namespace zollstock
 
     [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return [=]<quantity... quantities>(quantity_sequence<quantities...>)
+        return [&unit_1, &unit_2]<quantity... quantities>(quantity_sequence<quantities...>)
         {
             return (... && (data_of<quantities>(unit_1) == data_of<quantities>(unit_2)));
         }
