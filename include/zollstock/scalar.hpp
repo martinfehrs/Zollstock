@@ -135,7 +135,12 @@ namespace zollstock
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
         [[nodiscard]] constexpr scalar<that_unit, value_type> as() const noexcept
         {
-            return this->as_impl<that_unit>(make_quantity_sequence());
+            auto new_value = this->value_;
+
+            for(const quantity quantity_ : quantities)
+                value *= this->dimension_factor<that_unit>(quantities);
+
+            return { new_value };
         }
 
         template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
@@ -184,29 +189,21 @@ namespace zollstock
 
     private:
 
-        template <unit_c auto that_unit, quantity quantity_>
-        [[nodiscard]] constexpr value_type dimension_factor() const noexcept
+        template <unit_c auto that_unit>
+        [[nodiscard]] constexpr value_type dimension_factor(quantity quantity_) const noexcept
         {
-            constexpr auto this_exponent = data_of<quantity_>(this_unit).exponent;
-            constexpr auto that_exponent = data_of<quantity_>(that_unit).exponent;
+            constexpr auto this_exponent = data_of(quantity_, this_unit).exponent;
+            constexpr auto that_exponent = data_of(quantity_, that_unit).exponent;
 
             if constexpr(this_exponent != 0 && that_exponent != 0)
             {
-                return std::pow(data_of<quantity_>(this_unit).factor, this_exponent) /
-                       std::pow(data_of<quantity_>(that_unit).factor, that_exponent);
+                return std::pow(data_of(quantity_, this_unit).factor, this_exponent) /
+                       std::pow(data_of(quantity_, that_unit).factor, that_exponent);
             }
             else
             {
                 return value_type{ 1.0L };
             }
-        }
-
-        template <unit_c auto that_unit, quantity... quantities>
-        [[nodiscard]] constexpr scalar<that_unit, value_type> as_impl(
-            quantity_sequence<quantities...>
-        ) const noexcept
-        {
-            return { (this->value_ * ... * this->dimension_factor<that_unit, quantities>()) };
         }
 
 #if defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS)

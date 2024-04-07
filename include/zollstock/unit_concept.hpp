@@ -91,26 +91,14 @@ namespace zollstock
 
 
 
-    namespace detail
-    {
-
-        template <quantity... quantities>
-        [[nodiscard]] consteval bool convertible_units_impl(
-            unit_c auto unit_1, unit_c auto unit_2, quantity_sequence<quantities...>
-        ) noexcept
-        {
-            return (
-                ... &&
-                (data_of<quantities>(unit_1).exponent ==
-                 data_of<quantities>(unit_2).exponent)
-            );
-        }
-
-    }
-
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return detail::convertible_units_impl(unit_1, unit_2, make_quantity_sequence());
+        bool convertible = true;
+
+        for (const quantity quantity_ : quantities)
+            convertible = convertible && (data_of(quantity_, unit_1).exponent == data_of(quantity_, unit_2).exponent);
+
+        return convertible;
     }
 
 
@@ -158,10 +146,11 @@ namespace zollstock
 
 
 
-    template <quantity quantity_>
-    [[nodiscard]] consteval quantity_data data_of(base_unit_c auto unit) noexcept
+    [[nodiscard]] consteval quantity_data data_of(
+        quantity quantity_, base_unit_c auto unit
+    ) noexcept
     {
-        if constexpr(quantity_ == unit.quantity_)
+        if (quantity_ == unit.quantity_)
         {
             return { 1, unit.factor, unit.symbol };
         }
@@ -171,10 +160,11 @@ namespace zollstock
         }
     }
 
-    template <quantity quantity_>
-    [[nodiscard]] consteval quantity_data data_of(raised_unit_c auto unit) noexcept
+    [[nodiscard]] consteval quantity_data data_of(
+        quantity quantity_, raised_unit_c auto unit
+    ) noexcept
     {
-        if constexpr(quantity_ == unit.base_unit.quantity_)
+        if (quantity_ == unit.base_unit.quantity_)
         {
             return { unit.exponent, unit.base_unit.factor, unit.base_unit.symbol };
         }
@@ -184,13 +174,14 @@ namespace zollstock
         }
     }
 
-    template <quantity quantity_>
-    [[nodiscard]] consteval quantity_data data_of(heterogeneous_unit_c auto unit) noexcept
+    [[nodiscard]] consteval quantity_data data_of(
+        quantity quantity_, heterogeneous_unit_c auto unit
+    ) noexcept
     {
-        return [&unit]<std::size_t... indices>(std::index_sequence<indices...>)
+        return [quantity_, &unit]<std::size_t... indices>(std::index_sequence<indices...>) consteval
         {
             return (
-                quantity_data{} * ... * data_of<quantity_>(std::get<indices>(unit.base_units))
+                quantity_data{} * ... * data_of(quantity_, std::get<indices>(unit.base_units))
             );
         }
         (std::make_index_sequence<unit.size>{});
@@ -222,7 +213,7 @@ namespace zollstock
         {
             std::basic_string<Char> unit_representation;
 
-            constexpr quantity_data data = data_of<quantity_>(unit);
+            constexpr quantity_data data = data_of(quantity_, unit);
 
             if(data.exponent != 0)
             {
@@ -297,14 +288,16 @@ namespace zollstock
 
         };
 
-        template <typename Char, quantity... quantities>
-        [[nodiscard]] std::basic_string<Char> to_basic_string_impl(
-            unit_c auto unit, quantity_sequence<quantities...>
-        )
+        template <const auto& quantities, typename Char>
+        [[nodiscard]] std::basic_string<Char> to_basic_string_impl(unit_c auto unit)
         {
-            return detail::basic_concatenator<Char>{ '*' }(
-                detail::quantity_entry_to_string<quantities, Char>(unit)...
-            );
+            return [unit]<std::size_t... indices>(std::index_sequence<indices...>)
+            {
+                return detail::basic_concatenator<Char>{ '*' }(
+                    detail::quantity_entry_to_string<quantities[indices], Char>(unit)...
+                );
+            }
+            (std::make_index_sequence<std::size(quantities)>{});
         }
 
     }
@@ -313,8 +306,8 @@ namespace zollstock
     [[nodiscard]] std::basic_string<Char> to_basic_string(unit_c auto unit)
     {
         return detail::basic_concatenator<Char>{ "*" }(
-            detail::to_basic_string_impl<Char>(unit, make_derived_quantity_sequence()),
-            detail::to_basic_string_impl<Char>(unit, make_base_quantity_sequence())
+            detail::to_basic_string_impl<derived_quantities, Char>(unit),
+            detail::to_basic_string_impl<base_quantities, Char>(unit)
         );
     }
 
@@ -650,11 +643,12 @@ namespace zollstock
 
     [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return [&unit_1, &unit_2]<quantity... quantities>(quantity_sequence<quantities...>)
-        {
-            return (... && (data_of<quantities>(unit_1) == data_of<quantities>(unit_2)));
-        }
-        (make_quantity_sequence());
+        bool equal = true;
+
+        for(const quantity quantity_ : quantities)
+            equal = equal && data_of(quantity_, unit_1) == data_of(quantity_, unit_2);
+
+        return equal;
     }
 
     [[nodiscard]] consteval bool operator!=(unit_c auto unit_1, unit_c auto unit_2) noexcept
