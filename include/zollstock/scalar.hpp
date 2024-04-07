@@ -138,7 +138,7 @@ namespace zollstock
             auto new_value = this->value_;
 
             for(const quantity quantity_ : quantities)
-                value *= this->dimension_factor<that_unit>(quantities);
+                new_value *= this->dimension_factor<that_unit>(quantities);
 
             return { new_value };
         }
