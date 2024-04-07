@@ -340,7 +340,7 @@ namespace zollstock
         homogeneous_unit_c auto first_base_unit,
         homogeneous_unit_c auto... remaining_base_units
     >
-    [[nodiscard]] consteval auto first_base_of(
+    [[nodiscard]] consteval auto head(
         unit_product<first_base_unit, remaining_base_units...>
     ) noexcept
     {
@@ -349,14 +349,13 @@ namespace zollstock
 
     template <
         homogeneous_unit_c auto first_base_unit,
-        homogeneous_unit_c auto second_base_unit,
         homogeneous_unit_c auto... remaining_base_units
     >
-    [[nodiscard]] consteval auto second_base_of(
-        unit_product<first_base_unit, second_base_unit, remaining_base_units...>
+    [[nodiscard]] consteval auto tail(
+        unit_product<first_base_unit, remaining_base_units...>
     ) noexcept
     {
-        return second_base_unit;
+        return unit_product_v<remaining_base_units...>;
     }
 
 
@@ -449,62 +448,60 @@ namespace zollstock
 
         }
 
-        [[nodiscard]] consteval auto combine_redundant_product_bases(unit_product<> unit) noexcept
-        {
-            return unit;
-        }
 
-        template <
-            homogeneous_unit_c auto first_base_unit,
-            homogeneous_unit_c auto... remaining_base_units
-        >
+
         [[nodiscard]] consteval auto combine_redundant_product_bases(
-            unit_product<first_base_unit, remaining_base_units...> unit
+            heterogeneous_unit_c auto unit
         ) noexcept
         {
-            if constexpr(unit.size == 1)
+            if constexpr(unit.size <= 1)
             {
                 return unit;
             }
-            if constexpr (is_base_unit(first_base_unit))
+            else
             {
-                constexpr auto erasure_result = erase_product_base(
-                    first_base_unit,
-                    combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
-                );
+                auto first = head(unit);
 
-                if constexpr(erasure_result.exponent != 0)
+                if constexpr (is_base_unit(first))
                 {
-                    return prepend_to_product_raw(
-                        unit_exponentiation_v<first_base_unit, erasure_result.exponent + 1>,
-                        erasure_result.unit
+                    constexpr auto erasure_result = erase_product_base(
+                        first,
+                        combine_redundant_product_bases(tail(unit))
                     );
-                }
-                else
-                {
-                    return prepend_to_product_raw(first_base_unit, erasure_result.unit);
-                }
-            }
-            else if constexpr(is_raised_unit(first_base_unit))
-            {
-                constexpr auto erasure_result = erase_product_base(
-                    first_base_unit.base_unit,
-                    combine_redundant_product_bases(unit_product_v<remaining_base_units...>)
-                );
 
-                if constexpr(erasure_result.exponent != 0)
-                {
-                    return prepend_to_product_raw(
-                        unit_exponentiation_v<
-                            first_base_unit.base_unit,
-                            first_base_unit.exponent + erasure_result.exponent
-                        >,
-                        erasure_result.unit
-                    );
+                    if constexpr(erasure_result.exponent != 0)
+                    {
+                        return prepend_to_product_raw(
+                            unit_exponentiation_v<first, erasure_result.exponent + 1>,
+                            erasure_result.unit
+                        );
+                    }
+                    else
+                    {
+                        return prepend_to_product_raw(first, erasure_result.unit);
+                    }
                 }
-                else
+                else if constexpr(is_raised_unit(first))
                 {
-                    return prepend_to_product_raw(first_base_unit, erasure_result.unit);
+                    constexpr auto erasure_result = erase_product_base(
+                        first.base_unit,
+                        combine_redundant_product_bases(tail(unit))
+                    );
+
+                    if constexpr(erasure_result.exponent != 0)
+                    {
+                        return prepend_to_product_raw(
+                            unit_exponentiation_v<
+                                first.base_unit,
+                                first.exponent + erasure_result.exponent
+                            >,
+                            erasure_result.unit
+                        );
+                    }
+                    else
+                    {
+                        return prepend_to_product_raw(first, erasure_result.unit);
+                    }
                 }
             }
         }
@@ -540,7 +537,7 @@ namespace zollstock
                 }
                 else if constexpr(unit.size == 1)
                 {
-                    return simplify_combined_unit(first_base_of(unit));
+                    return simplify_combined_unit(head(unit));
                 }
                 else
                 {
@@ -622,6 +619,14 @@ namespace zollstock
             else if constexpr(is_raised_unit(unit))
             {
                 return unit_exponentiation_v<unit.base_unit, unit.exponent * exponent>;
+            }
+            else if constexpr(is_heterogeneous_unit(unit))
+            {
+                return [=]<std::size_t... indices>(std::index_sequence<indices...>)
+                {
+                    return unit_product_v<pow<exponent>(std::get<indices>(unit.base_units))...>;
+                }
+                (std::make_index_sequence<unit.size>{});
             }
             else
             {
