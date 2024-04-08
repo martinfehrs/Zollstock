@@ -174,17 +174,24 @@ namespace zollstock
         }
     }
 
-    [[nodiscard]] consteval quantity_data data_of(
-        quantity quantity_, heterogeneous_unit_c auto unit
-    ) noexcept
+    namespace detail
     {
-        return [quantity_, &unit]<std::size_t... indices>(std::index_sequence<indices...>) consteval
+        template <std::size_t... indices>
+        [[nodiscard]] consteval quantity_data data_of_impl(
+            quantity quantity_, heterogeneous_unit_c auto unit, std::index_sequence<indices...>
+        ) noexcept
         {
             return (
                 quantity_data{} * ... * data_of(quantity_, std::get<indices>(unit.base_units))
             );
         }
-        (std::make_index_sequence<unit.size>{});
+    }
+
+    [[nodiscard]] consteval quantity_data data_of(
+        quantity quantity_, heterogeneous_unit_c auto unit
+    ) noexcept
+    {
+        return detail::data_of_impl(quantity_, unit, std::make_index_sequence<unit.size>{});
     }
 
 
