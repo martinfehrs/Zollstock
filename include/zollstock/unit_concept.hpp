@@ -97,7 +97,8 @@ namespace zollstock
         bool convertible = true;
 
         for (const quantity quantity_ : quantities)
-            convertible = convertible && (data_of(quantity_, unit_1).exponent == data_of(quantity_, unit_2).exponent);
+            convertible = convertible && data_of(quantity_, unit_1).exponent
+                                      == data_of(quantity_, unit_2).exponent;
 
         return convertible;
     }
@@ -216,6 +217,7 @@ namespace zollstock
 
     namespace detail
     {
+
         template <std::size_t... indices>
         [[nodiscard]] consteval quantity_data data_of_impl(
             quantity quantity_, heterogeneous_unit_c auto unit, std::index_sequence<indices...>
@@ -225,6 +227,7 @@ namespace zollstock
                 quantity_data{} * ... * data_of(quantity_, std::get<indices>(unit.base_units))
             );
         }
+
     }
 
     [[nodiscard]] consteval quantity_data data_of(
