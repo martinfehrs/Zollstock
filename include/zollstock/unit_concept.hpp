@@ -4,6 +4,7 @@
 
 #include <zollstock/quantity_data.hpp>
 
+#include <array>
 #include <type_traits>
 #include <concepts>
 #include <string>
@@ -142,6 +143,45 @@ namespace zollstock
 
         }
 
+    }
+
+    [[nodiscard]] consteval auto unit_quantities(base_unit_c auto unit) noexcept
+    {
+        return std::array{ unit.quantity_ };
+    }
+
+    [[nodiscard]] consteval auto unit_quantities(raised_unit_c auto unit) noexcept
+    {
+        return unit_quantities(unit.base_unit);
+    }
+
+    namespace detail
+    {
+
+        [[nodiscard]] consteval auto unit_quantity(base_unit_c auto unit) noexcept
+        {
+            return unit.quantity_;
+        }
+
+        [[nodiscard]] consteval auto unit_quantity(raised_unit_c auto unit) noexcept
+        {
+            return unit_quantity(unit.base_unit);
+        }
+
+        [[nodiscard]] consteval auto units_quantities(homogeneous_unit_c auto... units) noexcept
+        {
+            std::array quantities{ unit_quantitiy(units)... };
+
+            std::ranges::sort(quantities);
+
+            return quantities;
+        }
+
+    }
+
+    [[nodiscard]] consteval auto unit_quantities(heterogeneous_unit_c auto unit) noexcept
+    {
+        return std::apply(detail::units_quantities, unit.base_units);
     }
 
 
