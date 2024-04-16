@@ -94,11 +94,17 @@ namespace zollstock
 
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
+        const auto unit_data_1 = unit_data(unit_1);
+        const auto unit_data_2 = unit_data(unit_2);
+
+        if(std::size(unit_data_1) != std::size(unit_data_2))
+            return false;
+
         bool convertible = true;
 
-        for (const quantity quantity_ : quantities)
-            convertible = convertible && data_of(quantity_, unit_1).exponent
-                                      == data_of(quantity_, unit_2).exponent;
+        for(std::size_t i = 0; i < std::size(unit_data_1); ++i)
+            convertible = convertible && unit_data_1[i].quantity_ == unit_data_2[i].quantity_
+                                      && unit_data_1[i].exponent  == unit_data_2[i].exponent;
 
         return convertible;
     }
@@ -169,49 +175,50 @@ namespace zollstock
             return unit_quantity(unit.base_unit);
         }
 
-        [[nodiscard]] consteval auto units_quantities(homogeneous_unit_c auto... units) noexcept
-        {
-            std::array quantities{ unit_quantitiy(units)... };
-
-            std::ranges::sort(quantities);
-
-            return quantities;
-        }
-
     }
 
     [[nodiscard]] consteval auto unit_quantities(heterogeneous_unit_c auto unit) noexcept
     {
-        return std::apply(detail::units_quantities, unit.base_units);
+        return std::apply(
+            [](homogeneous_unit_c auto... units)
+            {
+                std::array<quantity, sizeof...(units)> quantities{ detail::unit_quantity(units)... };
+
+                std::ranges::sort(quantities);
+
+                return quantities;
+            },
+            unit.base_units
+        );
     }
 
 
 
-    [[nodiscard]] consteval quantity_data data_of(
+    [[nodiscard]] consteval quantity_data unit_data_for(
         quantity quantity_, base_unit_c auto unit
     ) noexcept
     {
         if (quantity_ == unit.quantity_)
         {
-            return { 1, unit.factor, unit.symbol };
+            return { quantity_, 1, unit.factor, unit.symbol };
         }
         else
         {
-            return {};
+            return { quantity_ };
         }
     }
 
-    [[nodiscard]] consteval quantity_data data_of(
+    [[nodiscard]] consteval quantity_data unit_data_for(
         quantity quantity_, raised_unit_c auto unit
     ) noexcept
     {
         if (quantity_ == unit.base_unit.quantity_)
         {
-            return { unit.exponent, unit.base_unit.factor, unit.base_unit.symbol };
+            return { quantity_, unit.exponent, unit.base_unit.factor, unit.base_unit.symbol };
         }
         else
         {
-            return {};
+            return { quantity_ };
         }
     }
 
@@ -219,22 +226,36 @@ namespace zollstock
     {
 
         template <std::size_t... indices>
-        [[nodiscard]] consteval quantity_data data_of_impl(
+        [[nodiscard]] consteval quantity_data unit_data_for_impl(
             quantity quantity_, heterogeneous_unit_c auto unit, std::index_sequence<indices...>
         ) noexcept
         {
             return (
-                quantity_data{} * ... * data_of(quantity_, std::get<indices>(unit.base_units))
+                quantity_data{ quantity_ } * ... * unit_data_for(quantity_, std::get<indices>(unit.base_units))
             );
         }
 
     }
 
-    [[nodiscard]] consteval quantity_data data_of(
+    [[nodiscard]] consteval quantity_data unit_data_for(
         quantity quantity_, heterogeneous_unit_c auto unit
     ) noexcept
     {
-        return detail::data_of_impl(quantity_, unit, std::make_index_sequence<unit.size>{});
+        return detail::unit_data_for_impl(quantity_, unit, std::make_index_sequence<unit.size>{});
+    }
+
+
+
+    [[nodiscard]] consteval auto unit_data(unit_c auto unit) noexcept
+    {
+        const auto quantities = unit_quantities(unit);
+
+        std::array<quantity_data, std::size(quantities)> data;
+
+        for(std::size_t i = 0; i < std::size(quantities); ++i)
+            data[i] = unit_data_for(quantities[i], unit);
+
+        return data;
     }
 
 
@@ -258,107 +279,32 @@ namespace zollstock
             return string_representation;
         }
 
-        template <quantity quantity_, typename Char>
-        [[nodiscard]] std::basic_string<Char> quantity_entry_to_string(unit_c auto unit)
-        {
-            std::basic_string<Char> unit_representation;
-
-            constexpr quantity_data data = data_of(quantity_, unit);
-
-            if(data.exponent != 0)
-            {
-                std::string_view symbol_string{ data.symbol.c_str() };
-
-                unit_representation.append(symbol_string.begin(), symbol_string.end());
-
-                if(data.exponent != 1)
-                    unit_representation += exponent_to_string<Char>(data.exponent);
-            }
-
-            return unit_representation;
-        }
-
-        template <typename Char>
-        class basic_concatenator
-        {
-
-        public:
-
-            template <typename Separator>
-            explicit basic_concatenator(const Separator& separator)
-                : separator{ stringify(separator) }
-            {
-            }
-
-            template <typename FirstToken, typename... RemainingTokens>
-            [[nodiscard]] std::basic_string<Char> operator()(
-                const FirstToken& first_token,
-                const RemainingTokens&... remaining_tokens
-            )
-            {
-                if constexpr (sizeof...(RemainingTokens) == 0)
-                {
-                    return stringify(first_token);
-                }
-                else
-                {
-                    std::basic_string result = stringify(first_token);
-
-                    const std::basic_string tail = (*this)(remaining_tokens...);
-
-                    if(result.size() > 0 && tail.size() > 0)
-                        result += this->separator;
-
-                    result += tail;
-
-                    return result;
-                }
-            }
-
-        private:
-
-            template <typename Token>
-            static std::basic_string<Char> stringify(const Token& token)
-            {
-                if constexpr(std::is_same_v<Token, std::basic_string<Char>>)
-                {
-                    return token;
-                }
-                else
-                {
-                    std::basic_stringstream<Char> sstream;
-
-                    sstream << token;
-
-                    return sstream.str();
-                }
-            }
-
-            std::basic_string<Char> separator;
-
-        };
-
-        template <const auto& quantities, typename Char>
-        [[nodiscard]] std::basic_string<Char> to_basic_string_impl(unit_c auto unit)
-        {
-            return [unit]<std::size_t... indices>(std::index_sequence<indices...>)
-            {
-                return detail::basic_concatenator<Char>{ '*' }(
-                    detail::quantity_entry_to_string<quantities[indices], Char>(unit)...
-                );
-            }
-            (std::make_index_sequence<std::size(quantities)>{});
-        }
-
     }
 
     template <typename Char>
     [[nodiscard]] std::basic_string<Char> to_basic_string(unit_c auto unit)
     {
-        return detail::basic_concatenator<Char>{ "*" }(
-            detail::to_basic_string_impl<derived_quantities, Char>(unit),
-            detail::to_basic_string_impl<base_quantities, Char>(unit)
-        );
+        constexpr auto data = unit_data(unit);
+
+        std::string unit_representation;
+
+        for(std::size_t i = 0; i < std::size(data); ++i)
+        {
+            if(data[i].exponent != 0)
+            {
+                if(i > 0 && !unit_representation.empty() && unit_representation.back() != '*')
+                    unit_representation += '*';
+
+                std::string_view symbol_string{ data[i].symbol.c_str() };
+
+                unit_representation.append(symbol_string.begin(), symbol_string.end());
+
+                if(data[i].exponent != 1)
+                    unit_representation += detail::exponent_to_string<Char>(data[i].exponent);
+            }
+        }
+
+        return unit_representation;
     }
 
     [[nodiscard]] std::string to_string(unit_c auto unit)
@@ -693,10 +639,16 @@ namespace zollstock
 
     [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
+        const auto unit_data_1 = unit_data(unit_1);
+        const auto unit_data_2 = unit_data(unit_2);
+
+        if(std::size(unit_data_1) != std::size(unit_data_2))
+            return false;
+
         bool equal = true;
 
-        for(const quantity quantity_ : quantities)
-            equal = equal && data_of(quantity_, unit_1) == data_of(quantity_, unit_2);
+        for(std::size_t i = 0; i < std::size(unit_data_1); ++i)
+            equal = equal && unit_data_1[i] == unit_data_2[i];
 
         return equal;
     }

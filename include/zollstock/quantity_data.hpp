@@ -12,46 +12,17 @@ namespace zollstock
 
     enum class quantity
     {
+        angle,
         length,
         time,
         mass,
-        angle
-    };
-
-
-
-    template <quantity... quantities>
-    struct quantity_sequence
-    {
-        using value_type = quantity;
-
-        static constexpr std::size_t size() noexcept
-        {
-            return sizeof...(quantities);
-        }
-    };
-
-    inline constexpr quantity quantities[]{
-        quantity::length,
-        quantity::time,
-        quantity::mass,
-        quantity::angle
-    };
-
-    inline constexpr quantity base_quantities[]{
-        quantity::length,
-        quantity::time,
-        quantity::mass
-    };
-
-    inline constexpr quantity derived_quantities[]{
-        quantity::angle
     };
 
 
 
     struct quantity_data
     {
+        quantity quantity_;
         int exponent;
         long double factor;
         unit_symbol symbol;
@@ -60,7 +31,11 @@ namespace zollstock
 
         [[nodiscard]] consteval quantity_data operator*(const quantity_data& that) const
         {
+            if(this->quantity_ != that.quantity_)
+                throw "incompatible quantities";
+
             return {
+                this->quantity_,
                 this->exponent + that.exponent,
                 this->factor != 0 ? this->factor : that.factor,
                 this->select_symbol(that)
@@ -102,7 +77,7 @@ namespace zollstock
 
     [[nodiscard]] consteval quantity_data pow(const quantity_data& udat, int exponent) noexcept
     {
-        return { udat.exponent * exponent, udat.factor, udat.symbol };
+        return { udat.quantity_, udat.exponent * exponent, udat.factor, udat.symbol };
     }
 
     [[nodiscard]] consteval quantity_data operator/(

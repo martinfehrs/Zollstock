@@ -132,18 +132,24 @@ namespace zollstock
             return this_type{ -this->value_ };
         }
 
-        template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
+        template <auto that_unit> requires(convertible_units(this_unit, that_unit))
         [[nodiscard]] constexpr scalar<that_unit, value_type> as() const noexcept
         {
             auto new_value = this->value_;
 
-            for(const quantity quantity_ : quantities)
-                new_value *= this->dimension_factor<that_unit>(quantities);
+            constexpr auto this_data = unit_data(this_unit);
+            constexpr auto that_data = unit_data(that_unit);
+
+            for(std::size_t i = 0; i < std::size(this_data); ++i)
+            {
+                new_value *= std::pow(this_data[i].factor, this_data[i].exponent) /
+                             std::pow(that_data[i].factor, that_data[i].exponent);
+            }
 
             return { new_value };
         }
 
-        template <unit_c auto that_unit> requires(convertible_units(this_unit, that_unit))
+        template <auto that_unit> requires(convertible_units(this_unit, that_unit))
         [[nodiscard]] constexpr operator scalar<that_unit, value_type>() const noexcept
         {
             return this->as<that_unit>();
