@@ -49,12 +49,26 @@ namespace zollstock
             : value_{ narrow<ThisValue>(value) }
         {}
 
-        template <number_c ThatValue>
+        template <auto that_unit, number_c ThatValue>
+            requires(convertible_units(this_unit, that_unit))
+        explicit(!lossless_convertible_v<ThatValue, ThisValue>)
         constexpr scalar(
-            scalar<this_unit, ThatValue> that
+            scalar<that_unit, ThatValue> that
         ) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
-            : scalar{ that.cvalue() }
-        { }
+            : value_{ narrow<ThisValue>(that.value_) }
+        {
+            if constexpr(this_unit != that_unit)
+            {
+                constexpr auto this_data = unit_data(this_unit);
+                constexpr auto that_data = unit_data(that_unit);
+
+                for(std::size_t i = 0; i < std::size(this_data); ++i)
+                {
+                    this->value_ *= std::pow(this_data[i].factor, this_data[i].exponent) /
+                                    std::pow(that_data[i].factor, that_data[i].exponent);
+                }
+            }
+        }
 
 #endif //!defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION)
 
@@ -132,29 +146,6 @@ namespace zollstock
             return this_type{ -this->value_ };
         }
 
-        template <auto that_unit> requires(convertible_units(this_unit, that_unit))
-        [[nodiscard]] constexpr scalar<that_unit, value_type> as() const noexcept
-        {
-            auto new_value = this->value_;
-
-            constexpr auto this_data = unit_data(this_unit);
-            constexpr auto that_data = unit_data(that_unit);
-
-            for(std::size_t i = 0; i < std::size(this_data); ++i)
-            {
-                new_value *= std::pow(this_data[i].factor, this_data[i].exponent) /
-                             std::pow(that_data[i].factor, that_data[i].exponent);
-            }
-
-            return { new_value };
-        }
-
-        template <auto that_unit> requires(convertible_units(this_unit, that_unit))
-        [[nodiscard]] constexpr operator scalar<that_unit, value_type>() const noexcept
-        {
-            return this->as<that_unit>();
-        }
-
         constexpr this_type& operator+=(this_type that) noexcept
         {
             this->value_ += that.value_;
@@ -194,23 +185,6 @@ namespace zollstock
         }
 
     private:
-
-        template <unit_c auto that_unit>
-        [[nodiscard]] constexpr value_type dimension_factor(quantity quantity_) const noexcept
-        {
-            constexpr auto this_exponent = data_of(quantity_, this_unit).exponent;
-            constexpr auto that_exponent = data_of(quantity_, that_unit).exponent;
-
-            if constexpr(this_exponent != 0 && that_exponent != 0)
-            {
-                return std::pow(data_of(quantity_, this_unit).factor, this_exponent) /
-                       std::pow(data_of(quantity_, that_unit).factor, that_exponent);
-            }
-            else
-            {
-                return value_type{ 1.0L };
-            }
-        }
 
 #if defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS)
     public:
