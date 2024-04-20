@@ -8,5 +8,5 @@ TEST_CASE("length-unit-types", "[length][unit][types]")
 {
     using namespace zollstock;
 
-    TEST_BASE_TYPES(ALL, meter, quantity::length, "m"_us, 1e0L)
+    TEST_BASE_TYPES(ALL, meter, quantity_t::length, "m"_us, 1e0L)
 }

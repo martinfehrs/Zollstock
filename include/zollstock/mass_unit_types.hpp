@@ -13,7 +13,7 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_gram
     {
-        static constexpr auto quantity_ = quantity::mass;
+        static constexpr auto quantity = quantity_t::mass;
         static constexpr auto symbol = Prefix::symbol + "g"_us;
         static constexpr auto factor = Prefix::factor;
     };

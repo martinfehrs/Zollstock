@@ -2,14 +2,14 @@
 #define __ZOLLSTOCK_TESTS_TYPE_TEST_HELPERS_HPP__
 
 
-#define TEST_BASE_TYPE(base_type, quantity, symbol_, factor_) \
-{                                                             \
-    using namespace zollstock;                                \
-                                                              \
-    STATIC_REQUIRE(base_type::quantity_ == quantity);         \
-    STATIC_REQUIRE(base_type::symbol    == symbol_ );         \
-    STATIC_REQUIRE(base_type::factor    == factor_ );         \
-}                                                             \
+#define TEST_BASE_TYPE(base_type, quantity_, symbol_, factor_) \
+{                                                              \
+    using namespace zollstock;                                 \
+                                                               \
+    STATIC_REQUIRE(base_type::quantity == quantity_);          \
+    STATIC_REQUIRE(base_type::symbol   == symbol_ );           \
+    STATIC_REQUIRE(base_type::factor   == factor_ );           \
+}                                                              \
 
 #define TEST_BASE_TYPES_UNPREFIXED(base_type, quantity, symbol, factor) \
     TEST_BASE_TYPE(base_type, quantity, symbol, factor)                 \

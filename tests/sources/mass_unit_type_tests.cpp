@@ -8,5 +8,5 @@ TEST_CASE("mass-unit-types", "[mass][unit][types]")
 {
     using namespace zollstock;
 
-    TEST_BASE_TYPES(ALL, gram, quantity::mass, "g"_us, 1e0L);
+    TEST_BASE_TYPES(ALL, gram, quantity_t::mass, "g"_us, 1e0L);
 }

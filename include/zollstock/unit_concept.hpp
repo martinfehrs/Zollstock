@@ -30,7 +30,7 @@ namespace zollstock
     concept base_unit_c = requires
     {
         requires named_unit_c<Candidate>;
-        { Candidate::quantity_ } -> std::same_as<const quantity&>;
+        { Candidate::quantity } -> std::same_as<const quantity_t&>;
         { Candidate::factor } -> std::same_as<const long double&>;
     };
 
@@ -103,7 +103,7 @@ namespace zollstock
         bool convertible = true;
 
         for(std::size_t i = 0; i < std::size(unit_data_1); ++i)
-            convertible = convertible && unit_data_1[i].quantity_ == unit_data_2[i].quantity_
+            convertible = convertible && unit_data_1[i].quantity == unit_data_2[i].quantity
                                       && unit_data_1[i].exponent  == unit_data_2[i].exponent;
 
         return convertible;
@@ -154,7 +154,7 @@ namespace zollstock
 
     [[nodiscard]] consteval auto unit_quantities(base_unit_c auto unit) noexcept
     {
-        return std::array{ unit.quantity_ };
+        return std::array{ unit.quantity };
     }
 
     [[nodiscard]] consteval auto unit_quantities(raised_unit_c auto unit) noexcept
@@ -167,7 +167,7 @@ namespace zollstock
 
         [[nodiscard]] consteval auto unit_quantity(base_unit_c auto unit) noexcept
         {
-            return unit.quantity_;
+            return unit.quantity;
         }
 
         [[nodiscard]] consteval auto unit_quantity(raised_unit_c auto unit) noexcept
@@ -182,7 +182,9 @@ namespace zollstock
         return std::apply(
             [](homogeneous_unit_c auto... units)
             {
-                std::array<quantity, sizeof...(units)> quantities{ detail::unit_quantity(units)... };
+                std::array<quantity_t, sizeof...(units)> quantities{
+                    detail::unit_quantity(units)...
+                };
 
                 std::ranges::sort(quantities);
 
@@ -195,30 +197,30 @@ namespace zollstock
 
 
     [[nodiscard]] consteval quantity_data unit_data_for(
-        quantity quantity_, base_unit_c auto unit
+        quantity_t quantity, base_unit_c auto unit
     ) noexcept
     {
-        if (quantity_ == unit.quantity_)
+        if (quantity == unit.quantity)
         {
-            return { quantity_, 1, unit.factor, unit.symbol };
+            return { quantity, 1, unit.factor, unit.symbol };
         }
         else
         {
-            return { quantity_ };
+            return { quantity };
         }
     }
 
     [[nodiscard]] consteval quantity_data unit_data_for(
-        quantity quantity_, raised_unit_c auto unit
+        quantity_t quantity, raised_unit_c auto unit
     ) noexcept
     {
-        if (quantity_ == unit.base_unit.quantity_)
+        if (quantity == unit.base_unit.quantity)
         {
-            return { quantity_, unit.exponent, unit.base_unit.factor, unit.base_unit.symbol };
+            return { quantity, unit.exponent, unit.base_unit.factor, unit.base_unit.symbol };
         }
         else
         {
-            return { quantity_ };
+            return { quantity };
         }
     }
 
@@ -227,21 +229,21 @@ namespace zollstock
 
         template <std::size_t... indices>
         [[nodiscard]] consteval quantity_data unit_data_for_impl(
-            quantity quantity_, heterogeneous_unit_c auto unit, std::index_sequence<indices...>
+            quantity_t quantity, heterogeneous_unit_c auto unit, std::index_sequence<indices...>
         ) noexcept
         {
             return (
-                quantity_data{ quantity_ } * ... * unit_data_for(quantity_, std::get<indices>(unit.base_units))
+                quantity_data{ quantity } * ... * unit_data_for(quantity, std::get<indices>(unit.base_units))
             );
         }
 
     }
 
     [[nodiscard]] consteval quantity_data unit_data_for(
-        quantity quantity_, heterogeneous_unit_c auto unit
+        quantity_t quantity, heterogeneous_unit_c auto unit
     ) noexcept
     {
-        return detail::unit_data_for_impl(quantity_, unit, std::make_index_sequence<unit.size>{});
+        return detail::unit_data_for_impl(quantity, unit, std::make_index_sequence<unit.size>{});
     }
 
 

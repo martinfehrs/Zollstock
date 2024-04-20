@@ -14,7 +14,7 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_radian
     {
-        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto quantity = quantity_t::angle;
         static constexpr auto symbol = Prefix::symbol + "rad"_us;
         static constexpr auto factor = Prefix::factor;
     };
@@ -47,14 +47,14 @@ namespace zollstock::inline units::inline types
 
     struct degree
     {
-        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto quantity = quantity_t::angle;
         static constexpr auto symbol = "deg"_us;
         static constexpr auto factor = pi/180.0L;
     };
 
     struct arcminute
     {
-        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto quantity = quantity_t::angle;
         static constexpr auto symbol = "amin"_us;
         static constexpr auto factor = pi/10.8e3L;
     };
@@ -62,7 +62,7 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_arcsecond
     {
-        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto quantity = quantity_t::angle;
         static constexpr auto symbol = Prefix::symbol + "as"_us;
         static constexpr auto factor = Prefix::factor * pi/648e3L;
     };
@@ -70,7 +70,7 @@ namespace zollstock::inline units::inline types
     template <>
     struct basic_arcsecond<unprefixed>
     {
-        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto quantity = quantity_t::angle;
         static constexpr auto symbol = "arcsec"_us;
         static constexpr auto factor = pi/648e3L;
     };
@@ -104,7 +104,7 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_gradian
     {
-        static constexpr auto quantity_ = quantity::angle;
+        static constexpr auto quantity = quantity_t::angle;
         static constexpr auto symbol = Prefix::symbol + "gon"_us;
         static constexpr auto factor = Prefix::factor * pi/200.0L;
     };

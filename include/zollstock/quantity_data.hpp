@@ -10,7 +10,7 @@
 namespace zollstock
 {
 
-    enum class quantity
+    enum class quantity_t
     {
         angle,
         length,
@@ -22,7 +22,7 @@ namespace zollstock
 
     struct quantity_data
     {
-        quantity quantity_;
+        quantity_t quantity;
         int exponent;
         long double factor;
         unit_symbol symbol;
@@ -31,11 +31,11 @@ namespace zollstock
 
         [[nodiscard]] consteval quantity_data operator*(const quantity_data& that) const
         {
-            if(this->quantity_ != that.quantity_)
+            if(this->quantity != that.quantity)
                 throw "incompatible quantities";
 
             return {
-                this->quantity_,
+                this->quantity,
                 this->exponent + that.exponent,
                 this->factor != 0 ? this->factor : that.factor,
                 this->select_symbol(that)
@@ -77,7 +77,7 @@ namespace zollstock
 
     [[nodiscard]] consteval quantity_data pow(const quantity_data& udat, int exponent) noexcept
     {
-        return { udat.quantity_, udat.exponent * exponent, udat.factor, udat.symbol };
+        return { udat.quantity, udat.exponent * exponent, udat.factor, udat.symbol };
     }
 
     [[nodiscard]] consteval quantity_data operator/(

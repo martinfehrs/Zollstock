@@ -13,7 +13,7 @@ namespace zollstock::inline units::inline types
     template <prefix_c Prefix>
     struct basic_meter
     {
-        static constexpr auto quantity_ = quantity::length;
+        static constexpr auto quantity = quantity_t::length;
         static constexpr auto symbol = Prefix::symbol + "m"_us;
         static constexpr auto factor = Prefix::factor;
     };
