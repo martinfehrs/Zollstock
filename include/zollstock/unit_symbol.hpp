@@ -24,16 +24,16 @@ namespace zollstock
     public:
 
         constexpr unit_symbol() noexcept
-            : data{}
+            : data_{}
             , size_{}
         {}
 
         constexpr unit_symbol(const_pointer str, std::size_t size) noexcept
-            : data{}
+            : data_{}
             , size_{ size }
         {
             for(size_type i = 0; i < size; ++i)
-                this->data[i] = str[i];
+                this->data_[i] = str[i];
         }
 
         //constexpr unit_symbol(const unit_symbol& that) noexcept = default;
@@ -45,7 +45,7 @@ namespace zollstock
 
         [[nodiscard]] constexpr const_pointer c_str() const noexcept
         {
-            return this->data;
+            return this->data_;
         }
 
         [[nodiscard]] constexpr bool operator==(const unit_symbol& that) const noexcept
@@ -56,7 +56,7 @@ namespace zollstock
             bool equal = true;
 
             for(size_type i = 0; i < this->size_; ++i)
-                equal = equal && (this->data[i] == that.data[i]);
+                equal = equal && (this->data_[i] == that.data_[i]);
 
             return equal;
         }
@@ -66,16 +66,14 @@ namespace zollstock
             unit_symbol result{ *this };
 
             for(size_type i = 0; i < that.size_; ++i)
-                result.data[i + result.size_] = that.data[i];
+                result.data_[i + result.size_] = that.data_[i];
 
             result.size_ += that.size_;
 
             return result;
         }
 
-    private:
-
-        value_type data[storage_size];
+        value_type data_[storage_size];
         size_type size_;
 
     };
