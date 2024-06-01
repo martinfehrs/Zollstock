@@ -36,8 +36,6 @@ namespace zollstock
                 this->data_[i] = str[i];
         }
 
-        //constexpr unit_symbol(const unit_symbol& that) noexcept = default;
-
         [[nodiscard]] constexpr size_type size() const noexcept
         {
             return this->size_;
