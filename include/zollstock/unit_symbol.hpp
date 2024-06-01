@@ -38,7 +38,7 @@ namespace zollstock
 
         template <std::size_t size>
         constexpr unit_symbol(const value_type (&str)[size]) noexcept
-            : unit_symbol{ str, size }
+            : unit_symbol{ str, size - 1 }
         { }
 
         [[nodiscard]] constexpr size_type size() const noexcept
