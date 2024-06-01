@@ -81,7 +81,7 @@ namespace zollstock
 
     };
 
-    [[nodiscard]] constexpr unit_symbol operator""_us(const char* str, std::size_t size) noexcept
+    [[nodiscard]] consteval unit_symbol operator""_us(const char* str, std::size_t size) noexcept
     {
         return { str, size };
     }
