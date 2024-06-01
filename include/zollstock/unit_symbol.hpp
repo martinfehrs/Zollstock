@@ -36,6 +36,11 @@ namespace zollstock
                 this->data_[i] = str[i];
         }
 
+        template <std::size_t size>
+        constexpr unit_symbol(const value_type (&str)[size]) noexcept
+            : unit_symbol{ str, size }
+        { }
+
         [[nodiscard]] constexpr size_type size() const noexcept
         {
             return this->size_;
