@@ -3,6 +3,7 @@
 
 
 #include <zollstock/quantity_data.hpp>
+#include <zollstock/unit_prefix_concept.hpp>
 
 #include <array>
 #include <type_traits>
@@ -110,6 +111,24 @@ namespace zollstock
     }
 
 
+    template<quantity_t quantity_, unit_symbol symbol_, long double factor_>
+    struct unit
+    {
+        static constexpr auto quantity = quantity_;
+        static constexpr auto symbol = symbol_;
+        static constexpr auto factor = factor_;
+    };
+
+
+
+    template<quantity_t quantity_, unit_symbol symbol_, prefix_c auto prefix>
+    struct prefixed_unit
+    {
+        static constexpr auto quantity = quantity_;
+        static constexpr auto symbol = prefix.symbol + symbol_;
+        static constexpr auto factor = prefix.factor;
+    };
+
 
     template <base_unit_c auto base_unit_, int exponent_>
     struct unit_exponentiation
@@ -136,17 +155,10 @@ namespace zollstock
     inline namespace units
     {
 
-        inline namespace types
-        {
-
-            using one = unit_product<>;
-
-        }
-
         inline namespace constants
         {
 
-            inline constexpr one _1{};
+            inline constexpr unit_product<> _1{};
 
         }
 

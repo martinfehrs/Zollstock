@@ -31,7 +31,6 @@ namespace zollstock
     public:
 
         using value_type = ThisValue;
-        using unit_type = std::remove_const_t<decltype(this_unit)>;
 
 #if !defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION)
 
@@ -87,7 +86,7 @@ namespace zollstock
             return this->value_;
         }
 
-        [[nodiscard]] static consteval const unit_type& unit() noexcept
+        [[nodiscard]] static consteval const auto& unit() noexcept
         {
             return this_unit;
         }

@@ -8,6 +8,8 @@ using namespace zollstock;
 TEST_CASE("dimensionless-unit-constants", "[dimensionless][unit][constants]")
 {
 
-    STATIC_REQUIRE(_1 == one{});
+    STATIC_REQUIRE(_1.base_units == std::tuple{});
+    STATIC_REQUIRE(_1.size == 0);
+
 
 }

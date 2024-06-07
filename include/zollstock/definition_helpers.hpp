@@ -78,71 +78,77 @@
     ZOLLSTOCK_DEFINE_LITERAL(base_symbol, base_symbol) \
     ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol) \
 
-#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(type, symbol) \
-    inline constexpr type symbol{};                       \
+#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quantity, symbol, factor)       \
+    inline constexpr unit<quantity_t:: quantity, #symbol, factor> symbol{}; \
 
-#define ZOLLSTOCK_DEFINE_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quecto##base_type, q##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(ronto##base_type , r##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(yocto##base_type , y##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(zepto##base_type , z##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(atto##base_type  , a##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(femto##base_type , f##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(pico##base_type  , p##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(nano##base_type  , n##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(micro##base_type , mic##base_symbol)     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(milli##base_type , m##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(centi##base_type , c##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(deci##base_type  , d##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(deca##base_type  , da##base_symbol )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(hecto##base_type , h##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(kilo##base_type  , k##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(mega##base_type  , M##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(giga##base_type  , G##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(tera##base_type  , T##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(peta##base_type  , P##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(exa##base_type   , E##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(zetta##base_type , Z##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(yotta##base_type , Y##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(ronna##base_type , R##base_symbol  )     \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quetta##base_type, Q##base_symbol  )     \
+#define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, prefix)                                      \
+    inline constexpr prefixed_unit<quantity_t::quantity, #base_symbol, si_prefixes::prefix> prefix##base_symbol{}; \
 
-#define ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(base_type, base_symbol)      \
-    ZOLLSTOCK_DEFINE_SI_PREFIXED_BASE_UNIT_CONSTANTS(base_type, base_symbol) \
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(base_type, base_symbol)              \
+#define ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(quantity, base_symbol) \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, q  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, r  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, y  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, z  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, a  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, f  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, p  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, n  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, mic)          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, m  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, c  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, d  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, da )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, h  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, k  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, M  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, G  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, T  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, P  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, E  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, Z  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, Y  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, R  )          \
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, Q  )          \
+
+#define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(quantity, base_symbol)      \
+    ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(quantity, base_symbol) \
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quantity, base_symbol, 1.0L)        \
 
 #define ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)                       \
     inline constexpr auto base_symbol##exponent = zollstock::pow_v<base_symbol, exponent>; \
 
-#define ZOLLSTOCK_DEFINE_SI_PREFIXED_RAISED_UNIT_CONSTANTS(base_symbol, exponent) \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(q##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(r##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(y##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(z##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(a##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(f##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(p##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(n##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(mic##base_symbol, exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(m##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(c##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(d##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(da##base_symbol , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(h##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(k##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(M##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(G##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(T##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(P##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(E##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(Z##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(Y##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(R##base_symbol  , exponent)             \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(Q##base_symbol  , exponent)             \
+#define ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, prefix) \
+    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(prefix##base_symbol, exponent)        \
 
-#define ZOLLSTOCK_DEFINE_SI_RAISED_UNIT_CONSTANTS(base_symbol, exponent)      \
-    ZOLLSTOCK_DEFINE_SI_PREFIXED_RAISED_UNIT_CONSTANTS(base_symbol, exponent) \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)              \
+#define ZOLLSTOCK_DEFINE_PREFIXED_RAISED_SI_UNIT_CONSTANTS(base_symbol, exponent) \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, q  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, r  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, y  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, z  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, a  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, f  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, p  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, n  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, mic)          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, m  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, c  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, d  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, da )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, h  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, k  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, M  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, G  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, T  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, P  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, E  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, Z  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, Y  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, R  )          \
+    ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, Q  )          \
+
+#define ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANTS(base_symbol, exponent)          \
+    ZOLLSTOCK_DEFINE_PREFIXED_RAISED_SI_UNIT_CONSTANTS(base_symbol, exponent)     \
+    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)                  \
 
 
 #endif //__ZOLLSTOCK_DEFINITION_HELPERS_HPP__

@@ -9,6 +9,6 @@ using namespace zollstock;
 TEST_CASE("length-unit-constants", "[length][unit][constants]")
 {
 
-    TEST_BASE_UNIT_CONSTANTS(ALL, meter, m)
+    TEST_BASE_UNIT_CONSTANTS(ALL, m, length)
 
 }

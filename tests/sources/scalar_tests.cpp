@@ -41,7 +41,6 @@ TEST_CASE("scalar type requirements", "[scalar]")
 {
     STATIC_REQUIRE(std::regular<zs::int_t<>>);
     STATIC_REQUIRE(std::same_as<typename zs::int_t<>::value_type, int>);
-    STATIC_REQUIRE(std::same_as<typename zs::int_t<>::unit_type , one>);
     STATIC_REQUIRE(zs::int_t<>::unit() == _1);
 }
 

@@ -2,7 +2,6 @@
 #define __ZOLLSTOCK_ANGLE_UNIT_MATH_CONSTANTS_HPP__
 
 
-#include <zollstock/angle_unit_types.hpp>
 #include <zollstock/math_constants.hpp>
 #include <zollstock/scalar.hpp>
 

@@ -9,6 +9,6 @@ using namespace zollstock;
 TEST_CASE("mass-unit-constants", "[mass][unit][constants]")
 {
 
-    TEST_BASE_UNIT_CONSTANTS(ALL, gram, g)
+    TEST_BASE_UNIT_CONSTANTS(ALL, g, mass)
 
 }

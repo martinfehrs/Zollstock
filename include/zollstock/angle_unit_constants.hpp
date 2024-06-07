@@ -2,22 +2,21 @@
 #define __ZOLLSTOCK_ANGLE_UNIT_CONSTANTS_HPP__
 
 
-#include <zollstock/angle_unit_types.hpp>
+#include <zollstock/unit_concept.hpp>
+#include <zollstock/si_prefixes.hpp>
+#include <zollstock/math_constants.hpp>
 #include <zollstock/definition_helpers.hpp>
 
 
 namespace zollstock::inline units::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(radian, rad)
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(angle, rad )
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(angle, gon )
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(angle, asec)
 
-    inline constexpr degree deg{};
-
-    inline constexpr arcminute amin{};
-
-    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(arcsecond, asec)
-
-    ZOLLSTOCK_DEFINE_SI_BASE_UNIT_CONSTANTS(gradian, gon)
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(angle, deg , pi/180.0L )
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(angle, amin, pi/10.8e3L)
 
 }
 

@@ -5,42 +5,57 @@
 #include <zollstock/unit_concept.hpp>
 
 
-#define TEST_BASE_UNIT_CONSTANT(type, symbol) \
-    STATIC_REQUIRE(symbol == type{});         \
+#define TEST_BASE_UNIT_CONSTANT(symbol_, quantity_, factor_)   \
+{                                                              \
+    using namespace zollstock;                                 \
+                                                               \
+    STATIC_REQUIRE(symbol_.quantity == quantity_t::quantity_); \
+    STATIC_REQUIRE(symbol_.symbol   == #symbol_ );             \
+    STATIC_REQUIRE(symbol_.factor   == factor_ );              \
+}
 
-#define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(base_type, base_symbol) \
-    TEST_BASE_UNIT_CONSTANT(base_type, base_symbol);                \
+#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, quantity_, prefix)                \
+{                                                                                      \
+    using namespace zollstock;                                                         \
+                                                                                       \
+    STATIC_REQUIRE(prefix##symbol_.quantity == quantity_t::quantity_);                 \
+    STATIC_REQUIRE(prefix##symbol_.symbol   == si_prefixes::prefix.symbol + #symbol_); \
+    STATIC_REQUIRE(prefix##symbol_.factor   == si_prefixes::prefix.factor);            \
+}
 
-#define TEST_BASE_UNIT_CONSTANTS_PREFIXED(base_type, base_symbol) \
-    TEST_BASE_UNIT_CONSTANT(quecto##base_type, q##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(ronto##base_type , r##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(yocto##base_type , y##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(zepto##base_type , z##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(atto##base_type  , a##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(femto##base_type , f##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(pico##base_type  , p##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(micro##base_type , mic##base_symbol); \
-    TEST_BASE_UNIT_CONSTANT(milli##base_type , m##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(centi##base_type , c##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(deca##base_type  , da##base_symbol ); \
-    TEST_BASE_UNIT_CONSTANT(hecto##base_type , h##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(kilo##base_type  , k##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(mega##base_type  , M##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(giga##base_type  , G##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(tera##base_type  , T##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(peta##base_type  , P##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(exa##base_type   , E##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(zetta##base_type , Z##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(yotta##base_type , Y##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(ronna##base_type , R##base_symbol  ); \
-    TEST_BASE_UNIT_CONSTANT(quetta##base_type, Q##base_symbol  ); \
+#define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, quantity) \
+    TEST_BASE_UNIT_CONSTANT(symbol, quantity, 1.0L)           \
 
-#define TEST_BASE_UNIT_CONSTANTS_ALL(base_type, base_symbol)    \
-    TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(base_type, base_symbol) \
-    TEST_BASE_UNIT_CONSTANTS_PREFIXED(base_type, base_symbol)   \
+#define TEST_BASE_UNIT_CONSTANTS_PREFIXED(symbol, quantity)    \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, q  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, r  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, y  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, z  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, a  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, f  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, p  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, mic) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, m  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, c  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, da ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, h  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, k  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, M  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, G  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, T  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, P  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, E  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, Z  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, Y  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, R  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, Q  ) \
 
-#define TEST_BASE_UNIT_CONSTANTS(select, base_type, base_symbol) \
-    TEST_BASE_UNIT_CONSTANTS_##select(base_type, base_symbol)    \
+#define TEST_BASE_UNIT_CONSTANTS_ALL(symbol, quantity)    \
+    TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, quantity) \
+    TEST_BASE_UNIT_CONSTANTS_PREFIXED(symbol, quantity)   \
+
+#define TEST_BASE_UNIT_CONSTANTS(select, symbol, quantity) \
+    TEST_BASE_UNIT_CONSTANTS_##select(symbol, quantity)    \
 
 
 #define TEST_RAISED_UNIT_CONSTANT(symbol, exponent)                         \

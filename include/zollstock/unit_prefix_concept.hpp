@@ -17,6 +17,15 @@ namespace zollstock
         { Candidate::factor } -> std::same_as<const long double&>;
     };
 
+
+
+    template <unit_symbol symbol_, long double factor_>
+    struct prefix
+    {
+        static constexpr unit_symbol symbol = symbol_;
+        static constexpr long double factor = factor_;
+    };
+
 }
 
 
