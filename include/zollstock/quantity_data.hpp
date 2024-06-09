@@ -53,7 +53,7 @@ namespace zollstock
         {
             if (this->exponent + that.exponent == 0)
             {
-                return ""_ss;
+                return "";
             }
             else if (this->symbol.size() == 0)
             {

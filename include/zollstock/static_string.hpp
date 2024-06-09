@@ -81,11 +81,6 @@ namespace zollstock
 
     };
 
-    [[nodiscard]] consteval static_string operator""_ss(const char* str, std::size_t size) noexcept
-    {
-        return { str, size };
-    }
-
 }
 
 
