@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_UNIT_PREFIX_CONCEPT_HPP__
 
 
-#include <zollstock/unit_symbol.hpp>
+#include <zollstock/static_string.hpp>
 
 #include <type_traits>
 
@@ -13,16 +13,16 @@ namespace zollstock
     template <typename Candidate>
     concept prefix_c = requires()
     {
-        { Candidate::symbol } -> std::same_as<const unit_symbol&>;
+        { Candidate::symbol } -> std::same_as<const static_string&>;
         { Candidate::factor } -> std::same_as<const long double&>;
     };
 
 
 
-    template <unit_symbol symbol_, long double factor_>
+    template <static_string symbol_, long double factor_>
     struct prefix
     {
-        static constexpr unit_symbol symbol = symbol_;
+        static constexpr static_string symbol = symbol_;
         static constexpr long double factor = factor_;
     };
 

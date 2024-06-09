@@ -24,7 +24,7 @@ namespace zollstock
     concept named_unit_c = requires
     {
         requires unit_c<Candidate>;
-        { Candidate::symbol } -> std::same_as<const unit_symbol&>;
+        { Candidate::symbol } -> std::same_as<const static_string&>;
     };
 
     template <typename Candidate>
@@ -111,7 +111,7 @@ namespace zollstock
     }
 
 
-    template<quantity_t quantity_, unit_symbol symbol_, long double factor_>
+    template<quantity_t quantity_, static_string symbol_, long double factor_>
     struct unit
     {
         static constexpr auto quantity = quantity_;
@@ -121,7 +121,7 @@ namespace zollstock
 
 
 
-    template<quantity_t quantity_, unit_symbol symbol_, prefix_c auto prefix>
+    template<quantity_t quantity_, static_string symbol_, prefix_c auto prefix>
     struct prefixed_unit
     {
         static constexpr auto quantity = quantity_;

@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_UNIT_SYMBOL_HPP__
-#define __ZOLLSTOCK_UNIT_SYMBOL_HPP__
+#ifndef __ZOLLSTOCK_STATIC_STRING_HPP__
+#define __ZOLLSTOCK_STATIC_STRING_HPP__
 
 
 #include <cstddef>
@@ -8,7 +8,7 @@
 namespace zollstock
 {
 
-    class unit_symbol
+    class static_string
     {
 
     public:
@@ -23,12 +23,12 @@ namespace zollstock
 
     public:
 
-        constexpr unit_symbol() noexcept
+        constexpr static_string() noexcept
             : data_{}
             , size_{}
         {}
 
-        constexpr unit_symbol(const_pointer str, std::size_t size) noexcept
+        constexpr static_string(const_pointer str, std::size_t size) noexcept
             : data_{}
             , size_{ size }
         {
@@ -37,8 +37,8 @@ namespace zollstock
         }
 
         template <std::size_t size>
-        constexpr unit_symbol(const value_type (&str)[size]) noexcept
-            : unit_symbol{ str, size - 1 }
+        constexpr static_string(const value_type (&str)[size]) noexcept
+            : static_string{ str, size - 1 }
         { }
 
         [[nodiscard]] constexpr size_type size() const noexcept
@@ -51,7 +51,7 @@ namespace zollstock
             return this->data_;
         }
 
-        [[nodiscard]] constexpr bool operator==(const unit_symbol& that) const noexcept
+        [[nodiscard]] constexpr bool operator==(const static_string& that) const noexcept
         {
             if(this->size_ != that.size_)
                 return false;
@@ -64,9 +64,9 @@ namespace zollstock
             return equal;
         }
 
-        [[nodiscard]] constexpr unit_symbol operator+(const unit_symbol& that) const noexcept
+        [[nodiscard]] constexpr static_string operator+(const static_string& that) const noexcept
         {
-            unit_symbol result{ *this };
+            static_string result{ *this };
 
             for(size_type i = 0; i < that.size_; ++i)
                 result.data_[i + result.size_] = that.data_[i];
@@ -81,7 +81,7 @@ namespace zollstock
 
     };
 
-    [[nodiscard]] consteval unit_symbol operator""_us(const char* str, std::size_t size) noexcept
+    [[nodiscard]] consteval static_string operator""_ss(const char* str, std::size_t size) noexcept
     {
         return { str, size };
     }
@@ -89,4 +89,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_UNIT_SYMBOL_HPP__
+#endif //__ZOLLSTOCK_STATIC_STRING_HPP__

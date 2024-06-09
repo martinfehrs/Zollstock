@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_QUANTITY_DATA_HPP__
 
 
-#include <zollstock/unit_symbol.hpp>
+#include <zollstock/static_string.hpp>
 
 #include <cstddef>
 
@@ -25,7 +25,7 @@ namespace zollstock
         quantity_t quantity;
         int exponent;
         long double factor;
-        unit_symbol symbol;
+        static_string symbol;
 
         [[nodiscard]] consteval bool operator==(const quantity_data&) const noexcept = default;
 
@@ -49,11 +49,11 @@ namespace zollstock
 
     private:
 
-        [[nodiscard]] consteval unit_symbol select_symbol(const quantity_data& that) const
+        [[nodiscard]] consteval static_string select_symbol(const quantity_data& that) const
         {
             if (this->exponent + that.exponent == 0)
             {
-                return ""_us;
+                return ""_ss;
             }
             else if (this->symbol.size() == 0)
             {
