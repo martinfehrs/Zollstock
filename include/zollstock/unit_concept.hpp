@@ -65,7 +65,7 @@ namespace zollstock
     };
 
     template <typename Candidate>
-    concept heterogeneous_unit_c = requires(Candidate candidate)
+    concept heterogeneous_unit_c = requires
     {
         requires unit_c<Candidate>;
         requires is_base_unit_tuple_like_c<std::remove_cvref_t<decltype(Candidate::base_units)>>;
