@@ -23,12 +23,12 @@ namespace zollstock
 
     public:
 
-        constexpr static_string() noexcept
+        consteval static_string() noexcept
             : data_{}
             , size_{}
         {}
 
-        constexpr static_string(const_pointer str, std::size_t size) noexcept
+        consteval static_string(const_pointer str, std::size_t size) noexcept
             : data_{}
             , size_{ size }
         {
@@ -37,7 +37,7 @@ namespace zollstock
         }
 
         template <std::size_t size>
-        constexpr static_string(const value_type (&str)[size]) noexcept
+        consteval static_string(const value_type (&str)[size]) noexcept
             : static_string{ str, size - 1 }
         { }
 
