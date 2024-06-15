@@ -8,6 +8,14 @@
 namespace zollstock
 {
 
+    struct unterminated_string : std::exception
+    {
+        const char* what() const noexcept override
+        {
+            return "unterminated string";
+        }
+    };
+
     class static_string
     {
 
@@ -21,6 +29,16 @@ namespace zollstock
 
         static constexpr size_type storage_size = 8;
 
+        template <std::size_t size>
+        [[nodiscard]] static constexpr size_type strlen(const value_type (&str)[size]) noexcept
+        {
+            for(size_type i = 0; i < size; ++i)
+                if(str[i] == '\0')
+                    return i;
+
+            return size;
+        }
+
     public:
 
         constexpr static_string() noexcept
@@ -28,18 +46,17 @@ namespace zollstock
             , size_{}
         {}
 
-        constexpr static_string(const_pointer str, std::size_t size) noexcept
+        template <std::size_t size> requires(size <= storage_size)
+        constexpr static_string(const value_type (&str)[size])
             : data_{}
-            , size_{ size }
+            , size_{ strlen(str) }
         {
-            for(size_type i = 0; i < size; ++i)
+            if(this->size_ == size)
+                throw unterminated_string{};
+
+            for(size_type i = 0; i < size_; ++i)
                 this->data_[i] = str[i];
         }
-
-        template <std::size_t size>
-        constexpr static_string(const value_type (&str)[size]) noexcept
-            : static_string{ str, size - 1 }
-        { }
 
         [[nodiscard]] constexpr size_type size() const noexcept
         {
@@ -68,7 +85,7 @@ namespace zollstock
         {
             static_string result{ *this };
 
-            for(size_type i = 0; i < that.size_; ++i)
+            for (size_type i = 0; i < that.size_; ++i)
                 result.data_[i + result.size_] = that.data_[i];
 
             result.size_ += that.size_;
