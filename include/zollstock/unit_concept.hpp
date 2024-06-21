@@ -65,7 +65,7 @@ namespace zollstock
     };
 
     template <typename Candidate>
-    concept heterogeneous_unit_c = requires
+    concept unit_product_c = requires
     {
         requires unit_c<Candidate>;
         requires is_base_unit_tuple_like_c<std::remove_cvref_t<decltype(Candidate::base_units)>>;
@@ -86,9 +86,9 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] consteval bool is_heterogeneous_unit(Unit unit) noexcept
+    [[nodiscard]] consteval bool is_unit_product(Unit unit) noexcept
     {
-        return heterogeneous_unit_c<Unit>;
+        return unit_product_c<Unit>;
     }
 
 
@@ -131,7 +131,7 @@ namespace zollstock
 
 
     template <base_unit_c auto base_unit_, int exponent_>
-    struct unit_exponentiation
+    struct raised_unit
     {
         static constexpr auto base_unit = base_unit_;
         static constexpr auto exponent = exponent_;
@@ -146,7 +146,7 @@ namespace zollstock
     };
 
     template <base_unit_c auto unit, int exponent_>
-    inline constexpr auto unit_exponentiation_v = unit_exponentiation<unit, exponent_>{};
+    inline constexpr auto raised_unit_v = raised_unit<unit, exponent_>{};
 
     template <homogeneous_unit_c auto... units>
     inline constexpr auto unit_product_v = unit_product<units...>{};
@@ -164,9 +164,19 @@ namespace zollstock
 
     }
 
+    [[nodiscard]] consteval auto unit_quantity(base_unit_c auto unit) noexcept
+    {
+        return unit.quantity;
+    }
+
+    [[nodiscard]] consteval auto unit_quantity(raised_unit_c auto unit) noexcept
+    {
+        return unit_quantity(unit.base_unit);
+    }
+
     [[nodiscard]] consteval auto unit_quantities(base_unit_c auto unit) noexcept
     {
-        return std::array{ unit.quantity };
+        return std::tuple{ unit.quantity };
     }
 
     [[nodiscard]] consteval auto unit_quantities(raised_unit_c auto unit) noexcept
@@ -174,31 +184,14 @@ namespace zollstock
         return unit_quantities(unit.base_unit);
     }
 
-    namespace detail
-    {
-
-        [[nodiscard]] consteval auto unit_quantity(base_unit_c auto unit) noexcept
-        {
-            return unit.quantity;
-        }
-
-        [[nodiscard]] consteval auto unit_quantity(raised_unit_c auto unit) noexcept
-        {
-            return unit_quantity(unit.base_unit);
-        }
-
-    }
-
-    [[nodiscard]] consteval auto unit_quantities(heterogeneous_unit_c auto unit) noexcept
+    [[nodiscard]] consteval auto unit_quantities(unit_product_c auto unit) noexcept
     {
         return std::apply(
             [](homogeneous_unit_c auto... units)
             {
-                std::array<quantity_t, sizeof...(units)> quantities{
-                    detail::unit_quantity(units)...
-                };
+                std::tuple quantities{ unit_quantity(units)... };
 
-                std::ranges::sort(quantities);
+                //std::ranges::sort(quantities);
 
                 return quantities;
             },
@@ -241,7 +234,7 @@ namespace zollstock
 
         template <std::size_t... indices>
         [[nodiscard]] consteval quantity_data unit_data_for_impl(
-            quantity_t quantity, heterogeneous_unit_c auto unit, std::index_sequence<indices...>
+            quantity_t quantity, unit_product_c auto unit, std::index_sequence<indices...>
         ) noexcept
         {
             return (
@@ -252,24 +245,37 @@ namespace zollstock
     }
 
     [[nodiscard]] consteval quantity_data unit_data_for(
-        quantity_t quantity, heterogeneous_unit_c auto unit
+        quantity_t quantity, unit_product_c auto unit
     ) noexcept
     {
         return detail::unit_data_for_impl(quantity, unit, std::make_index_sequence<unit.size>{});
     }
 
 
+    namespace detail
+    {
+
+        template <std::size_t... indices>
+        [[nodiscard]] consteval auto unit_data_impl(
+            unit_c auto unit, auto quantities, std::index_sequence<indices...>
+        )
+        {
+            return std::array<quantity_data, sizeof...(indices)>{
+                unit_data_for(std::get<indices>(quantities), unit)...
+            };
+        }
+
+    }
 
     [[nodiscard]] consteval auto unit_data(unit_c auto unit) noexcept
     {
         const auto quantities = unit_quantities(unit);
 
-        std::array<quantity_data, std::size(quantities)> data;
-
-        for(std::size_t i = 0; i < std::size(quantities); ++i)
-            data[i] = unit_data_for(quantities[i], unit);
-
-        return data;
+        return detail::unit_data_impl(
+            unit,
+            quantities,
+            std::make_index_sequence<std::tuple_size_v<decltype(quantities)>>{}
+        );
     }
 
 
@@ -343,18 +349,20 @@ namespace zollstock
         homogeneous_unit_c auto first_base_unit,
         homogeneous_unit_c auto... remaining_base_units
     >
-    [[nodiscard]] consteval auto head(
+    [[nodiscard]] consteval auto unit_product_head(
         unit_product<first_base_unit, remaining_base_units...>
     ) noexcept
     {
         return first_base_unit;
     }
 
+
+
     template <
         homogeneous_unit_c auto first_base_unit,
         homogeneous_unit_c auto... remaining_base_units
     >
-    [[nodiscard]] consteval auto tail(
+    [[nodiscard]] consteval auto unit_product_tail(
         unit_product<first_base_unit, remaining_base_units...>
     ) noexcept
     {
@@ -362,248 +370,6 @@ namespace zollstock
     }
 
 
-
-    namespace detail
-    {
-
-        template <homogeneous_unit_c auto... base_units>
-        [[nodiscard]] consteval auto append_to_product_raw(
-            homogeneous_unit_c auto base_unit, unit_product<base_units...>
-        ) noexcept
-        {
-            return unit_product_v<base_units..., base_unit>;
-        }
-
-        template <homogeneous_unit_c auto... base_units>
-        [[nodiscard]] consteval auto prepend_to_product_raw(
-            homogeneous_unit_c auto base_unit, unit_product<base_units...>
-        ) noexcept
-        {
-            return unit_product_v<base_unit, base_units...>;
-        }
-
-        template <homogeneous_unit_c auto... base_units_1, homogeneous_unit_c auto... base_units_2>
-        [[nodiscard]] consteval auto concat_products_raw(
-            unit_product<base_units_1...>,
-            unit_product<base_units_2...>
-        ) noexcept
-        {
-            return unit_product_v<base_units_1..., base_units_2...>;
-        }
-
-
-
-        template <unit_c Unit>
-        struct erasure_result
-        {
-            Unit unit;
-            int exponent;
-        };
-
-        template <unit_c Unit>
-        erasure_result(Unit, int) -> erasure_result<Unit>;
-
-
-        [[nodiscard]] consteval auto erase_product_base(
-            base_unit_c auto base_unit, unit_product<> unit
-        ) noexcept
-        {
-            return erasure_result{ unit, 0 };
-        }
-
-        template <
-            homogeneous_unit_c auto first_base_unit,
-            homogeneous_unit_c auto... remaining_base_units
-        >
-        [[nodiscard]] consteval auto erase_product_base(
-            base_unit_c auto base_unit, unit_product<first_base_unit, remaining_base_units...> unit
-        ) noexcept
-        {
-            auto[cleared_tail, exponent] = erase_product_base(
-                base_unit, unit_product_v<remaining_base_units...>
-            );
-
-            if constexpr(is_raised_unit(first_base_unit))
-            {
-                if constexpr(first_base_unit.base_unit == base_unit)
-                {
-                    return erasure_result{
-                        cleared_tail,
-                        exponent + first_base_unit.exponent
-                    };
-                }
-                else
-                {
-                    return erasure_result{ unit, exponent };
-                }
-            }
-            else if constexpr (is_base_unit(first_base_unit))
-            {
-                if constexpr(first_base_unit == base_unit)
-                {
-                    return erasure_result{ cleared_tail, exponent + 1 };
-                }
-                else
-                {
-                    return erasure_result{ unit, exponent };
-                }
-            }
-
-        }
-
-
-
-        [[nodiscard]] consteval auto combine_redundant_product_bases(
-            heterogeneous_unit_c auto unit
-        ) noexcept
-        {
-            if constexpr(unit.size <= 1)
-            {
-                return unit;
-            }
-            else
-            {
-                auto first = head(unit);
-
-                if constexpr (is_base_unit(first))
-                {
-                    constexpr auto erasure_result = erase_product_base(
-                        first,
-                        combine_redundant_product_bases(tail(unit))
-                    );
-
-                    if constexpr(erasure_result.exponent != 0)
-                    {
-                        return prepend_to_product_raw(
-                            unit_exponentiation_v<first, erasure_result.exponent + 1>,
-                            erasure_result.unit
-                        );
-                    }
-                    else
-                    {
-                        return prepend_to_product_raw(first, erasure_result.unit);
-                    }
-                }
-                else if constexpr(is_raised_unit(first))
-                {
-                    constexpr auto erasure_result = erase_product_base(
-                        first.base_unit,
-                        combine_redundant_product_bases(tail(unit))
-                    );
-
-                    if constexpr(erasure_result.exponent != 0)
-                    {
-                        return prepend_to_product_raw(
-                            unit_exponentiation_v<
-                                first.base_unit,
-                                first.exponent + erasure_result.exponent
-                            >,
-                            erasure_result.unit
-                        );
-                    }
-                    else
-                    {
-                        return prepend_to_product_raw(first, erasure_result.unit);
-                    }
-                }
-            }
-        }
-
-
-
-        [[nodiscard]] consteval auto simplify_combined_unit(unit_c auto unit) noexcept
-        {
-            if constexpr(is_base_unit(unit))
-            {
-                return unit;
-            }
-            else if constexpr(is_raised_unit(unit))
-            {
-                if constexpr(unit.exponent == 0)
-                {
-                    return _1;
-                }
-                else if constexpr(unit.exponent == 1)
-                {
-                    return unit.base_unit;
-                }
-                else
-                {
-                    return unit;
-                }
-            }
-            else if constexpr(is_heterogeneous_unit(unit))
-            {
-                if constexpr(unit.size == 0)
-                {
-                    return _1;
-                }
-                else if constexpr(unit.size == 1)
-                {
-                    return simplify_combined_unit(head(unit));
-                }
-                else
-                {
-                    constexpr auto reduced_unit = combine_redundant_product_bases(unit);
-
-                    if constexpr(reduced_unit.size <= 1)
-                    {
-                        return simplify_combined_unit(reduced_unit);
-                    }
-                    else
-                    {
-                        return reduced_unit;
-                    }
-                }
-            }
-        }
-
-
-
-        [[nodiscard]] consteval auto append_to_product(
-            homogeneous_unit_c auto base_unit, heterogeneous_unit_c auto unit
-        ) noexcept
-        {
-            return simplify_combined_unit(append_to_product_raw(base_unit, unit));
-        }
-
-        [[nodiscard]] consteval auto prepend_to_product(
-            homogeneous_unit_c auto base_unit, heterogeneous_unit_c auto unit
-        ) noexcept
-        {
-            return simplify_combined_unit(prepend_to_product_raw(base_unit, unit));
-        }
-
-        [[nodiscard]] consteval auto concat_products(
-            heterogeneous_unit_c auto unit_1, heterogeneous_unit_c auto unit_2
-        ) noexcept
-        {
-            return simplify_combined_unit(concat_products_raw(unit_1, unit_2));
-        }
-
-    }
-
-    [[nodiscard]] consteval auto operator*(unit_c auto unit_1, unit_c auto unit_2) noexcept
-    {
-        if constexpr(is_heterogeneous_unit(unit_1) && is_heterogeneous_unit(unit_2))
-        {
-            return detail::concat_products(unit_1, unit_2);
-        }
-        else
-        if constexpr(is_heterogeneous_unit(unit_1))
-        {
-            return detail::append_to_product(unit_2, unit_1);
-        }
-        else
-        if constexpr(is_heterogeneous_unit(unit_2))
-        {
-            return detail::prepend_to_product(unit_1, unit_2);
-        }
-        else
-        {
-            return detail::simplify_combined_unit(unit_product_v<unit_1, unit_2>);
-        }
-    }
 
     namespace detail
     {
@@ -621,9 +387,9 @@ namespace zollstock
             }
             else if constexpr(is_raised_unit(unit))
             {
-                return unit_exponentiation_v<unit.base_unit, unit.exponent * exponent>;
+                return raised_unit_v<unit.base_unit, unit.exponent * exponent>;
             }
-            else if constexpr(is_heterogeneous_unit(unit))
+            else if constexpr(is_unit_product(unit))
             {
                 return [=]<std::size_t... indices>(std::index_sequence<indices...>)
                 {
@@ -633,7 +399,7 @@ namespace zollstock
             }
             else
             {
-                return unit_exponentiation_v<unit, exponent>;
+                return raised_unit_v<unit, exponent>;
             }
         }
 
@@ -641,6 +407,127 @@ namespace zollstock
 
     template<unit_c auto unit, int exponent>
     inline constexpr unit_c auto pow_v = detail::pow<exponent>(unit);
+
+
+
+    namespace detail
+    {
+
+        template <homogeneous_unit_c auto... factors>
+        [[nodiscard]] consteval auto unit_product_prepend(
+            unit_product<factors...>, homogeneous_unit_c auto factor
+        ) noexcept
+        {
+            return unit_product_v<factor, factors...>;
+        }
+
+    }
+
+    [[nodiscard]] consteval auto operator*(
+        base_unit_c auto unit_1, base_unit_c auto unit_2
+    ) noexcept
+    {
+        if constexpr(unit_quantity(unit_1) == unit_quantity(unit_2))
+        {
+            return raised_unit_v<unit_1, 2>;
+        }
+        else
+        {
+            return unit_product_v<unit_1>;
+        }
+    }
+
+    [[nodiscard]] consteval auto operator*(
+        base_unit_c auto unit_1, raised_unit_c auto unit_2
+    ) noexcept
+    {
+        if constexpr(unit_quantity(unit_1) == unit_quantity(unit_2))
+        {
+            return pow_v<unit_1, unit_2.exponent + 1>;
+        }
+        else
+        {
+            return unit_product_v<unit_1> * unit_2;
+        }
+    }
+
+    [[nodiscard]] consteval auto operator*(
+        raised_unit_c auto unit_1, base_unit_c auto unit_2
+    ) noexcept
+    {
+        return unit_2 * unit_1;
+    }
+
+    [[nodiscard]] consteval auto operator*(
+        raised_unit_c auto unit_1, raised_unit_c auto unit_2
+    ) noexcept
+    {
+        if constexpr(unit_quantity(unit_1) == unit_quantity(unit_2))
+        {
+            return pow_v<unit_1.base_unit, unit_1.exponent + unit_2.exponent>;
+        }
+        else
+        {
+            return unit_product_v<unit_1> * unit_2;
+        }
+    }
+
+
+    [[nodiscard]] consteval auto operator*(
+        unit_product_c auto unit_1, homogeneous_unit_c auto unit_2
+    ) noexcept
+    {
+        if constexpr(unit_1.size == 0)
+        {
+            return unit_product_v<unit_2>;
+        }
+        else
+        if constexpr (
+            const auto head = unit_product_head(unit_1);
+            unit_quantity(unit_2) < unit_quantity(head)
+        )
+        {
+            return detail::unit_product_prepend(unit_1, unit_2);
+        }
+        else
+        if constexpr (
+            const auto tail = unit_product_tail(unit_1);
+            unit_quantity(unit_2) == unit_quantity(head)
+        )
+        {
+            return detail::unit_product_prepend(tail, head * unit_2);
+        }
+        else
+        {
+            return detail::unit_product_prepend(tail * unit_2, head);
+        }
+    }
+
+    [[nodiscard]] consteval auto operator*(
+        homogeneous_unit_c auto unit_1, unit_product_c auto unit_2
+    ) noexcept
+    {
+        return unit_2 * unit_1;
+    }
+
+    [[nodiscard]] consteval auto operator*(
+        unit_product_c auto unit_1, unit_product_c auto unit_2
+    ) noexcept
+    {
+        if constexpr (unit_1.size == 0)
+        {
+            return unit_2;
+        }
+        else
+        if constexpr (unit_2.size == 0)
+        {
+            return unit_1;
+        }
+        else
+        {
+            return unit_product_head(unit_1) * (unit_product_tail(unit_1) * unit_2);
+        }
+    }
 
 
 
