@@ -50,7 +50,9 @@ namespace zollstock
 
     [[nodiscard]] constexpr bool tuple_equal(const auto& tuple_1, const auto& tuple_2) noexcept
     {
-        return tuple_equal(tuple_1, tuple_2, std::equal_to<>{});
+        return tuple_equal(
+            tuple_1, tuple_2, [](const auto& lhs, const auto& rhs){ return lhs == rhs; }
+        );
     }
 
 
