@@ -4,6 +4,7 @@
 
 #include <zollstock/quantity_data.hpp>
 #include <zollstock/unit_prefix_concept.hpp>
+#include <zollstock/tuple_utils.hpp>
 
 #include <array>
 #include <type_traits>
@@ -91,23 +92,17 @@ namespace zollstock
         return unit_product_c<Unit>;
     }
 
-
-
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        const auto unit_data_1 = unit_data(unit_1);
-        const auto unit_data_2 = unit_data(unit_2);
-
-        if(std::size(unit_data_1) != std::size(unit_data_2))
-            return false;
-
-        bool convertible = true;
-
-        for(std::size_t i = 0; i < std::size(unit_data_1); ++i)
-            convertible = convertible && unit_data_1[i].quantity == unit_data_2[i].quantity
-                                      && unit_data_1[i].exponent  == unit_data_2[i].exponent;
-
-        return convertible;
+        return tuple_equal(
+            unit_data(unit_1),
+            unit_data(unit_2),
+            [](const auto& unit_data_1, const auto& unit_data_2)
+            {
+                return unit_data_1.quantity == unit_data_2.quantity
+                    && unit_data_1.exponent == unit_data_2.exponent;
+            }
+        );
     }
 
 
@@ -164,6 +159,8 @@ namespace zollstock
 
     }
 
+
+
     [[nodiscard]] consteval auto unit_quantity(base_unit_c auto unit) noexcept
     {
         return unit.quantity;
@@ -174,108 +171,48 @@ namespace zollstock
         return unit_quantity(unit.base_unit);
     }
 
-    [[nodiscard]] consteval auto unit_quantities(base_unit_c auto unit) noexcept
+
+
+    [[nodiscard]] consteval auto unit_data(base_unit_c auto unit) noexcept
     {
-        return std::tuple{ unit.quantity };
+        return std::tuple{
+            quantity_data{
+                unit.quantity,
+                1,
+                unit.factor,
+                unit.symbol
+            }
+        };
     }
 
-    [[nodiscard]] consteval auto unit_quantities(raised_unit_c auto unit) noexcept
+    [[nodiscard]] consteval auto unit_data(raised_unit_c auto unit) noexcept
     {
-        return unit_quantities(unit.base_unit);
+        return std::tuple{
+            quantity_data{
+                unit.base_unit.quantity,
+                unit.exponent,
+                unit.base_unit.factor,
+                unit.base_unit.symbol
+            }
+        };
     }
-
-    [[nodiscard]] consteval auto unit_quantities(unit_product_c auto unit) noexcept
-    {
-        return std::apply(
-            [](homogeneous_unit_c auto... units)
-            {
-                std::tuple quantities{ unit_quantity(units)... };
-
-                //std::ranges::sort(quantities);
-
-                return quantities;
-            },
-            unit.base_units
-        );
-    }
-
-
-
-    [[nodiscard]] consteval quantity_data unit_data_for(
-        quantity_t quantity, base_unit_c auto unit
-    ) noexcept
-    {
-        if (quantity == unit.quantity)
-        {
-            return { quantity, 1, unit.factor, unit.symbol };
-        }
-        else
-        {
-            return { quantity };
-        }
-    }
-
-    [[nodiscard]] consteval quantity_data unit_data_for(
-        quantity_t quantity, raised_unit_c auto unit
-    ) noexcept
-    {
-        if (quantity == unit.base_unit.quantity)
-        {
-            return { quantity, unit.exponent, unit.base_unit.factor, unit.base_unit.symbol };
-        }
-        else
-        {
-            return { quantity };
-        }
-    }
-
-    namespace detail
-    {
-
-        template <std::size_t... indices>
-        [[nodiscard]] consteval quantity_data unit_data_for_impl(
-            quantity_t quantity, unit_product_c auto unit, std::index_sequence<indices...>
-        ) noexcept
-        {
-            return (
-                quantity_data{ quantity } * ... * unit_data_for(quantity, std::get<indices>(unit.base_units))
-            );
-        }
-
-    }
-
-    [[nodiscard]] consteval quantity_data unit_data_for(
-        quantity_t quantity, unit_product_c auto unit
-    ) noexcept
-    {
-        return detail::unit_data_for_impl(quantity, unit, std::make_index_sequence<unit.size>{});
-    }
-
 
     namespace detail
     {
 
         template <std::size_t... indices>
         [[nodiscard]] consteval auto unit_data_impl(
-            unit_c auto unit, auto quantities, std::index_sequence<indices...>
-        )
+            unit_product_c auto unit, std::index_sequence<indices...>
+        ) noexcept
         {
-            return std::array<quantity_data, sizeof...(indices)>{
-                unit_data_for(std::get<indices>(quantities), unit)...
-            };
+            return std::tuple_cat(unit_data(std::get<indices>(unit.base_units))...);
         }
 
     }
 
-    [[nodiscard]] consteval auto unit_data(unit_c auto unit) noexcept
+    [[nodiscard]] consteval auto unit_data(unit_product_c auto unit) noexcept
     {
-        const auto quantities = unit_quantities(unit);
-
-        return detail::unit_data_impl(
-            unit,
-            quantities,
-            std::make_index_sequence<std::tuple_size_v<decltype(quantities)>>{}
-        );
+        return detail::unit_data_impl(unit, std::make_index_sequence<unit.size>{});
     }
 
 
@@ -304,27 +241,28 @@ namespace zollstock
     template <typename Char>
     [[nodiscard]] std::basic_string<Char> to_basic_string(unit_c auto unit)
     {
-        constexpr auto data = unit_data(unit);
+        using namespace std::string_literals;
 
-        std::string unit_representation;
-
-        for(std::size_t i = 0; i < std::size(data); ++i)
-        {
-            if(data[i].exponent != 0)
+        return tuple_transform_reduce(
+            unit_data(unit),
+            ""s,
+            [](std::string lhs, const std::string& rhs)
             {
-                if(i > 0 && !unit_representation.empty() && unit_representation.back() != '*')
-                    unit_representation += '*';
+                if (!lhs.empty() && lhs.back() != '*')
+                    lhs += '*';
 
-                std::string_view symbol_string{ data[i].symbol.c_str() };
+                return lhs += rhs;
+            },
+            [](const quantity_data& data)
+            {
+                std::string symbol{ data.symbol.c_str() };
 
-                unit_representation.append(symbol_string.begin(), symbol_string.end());
+                if(data.exponent != 1)
+                    symbol += detail::exponent_to_string<Char>(data.exponent);
 
-                if(data[i].exponent != 1)
-                    unit_representation += detail::exponent_to_string<Char>(data[i].exponent);
+                return symbol;
             }
-        }
-
-        return unit_representation;
+        );
     }
 
     [[nodiscard]] std::string to_string(unit_c auto unit)
@@ -540,18 +478,7 @@ namespace zollstock
 
     [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        const auto unit_data_1 = unit_data(unit_1);
-        const auto unit_data_2 = unit_data(unit_2);
-
-        if(std::size(unit_data_1) != std::size(unit_data_2))
-            return false;
-
-        bool equal = true;
-
-        for(std::size_t i = 0; i < std::size(unit_data_1); ++i)
-            equal = equal && unit_data_1[i] == unit_data_2[i];
-
-        return equal;
+        return tuple_equal(unit_data(unit_1), unit_data(unit_2));
     }
 
     [[nodiscard]] consteval bool operator!=(unit_c auto unit_1, unit_c auto unit_2) noexcept
