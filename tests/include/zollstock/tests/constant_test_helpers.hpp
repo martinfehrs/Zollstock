@@ -111,9 +111,13 @@ void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
     STATIC_REQUIRE(unit_product_c<decltype(mixed)>);
     STATIC_REQUIRE(unit_product_head(mixed)  == unit_1);
     STATIC_REQUIRE(unit_product_head(unit_product_tail(mixed)) == pow_v<unit_2, -1>);
-    STATIC_REQUIRE(unit_data_for(quantity_t::length, mixed) == unit_data_for(quantity_t::length, unit_1) / unit_data_for(quantity_t::length, unit_2));
-    STATIC_REQUIRE(unit_data_for(quantity_t::time  , mixed) == unit_data_for(quantity_t::time  , unit_1) / unit_data_for(quantity_t::time  , unit_2));
-    STATIC_REQUIRE(unit_data_for(quantity_t::angle , mixed) == unit_data_for(quantity_t::angle , unit_1) / unit_data_for(quantity_t::angle , unit_2));
+
+    static constexpr auto udat_mixed  = unit_data(mixed );
+    static constexpr auto udat_unit_1 = unit_data(unit_1);
+    static constexpr auto udat_unit_2 = unit_data(unit_2);
+
+    STATIC_REQUIRE(tuple_contains(udat_mixed, std::get<0>(udat_unit_1)         ));
+    STATIC_REQUIRE(tuple_contains(udat_mixed, pow(std::get<0>(udat_unit_2), -1)));
 }
 
 #define TEST_MIXED_DIVISION_UNIT_CONSTANT(symbol_1, symbol_2) \
