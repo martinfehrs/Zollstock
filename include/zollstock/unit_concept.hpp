@@ -246,10 +246,7 @@ namespace zollstock
 
 
 
-    template <
-        base_unit_c auto first_base_unit,
-        base_unit_c auto... remaining_base_units
-    >
+    template <base_unit_c auto first_base_unit, base_unit_c auto... remaining_base_units>
     [[nodiscard]] consteval auto unit_product_head(
         unit_product<first_base_unit, remaining_base_units...>
     ) noexcept
@@ -259,10 +256,7 @@ namespace zollstock
 
 
 
-    template <
-        base_unit_c auto first_base_unit,
-        base_unit_c auto... remaining_base_units
-    >
+    template <base_unit_c auto first_base_unit, base_unit_c auto... remaining_base_units>
     [[nodiscard]] consteval auto unit_product_tail(
         unit_product<first_base_unit, remaining_base_units...>
     ) noexcept
