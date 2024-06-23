@@ -64,20 +64,6 @@ namespace zollstock
 
 
 
-    template <unit_c Unit>
-    [[nodiscard]] consteval bool is_base_unit(Unit unit) noexcept
-    {
-        return base_unit_c<Unit>;
-    }
-
-    template <unit_c Unit>
-    [[nodiscard]] consteval bool is_unit_product(Unit unit) noexcept
-    {
-        return unit_product_c<Unit>;
-    }
-
-
-
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
         return tuple_equal(
@@ -104,21 +90,13 @@ namespace zollstock
     template <quantity_t quantity, static_string symbol, long double factor, int exponent = 1>
     inline constexpr auto unit_v = unit<quantity, symbol, factor, exponent>{};
 
-    template <base_unit_c auto base, int exponent>
-    inline constexpr auto& raised_unit_v = unit_v<
-        base.quantity,
-        base.symbol,
-        base.factor,
-        base.exponent * exponent
-    >;
-
     template <quantity_t quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
-    inline constexpr auto& prefixed_unit_v = unit_v<
+    inline constexpr auto prefixed_unit_v = unit<
         quantity,
         prefix.symbol + symbol,
         prefix.factor,
         exponent
-    >;
+    >{};
 
 
 
@@ -269,29 +247,37 @@ namespace zollstock
     namespace detail
     {
 
-        template<int exponent>
+        template<int exponent> requires(exponent == 0)
         [[nodiscard]] consteval auto pow(unit_c auto unit) noexcept
         {
-            if constexpr(exponent == 0 || unit == _1)
+            return _1;
+        }
+
+        template<int exponent> requires(exponent == 1)
+        [[nodiscard]] consteval auto pow(unit_c auto unit) noexcept
+        {
+            return unit;
+        }
+
+        template<int exponent> requires(exponent < 0 || exponent > 1)
+        [[nodiscard]] consteval auto pow(base_unit_c auto unit) noexcept
+        {
+            return unit_v<
+                unit.quantity,
+                unit.symbol,
+                unit.factor,
+                unit.exponent * exponent
+            >;
+        }
+
+        template<int exponent> requires(exponent < 0 || exponent > 1)
+        [[nodiscard]] consteval auto pow(unit_product_c auto unit) noexcept
+        {
+            return [=]<std::size_t... indices>(std::index_sequence<indices...>)
             {
-                return _1;
+                return unit_product_v<pow<exponent>(std::get<indices>(unit.base_units))...>;
             }
-            else if constexpr(exponent == 1)
-            {
-                return unit;
-            }
-            else if constexpr(is_unit_product(unit))
-            {
-                return [=]<std::size_t... indices>(std::index_sequence<indices...>)
-                {
-                    return unit_product_v<pow<exponent>(std::get<indices>(unit.base_units))...>;
-                }
-                (std::make_index_sequence<unit.size>{});
-            }
-            else
-            {
-                return raised_unit_v<unit, exponent>;
-            }
+            (std::make_index_sequence<unit.size>{});
         }
 
     }
