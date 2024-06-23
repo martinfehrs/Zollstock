@@ -34,23 +34,13 @@ namespace zollstock
         requires named_unit_c<Candidate>;
         { Candidate::quantity } -> std::same_as<const quantity_t&>;
         { Candidate::factor } -> std::same_as<const long double&>;
-    };
-
-    template <typename Candidate>
-    concept raised_unit_c = requires
-    {
-        requires base_unit_c<std::remove_reference_t<decltype(Candidate::base_unit)>>;
         { Candidate::exponent } -> std::same_as<const int&>;
     };
-
-    template <typename Candidate>
-    concept homogeneous_unit_c = base_unit_c<Candidate >|| raised_unit_c<Candidate>;
-
 
     template<class Candidate, std::size_t index>
     concept has_base_unit_tuple_element_c = requires (Candidate candidate)
     {
-        requires homogeneous_unit_c<typename std::tuple_element<index, Candidate>::type>;
+        requires base_unit_c<typename std::tuple_element<index, Candidate>::type>;
         { get<index>(candidate) } -> std::convertible_to<std::tuple_element_t<index, Candidate>&>;
     };
 
@@ -81,16 +71,12 @@ namespace zollstock
     }
 
     template <unit_c Unit>
-    [[nodiscard]] consteval bool is_raised_unit(Unit unit) noexcept
-    {
-        return raised_unit_c<Unit>;
-    }
-
-    template <unit_c Unit>
     [[nodiscard]] consteval bool is_unit_product(Unit unit) noexcept
     {
         return unit_product_c<Unit>;
     }
+
+
 
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
@@ -106,45 +92,46 @@ namespace zollstock
     }
 
 
-    template<quantity_t quantity_, static_string symbol_, long double factor_>
+    template<quantity_t quantity_, static_string symbol_, long double factor_, int exponent_ = 1>
     struct unit
     {
         static constexpr auto quantity = quantity_;
         static constexpr auto symbol = symbol_;
         static constexpr auto factor = factor_;
-    };
-
-
-
-    template<quantity_t quantity_, static_string symbol_, prefix_c auto prefix>
-    struct prefixed_unit
-    {
-        static constexpr auto quantity = quantity_;
-        static constexpr auto symbol = prefix.symbol + symbol_;
-        static constexpr auto factor = prefix.factor;
-    };
-
-
-    template <base_unit_c auto base_unit_, int exponent_>
-    struct raised_unit
-    {
-        static constexpr auto base_unit = base_unit_;
         static constexpr auto exponent = exponent_;
     };
 
+    template <quantity_t quantity, static_string symbol, long double factor, int exponent = 1>
+    inline constexpr auto unit_v = unit<quantity, symbol, factor, exponent>{};
 
-    template<homogeneous_unit_c auto... base_units_>
+    template <base_unit_c auto base, int exponent>
+    inline constexpr auto& raised_unit_v = unit_v<
+        base.quantity,
+        base.symbol,
+        base.factor,
+        base.exponent * exponent
+    >;
+
+    template <quantity_t quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
+    inline constexpr auto& prefixed_unit_v = unit_v<
+        quantity,
+        prefix.symbol + symbol,
+        prefix.factor,
+        exponent
+    >;
+
+
+
+    template<base_unit_c auto... base_units_>
     struct unit_product
     {
         static constexpr auto base_units = std::tuple{ base_units_... };
         static constexpr std::size_t size = sizeof...(base_units_);
     };
 
-    template <base_unit_c auto unit, int exponent_>
-    inline constexpr auto raised_unit_v = raised_unit<unit, exponent_>{};
-
-    template <homogeneous_unit_c auto... units>
+    template <base_unit_c auto... units>
     inline constexpr auto unit_product_v = unit_product<units...>{};
+
 
 
     inline namespace units
@@ -161,38 +148,14 @@ namespace zollstock
 
 
 
-    [[nodiscard]] consteval auto unit_quantity(base_unit_c auto unit) noexcept
-    {
-        return unit.quantity;
-    }
-
-    [[nodiscard]] consteval auto unit_quantity(raised_unit_c auto unit) noexcept
-    {
-        return unit_quantity(unit.base_unit);
-    }
-
-
-
     [[nodiscard]] consteval auto unit_data(base_unit_c auto unit) noexcept
     {
         return std::tuple{
             quantity_data{
                 unit.quantity,
-                1,
+                unit.exponent,
                 unit.factor,
                 unit.symbol
-            }
-        };
-    }
-
-    [[nodiscard]] consteval auto unit_data(raised_unit_c auto unit) noexcept
-    {
-        return std::tuple{
-            quantity_data{
-                unit.base_unit.quantity,
-                unit.exponent,
-                unit.base_unit.factor,
-                unit.base_unit.symbol
             }
         };
     }
@@ -284,8 +247,8 @@ namespace zollstock
 
 
     template <
-        homogeneous_unit_c auto first_base_unit,
-        homogeneous_unit_c auto... remaining_base_units
+        base_unit_c auto first_base_unit,
+        base_unit_c auto... remaining_base_units
     >
     [[nodiscard]] consteval auto unit_product_head(
         unit_product<first_base_unit, remaining_base_units...>
@@ -297,8 +260,8 @@ namespace zollstock
 
 
     template <
-        homogeneous_unit_c auto first_base_unit,
-        homogeneous_unit_c auto... remaining_base_units
+        base_unit_c auto first_base_unit,
+        base_unit_c auto... remaining_base_units
     >
     [[nodiscard]] consteval auto unit_product_tail(
         unit_product<first_base_unit, remaining_base_units...>
@@ -322,10 +285,6 @@ namespace zollstock
             else if constexpr(exponent == 1)
             {
                 return unit;
-            }
-            else if constexpr(is_raised_unit(unit))
-            {
-                return raised_unit_v<unit.base_unit, unit.exponent * exponent>;
             }
             else if constexpr(is_unit_product(unit))
             {
@@ -351,9 +310,9 @@ namespace zollstock
     namespace detail
     {
 
-        template <homogeneous_unit_c auto... factors>
+        template <base_unit_c auto... factors>
         [[nodiscard]] consteval auto unit_product_prepend(
-            unit_product<factors...>, homogeneous_unit_c auto factor
+            unit_product<factors...>, base_unit_c auto factor
         ) noexcept
         {
             return unit_product_v<factor, factors...>;
@@ -361,48 +320,27 @@ namespace zollstock
 
     }
 
+
+
     [[nodiscard]] consteval auto operator*(
         base_unit_c auto unit_1, base_unit_c auto unit_2
     ) noexcept
     {
-        if constexpr(unit_quantity(unit_1) == unit_quantity(unit_2))
+        if constexpr(unit_1.quantity == unit_2.quantity)
         {
-            return raised_unit_v<unit_1, 2>;
-        }
-        else
-        {
-            return unit_product_v<unit_1>;
-        }
-    }
-
-    [[nodiscard]] consteval auto operator*(
-        base_unit_c auto unit_1, raised_unit_c auto unit_2
-    ) noexcept
-    {
-        if constexpr(unit_quantity(unit_1) == unit_quantity(unit_2))
-        {
-            return pow_v<unit_1, unit_2.exponent + 1>;
-        }
-        else
-        {
-            return unit_product_v<unit_1> * unit_2;
-        }
-    }
-
-    [[nodiscard]] consteval auto operator*(
-        raised_unit_c auto unit_1, base_unit_c auto unit_2
-    ) noexcept
-    {
-        return unit_2 * unit_1;
-    }
-
-    [[nodiscard]] consteval auto operator*(
-        raised_unit_c auto unit_1, raised_unit_c auto unit_2
-    ) noexcept
-    {
-        if constexpr(unit_quantity(unit_1) == unit_quantity(unit_2))
-        {
-            return pow_v<unit_1.base_unit, unit_1.exponent + unit_2.exponent>;
+            if constexpr(unit_1.exponent + unit_2.exponent == 0)
+            {
+                return _1;
+            }
+            else
+            {
+                return unit_v<
+                    unit_1.quantity,
+                    unit_1.symbol,
+                    unit_1.factor,
+                    unit_1.exponent + unit_2.exponent
+                >;
+            }
         }
         else
         {
@@ -410,9 +348,8 @@ namespace zollstock
         }
     }
 
-
     [[nodiscard]] consteval auto operator*(
-        unit_product_c auto unit_1, homogeneous_unit_c auto unit_2
+        unit_product_c auto unit_1, base_unit_c auto unit_2
     ) noexcept
     {
         if constexpr(unit_1.size == 0)
@@ -422,7 +359,7 @@ namespace zollstock
         else
         if constexpr (
             const auto head = unit_product_head(unit_1);
-            unit_quantity(unit_2) < unit_quantity(head)
+            unit_2.quantity < head.quantity
         )
         {
             return detail::unit_product_prepend(unit_1, unit_2);
@@ -430,7 +367,7 @@ namespace zollstock
         else
         if constexpr (
             const auto tail = unit_product_tail(unit_1);
-            unit_quantity(unit_2) == unit_quantity(head)
+            unit_2.quantity == head.quantity
         )
         {
             return detail::unit_product_prepend(tail, head * unit_2);
@@ -442,7 +379,7 @@ namespace zollstock
     }
 
     [[nodiscard]] consteval auto operator*(
-        homogeneous_unit_c auto unit_1, unit_product_c auto unit_2
+        base_unit_c auto unit_1, unit_product_c auto unit_2
     ) noexcept
     {
         return unit_2 * unit_1;
