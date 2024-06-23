@@ -27,7 +27,8 @@ namespace zollstock
         long double factor;
         static_string symbol;
 
-        [[nodiscard]] consteval bool operator==(const quantity_data&) const noexcept = default;
+        [[nodiscard]] constexpr bool operator==(const quantity_data&) const noexcept = default;
+
 
         [[nodiscard]] consteval quantity_data operator*(const quantity_data& that) const
         {
