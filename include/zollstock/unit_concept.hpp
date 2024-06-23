@@ -334,6 +334,12 @@ namespace zollstock
             }
             else
             {
+                if (unit_1.factor != unit_2.factor)
+                    throw "incompatible factors";
+
+                if (unit_1.symbol != unit_2.symbol)
+                    throw "incompatible symbols";
+
                 return unit_v<
                     unit_1.quantity,
                     unit_1.symbol,
@@ -370,6 +376,12 @@ namespace zollstock
             unit_2.quantity == head.quantity
         )
         {
+            if (unit_2.factor != head.factor)
+                throw "incompatible factors";
+
+            if (unit_2.symbol != head.symbol)
+                throw "incompatible symbols";
+
             return detail::unit_product_prepend(tail, head * unit_2);
         }
         else
