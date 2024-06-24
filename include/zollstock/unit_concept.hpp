@@ -251,11 +251,15 @@ namespace zollstock
         template<int exponent> requires(exponent < 0 || exponent > 1)
         [[nodiscard]] consteval auto pow(unit_product_c auto unit) noexcept
         {
-            return [=]<std::size_t... indices>(std::index_sequence<indices...>)
+            if constexpr (unit.size == 0)
             {
-                return unit_product_v<pow<exponent>(std::get<indices>(unit.base_units))...>;
+                return unit;
             }
-            (std::make_index_sequence<unit.size>{});
+            else
+            {
+                return pow<exponent>(unit_product_head(unit))
+                     * pow<exponent>(unit_product_tail(unit));
+            }
         }
 
     }
