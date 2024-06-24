@@ -14,7 +14,7 @@ namespace zollstock
     {
 
         template <typename Tuple1, typename Tuple2, typename BinaryPred, std::size_t... indices>
-        [[nodiscard]] constexpr bool tuple_equal_impl(
+        [[nodiscard]] consteval bool tuple_equal_impl(
             const Tuple1& tuple_1,
             const Tuple2& tuple_2,
             BinaryPred compare,
@@ -36,7 +36,7 @@ namespace zollstock
     }
 
     template <typename Tuple1, typename Tuple2, typename BinaryPred>
-    [[nodiscard]] constexpr bool tuple_equal(
+    [[nodiscard]] consteval bool tuple_equal(
         const Tuple1& tuple_1, const Tuple2& tuple_2, BinaryPred compare
     ) noexcept
     {
@@ -48,10 +48,10 @@ namespace zollstock
         );
     }
 
-    [[nodiscard]] constexpr bool tuple_equal(const auto& tuple_1, const auto& tuple_2) noexcept
+    [[nodiscard]] consteval bool tuple_equal(const auto& tuple_1, const auto& tuple_2) noexcept
     {
         return tuple_equal(
-            tuple_1, tuple_2, [](const auto& lhs, const auto& rhs){ return lhs == rhs; }
+            tuple_1, tuple_2, [](const auto& lhs, const auto& rhs) consteval { return lhs == rhs; }
         );
     }
 
@@ -119,7 +119,7 @@ namespace zollstock
     {
 
         template <typename Tuple, typename T, std::size_t... indices>
-        [[nodiscard]] constexpr bool tuple_contains_impl(
+        [[nodiscard]] consteval bool tuple_contains_impl(
             const Tuple& tuple, const T& value, std::index_sequence<indices...>
         )
         {
@@ -129,7 +129,7 @@ namespace zollstock
     }
 
     template <typename Tuple, typename T>
-    [[nodiscard]] constexpr bool tuple_contains(const Tuple& tuple, const T& value)
+    [[nodiscard]] consteval bool tuple_contains(const Tuple& tuple, const T& value)
     {
         return detail::tuple_contains_impl(
             tuple,

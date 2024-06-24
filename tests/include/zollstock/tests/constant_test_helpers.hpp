@@ -112,12 +112,12 @@ void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
     STATIC_REQUIRE(unit_product_head(mixed)  == unit_1);
     STATIC_REQUIRE(unit_product_head(unit_product_tail(mixed)) == pow_v<unit_2, -1>);
 
-    static constexpr auto udat_mixed  = unit_data(mixed );
-    static constexpr auto udat_unit_1 = unit_data(unit_1);
-    static constexpr auto udat_unit_2 = unit_data(unit_2);
+    static constexpr auto udat_mixed  = base_units(mixed );
+    static constexpr auto udat_unit_1 = base_units(unit_1);
+    static constexpr auto udat_unit_2 = base_units(unit_2);
 
     STATIC_REQUIRE(tuple_contains(udat_mixed, std::get<0>(udat_unit_1)         ));
-    STATIC_REQUIRE(tuple_contains(udat_mixed, pow(std::get<0>(udat_unit_2), -1)));
+    STATIC_REQUIRE(tuple_contains(udat_mixed, pow_v<std::get<0>(udat_unit_2), -1>));
 }
 
 #define TEST_MIXED_DIVISION_UNIT_CONSTANT(symbol_1, symbol_2) \

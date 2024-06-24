@@ -2,17 +2,15 @@
 #define __ZOLLSTOCK_UNIT_CONCEPT_HPP__
 
 
-#include <zollstock/quantity_data.hpp>
+#include <zollstock/quantities.hpp>
 #include <zollstock/unit_prefix_concept.hpp>
 #include <zollstock/tuple_utils.hpp>
 
-#include <array>
+#include <tuple>
 #include <type_traits>
 #include <concepts>
 #include <string>
-#include <string_view>
 #include <iostream>
-#include <sstream>
 
 
 namespace zollstock
@@ -67,12 +65,12 @@ namespace zollstock
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
         return tuple_equal(
-            unit_data(unit_1),
-            unit_data(unit_2),
-            [](const auto& unit_data_1, const auto& unit_data_2)
+            base_units(unit_1),
+            base_units(unit_2),
+            [](const auto& base_unit_1, const auto& base_unit_2)
             {
-                return unit_data_1.quantity == unit_data_2.quantity
-                    && unit_data_1.exponent == unit_data_2.exponent;
+                return base_unit_1.quantity == base_unit_2.quantity
+                    && base_unit_1.exponent == base_unit_2.exponent;
             }
         );
     }
@@ -126,34 +124,14 @@ namespace zollstock
 
 
 
-    [[nodiscard]] consteval auto unit_data(base_unit_c auto unit) noexcept
+    [[nodiscard]] consteval auto base_units(base_unit_c auto unit) noexcept
     {
-        return std::tuple{
-            quantity_data{
-                unit.quantity,
-                unit.exponent,
-                unit.factor,
-                unit.symbol
-            }
-        };
+        return std::tuple{ unit };
     }
 
-    namespace detail
+    [[nodiscard]] consteval auto base_units(unit_product_c auto unit) noexcept
     {
-
-        template <std::size_t... indices>
-        [[nodiscard]] consteval auto unit_data_impl(
-            unit_product_c auto unit, std::index_sequence<indices...>
-        ) noexcept
-        {
-            return std::tuple_cat(unit_data(std::get<indices>(unit.base_units))...);
-        }
-
-    }
-
-    [[nodiscard]] consteval auto unit_data(unit_product_c auto unit) noexcept
-    {
-        return detail::unit_data_impl(unit, std::make_index_sequence<unit.size>{});
+        return unit.base_units;
     }
 
 
@@ -185,7 +163,7 @@ namespace zollstock
         using namespace std::string_literals;
 
         return tuple_transform_reduce(
-            unit_data(unit),
+            base_units(unit),
             ""s,
             [](std::string lhs, const std::string& rhs)
             {
@@ -194,12 +172,12 @@ namespace zollstock
 
                 return lhs += rhs;
             },
-            [](const quantity_data& data)
+            [](const base_unit_c auto& base_unit)
             {
-                std::string symbol{ data.symbol.c_str() };
+                std::string symbol{ base_unit.symbol.c_str() };
 
-                if(data.exponent != 1)
-                    symbol += detail::exponent_to_string<Char>(data.exponent);
+                if(base_unit.exponent != 1)
+                    symbol += detail::exponent_to_string<Char>(base_unit.exponent);
 
                 return symbol;
             }
@@ -405,10 +383,29 @@ namespace zollstock
 
 
 
-    [[nodiscard]] consteval bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
+    [[nodiscard]] consteval bool operator==(
+        const base_unit_c auto unit_1, const base_unit_c auto unit_2
+    ) noexcept
     {
-        return tuple_equal(unit_data(unit_1), unit_data(unit_2));
+        return unit_1.quantity == unit_2.quantity
+            && unit_1.symbol   == unit_2.symbol
+            && unit_1.factor   == unit_2.factor
+            && unit_1.exponent == unit_2.exponent;
     }
+
+    [[nodiscard]] constexpr bool operator==(unit_product_c auto unit_1, unit_c auto unit_2) noexcept
+    {
+        return tuple_equal(base_units(unit_1), base_units(unit_2));
+    }
+
+    [[nodiscard]] consteval bool operator==(
+        base_unit_c auto unit_1, unit_product_c auto unit_2
+    ) noexcept
+    {
+        return unit_2 == unit_1;
+    }
+
+
 
     [[nodiscard]] consteval bool operator!=(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
