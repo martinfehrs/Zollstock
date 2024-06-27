@@ -75,7 +75,7 @@ namespace zollstock
             std::integral_constant<std::size_t, index>
         )
         {
-            if constexpr(index == std::tuple_size_v<Tuple>)
+            if constexpr(index == std::tuple_size_v<std::remove_cvref_t<Tuple>>)
             {
                 return init;
             }
@@ -114,6 +114,70 @@ namespace zollstock
     }
 
 
+
+    namespace detail
+    {
+
+        template <
+            typename Tuple1,
+            typename Tuple2,
+            typename T,
+            typename BinaryOp1,
+            typename BinaryOp2,
+            std::size_t index
+        >
+        [[nodiscard]] constexpr T tuple_transform_reduce_impl(
+            Tuple1&& tuple_1,
+            Tuple2&& tuple_2,
+            T init,
+            BinaryOp1 reduce,
+            BinaryOp2 transform,
+            std::integral_constant<std::size_t, index>
+        )
+        {
+            if constexpr(index == std::tuple_size_v<std::remove_cvref_t<Tuple1>>)
+            {
+                return init;
+            }
+            else
+            {
+                return reduce(
+                    tuple_transform_reduce_impl(
+                        std::forward<Tuple1>(tuple_1),
+                        std::forward<Tuple2>(tuple_2),
+                        init,
+                        reduce,
+                        transform,
+                        std::integral_constant<std::size_t, index + 1>{}
+                    ),
+                    transform(
+                        std::get<index>(std::forward<Tuple1>(tuple_1)),
+                        std::get<index>(std::forward<Tuple2>(tuple_2))
+                    )
+                );
+            }
+        }
+
+    }
+
+    template <typename Tuple1, typename Tuple2, typename T, typename BinaryOp1, typename BinaryOp2>
+    [[nodiscard]] constexpr T tuple_transform_reduce(
+        Tuple1&& tuple_1,
+        Tuple2&& tuple_2,
+        T init,
+        BinaryOp1 reduce,
+        BinaryOp2 transform
+    )
+    {
+        return detail::tuple_transform_reduce_impl(
+            std::forward<Tuple1>(tuple_1),
+            std::forward<Tuple2>(tuple_2),
+            init,
+            reduce,
+            transform,
+            std::integral_constant<std::size_t, 0>{}
+        );
+    }
 
     namespace detail
     {

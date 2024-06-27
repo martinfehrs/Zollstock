@@ -5,22 +5,26 @@
 #include <zollstock/unit_concept.hpp>
 
 
-#define TEST_BASE_UNIT_CONSTANT(symbol_, quantity_, factor_)   \
-{                                                              \
-    using namespace zollstock;                                 \
-                                                               \
-    STATIC_REQUIRE(symbol_.quantity == quantity_t::quantity_); \
-    STATIC_REQUIRE(symbol_.symbol   == #symbol_ );             \
-    STATIC_REQUIRE(symbol_.factor   == factor_ );              \
+#define TEST_BASE_UNIT_CONSTANT(symbol_, quantity_, factor_)        \
+{                                                                   \
+    using namespace zollstock;                                      \
+                                                                    \
+    static constexpr auto factor = std::get<0>(symbol_.factors);    \
+                                                                    \
+    STATIC_REQUIRE(factor.quantity       == quantity_t::quantity_); \
+    STATIC_REQUIRE(factor.symbol         == #symbol_ );             \
+    STATIC_REQUIRE(factor.scaling_factor == factor_ );              \
 }
 
-#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, quantity_, prefix)                \
-{                                                                                      \
-    using namespace zollstock;                                                         \
-                                                                                       \
-    STATIC_REQUIRE(prefix##symbol_.quantity == quantity_t::quantity_);                 \
-    STATIC_REQUIRE(prefix##symbol_.symbol   == si_prefixes::prefix.symbol + #symbol_); \
-    STATIC_REQUIRE(prefix##symbol_.factor   == si_prefixes::prefix.factor);            \
+#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, quantity_, prefix)             \
+{                                                                                   \
+    using namespace zollstock;                                                      \
+                                                                                    \
+    static constexpr auto factor = std::get<0>(prefix##symbol_.factors);            \
+                                                                                    \
+    STATIC_REQUIRE(factor.quantity        == quantity_t::quantity_);                \
+    STATIC_REQUIRE(factor.symbol         == si_prefixes::prefix.symbol + #symbol_); \
+    STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix.factor);            \
 }
 
 #define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, quantity) \
@@ -98,7 +102,9 @@
 
 
 
-void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
+void test_mixed_division_unit_constant(
+    zollstock::base_unit_c auto unit_1, zollstock::base_unit_c auto unit_2
+)
 {
     using namespace zollstock;
 
@@ -108,16 +114,11 @@ void test_mixed_division_unit_constant(auto unit_1, auto unit_2)
 
     static constexpr auto mixed = unit_1 / unit_2;
 
-    STATIC_REQUIRE(unit_product_c<decltype(mixed)>);
+    STATIC_REQUIRE(derived_unit_c<decltype(mixed)>);
     STATIC_REQUIRE(unit_product_head(mixed)  == unit_1);
     STATIC_REQUIRE(unit_product_head(unit_product_tail(mixed)) == pow_v<unit_2, -1>);
-
-    static constexpr auto udat_mixed  = base_units(mixed );
-    static constexpr auto udat_unit_1 = base_units(unit_1);
-    static constexpr auto udat_unit_2 = base_units(unit_2);
-
-    STATIC_REQUIRE(tuple_contains(udat_mixed, std::get<0>(udat_unit_1)         ));
-    STATIC_REQUIRE(tuple_contains(udat_mixed, pow_v<std::get<0>(udat_unit_2), -1>));
+    STATIC_REQUIRE(tuple_contains(mixed.factors, std::get<0>(unit_1.factors)));
+    STATIC_REQUIRE(tuple_contains(mixed.factors, std::get<0>(zollstock::pow_v<unit_2, -1>.factors)));
 }
 
 #define TEST_MIXED_DIVISION_UNIT_CONSTANT(symbol_1, symbol_2) \

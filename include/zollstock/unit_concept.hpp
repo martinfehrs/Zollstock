@@ -17,96 +17,107 @@ namespace zollstock
 {
 
     template <typename Candidate>
-    concept unit_c = std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
-
-    template <typename Candidate>
-    concept named_unit_c = requires
+    concept unit_factor_c = requires
     {
-        requires unit_c<Candidate>;
-        { Candidate::symbol } -> std::same_as<const static_string&>;
-    };
-
-    template <typename Candidate>
-    concept base_unit_c = requires
-    {
-        requires named_unit_c<Candidate>;
-        { Candidate::quantity } -> std::same_as<const quantity_t&>;
-        { Candidate::factor } -> std::same_as<const long double&>;
-        { Candidate::exponent } -> std::same_as<const int&>;
+        requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
+        { Candidate::quantity       } -> std::same_as<const quantity_t&>;
+        { Candidate::symbol         } -> std::same_as<const static_string&>;
+        { Candidate::scaling_factor } -> std::same_as<const long double&>;
+        { Candidate::exponent       } -> std::same_as<const int&>;
     };
 
     template<class Candidate, std::size_t index>
-    concept has_base_unit_tuple_element_c = requires (Candidate candidate)
+    concept has_unit_factor_tuple_element_c = requires (Candidate candidate)
     {
-        requires base_unit_c<typename std::tuple_element<index, Candidate>::type>;
+        requires unit_factor_c<typename std::tuple_element<index, Candidate>::type>;
         { get<index>(candidate) } -> std::convertible_to<std::tuple_element_t<index, Candidate>&>;
     };
 
     template<class Candidate>
-    concept is_base_unit_tuple_like_c = requires
+    concept is_unit_factor_tuple_like_c = requires
     {
         requires []<std::size_t... indices>(std::index_sequence<indices...>)
         {
-            return (has_base_unit_tuple_element_c<Candidate, indices> && ...);
+            return (has_unit_factor_tuple_element_c<Candidate, indices> && ...);
         }
         (std::make_index_sequence<std::tuple_size_v<Candidate>>{});
 
     };
 
     template <typename Candidate>
-    concept unit_product_c = requires
+    concept unit_c = requires
     {
-        requires unit_c<Candidate>;
-        requires is_base_unit_tuple_like_c<std::remove_cvref_t<decltype(Candidate::base_units)>>;
+        requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
+        requires is_unit_factor_tuple_like_c<std::remove_cvref_t<decltype(Candidate::factors)>>;
     };
+
+    template <typename Candidate>
+    concept base_unit_c = unit_c<Candidate> && Candidate::size == 1;
+
+    template <typename Candidate>
+    concept derived_unit_c = unit_c<Candidate> && Candidate::size != 1;
 
 
 
     [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
         return tuple_equal(
-            base_units(unit_1),
-            base_units(unit_2),
-            [](const auto& base_unit_1, const auto& base_unit_2)
+            unit_1.factors,
+            unit_2.factors,
+            [](const auto& factor_1, const auto& factor_2)
             {
-                return base_unit_1.quantity == base_unit_2.quantity
-                    && base_unit_1.exponent == base_unit_2.exponent;
+                return factor_1.quantity == factor_2.quantity
+                    && factor_1.exponent == factor_2.exponent;
             }
         );
     }
 
 
-    template<quantity_t quantity_, static_string symbol_, long double factor_, int exponent_ = 1>
-    struct unit
+    template<
+        quantity_t quantity_,
+        static_string symbol_,
+        long double scaling_factor_,
+        int exponent_
+    >
+    struct unit_factor
     {
         static constexpr auto quantity = quantity_;
         static constexpr auto symbol = symbol_;
-        static constexpr auto factor = factor_;
+        static constexpr auto scaling_factor = scaling_factor_;
         static constexpr auto exponent = exponent_;
     };
 
-    template <quantity_t quantity, static_string symbol, long double factor, int exponent = 1>
-    inline constexpr auto unit_v = unit<quantity, symbol, factor, exponent>{};
-
-    template <quantity_t quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
-    inline constexpr auto prefixed_unit_v = unit<
-        quantity,
-        prefix.symbol + symbol,
-        prefix.factor,
-        exponent
-    >{};
 
 
-
-    template<base_unit_c auto... base_units_>
+    template<unit_factor_c auto... factors_>
     struct unit_product
     {
-        static constexpr auto base_units = std::tuple{ base_units_... };
-        static constexpr std::size_t size = sizeof...(base_units_);
+        static constexpr auto factors = std::tuple{ factors_... };
+        static constexpr std::size_t size = sizeof...(factors_);
     };
 
-    template <base_unit_c auto... units>
-    inline constexpr auto unit_product_v = unit_product<units...>{};
+    template <unit_factor_c auto... factors>
+    inline constexpr auto unit_product_v = unit_product<factors...>{};
+
+
+
+    template <
+        quantity_t quantity, static_string symbol, long double scaling_factor, int exponent = 1
+    >
+    using unit = unit_product<unit_factor<quantity, symbol, scaling_factor, exponent>{}>;
+
+    template <
+        quantity_t quantity, static_string symbol, long double scaling_factor, int exponent = 1
+    >
+    inline constexpr auto unit_v = unit<quantity, symbol, scaling_factor, exponent>{};
+
+
+
+    template <quantity_t quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
+    using prefixed_unit = unit<quantity, prefix.symbol + symbol, prefix.factor, exponent>;
+
+    template <quantity_t quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
+    inline constexpr auto prefixed_unit_v = prefixed_unit<quantity, symbol, prefix, exponent>{};
 
 
 
@@ -120,18 +131,6 @@ namespace zollstock
 
         }
 
-    }
-
-
-
-    [[nodiscard]] consteval auto base_units(base_unit_c auto unit) noexcept
-    {
-        return std::tuple{ unit };
-    }
-
-    [[nodiscard]] consteval auto base_units(unit_product_c auto unit) noexcept
-    {
-        return unit.base_units;
     }
 
 
@@ -163,7 +162,7 @@ namespace zollstock
         using namespace std::string_literals;
 
         return tuple_transform_reduce(
-            base_units(unit),
+            unit.factors,
             ""s,
             [](std::string lhs, const std::string& rhs)
             {
@@ -172,12 +171,12 @@ namespace zollstock
 
                 return lhs += rhs;
             },
-            [](const base_unit_c auto& base_unit)
+            [](const unit_factor_c auto& factor)
             {
-                std::string symbol{ base_unit.symbol.c_str() };
+                std::string symbol{ factor.symbol.c_str() };
 
-                if(base_unit.exponent != 1)
-                    symbol += detail::exponent_to_string<Char>(base_unit.exponent);
+                if(factor.exponent != 1)
+                    symbol += detail::exponent_to_string<Char>(factor.exponent);
 
                 return symbol;
             }
@@ -202,22 +201,22 @@ namespace zollstock
 
 
 
-    template <base_unit_c auto first_base_unit, base_unit_c auto... remaining_base_units>
+    template <unit_factor_c auto first_factor, unit_factor_c auto... remaining_factors>
     [[nodiscard]] consteval auto unit_product_head(
-        unit_product<first_base_unit, remaining_base_units...>
+        unit_product<first_factor, remaining_factors...>
     ) noexcept
     {
-        return first_base_unit;
+        return unit_product_v<first_factor>;
     }
 
 
 
-    template <base_unit_c auto first_base_unit, base_unit_c auto... remaining_base_units>
+    template <unit_factor_c auto first_factor, unit_factor_c auto... remaining_factors>
     [[nodiscard]] consteval auto unit_product_tail(
-        unit_product<first_base_unit, remaining_base_units...>
+        unit_product<first_factor, remaining_factors...>
     ) noexcept
     {
-        return unit_product_v<remaining_base_units...>;
+        return unit_product_v<remaining_factors...>;
     }
 
 
@@ -240,16 +239,18 @@ namespace zollstock
         template<int exponent> requires(exponent < 0 || exponent > 1)
         [[nodiscard]] consteval auto pow(base_unit_c auto unit) noexcept
         {
+            const auto factor = std::get<0>(unit.factors);
+
             return unit_v<
-                unit.quantity,
-                unit.symbol,
-                unit.factor,
-                unit.exponent * exponent
+                factor.quantity,
+                factor.symbol,
+                factor.scaling_factor,
+                factor.exponent * exponent
             >;
         }
 
         template<int exponent> requires(exponent < 0 || exponent > 1)
-        [[nodiscard]] consteval auto pow(unit_product_c auto unit) noexcept
+        [[nodiscard]] consteval auto pow(derived_unit_c auto unit) noexcept
         {
             if constexpr (unit.size == 0)
             {
@@ -272,12 +273,12 @@ namespace zollstock
     namespace detail
     {
 
-        template <base_unit_c auto... factors>
-        [[nodiscard]] consteval auto unit_product_prepend(
-            unit_product<factors...>, base_unit_c auto factor
+        template <unit_factor_c auto... factors_1, unit_factor_c auto... factors_2>
+        [[nodiscard]] consteval auto unit_product_concat(
+            unit_product<factors_1...>, unit_product<factors_2...>
         ) noexcept
         {
-            return unit_product_v<factor, factors...>;
+            return unit_product_v<factors_1..., factors_2...>;
         }
 
     }
@@ -288,79 +289,88 @@ namespace zollstock
         base_unit_c auto unit_1, base_unit_c auto unit_2
     ) noexcept
     {
-        if constexpr(unit_1.quantity == unit_2.quantity)
+        const auto factor_1 = std::get<0>(unit_1.factors);
+        const auto factor_2 = std::get<0>(unit_2.factors);
+
+        if constexpr(factor_1.quantity < factor_2.quantity)
         {
-            if constexpr(unit_1.exponent + unit_2.exponent == 0)
-            {
-                return _1;
-            }
-            else
-            {
-                if (unit_1.factor != unit_2.factor)
-                    throw "incompatible factors";
-
-                if (unit_1.symbol != unit_2.symbol)
-                    throw "incompatible symbols";
-
-                return unit_v<
-                    unit_1.quantity,
-                    unit_1.symbol,
-                    unit_1.factor,
-                    unit_1.exponent + unit_2.exponent
-                >;
-            }
+            return detail::unit_product_concat(unit_1, unit_2);
+        }
+        else
+        if constexpr(factor_2.quantity < factor_1.quantity)
+        {
+            return detail::unit_product_concat(unit_2, unit_1);
+        }
+        else
+        if constexpr(factor_1.exponent + factor_2.exponent == 0)
+        {
+            return _1;
         }
         else
         {
-            return unit_product_v<unit_1> * unit_2;
+            if (factor_1.scaling_factor != factor_2.scaling_factor)
+                throw "incompatible factors";
+
+            if (factor_1.symbol != factor_2.symbol)
+                throw "incompatible symbols";
+
+            return unit_v<
+                factor_1.quantity,
+                factor_1.symbol,
+                factor_1.scaling_factor,
+                factor_1.exponent + factor_2.exponent
+            >;
         }
     }
 
     [[nodiscard]] consteval auto operator*(
-        unit_product_c auto unit_1, base_unit_c auto unit_2
+        derived_unit_c auto unit_1, base_unit_c auto unit_2
     ) noexcept
     {
         if constexpr(unit_1.size == 0)
         {
-            return unit_product_v<unit_2>;
+            return unit_2;
         }
         else
-        if constexpr (
+        {
+            const auto factor_2 = std::get<0>(unit_2.factors);
             const auto head = unit_product_head(unit_1);
-            unit_2.quantity < head.quantity
-        )
-        {
-            return detail::unit_product_prepend(unit_1, unit_2);
-        }
-        else
-        if constexpr (
-            const auto tail = unit_product_tail(unit_1);
-            unit_2.quantity == head.quantity
-        )
-        {
-            if (unit_2.factor != head.factor)
-                throw "incompatible factors";
+            const auto head_factor = std::get<0>(head);
 
-            if (unit_2.symbol != head.symbol)
-                throw "incompatible symbols";
+            if constexpr (factor_2.quantity < head_factor.quantity)
+            {
+                return detail::unit_product_concat(unit_2, unit_1);
+            }
+            else
+            if constexpr (
+                const auto tail = unit_product_tail(unit_1);
+                factor_2.quantity == head_factor.quantity
+            )
+            {
+                if (factor_2.scaling_factor != head_factor.scaling_factor)
+                    throw "incompatible factors";
 
-            return detail::unit_product_prepend(tail, head * unit_2);
-        }
-        else
-        {
-            return detail::unit_product_prepend(tail * unit_2, head);
+                if (factor_2.symbol != head_factor.symbol)
+                    throw "incompatible symbols";
+
+                return detail::unit_product_concat(head * unit_2, tail);
+            }
+            else
+            {
+                return detail::unit_product_concat(head, tail * unit_2);
+            }
         }
     }
 
     [[nodiscard]] consteval auto operator*(
-        base_unit_c auto unit_1, unit_product_c auto unit_2
+        base_unit_c auto unit_1, derived_unit_c auto unit_2
     ) noexcept
     {
         return unit_2 * unit_1;
     }
 
     [[nodiscard]] consteval auto operator*(
-        unit_product_c auto unit_1, unit_product_c auto unit_2
+        derived_unit_c auto unit_1, derived_unit_c auto unit_2
     ) noexcept
     {
         if constexpr (unit_1.size == 0)
@@ -387,26 +397,21 @@ namespace zollstock
 
 
 
-    [[nodiscard]] consteval bool operator==(
-        const base_unit_c auto unit_1, const base_unit_c auto unit_2
+    [[nodiscard]] constexpr bool operator==(
+        unit_factor_c auto factor_1, unit_factor_c auto factor_2
     ) noexcept
     {
-        return unit_1.quantity == unit_2.quantity
-            && unit_1.symbol   == unit_2.symbol
-            && unit_1.factor   == unit_2.factor
-            && unit_1.exponent == unit_2.exponent;
+        return factor_1.quantity       == factor_2.quantity
+            && factor_1.symbol         == factor_2.symbol
+            && factor_1.scaling_factor == factor_2.scaling_factor
+            && factor_1.exponent       == factor_2.exponent;
     }
 
-    [[nodiscard]] constexpr bool operator==(unit_product_c auto unit_1, unit_c auto unit_2) noexcept
-    {
-        return tuple_equal(base_units(unit_1), base_units(unit_2));
-    }
 
-    [[nodiscard]] consteval bool operator==(
-        base_unit_c auto unit_1, unit_product_c auto unit_2
-    ) noexcept
+
+    [[nodiscard]] constexpr bool operator==(unit_c auto unit_1, unit_c auto unit_2) noexcept
     {
-        return unit_2 == unit_1;
+        return tuple_equal(unit_1.factors, unit_2.factors);
     }
 
 

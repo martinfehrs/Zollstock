@@ -58,14 +58,23 @@ namespace zollstock
         {
             if constexpr(this_unit != that_unit)
             {
-                constexpr auto this_data = unit_data(this_unit);
-                constexpr auto that_data = unit_data(that_unit);
+                constexpr auto this_factors = this_unit.factors;
+                constexpr auto that_factors= that_unit.factors;
 
-                for(std::size_t i = 0; i < std::size(this_data); ++i)
-                {
-                    this->value_ *= std::pow(this_data[i].factor, this_data[i].exponent) /
-                                    std::pow(that_data[i].factor, that_data[i].exponent);
-                }
+                this->value = tuple_transform_reduce(
+                    this_unit,
+                    that_unit,
+                    this->value,
+                    [](auto value, auto scaling_factor)
+                    {
+                        return value * scaling_factor;
+                    },
+                    [](auto unit_1, auto unit_2)
+                    {
+                        return std::pow(unit_1.scaling_factor, unit_1.exponent) /
+                               std::pow(unit_2.scaling_factor, unit_2.exponent);
+                    }
+                );
             }
         }
 
