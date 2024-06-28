@@ -89,22 +89,22 @@ namespace zollstock
 
 
 
-    template<unit_factor_c auto... factors_>
+    template<unit_factor_c... Factors>
     struct unit_product
     {
-        static constexpr auto factors = std::tuple{ factors_... };
-        static constexpr std::size_t size = sizeof...(factors_);
+        static constexpr auto factors = std::tuple{ Factors{}... };
+        static constexpr std::size_t size = sizeof...(Factors);
     };
 
-    template <unit_factor_c auto... factors>
-    inline constexpr auto unit_product_v = unit_product<factors...>{};
+    template <unit_factor_c... Factors>
+    inline constexpr auto unit_product_v = unit_product<Factors...>{};
 
 
 
     template <
         quantity_t quantity, static_string symbol, long double scaling_factor, int exponent = 1
     >
-    using unit = unit_product<unit_factor<quantity, symbol, scaling_factor, exponent>{}>;
+    using unit = unit_product<unit_factor<quantity, symbol, scaling_factor, exponent>>;
 
     template <
         quantity_t quantity, static_string symbol, long double scaling_factor, int exponent = 1
@@ -201,22 +201,22 @@ namespace zollstock
 
 
 
-    template <unit_factor_c auto first_factor, unit_factor_c auto... remaining_factors>
+    template <unit_factor_c FirstFactor, unit_factor_c... RemainingFactors>
     [[nodiscard]] consteval auto unit_product_head(
-        unit_product<first_factor, remaining_factors...>
+        unit_product<FirstFactor, RemainingFactors...>
     ) noexcept
     {
-        return unit_product_v<first_factor>;
+        return unit_product_v<FirstFactor>;
     }
 
 
 
-    template <unit_factor_c auto first_factor, unit_factor_c auto... remaining_factors>
+    template <unit_factor_c FirstFactor, unit_factor_c... RemainingFactors>
     [[nodiscard]] consteval auto unit_product_tail(
-        unit_product<first_factor, remaining_factors...>
+        unit_product<FirstFactor, RemainingFactors...>
     ) noexcept
     {
-        return unit_product_v<remaining_factors...>;
+        return unit_product_v<RemainingFactors...>;
     }
 
 
@@ -273,12 +273,12 @@ namespace zollstock
     namespace detail
     {
 
-        template <unit_factor_c auto... factors_1, unit_factor_c auto... factors_2>
+        template <unit_factor_c ... Factors1, unit_factor_c... Factors2>
         [[nodiscard]] consteval auto unit_product_concat(
-            unit_product<factors_1...>, unit_product<factors_2...>
+            unit_product<Factors1...>, unit_product<Factors2...>
         ) noexcept
         {
-            return unit_product_v<factors_1..., factors_2...>;
+            return unit_product_v<Factors1..., Factors2...>;
         }
 
     }
