@@ -11,12 +11,12 @@
 namespace zollstock::inline units::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(angle, rad )
-    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(angle, gon )
-    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(angle, asec)
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(quantities::theta, rad )
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(quantities::theta, gon )
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(quantities::theta, asec)
 
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(angle, deg , pi/180.0L )
-    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(angle, amin, pi/10.8e3L)
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quantities::theta, deg , pi/180.0L )
+    ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quantities::theta, amin, pi/10.8e3L)
 
 }
 

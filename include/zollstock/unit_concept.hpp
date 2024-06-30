@@ -20,7 +20,7 @@ namespace zollstock
     concept unit_factor_c = requires
     {
         requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
-        { Candidate::quantity       } -> std::same_as<const quantity_t&>;
+        requires quantity_c<std::remove_cvref_t<decltype(Candidate::quantity)>>;
         { Candidate::symbol         } -> std::same_as<const static_string&>;
         { Candidate::scaling_factor } -> std::same_as<const long double&>;
         { Candidate::exponent       } -> std::same_as<const int&>;
@@ -74,7 +74,7 @@ namespace zollstock
 
 
     template<
-        quantity_t quantity_,
+        quantity_c auto quantity_,
         static_string symbol_,
         long double scaling_factor_,
         int exponent_
@@ -102,21 +102,21 @@ namespace zollstock
 
 
     template <
-        quantity_t quantity, static_string symbol, long double scaling_factor, int exponent = 1
+        quantity_c auto quantity, static_string symbol, long double scaling_factor, int exponent = 1
     >
     using unit = unit_product<unit_factor<quantity, symbol, scaling_factor, exponent>>;
 
     template <
-        quantity_t quantity, static_string symbol, long double scaling_factor, int exponent = 1
+        quantity_c auto quantity, static_string symbol, long double scaling_factor, int exponent = 1
     >
     inline constexpr auto unit_v = unit<quantity, symbol, scaling_factor, exponent>{};
 
 
 
-    template <quantity_t quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
+    template <quantity_c auto quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
     using prefixed_unit = unit<quantity, prefix.symbol + symbol, prefix.factor, exponent>;
 
-    template <quantity_t quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
+    template <quantity_c auto quantity, static_string symbol, prefix_c auto prefix, int exponent = 1>
     inline constexpr auto prefixed_unit_v = prefixed_unit<quantity, symbol, prefix, exponent>{};
 
 
@@ -289,8 +289,8 @@ namespace zollstock
         base_unit_c auto unit_1, base_unit_c auto unit_2
     ) noexcept
     {
-        const auto factor_1 = std::get<0>(unit_1.factors);
-        const auto factor_2 = std::get<0>(unit_2.factors);
+        const unit_factor_c auto factor_1 = std::get<0>(unit_1.factors);
+        const unit_factor_c auto factor_2 = std::get<0>(unit_2.factors);
 
         if constexpr(factor_1.quantity < factor_2.quantity)
         {

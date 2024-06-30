@@ -78,12 +78,12 @@
     ZOLLSTOCK_DEFINE_LITERAL(base_symbol, base_symbol) \
     ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol) \
 
-#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quantity, symbol, factor)       \
-    inline constexpr unit<quantity_t:: quantity, #symbol, factor> symbol{}; \
+#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(quantity, symbol, factor) \
+    inline constexpr unit<quantity, #symbol, factor> symbol{};        \
 
 #define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(quantity, base_symbol, prefix) \
     inline constexpr auto& prefix##base_symbol = prefixed_unit_v<             \
-        quantity_t::quantity,                                                 \
+        quantity,                                                             \
         #base_symbol,                                                         \
         si_prefixes::prefix                                                   \
     >;                                                                        \

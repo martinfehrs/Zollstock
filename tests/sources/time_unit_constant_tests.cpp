@@ -9,6 +9,6 @@ using namespace zollstock;
 TEST_CASE("time-unit-constants", "[time][unit][constants]")
 {
 
-    TEST_BASE_UNIT_CONSTANTS(ALL, s, time)
+    TEST_BASE_UNIT_CONSTANTS(ALL, s, quantities::t)
 
 }

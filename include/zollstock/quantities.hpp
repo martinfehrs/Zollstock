@@ -2,21 +2,16 @@
 #define __ZOLLSTOCK_QUANTITIES_HPP__
 
 
-#include <zollstock/static_string.hpp>
-
-#include <cstddef>
+#include <zollstock/quantity_concept.hpp>
 
 
-namespace zollstock
+namespace zollstock::quantities
 {
 
-    enum class quantity_t
-    {
-        angle,
-        length,
-        time,
-        mass,
-    };
+    inline constexpr quantity_t<"θ"> theta{};
+    inline constexpr quantity_t<"l"> l    {};
+    inline constexpr quantity_t<"t"> t    {};
+    inline constexpr quantity_t<"m"> m    {};
 
 }
 

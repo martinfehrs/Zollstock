@@ -68,17 +68,31 @@ namespace zollstock
             return this->data_;
         }
 
+        [[nodiscard]] constexpr int compare(const static_string& that) const noexcept
+        {
+            return std::char_traits<char>::compare(
+                this->data_, that.data_, std::min(this->size_, that.size_)
+            );
+        }
+
         [[nodiscard]] constexpr bool operator==(const static_string& that) const noexcept
         {
             if(this->size_ != that.size_)
                 return false;
 
-            bool equal = true;
+            return this->compare(that) == 0;
+        }
 
-            for(size_type i = 0; i < this->size_; ++i)
-                equal = equal && (this->data_[i] == that.data_[i]);
+        [[nodiscard]] constexpr bool operator!=(const static_string& that) const noexcept
+        {
+            return !(*this == that);
+        }
 
-            return equal;
+        [[nodiscard]] constexpr bool operator<(const static_string& that) const noexcept
+        {
+            const int comparison_result = this->compare(that);
+
+            return comparison_result < 0 || comparison_result == 0 && this->size_ < that.size_;
         }
 
         [[nodiscard]] constexpr static_string operator+(const static_string& that) const noexcept

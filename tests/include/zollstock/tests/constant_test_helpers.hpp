@@ -5,15 +5,15 @@
 #include <zollstock/unit_concept.hpp>
 
 
-#define TEST_BASE_UNIT_CONSTANT(symbol_, quantity_, factor_)        \
-{                                                                   \
-    using namespace zollstock;                                      \
-                                                                    \
-    static constexpr auto factor = std::get<0>(symbol_.factors);    \
-                                                                    \
-    STATIC_REQUIRE(factor.quantity       == quantity_t::quantity_); \
-    STATIC_REQUIRE(factor.symbol         == #symbol_ );             \
-    STATIC_REQUIRE(factor.scaling_factor == factor_ );              \
+#define TEST_BASE_UNIT_CONSTANT(symbol_, quantity_, factor_)     \
+{                                                                \
+    using namespace zollstock;                                   \
+                                                                 \
+    static constexpr auto factor = std::get<0>(symbol_.factors); \
+                                                                 \
+    STATIC_REQUIRE(factor.quantity       == quantity_);          \
+    STATIC_REQUIRE(factor.symbol         == #symbol_ );          \
+    STATIC_REQUIRE(factor.scaling_factor == factor_ );           \
 }
 
 #define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, quantity_, prefix)             \
@@ -22,7 +22,7 @@
                                                                                     \
     static constexpr auto factor = std::get<0>(prefix##symbol_.factors);            \
                                                                                     \
-    STATIC_REQUIRE(factor.quantity        == quantity_t::quantity_);                \
+    STATIC_REQUIRE(factor.quantity       == quantity_);                             \
     STATIC_REQUIRE(factor.symbol         == si_prefixes::prefix.symbol + #symbol_); \
     STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix.factor);            \
 }
@@ -115,10 +115,9 @@ void test_mixed_division_unit_constant(
     static constexpr auto mixed = unit_1 / unit_2;
 
     STATIC_REQUIRE(derived_unit_c<decltype(mixed)>);
-    STATIC_REQUIRE(unit_product_head(mixed)  == unit_1);
-    STATIC_REQUIRE(unit_product_head(unit_product_tail(mixed)) == pow_v<unit_2, -1>);
+    STATIC_REQUIRE(std::tuple_size_v<decltype(mixed.factors)> == 2);
     STATIC_REQUIRE(tuple_contains(mixed.factors, std::get<0>(unit_1.factors)));
-    STATIC_REQUIRE(tuple_contains(mixed.factors, std::get<0>(zollstock::pow_v<unit_2, -1>.factors)));
+    STATIC_REQUIRE(tuple_contains(mixed.factors, std::get<0>(pow_v<unit_2, -1>.factors)));
 }
 
 #define TEST_MIXED_DIVISION_UNIT_CONSTANT(symbol_1, symbol_2) \
