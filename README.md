@@ -39,35 +39,35 @@ production code.
 
 ## Supported SI named derived units
 
-| prefix | radian | steradian |
-|--------|:------:|:---------:|
-| quetta |    X   |           |
-| ronna  |    X   |           |
-| yotta  |    X   |           |
-| zetta  |    X   |           |
-| exa    |    X   |           |
-| peta   |    X   |           |
-| tera   |    X   |           |
-| giga   |    X   |           |
-| mega   |    X   |           |
-| kilo   |    X   |           |
-| hecto  |    X   |           |
-| deca   |    X   |           |
-|        |    X   |           |
-| deci   |    X   |           |
-| centi  |    X   |           |
-| milli  |    X   |           |
-| micro  |    X   |           |
-| nano   |    X   |           |
-| pico   |    X   |           |
-| femto  |    X   |           |
-| atto   |    X   |           |
-| zepto  |    X   |           |
-| yocto  |    X   |           |
-| ronto  |    X   |           |
-| quecto |    X   |           |
+| prefix | radian | steradian | hertz | newton | pascal |
+|--------|:------:|:---------:|:-----:|:------:|:------:|
+| quetta |    X   |           |       |        |        |
+| ronna  |    X   |           |       |        |        |
+| yotta  |    X   |           |       |        |        |
+| zetta  |    X   |           |       |        |        |
+| exa    |    X   |           |       |        |        |
+| peta   |    X   |           |       |        |        |
+| tera   |    X   |           |       |        |        |
+| giga   |    X   |           |       |        |        |
+| mega   |    X   |           |       |        |        |
+| kilo   |    X   |           |       |        |        |
+| hecto  |    X   |           |       |        |        |
+| deca   |    X   |           |       |        |        |
+|        |    X   |           |       |        |        |
+| deci   |    X   |           |       |        |        |
+| centi  |    X   |           |       |        |        |
+| milli  |    X   |           |       |        |        |
+| micro  |    X   |           |       |        |        |
+| nano   |    X   |           |       |        |        |
+| pico   |    X   |           |       |        |        |
+| femto  |    X   |           |       |        |        |
+| atto   |    X   |           |       |        |        |
+| zepto  |    X   |           |       |        |        |
+| yocto  |    X   |           |       |        |        |
+| ronto  |    X   |           |       |        |        |
+| quecto |    X   |           |       |        |        |
 
-## SI unnamed derived units with special support
+# SI unnamed derived units with special support
 
 There is no finite set of unamed derived units. You can combine base units as you like. But there
 are some unamed derived units with predefined symbols and literals. These symbols and literals
