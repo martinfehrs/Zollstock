@@ -7,62 +7,96 @@ so called Zollstock normaly shows centimeters these days.
 The library is still in a very early development stage. So please be careful when using it in
 production code.
 
-these units for the following quantities are currently supported:
+## Supported SI base units
 
-Dimensionless:
-  - Type for unit 1
-  - Constant for unit 1
-  - Literal for unit 1
+| prefix | second | meter | gram | ampere | kelvin | mole | candela |
+|--------|:------:|:-----:|:----:|:------:|:------:|:----:|:-------:|
+| quetta |    X   |   X   |   X  |        |        |      |         |
+| ronna  |    X   |   X   |   X  |        |        |      |         |
+| yotta  |    X   |   X   |   X  |        |        |      |         |
+| zetta  |    X   |   X   |   X  |        |        |      |         |
+| exa    |    X   |   X   |   X  |        |        |      |         |
+| peta   |    X   |   X   |   X  |        |        |      |         |
+| tera   |    X   |   X   |   X  |        |        |      |         |
+| giga   |    X   |   X   |   X  |        |        |      |         |
+| mega   |    X   |   X   |   X  |        |        |      |         |
+| kilo   |    X   |   X   |   X  |        |        |      |         |
+| hecto  |    X   |   X   |   X  |        |        |      |         |
+| deca   |    X   |   X   |   X  |        |        |      |         |
+|        |    X   |   X   |   X  |        |        |      |         |
+| deci   |    X   |   X   |   X  |        |        |      |         |
+| centi  |    X   |   X   |   X  |        |        |      |         |
+| milli  |    X   |   X   |   X  |        |        |      |         |
+| micro  |    X   |   X   |   X  |        |        |      |         |
+| nano   |    X   |   X   |   X  |        |        |      |         |
+| pico   |    X   |   X   |   X  |        |        |      |         |
+| femto  |    X   |   X   |   X  |        |        |      |         |
+| atto   |    X   |   X   |   X  |        |        |      |         |
+| zepto  |    X   |   X   |   X  |        |        |      |         |
+| yocto  |    X   |   X   |   X  |        |        |      |         |
+| ronto  |    X   |   X   |   X  |        |        |      |         |
+| quecto |    X   |   X   |   X  |        |        |      |         |
 
-Length:
-  - Types for meter and all prefixed variants
-  - Constants for meter and all prefixed variants
-  - Literals for meter and all prefixed variants
+## Supported SI named derived units
 
-Area:
-  - Types for square meter and all prefixed variants
-  - Constants for square meter and all prefixed variants
-  - Literals for square meter abs all prefixed variants
+| prefix | radian | steradian |
+|--------|:------:|:---------:|
+| quetta |    X   |           |
+| ronna  |    X   |           |
+| yotta  |    X   |           |
+| zetta  |    X   |           |
+| exa    |    X   |           |
+| peta   |    X   |           |
+| tera   |    X   |           |
+| giga   |    X   |           |
+| mega   |    X   |           |
+| kilo   |    X   |           |
+| hecto  |    X   |           |
+| deca   |    X   |           |
+|        |    X   |           |
+| deci   |    X   |           |
+| centi  |    X   |           |
+| milli  |    X   |           |
+| micro  |    X   |           |
+| nano   |    X   |           |
+| pico   |    X   |           |
+| femto  |    X   |           |
+| atto   |    X   |           |
+| zepto  |    X   |           |
+| yocto  |    X   |           |
+| ronto  |    X   |           |
+| quecto |    X   |           |
 
-Volume:
-  - Types for cubic meter and all prefixed variants
-  - Constants for cubic meter and all prefixed variants
-  - Literals for cubic meter and all prefixed variants
+## SI unnamed derived units with special support
 
-Time:
-  - Types for second and all prefixed variants
-  - Contants for second and all prefixed variants
-  - Literals for second and all prefixed variants
-  - Type for minute
-  - Constant for minute
-  - Literal for minute
-  - Type for hour
-  - Constant for hour
-  - Literal for hour
-  - Type for day
-  - Constant for day
-  - Literal for day
-  - Type for year
-  - Constant for year
-  - Literal for year
+There is no finite set of unamed derived units. You can combine base units as you like. But there
+are some unamed derived units with predefined symbols and literals. These symbols and literals
+are not required. Their only purpose is to increase readability.
 
-Angle:
-  - Types for radian and all prefixed variants
-  - Constants for radian and all prefixed variants
-  - Literals for radian and all prefixed variants
-  - Type for degree
-  - Constant for degree
-  - Literal for degree
-  - Type for arcminute
-  - Constant for arcminute
-  - Literal for arcminute
-  - Types for arcsecond and all prefixed variants
-  - Constants for arcsecond and all prefixed variants
-  - Literals for arcsecond and all prefixed variants
-  - Types for gradian and all prefixed variants
-  - Constants for gradian and all prefixed variants
-  - Literals for gradian and all prefixed variants
-
-
-Furthermore you can combine all units as needed to represent all derived units but without any
-special support. Arithmetic would work as expected.
+| prefix | square metre | cubic metre | square second |
+|--------|:------------:|:-----------:|:-------------:|
+| quetta |       X      |      X      |       X       |
+| ronna  |       X      |      X      |       X       |
+| yotta  |       X      |      X      |       X       |
+| zetta  |       X      |      X      |       X       |
+| exa    |       X      |      X      |       X       |
+| peta   |       X      |      X      |       X       |
+| tera   |       X      |      X      |       X       |
+| giga   |       X      |      X      |       X       |
+| mega   |       X      |      X      |       X       |
+| kilo   |       X      |      X      |       X       |
+| hecto  |       X      |      X      |       X       |
+| deca   |       X      |      X      |       X       |
+|        |       X      |      X      |       X       |
+| deci   |       X      |      X      |       X       |
+| centi  |       X      |      X      |       X       |
+| milli  |       X      |      X      |       X       |
+| micro  |       X      |      X      |       X       |
+| nano   |       X      |      X      |       X       |
+| pico   |       X      |      X      |       X       |
+| femto  |       X      |      X      |       X       |
+| atto   |       X      |      X      |       X       |
+| zepto  |       X      |      X      |       X       |
+| yocto  |       X      |      X      |       X       |
+| ronto  |       X      |      X      |       X       |
+| quecto |       X      |      X      |       X       |
