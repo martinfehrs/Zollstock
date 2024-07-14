@@ -202,6 +202,62 @@ namespace zollstock
         );
     }
 
+
+
+    namespace detail
+    {
+
+        template <typename Tuple1, typename Tuple2, std::size_t index>
+        [[nodiscard]] consteval int tuple_lexicographical_compare_three_way_impl(
+            const Tuple1& tuple_1,
+            const Tuple2& tuple_2,
+            std::integral_constant<std::size_t, index>
+        )
+        {
+            if constexpr(index == std::tuple_size_v<Tuple1> && index < std::tuple_size_v<Tuple2>)
+            {
+                return -1;
+            }
+            else
+            if constexpr(index == std::tuple_size_v<Tuple2> && index < std::tuple_size_v<Tuple1>)
+            {
+                return 1;
+            }
+            else
+            if constexpr (index == std::tuple_size_v<Tuple1> && index == std::tuple_size_v<Tuple2>)
+            {
+                return 0;
+            }
+            else
+            if (std::get<index>(tuple_1) < std::get<index>(tuple_2))
+            {
+                return -1;
+            }
+            else
+            if (std::get<index>(tuple_2) < std::get<index>(tuple_1))
+            {
+                return 1;
+            }
+            else
+            {
+                return tuple_lexicographical_compare_three_way_impl(
+                    tuple_1, tuple_2, std::integral_constant<std::size_t, index + 1>{}
+                );
+            }
+        }
+
+    }
+
+    template <typename Tuple1, typename Tuple2>
+    [[nodiscard]] consteval int tuple_lexicographical_compare_three_way(
+        const Tuple1& tuple_1, const Tuple2& tuple_2
+    )
+    {
+        return detail::tuple_lexicographical_compare_three_way_impl(
+            tuple_1, tuple_2, std::integral_constant<std::size_t, 0>{}
+        );
+    }
+
 }
 
 
