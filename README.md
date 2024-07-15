@@ -9,7 +9,7 @@ production code.
 
 ## Supported SI base units
 
-| prefix | second | meter | gram | ampere | kelvin | mole | candela |
+| prefix |    s   |   m   |   g  |    A   |    K   |  mol |    cd   |
 |--------|:------:|:-----:|:----:|:------:|:------:|:----:|:-------:|
 | quetta |    ✓   |   ✓   |   ✓  |        |        |      |         |
 | ronna  |    ✓   |   ✓   |   ✓  |        |        |      |         |
@@ -73,7 +73,7 @@ There is no finite set of unamed derived units. You can combine base units as yo
 are some unamed derived units with predefined symbols and literals. These symbols and literals
 are not required. Their only purpose is to increase readability.
 
-| prefix | square metre | cubic metre | square second |
+| prefix |       m²     |      m³     |       s²      |
 |--------|:------------:|:-----------:|:-------------:|
 | quetta |       ✓      |      ✓      |       ✓       |
 | ronna  |       ✓      |      ✓      |       ✓       |
