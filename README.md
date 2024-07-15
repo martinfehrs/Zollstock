@@ -11,61 +11,61 @@ production code.
 
 | prefix | second | meter | gram | ampere | kelvin | mole | candela |
 |--------|:------:|:-----:|:----:|:------:|:------:|:----:|:-------:|
-| quetta |    X   |   X   |   X  |        |        |      |         |
-| ronna  |    X   |   X   |   X  |        |        |      |         |
-| yotta  |    X   |   X   |   X  |        |        |      |         |
-| zetta  |    X   |   X   |   X  |        |        |      |         |
-| exa    |    X   |   X   |   X  |        |        |      |         |
-| peta   |    X   |   X   |   X  |        |        |      |         |
-| tera   |    X   |   X   |   X  |        |        |      |         |
-| giga   |    X   |   X   |   X  |        |        |      |         |
-| mega   |    X   |   X   |   X  |        |        |      |         |
-| kilo   |    X   |   X   |   X  |        |        |      |         |
-| hecto  |    X   |   X   |   X  |        |        |      |         |
-| deca   |    X   |   X   |   X  |        |        |      |         |
-|        |    X   |   X   |   X  |        |        |      |         |
-| deci   |    X   |   X   |   X  |        |        |      |         |
-| centi  |    X   |   X   |   X  |        |        |      |         |
-| milli  |    X   |   X   |   X  |        |        |      |         |
-| micro  |    X   |   X   |   X  |        |        |      |         |
-| nano   |    X   |   X   |   X  |        |        |      |         |
-| pico   |    X   |   X   |   X  |        |        |      |         |
-| femto  |    X   |   X   |   X  |        |        |      |         |
-| atto   |    X   |   X   |   X  |        |        |      |         |
-| zepto  |    X   |   X   |   X  |        |        |      |         |
-| yocto  |    X   |   X   |   X  |        |        |      |         |
-| ronto  |    X   |   X   |   X  |        |        |      |         |
-| quecto |    X   |   X   |   X  |        |        |      |         |
+| quetta |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| ronna  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| yotta  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| zetta  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| exa    |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| peta   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| tera   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| giga   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| mega   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| kilo   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| hecto  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| deca   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+|        |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| deci   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| centi  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| milli  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| micro  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| nano   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| pico   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| femto  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| atto   |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| zepto  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| yocto  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| ronto  |    ✓   |   ✓   |   ✓  |        |        |      |         |
+| quecto |    ✓   |   ✓   |   ✓  |        |        |      |         |
 
 ## Supported SI named derived units
 
 | prefix | rad | sr | Hz | N | Pa | J | W | C | V | F | Ω | S | Wb | T | H | °C | lm | lx | Bq | Gy | Sv | kat |
 |--------|:---:|:--:|:--:|:-:|:--:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:--:|:-:|:-:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
-| quetta |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| ronna  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| yotta  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| zetta  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| exa    |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| peta   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| tera   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| giga   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| mega   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| kilo   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| hecto  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| deca   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-|        |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| deci   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| centi  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| milli  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| micro  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| nano   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| pico   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| femto  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| atto   |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| zepto  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| yocto  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| ronto  |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
-| quecto |  X  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| quetta |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| ronna  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| yotta  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| zetta  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| exa    |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| peta   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| tera   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| giga   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| mega   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| kilo   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| hecto  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| deca   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+|        |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| deci   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| centi  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| milli  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| micro  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| nano   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| pico   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| femto  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| atto   |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| zepto  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| yocto  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| ronto  |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
+| quecto |  ✓  |    |    |   |    |   |   |   |   |   |   |   |    |   |   |    |    |    |    |    |    |     |
 
 ## SI unnamed derived units with special support
 
@@ -75,28 +75,28 @@ are not required. Their only purpose is to increase readability.
 
 | prefix | square metre | cubic metre | square second |
 |--------|:------------:|:-----------:|:-------------:|
-| quetta |       X      |      X      |       X       |
-| ronna  |       X      |      X      |       X       |
-| yotta  |       X      |      X      |       X       |
-| zetta  |       X      |      X      |       X       |
-| exa    |       X      |      X      |       X       |
-| peta   |       X      |      X      |       X       |
-| tera   |       X      |      X      |       X       |
-| giga   |       X      |      X      |       X       |
-| mega   |       X      |      X      |       X       |
-| kilo   |       X      |      X      |       X       |
-| hecto  |       X      |      X      |       X       |
-| deca   |       X      |      X      |       X       |
-|        |       X      |      X      |       X       |
-| deci   |       X      |      X      |       X       |
-| centi  |       X      |      X      |       X       |
-| milli  |       X      |      X      |       X       |
-| micro  |       X      |      X      |       X       |
-| nano   |       X      |      X      |       X       |
-| pico   |       X      |      X      |       X       |
-| femto  |       X      |      X      |       X       |
-| atto   |       X      |      X      |       X       |
-| zepto  |       X      |      X      |       X       |
-| yocto  |       X      |      X      |       X       |
-| ronto  |       X      |      X      |       X       |
-| quecto |       X      |      X      |       X       |
+| quetta |       ✓      |      ✓      |       ✓       |
+| ronna  |       ✓      |      ✓      |       ✓       |
+| yotta  |       ✓      |      ✓      |       ✓       |
+| zetta  |       ✓      |      ✓      |       ✓       |
+| exa    |       ✓      |      ✓      |       ✓       |
+| peta   |       ✓      |      ✓      |       ✓       |
+| tera   |       ✓      |      ✓      |       ✓       |
+| giga   |       ✓      |      ✓      |       ✓       |
+| mega   |       ✓      |      ✓      |       ✓       |
+| kilo   |       ✓      |      ✓      |       ✓       |
+| hecto  |       ✓      |      ✓      |       ✓       |
+| deca   |       ✓      |      ✓      |       ✓       |
+|        |       ✓      |      ✓      |       ✓       |
+| deci   |       ✓      |      ✓      |       ✓       |
+| centi  |       ✓      |      ✓      |       ✓       |
+| milli  |       ✓      |      ✓      |       ✓       |
+| micro  |       ✓      |      ✓      |       ✓       |
+| nano   |       ✓      |      ✓      |       ✓       |
+| pico   |       ✓      |      ✓      |       ✓       |
+| femto  |       ✓      |      ✓      |       ✓       |
+| atto   |       ✓      |      ✓      |       ✓       |
+| zepto  |       ✓      |      ✓      |       ✓       |
+| yocto  |       ✓      |      ✓      |       ✓       |
+| ronto  |       ✓      |      ✓      |       ✓       |
+| quecto |       ✓      |      ✓      |       ✓       |
