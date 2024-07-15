@@ -39,33 +39,33 @@ production code.
 
 ## Supported SI named derived units
 
-| prefix | radian | steradian | hertz | newton | pascal |
-|--------|:------:|:---------:|:-----:|:------:|:------:|
-| quetta |    X   |           |       |        |        |
-| ronna  |    X   |           |       |        |        |
-| yotta  |    X   |           |       |        |        |
-| zetta  |    X   |           |       |        |        |
-| exa    |    X   |           |       |        |        |
-| peta   |    X   |           |       |        |        |
-| tera   |    X   |           |       |        |        |
-| giga   |    X   |           |       |        |        |
-| mega   |    X   |           |       |        |        |
-| kilo   |    X   |           |       |        |        |
-| hecto  |    X   |           |       |        |        |
-| deca   |    X   |           |       |        |        |
-|        |    X   |           |       |        |        |
-| deci   |    X   |           |       |        |        |
-| centi  |    X   |           |       |        |        |
-| milli  |    X   |           |       |        |        |
-| micro  |    X   |           |       |        |        |
-| nano   |    X   |           |       |        |        |
-| pico   |    X   |           |       |        |        |
-| femto  |    X   |           |       |        |        |
-| atto   |    X   |           |       |        |        |
-| zepto  |    X   |           |       |        |        |
-| yocto  |    X   |           |       |        |        |
-| ronto  |    X   |           |       |        |        |
-| quecto |    X   |           |       |        |        |
+| prefix | radian | steradian | hertz | newton | pascal | joule | watt | coulomb | volt |
+|--------|:------:|:---------:|:-----:|:------:|:------:|:-----:|:----:|:-------:|:----:|
+| quetta |    X   |           |       |        |        |       |      |         |      |
+| ronna  |    X   |           |       |        |        |       |      |         |      |
+| yotta  |    X   |           |       |        |        |       |      |         |      |
+| zetta  |    X   |           |       |        |        |       |      |         |      |
+| exa    |    X   |           |       |        |        |       |      |         |      |
+| peta   |    X   |           |       |        |        |       |      |         |      |
+| tera   |    X   |           |       |        |        |       |      |         |      |
+| giga   |    X   |           |       |        |        |       |      |         |      |
+| mega   |    X   |           |       |        |        |       |      |         |      |
+| kilo   |    X   |           |       |        |        |       |      |         |      |
+| hecto  |    X   |           |       |        |        |       |      |         |      |
+| deca   |    X   |           |       |        |        |       |      |         |      |
+|        |    X   |           |       |        |        |       |      |         |      |
+| deci   |    X   |           |       |        |        |       |      |         |      |
+| centi  |    X   |           |       |        |        |       |      |         |      |
+| milli  |    X   |           |       |        |        |       |      |         |      |
+| micro  |    X   |           |       |        |        |       |      |         |      |
+| nano   |    X   |           |       |        |        |       |      |         |      |
+| pico   |    X   |           |       |        |        |       |      |         |      |
+| femto  |    X   |           |       |        |        |       |      |         |      |
+| atto   |    X   |           |       |        |        |       |      |         |      |
+| zepto  |    X   |           |       |        |        |       |      |         |      |
+| yocto  |    X   |           |       |        |        |       |      |         |      |
+| ronto  |    X   |           |       |        |        |       |      |         |      |
+| quecto |    X   |           |       |        |        |       |      |         |      |
 
 ## SI unnamed derived units with special support
 
