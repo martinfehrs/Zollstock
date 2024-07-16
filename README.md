@@ -7,6 +7,36 @@ so called Zollstock normaly shows centimeters these days.
 The library is still in a very early development stage. So please be careful when using it in
 production code.
 
+## Minimal example
+
+```cpp
+
+#include <zollstock/zollstock.h>
+#include <iostream>
+
+namespace zs = zollstock;
+
+int main(int argc, char** argv)
+{
+    // Calculation of a pipes material volume
+
+    const zs::double_t<zs::cm> wall_thickness{ std::strtod(argv[1]) };
+    const zs::double_t<zs::cm> outer_radius{ std::strtod(argv[2]) };
+    const zs::double_t<zs::cm> length{ zs::double_t<zs::m>{ std::strtod(argv[3]) } };
+
+    const auto inner_radius = outer_radius - wall_thickness;
+    const auto outer_area = 2 * zs::pi * outer_radius;
+    const auto inner_area = 2 * zs::pi * inner_radius;
+    const auto outer_volume = outer_area * length;
+    const auto inner_volume = inner_area * length;
+    const zs::double_t<zs::dm3> pipe_volume = outer_volume - inner_volume;
+
+    std::cout << "pipe_volume: " << pipe_volume << '\n';
+
+    return 0;
+}
+```
+
 ## Supported SI base units
 
 | prefix | Q | R | Y | Z | E | P | T | G | M | k | h | da |   | d | c | m | μ | n | p | f | a | z | y | r | q |
