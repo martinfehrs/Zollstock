@@ -26,6 +26,9 @@ namespace zollstock
     class scalar
     {
 
+        template <unit_c auto, number_c>
+        friend class scalar;
+
         using this_type = scalar<this_unit, ThisValue>;
 
     public:
