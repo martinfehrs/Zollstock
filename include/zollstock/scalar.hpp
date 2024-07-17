@@ -64,10 +64,10 @@ namespace zollstock
                 constexpr auto this_factors = this_unit.factors;
                 constexpr auto that_factors= that_unit.factors;
 
-                this->value = tuple_transform_reduce(
-                    this_unit,
-                    that_unit,
-                    this->value,
+                this->value_ = tuple_transform_reduce(
+                    this_unit.factors,
+                    that_unit.factors,
+                    this->value_,
                     [](auto value, auto scaling_factor)
                     {
                         return value * scaling_factor;
