@@ -9,11 +9,11 @@ using namespace zollstock;
 TEST_CASE("angle-unit-constants", "[angle][unit][constants]")
 {
 
-    TEST_BASE_UNIT_CONSTANTS(ALL, rad , quantities::theta)
-    TEST_BASE_UNIT_CONSTANTS(ALL, gon , quantities::theta)
-    TEST_BASE_UNIT_CONSTANTS(ALL, asec, quantities::theta)
+    TEST_BASE_UNIT_CONSTANTS(ALL, rad , dimensions::_1)
+    TEST_BASE_UNIT_CONSTANTS(ALL, gon , dimensions::_1)
+    TEST_BASE_UNIT_CONSTANTS(ALL, asec, dimensions::_1)
 
-    TEST_BASE_UNIT_CONSTANT(deg  , quantities::theta, pi/180.0L )
-    TEST_BASE_UNIT_CONSTANT(amin , quantities::theta, pi/10.8e3L)
+    TEST_BASE_UNIT_CONSTANT(deg  , dimensions::_1, pi/180.0L )
+    TEST_BASE_UNIT_CONSTANT(amin , dimensions::_1, pi/10.8e3L)
 
 }

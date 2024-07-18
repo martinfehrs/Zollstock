@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_UNIT_CONCEPT_HPP__
 
 
-#include <zollstock/quantities.hpp>
+#include <zollstock/dimensions.hpp>
 #include <zollstock/unit_prefix_concept.hpp>
 #include <zollstock/tuple_utils.hpp>
 
@@ -20,7 +20,7 @@ namespace zollstock
     concept unit_factor_c = requires
     {
         requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
-        requires quantities::quantity_c<std::remove_cvref_t<decltype(Candidate::quantity)>>;
+        requires dimensions::dimension_c<std::remove_cvref_t<decltype(Candidate::dimension)>>;
         { Candidate::symbol         } -> std::same_as<const static_string&>;
         { Candidate::scaling_factor } -> std::same_as<const long double&>;
         { Candidate::exponent       } -> std::same_as<const int&>;
@@ -44,12 +44,16 @@ namespace zollstock
 
     };
 
+    struct unit_tag;
+
     template <typename Candidate>
     concept unit_c = requires
     {
+        requires std::same_as<typename Candidate::type, unit_tag>;
         requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
         requires is_unit_factor_tuple_like_c<std::remove_cvref_t<decltype(Candidate::factors)>>;
-    };
+    };    struct dimension_tag;
+
 
     template <typename Candidate>
     concept base_unit_c = unit_c<Candidate> && Candidate::size == 1;
@@ -66,7 +70,7 @@ namespace zollstock
             unit_2.factors,
             [](const auto& factor_1, const auto& factor_2)
             {
-                return factor_1.quantity == factor_2.quantity
+                return factor_1.dimension == factor_2.dimension
                     && factor_1.exponent == factor_2.exponent;
             }
         );
@@ -74,14 +78,14 @@ namespace zollstock
 
 
     template<
-        quantities::quantity_c auto quantity_,
+        dimensions::dimension_c auto dimension_,
         static_string symbol_,
         long double scaling_factor_,
         int exponent_
     >
     struct unit_factor
     {
-        static constexpr auto quantity = quantity_;
+        static constexpr auto dimension = dimension_;
         static constexpr auto symbol = symbol_;
         static constexpr auto scaling_factor = scaling_factor_;
         static constexpr auto exponent = exponent_;
@@ -92,6 +96,7 @@ namespace zollstock
     template<unit_factor_c... Factors>
     struct unit_product
     {
+        using type = unit_tag;
         static constexpr auto factors = std::tuple{ Factors{}... };
         static constexpr std::size_t size = sizeof...(Factors);
     };
@@ -142,37 +147,37 @@ namespace zollstock
 
 
     template <
-        quantities::quantity_c auto quantity,
+        dimensions::dimension_c auto dimension,
         static_string symbol,
         long double scaling_factor, int exponent = 1
     >
-    using unit = unit_product<unit_factor<quantity, symbol, scaling_factor, exponent>>;
+    using unit = unit_product<unit_factor<dimension, symbol, scaling_factor, exponent>>;
 
     template <
-        quantities::quantity_c auto quantity,
+        dimensions::dimension_c auto dimension,
         static_string symbol,
         long double scaling_factor,
         int exponent = 1
     >
-    inline constexpr auto unit_v = unit<quantity, symbol, scaling_factor, exponent>{};
+    inline constexpr auto unit_v = unit<dimension, symbol, scaling_factor, exponent>{};
 
 
 
     template <
-        quantities::quantity_c auto quantity,
+        dimensions::dimension_c auto dimension,
         static_string symbol,
         prefix_c auto prefix,
         int exponent = 1
     >
-    using prefixed_unit = unit<quantity, prefix.symbol + symbol, prefix.factor, exponent>;
+    using prefixed_unit = unit<dimension, prefix.symbol + symbol, prefix.factor, exponent>;
 
     template <
-        quantities::quantity_c auto quantity,
+        dimensions::dimension_c auto dimension,
         static_string symbol,
         prefix_c auto prefix,
         int exponent = 1
     >
-    inline constexpr auto prefixed_unit_v = prefixed_unit<quantity, symbol, prefix, exponent>{};
+    inline constexpr auto prefixed_unit_v = prefixed_unit<dimension, symbol, prefix, exponent>{};
 
 
 
@@ -263,7 +268,7 @@ namespace zollstock
             const auto factor = std::get<0>(unit.factors);
 
             return unit_v<
-                factor.quantity,
+                factor.dimension,
                 factor.symbol,
                 factor.scaling_factor,
                 factor.exponent * exponent
@@ -296,12 +301,12 @@ namespace zollstock
         const unit_factor_c auto factor_1 = std::get<0>(unit_1.factors);
         const unit_factor_c auto factor_2 = std::get<0>(unit_2.factors);
 
-        if constexpr(factor_1.quantity < factor_2.quantity)
+        if constexpr(factor_1.dimension < factor_2.dimension)
         {
             return detail::unit_product_concat(unit_1, unit_2);
         }
         else
-        if constexpr(factor_2.quantity < factor_1.quantity)
+        if constexpr(factor_2.dimension < factor_1.dimension)
         {
             return detail::unit_product_concat(unit_2, unit_1);
         }
@@ -319,7 +324,7 @@ namespace zollstock
                 throw "incompatible symbols";
 
             return unit_v<
-                factor_1.quantity,
+                factor_1.dimension,
                 factor_1.symbol,
                 factor_1.scaling_factor,
                 factor_1.exponent + factor_2.exponent
@@ -339,14 +344,14 @@ namespace zollstock
             const auto head = unit_product_head(unit_1);
             const auto head_factor = std::get<0>(head);
 
-            if constexpr (factor_2.quantity < head_factor.quantity)
+            if constexpr (factor_2.dimension < head_factor.dimension)
             {
                 return detail::unit_product_concat(unit_2, unit_1);
             }
             else
             if constexpr (
                 const auto tail = unit_product_tail(unit_1);
-                factor_2.quantity == head_factor.quantity
+                factor_2.dimension == head_factor.dimension
             )
             {
                 if (factor_2.scaling_factor != head_factor.scaling_factor)
@@ -399,7 +404,7 @@ namespace zollstock
         unit_factor_c auto factor_1, unit_factor_c auto factor_2
     ) noexcept
     {
-        return factor_1.quantity       == factor_2.quantity
+        return factor_1.dimension      == factor_2.dimension
             && factor_1.symbol         == factor_2.symbol
             && factor_1.scaling_factor == factor_2.scaling_factor
             && factor_1.exponent       == factor_2.exponent;

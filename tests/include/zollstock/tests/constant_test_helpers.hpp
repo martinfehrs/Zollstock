@@ -5,61 +5,61 @@
 #include <zollstock/unit_concept.hpp>
 
 
-#define TEST_BASE_UNIT_CONSTANT(symbol_, quantity_, factor_)     \
+#define TEST_BASE_UNIT_CONSTANT(symbol_, dimension_, factor_)    \
 {                                                                \
     using namespace zollstock;                                   \
                                                                  \
     static constexpr auto factor = std::get<0>(symbol_.factors); \
                                                                  \
-    STATIC_REQUIRE(factor.quantity       == quantity_);          \
+    STATIC_REQUIRE(factor.dimension      == dimension_);         \
     STATIC_REQUIRE(factor.symbol         == #symbol_ );          \
     STATIC_REQUIRE(factor.scaling_factor == factor_ );           \
 }
 
-#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, quantity_, prefix)             \
+#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, dimension_, prefix)            \
 {                                                                                   \
     using namespace zollstock;                                                      \
                                                                                     \
     static constexpr auto factor = std::get<0>(prefix##symbol_.factors);            \
                                                                                     \
-    STATIC_REQUIRE(factor.quantity       == quantity_);                             \
+    STATIC_REQUIRE(factor.dimension      == dimension_);                            \
     STATIC_REQUIRE(factor.symbol         == si_prefixes::prefix.symbol + #symbol_); \
     STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix.factor);            \
 }
 
-#define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, quantity) \
-    TEST_BASE_UNIT_CONSTANT(symbol, quantity, 1.0L)           \
+#define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, dimension) \
+    TEST_BASE_UNIT_CONSTANT(symbol, dimension, 1.0L)           \
 
-#define TEST_BASE_UNIT_CONSTANTS_PREFIXED(symbol, quantity)    \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, q  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, r  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, y  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, z  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, a  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, f  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, p  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, mic) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, m  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, c  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, da ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, h  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, k  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, M  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, G  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, T  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, P  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, E  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, Z  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, Y  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, R  ) \
-    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, quantity, Q  ) \
+#define TEST_BASE_UNIT_CONSTANTS_PREFIXED(symbol, dimension)    \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, q  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, r  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, y  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, z  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, a  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, f  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, p  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, mic) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, m  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, c  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, da ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, h  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, k  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, M  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, G  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, T  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, P  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, E  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, Z  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, Y  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, R  ) \
+    TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol, dimension, Q  ) \
 
-#define TEST_BASE_UNIT_CONSTANTS_ALL(symbol, quantity)    \
-    TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, quantity) \
-    TEST_BASE_UNIT_CONSTANTS_PREFIXED(symbol, quantity)   \
+#define TEST_BASE_UNIT_CONSTANTS_ALL(symbol, dimension)    \
+    TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, dimension) \
+    TEST_BASE_UNIT_CONSTANTS_PREFIXED(symbol, dimension)   \
 
-#define TEST_BASE_UNIT_CONSTANTS(select, symbol, quantity) \
-    TEST_BASE_UNIT_CONSTANTS_##select(symbol, quantity)    \
+#define TEST_BASE_UNIT_CONSTANTS(select, symbol, dimension) \
+    TEST_BASE_UNIT_CONSTANTS_##select(symbol, dimension)    \
 
 
 #define TEST_RAISED_UNIT_CONSTANT(symbol, exponent)                         \
