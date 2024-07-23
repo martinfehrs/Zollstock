@@ -7,7 +7,7 @@ so called Zollstock normaly shows centimeters these days.
 The library is still in a very early development stage. So please be careful when using it in
 production code.
 
-## Minimal example
+## Example
 
 ```cpp
 #include <zollstock/zollstock.hpp>
