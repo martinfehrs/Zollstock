@@ -13,6 +13,7 @@ production code.
 #include <zollstock/zollstock.hpp>
 #include <iostream>
 #include <cstdlib>
+#include <format>
 
 namespace zs = zollstock;
 
