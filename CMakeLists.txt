@@ -10,6 +10,8 @@ target_compile_features(zollstock INTERFACE cxx_std_20)
 
 add_subdirectory(dependencies/Catch2)
 
+add_subdirectory(examples)
+
 include(CTest)
 add_subdirectory(tests)
 
