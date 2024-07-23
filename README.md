@@ -56,7 +56,7 @@ int main(int argc, char** argv)
     const auto inner_volume = inner_area * pipe_length;
     const zs::double_t<zs::dm3> pipe_volume = outer_volume - inner_volume;
 
-    std::cout << "pipe volume: " << pipe_volume << '\n';
+    std::cout << std::format("pipe volume: {}\n", pipe_volume);
 
     return 0;
 }

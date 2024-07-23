@@ -7,6 +7,10 @@
 #include <zollstock/definition_helpers.hpp>
 
 #include <cmath>
+#include <format>
+#include <algorithm>
+#include <sstream>
+#include <utility>
 
 
 namespace zollstock
@@ -361,6 +365,27 @@ namespace zollstock
 
 }
 
+
+template<zollstock::unit_c auto this_unit, zollstock::number_c ThisValue>
+struct std::formatter<zollstock::scalar<this_unit, ThisValue>, char>
+{
+
+    template<typename ParseContext>
+    constexpr ParseContext::iterator parse(ParseContext& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template<typename FmtContext>
+    FmtContext::iterator format(zollstock::scalar<this_unit, ThisValue> s, FmtContext& ctx) const
+    {
+        std::ostringstream out;
+
+        out << s;
+
+        return std::ranges::copy(std::move(out).str(), ctx.out()).out;
+    }
+};
 
 
 namespace zollstock::inline units::inline literals
