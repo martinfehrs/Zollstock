@@ -31,7 +31,7 @@ namespace zs = zollstock;
     }
 }
 
-int main(int argc, char** argv) try
+int main(int argc, char** argv)
 {
     // Checking arguments
     const auto [wall_thickness, outer_radius, pipe_length] = read_args(argc, argv);
@@ -47,8 +47,4 @@ int main(int argc, char** argv) try
     std::cout << "pipe volume: " << pipe_volume << '\n';
 
     return 0;
-}
-catch(std::exception&)
-{
-    argument_error();
 }
