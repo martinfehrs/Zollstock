@@ -26,8 +26,8 @@ int main(int argc, char** argv)
     const zs::double_t<zs::cm> length{ zs::double_t<zs::m>{ std::stod(argv[3]) } };
 
     const auto inner_radius = outer_radius - wall_thickness;
-    const auto outer_area = 2 * zs::pi * outer_radius;
-    const auto inner_area = 2 * zs::pi * inner_radius;
+    const auto outer_area = zs::pi * outer_radius * outer_radius;
+    const auto inner_area = zs::pi * inner_radius * inner_radius;
     const auto outer_volume = outer_area * length;
     const auto inner_volume = inner_area * length;
     const zs::double_t<zs::dm3> pipe_volume = outer_volume - inner_volume;
