@@ -17,13 +17,33 @@ production code.
 
 namespace zs = zollstock;
 
+[[noreturn]] void argument_error()
+{
+    std::cerr << "Invalid arguments\n"
+              << "Usage: pcalc <wall thickness (cm)> <outer radius (cm)> <pipe length (m)>\n";
+
+    std::exit(1);
+}
+
 int main(int argc, char** argv)
 {
-    // Calculation of a pipes material volume
+    // Checking arguments
 
-    const zs::double_t<zs::cm> wall_thickness{ std::stod(argv[1]) };
-    const zs::double_t<zs::cm> outer_radius{ std::stod(argv[2]) };
-    const zs::double_t<zs::cm> length{ zs::double_t<zs::m>{ std::stod(argv[3]) } };
+    if (argc != 4)
+        argument_error();
+
+    try
+    {
+        const zs::double_t<zs::cm> wall_thickness{ std::stod(argv[1]) };
+        const zs::double_t<zs::cm> outer_radius{ std::stod(argv[2]) };
+        const zs::double_t<zs::cm> length{ zs::double_t<zs::m>{ std::stod(argv[3]) } };
+    }
+    catch(const std::exception&)
+    {
+        argument_error();
+    }
+
+    // Calculation of a pipes material volume
 
     const auto inner_radius = outer_radius - wall_thickness;
     const auto outer_area = zs::pi * outer_radius * outer_radius;
