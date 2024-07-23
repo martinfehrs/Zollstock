@@ -3,6 +3,7 @@
 
 
 #include <cstddef>
+#include <string>
 
 
 namespace zollstock
