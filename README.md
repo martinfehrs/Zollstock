@@ -11,7 +11,7 @@ production code.
 
 ```cpp
 
-#include <zollstock/zollstock.h>
+#include <zollstock/zollstock.hpp>
 #include <iostream>
 #include <cstdlib>
 
