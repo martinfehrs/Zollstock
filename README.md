@@ -21,9 +21,9 @@ int main(int argc, char** argv)
 {
     // Calculation of a pipes material volume
 
-    const zs::double_t<zs::cm> wall_thickness{ std::strtod(argv[1]) };
-    const zs::double_t<zs::cm> outer_radius{ std::strtod(argv[2]) };
-    const zs::double_t<zs::cm> length{ zs::double_t<zs::m>{ std::strtod(argv[3]) } };
+    const zs::double_t<zs::cm> wall_thickness{ std::stod(argv[1]) };
+    const zs::double_t<zs::cm> outer_radius{ std::stod(argv[2]) };
+    const zs::double_t<zs::cm> length{ zs::double_t<zs::m>{ std::stod(argv[3]) } };
 
     const auto inner_radius = outer_radius - wall_thickness;
     const auto outer_area = 2 * zs::pi * outer_radius;
