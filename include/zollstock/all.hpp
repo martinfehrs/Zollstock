@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_HPP__
-#define __ZOLLSTOCK_HPP__
+#ifndef __ZOLLSTOCK_ALL_HPP__
+#define __ZOLLSTOCK_ALL_HPP__
 
 
 #include <zollstock/angle_units.hpp>
@@ -9,4 +9,4 @@
 #include <zollstock/volume_units.hpp>
 
 
-#endif /*__ZOLLSTOCK_HPP__*/
+#endif /*__ZOLLSTOCK_ALL_HPP__*/

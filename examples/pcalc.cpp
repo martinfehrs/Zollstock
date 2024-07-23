@@ -1,4 +1,4 @@
-#include <zollstock/zollstock.hpp>
+#include <zollstock/all.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <format>
