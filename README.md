@@ -14,6 +14,7 @@ production code.
 #include <iostream>
 #include <cstdlib>
 #include <format>
+#include <numbers>
 
 namespace zs = zollstock;
 
@@ -46,13 +47,15 @@ namespace zs = zollstock;
 
 int main(int argc, char** argv)
 {
+    using namespace std::numbers;
+
     // Checking arguments
     const auto [wall_thickness, outer_radius, pipe_length] = read_args(argc, argv);
 
     // Calculation of a pipes material volume
     const auto inner_radius = outer_radius - wall_thickness;
-    const auto outer_area = zs::pi * outer_radius * outer_radius;
-    const auto inner_area = zs::pi * inner_radius * inner_radius;
+    const auto outer_area = pi * outer_radius * outer_radius;
+    const auto inner_area = pi * inner_radius * inner_radius;
     const auto outer_volume = outer_area * pipe_length;
     const auto inner_volume = inner_area * pipe_length;
     const zs::double_t<zs::dm3> pipe_volume = outer_volume - inner_volume;
