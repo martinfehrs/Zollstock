@@ -33,19 +33,31 @@
         return scalar<constant, unsigned long long int>{ value };                               \
     }                                                                                           \
                                                                                                 \
-    [[nodiscard]] consteval auto operator""_##suffix(long double value) noexcept                \
+    [[nodiscard]] consteval auto operator""_##suffix(long double value)                         \
     {                                                                                           \
-        return scalar<constant, double>{ narrow<double>(value) };                               \
+        if (                                                                                    \
+            value > std::numeric_limits<double>::max() ||                                       \
+            value < std::numeric_limits<double>::min()                                          \
+        )                                                                                       \
+            throw "literal value out of range";                                                 \
+                                                                                                \
+        return scalar<constant, double>{ static_cast<double>(value) };                          \
     }                                                                                           \
                                                                                                 \
-    [[nodiscard]] consteval auto operator""_f_##suffix(long double value) noexcept              \
+    [[nodiscard]] consteval auto operator""_f_##suffix(long double value)                       \
     {                                                                                           \
-        return scalar<constant, float>{ narrow<float>(value) };                                 \
+        if (                                                                                    \
+            value > std::numeric_limits<float>::max() ||                                        \
+            value < std::numeric_limits<float>::min()                                           \
+        )                                                                                       \
+            throw "literal value out of range";                                                 \
+                                                                                                \
+        return scalar<constant, float>{ static_cast<float>(value) };                                 \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_l_##suffix(long double value) noexcept              \
     {                                                                                           \
-        return scalar<constant, long double>{ narrow<long double>(value) };                     \
+        return scalar<constant, long double>{ value };                                          \
     }                                                                                           \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol)       \

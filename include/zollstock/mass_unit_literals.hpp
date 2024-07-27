@@ -6,6 +6,8 @@
 #include <zollstock/definition_helpers.hpp>
 #include <zollstock/scalar.hpp>
 
+#include <limits>
+
 
 namespace zollstock::inline units::inline literals
 {
