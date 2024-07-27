@@ -66,7 +66,7 @@ namespace zollstock
             if constexpr(this_unit != that_unit)
             {
                 constexpr auto this_factors = this_unit.factors;
-                constexpr auto that_factors= that_unit.factors;
+                constexpr auto that_factors = that_unit.factors;
 
                 this->value_ = tuple_transform_reduce(
                     this_unit.factors,
@@ -78,8 +78,8 @@ namespace zollstock
                     },
                     [](auto unit_1, auto unit_2)
                     {
-                        return std::pow(unit_1.scaling_factor, unit_1.exponent) /
-                               std::pow(unit_2.scaling_factor, unit_2.exponent);
+                        return std::pow(unit_2.scaling_factor, unit_2.exponent) /
+                               std::pow(unit_1.scaling_factor, unit_1.exponent);
                     }
                 );
             }
