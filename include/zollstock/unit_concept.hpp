@@ -342,7 +342,7 @@ namespace zollstock
         {
             const auto factor_2 = std::get<0>(unit_2.factors);
             const auto head = unit_product_head(unit_1);
-            const auto head_factor = std::get<0>(head);
+            const auto head_factor = std::get<0>(head.factors);
 
             if constexpr (factor_2.dimension < head_factor.dimension)
             {
