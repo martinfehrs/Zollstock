@@ -52,7 +52,7 @@ int main(int argc, char** argv)
     const auto pipe_volume = outer_volume - inner_volume;
     const zs::double_t<kg> pipe_mass = pipe_volume * copper_density;
 
-    std::cout << std::format("pipe mass (kg): {}\n", pipe_mass);
+    std::cout << std::format("pipe mass ({}): {}\n", pipe_mass.unit(), pipe_mass);
 
     return 0;
 }
