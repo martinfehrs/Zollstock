@@ -12,7 +12,7 @@ using namespace zs::units;
 [[noreturn]] void argument_error() noexcept
 {
     std::cerr << "Invalid arguments\n"
-              << "Usage: pcalc <wall thickness (cm)> <outer radius (cm)> <pipe length (m)>\n";
+              << "Usage: pcalc <wall thickness (mm)> <outer diameter (mm)> <length (m)>\n";
 
     std::exit(1);
 }
@@ -25,9 +25,9 @@ using namespace zs::units;
     try
     {
         return std::tuple{
-            zs::double_t<cm>{ std::stod(argv[1]) },
-            zs::double_t<cm>{ std::stod(argv[2]) },
-            zs::double_t<cm>{ zs::double_t<m>{ std::stod(argv[3]) } },
+            zs::double_t<mm>{ std::stod(argv[1]) },
+            zs::double_t<mm>{ std::stod(argv[2]) },
+            zs::double_t<mm>{ zs::double_t<m>{ std::stod(argv[3]) } },
         };
     }
     catch(const std::exception& e)
@@ -39,10 +39,11 @@ using namespace zs::units;
 int main(int argc, char** argv)
 {
     // Checking arguments
-    const auto [wall_thickness, outer_radius, pipe_length] = read_args(argc, argv);
+    const auto [wall_thickness, outer_diameter, pipe_length] = read_args(argc, argv);
 
     // Calculating mass of a copper pipe
-    static constexpr auto copper_density = 8.1_g/cm3;
+    static constexpr zs::double_t<g/mm3> copper_density = 8.1_g/cm3;
+    const auto outer_radius = outer_diameter / 2;
     const auto inner_radius = outer_radius - wall_thickness;
     const auto outer_area = pi * outer_radius * outer_radius;
     const auto inner_area = pi * inner_radius * inner_radius;
