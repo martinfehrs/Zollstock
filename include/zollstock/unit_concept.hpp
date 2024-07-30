@@ -6,6 +6,8 @@
 #include <zollstock/unit_prefix_concept.hpp>
 #include <zollstock/tuple_utils.hpp>
 
+#include <format>
+#include <sstream>
 #include <tuple>
 #include <type_traits>
 #include <concepts>
@@ -430,6 +432,28 @@ namespace zollstock
     }
 
 }
+
+
+template<zollstock::unit_c Unit>
+struct std::formatter<Unit, char>
+{
+
+    template<typename ParseContext>
+    constexpr ParseContext::iterator parse(ParseContext& ctx)
+    {
+        return ctx.begin();
+    }
+
+    template<typename FmtContext>
+    FmtContext::iterator format(Unit u, FmtContext& ctx) const
+    {
+        std::ostringstream out;
+
+        out << u;
+
+        return std::ranges::copy(std::move(out).str(), ctx.out()).out;
+    }
+};
 
 
 #endif //__ZOLLSTOCK_UNIT_CONCEPT_HPP__
