@@ -3,7 +3,8 @@
 #include <zollstock/angle_unit_literals.hpp>
 #include <zollstock/tests/literal_test_helpers.hpp>
 
-using namespace zollstock;
+
+using namespace zollstock::units;
 
 
 TEST_CASE("angle-unit-literals", "[angle][unit][literals]")

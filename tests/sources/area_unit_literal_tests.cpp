@@ -3,7 +3,7 @@
 #include <zollstock/tests/literal_test_helpers.hpp>
 
 
-using namespace zollstock;
+using namespace zollstock::units;
 
 
 TEST_CASE("area-unit-literals", "[area][unit][literals]")

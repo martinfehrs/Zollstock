@@ -232,62 +232,62 @@ namespace zollstock
 
 
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using int_t = scalar<unit, int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_int_t = scalar<unit, unsigned int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_t = scalar<unit, unsigned>;
 
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using short_int_t = scalar<unit, short int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using short_t= scalar<unit, short>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_short_int_t= scalar<unit, unsigned short int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_short_t= scalar<unit, unsigned short>;
 
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using long_int_t = scalar<unit, long int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using long_t= scalar<unit, long>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_long_int_t= scalar<unit, unsigned long int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_long_t= scalar<unit, unsigned long>;
 
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using long_long_int_t = scalar<unit, long long int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using long_long_t= scalar<unit, long long>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_long_long_int_t= scalar<unit, unsigned long long int>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using unsigned_long_long_t= scalar<unit, unsigned long long>;
 
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using float_t = scalar<unit, float>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using double_t = scalar<unit, double>;
 
-    template <unit_c auto unit = _1>
+    template <unit_c auto unit = units::_1>
     using long_double_t = scalar<unit, long double>;
 
 
@@ -384,6 +384,19 @@ namespace zollstock
         return os;
     }
 
+
+    template <unit_c auto target_unit, unit_c auto source_unit, number_c Value>
+    [[nodiscard]] scalar<target_unit, Value> in(scalar<source_unit, Value> source) noexcept
+    {
+        return scalar<target_unit, Value>{ source };
+    }
+
+    template <unit_c auto unit, number_c Value>
+    [[nodiscard]] scalar<unit, Value> as(Value source) noexcept
+    {
+        return scalar<unit, Value>{ source };
+    }
+
 }
 
 
@@ -409,7 +422,7 @@ struct std::formatter<zollstock::scalar<this_unit, ThisValue>, char>
 };
 
 
-namespace zollstock::inline units::inline literals
+namespace zollstock::units::inline literals
 {
 
     ZOLLSTOCK_DEFINE_LITERAL(1, _1)

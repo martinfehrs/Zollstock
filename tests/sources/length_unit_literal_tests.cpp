@@ -4,7 +4,7 @@
 #include <zollstock/tests/literal_test_helpers.hpp>
 
 
-using namespace zollstock;
+using namespace zollstock::units;
 
 
 TEST_CASE("length-unit-literals", "[length][unit][literals]")

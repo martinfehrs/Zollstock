@@ -4,7 +4,7 @@
 #include <zollstock/tests/constant_test_helpers.hpp>
 
 
-using namespace zollstock;
+using namespace zollstock::units;
 
 
 TEST_CASE("angular-velocity-unit-constants", "[angular-velocity][unit][constants]")

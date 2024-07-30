@@ -3,7 +3,7 @@
 #include <zollstock/tests/constant_test_helpers.hpp>
 
 
-using namespace zollstock;
+using namespace zollstock::units;
 
 
 TEST_CASE("squared-time-unit-constants", "[squared-time][unit][constants]")

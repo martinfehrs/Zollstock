@@ -9,9 +9,9 @@
 namespace zollstock::inline math_constants
 {
 
-    inline constexpr scalar<rad, float      > pi_f_rad{ pi_f };
-    inline constexpr scalar<rad, double     > pi_rad  { pi   };
-    inline constexpr scalar<rad, long double> pi_l_rad{ pi_l };
+    inline constexpr scalar<units::rad, float      > pi_f_rad{ pi_f };
+    inline constexpr scalar<units::rad, double     > pi_rad  { pi   };
+    inline constexpr scalar<units::rad, long double> pi_l_rad{ pi_l };
 
 }
 

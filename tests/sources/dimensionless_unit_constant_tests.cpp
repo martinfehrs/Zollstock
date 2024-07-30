@@ -2,7 +2,7 @@
 #include <zollstock/unit_concept.hpp>
 
 
-using namespace zollstock;
+using namespace zollstock::units;
 
 
 TEST_CASE("dimensionless-unit-constants", "[dimensionless][unit][constants]")

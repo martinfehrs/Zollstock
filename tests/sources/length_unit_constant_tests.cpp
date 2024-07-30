@@ -3,12 +3,12 @@
 #include <zollstock/tests/constant_test_helpers.hpp>
 
 
-using namespace zollstock;
-
+using namespace zollstock::units;
+using namespace zollstock::dimensions;
 
 TEST_CASE("length-unit-constants", "[length][unit][constants]")
 {
 
-    TEST_BASE_UNIT_CONSTANTS(ALL, m, dimensions::L)
+    TEST_BASE_UNIT_CONSTANTS(ALL, m, L)
 
 }

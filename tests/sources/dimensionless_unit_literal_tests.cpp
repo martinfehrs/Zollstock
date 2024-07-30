@@ -2,7 +2,7 @@
 #include <zollstock/scalar.hpp>
 
 
-using namespace zollstock;
+using namespace zollstock::units;
 
 
 TEST_CASE("dimensionless-unit-literals", "[dimensionless][unit][literals]")

@@ -135,7 +135,7 @@ namespace zollstock
 
     }
 
-    inline namespace units
+    namespace units
     {
 
         inline namespace constants
@@ -255,7 +255,7 @@ namespace zollstock
         template<int exponent> requires(exponent == 0)
         [[nodiscard]] consteval auto pow(unit_c auto unit) noexcept
         {
-            return _1;
+            return units::_1;
         }
 
         template<int exponent> requires(exponent == 1)
@@ -315,7 +315,7 @@ namespace zollstock
         else
         if constexpr(factor_1.exponent + factor_2.exponent == 0)
         {
-            return _1;
+            return units::_1;
         }
         else
         {

@@ -6,7 +6,7 @@
 #include <zollstock/definition_helpers.hpp>
 
 
-namespace zollstock::inline units::inline constants
+namespace zollstock::units::inline constants
 {
 
     ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANTS(s, 2)
