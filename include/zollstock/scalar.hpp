@@ -78,8 +78,8 @@ namespace zollstock
                     },
                     [](auto unit_1, auto unit_2)
                     {
-                        return std::pow(unit_2.scaling_factor, unit_2.exponent) /
-                               std::pow(unit_1.scaling_factor, unit_1.exponent);
+                        return pow(unit_2.scaling_factor, unit_2.exponent) /
+                               pow(unit_1.scaling_factor, unit_1.exponent);
                     }
                 );
             }
@@ -200,6 +200,27 @@ namespace zollstock
         }
 
     private:
+
+        [[nodiscard]] static constexpr long double pow_impl(
+            long double base, unsigned int exponent
+        ) noexcept
+        {
+            if (exponent == 0)
+                return 1.0L;
+
+            return base * pow(base, exponent - 1);
+        }
+
+        // Eigene Implementierung von pow, da die Standardimplementierung std::pow
+        // nicht bei allen unterstützten Compilern innerhalb konstanter Ausdrücke verwendet
+        // werden kann.
+        [[nodiscard]] static constexpr long double pow(long double base, int exponent) noexcept
+        {
+            if (exponent < 0)
+                return 1.0L/pow_impl(base, -exponent);
+
+            return pow_impl(base, exponent);
+        }
 
 #if defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS)
     public:
