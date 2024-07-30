@@ -7,7 +7,7 @@
 #include <zollstock/scalar.hpp>
 
 
-namespace zollstock::inline units::inline literals
+namespace zollstock::units::inline literals
 {
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(m3)
