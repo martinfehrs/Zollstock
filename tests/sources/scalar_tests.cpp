@@ -1,6 +1,5 @@
 #include <catch2/catch_all.hpp>
 
-#define ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION
 #include <zollstock/scalar.hpp>
 #include <zollstock/length_units.hpp>
 
@@ -19,7 +18,7 @@ template <zs::unit_c auto unit, zs::unit_c Unit, zs::number_c Number>
     Number expected_value
 ) noexcept
 {
-    return unit == expected_unit && s.value_ == expected_value;
+    return unit == expected_unit && s.value() == expected_value;
 }
 
 
@@ -142,4 +141,10 @@ TEST_CASE("scalar comparison", "[scalar]")
     STATIC_REQUIRE(zs::unsigned_t<>{ 1 } > zs::int_t<>{ -1 });
 
     STATIC_REQUIRE_FALSE(zs::int_t<>{ -1 } == zs::unsigned_t<>{ UINT_MAX });
+}
+
+TEST_CASE("scalar conversions", "[scalar]")
+{
+    STATIC_REQUIRE(zs::int_t<m >{ zs::int_t<cm>{ 100 } }.value() ==   1);
+    STATIC_REQUIRE(zs::int_t<cm>{ zs::int_t< m>{   1 } }.value() == 100);
 }
