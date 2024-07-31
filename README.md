@@ -37,9 +37,9 @@ using namespace zs::units;
     try
     {
         return std::tuple{
-            zs::double_t<mm>{ std::stod(argv[1]) },
-            zs::double_t<mm>{ std::stod(argv[2]) },
-            zs::double_t<mm>{ zs::double_t<m>{ std::stod(argv[3]) } },
+            zs::as<mm>(std::stod(argv[1])),
+            zs::as<mm>(std::stod(argv[2])),
+            zs::in<mm>(zs::as<m>(std::stod(argv[3]))),
         };
     }
     catch(const std::exception& e)
@@ -68,6 +68,7 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
 ```
 
 ## Supported SI base units
