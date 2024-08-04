@@ -8,7 +8,7 @@ using namespace zollstock::units;
 TEST_CASE("dimensionless-unit-literals", "[dimensionless][unit][literals]")
 {
 
-    REQUIRE(1.0_1   == 1.0 * _1);
-    REQUIRE(1_1     == 1   * _1);
+    STATIC_REQUIRE(1.0_1   == 1.0 * _1);
+    STATIC_REQUIRE(1_1     == 1   * _1);
 
 }
