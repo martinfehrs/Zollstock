@@ -5,36 +5,50 @@
 #define ZOLLSTOCK_DEFINE_LITERAL(suffix, constant)                                              \
     [[nodiscard]] consteval auto operator""_##suffix(unsigned long long int value) noexcept     \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         return scalar<constant, int>{ narrow<int>(value) };                                     \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_l_##suffix(unsigned long long int value) noexcept   \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         return scalar<constant, long int>{ narrow<long int>(value) };                           \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ll_##suffix(unsigned long long int value) noexcept  \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         return scalar<constant, long long int>{ narrow<long long int>(value) };                 \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_u_##suffix(unsigned long long int value) noexcept   \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         return scalar<constant, unsigned int>{ narrow<unsigned int>(value) };                   \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ul_##suffix(unsigned long long int value) noexcept  \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         return scalar<constant, unsigned long int>{ narrow<unsigned long int>(value) };         \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ull_##suffix(unsigned long long int value) noexcept \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         return scalar<constant, unsigned long long int>{ value };                               \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_##suffix(long double value)                         \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         if (                                                                                    \
             value > std::numeric_limits<double>::max() ||                                       \
             value < std::numeric_limits<double>::min()                                          \
@@ -46,17 +60,21 @@
                                                                                                 \
     [[nodiscard]] consteval auto operator""_f_##suffix(long double value)                       \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         if (                                                                                    \
             value > std::numeric_limits<float>::max() ||                                        \
             value < std::numeric_limits<float>::min()                                           \
         )                                                                                       \
             throw "literal value out of range";                                                 \
                                                                                                 \
-        return scalar<constant, float>{ static_cast<float>(value) };                                 \
+        return scalar<constant, float>{ static_cast<float>(value) };                            \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_l_##suffix(long double value) noexcept              \
     {                                                                                           \
+        using namespace ::zollstock;                                                            \
+                                                                                                \
         return scalar<constant, long double>{ value };                                          \
     }                                                                                           \
 
@@ -90,14 +108,14 @@
     ZOLLSTOCK_DEFINE_LITERAL(base_symbol, base_symbol) \
     ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol) \
 
-#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor) \
-    inline constexpr unit<dimension, #symbol, factor> symbol{};        \
+#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor)       \
+    inline constexpr ::zollstock::unit<dimension, #symbol, factor> symbol{}; \
 
 #define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(dimension, base_symbol, prefix) \
-    inline constexpr auto& prefix##base_symbol = prefixed_unit_v<              \
+    inline constexpr auto& prefix##base_symbol = ::zollstock::prefixed_unit_v< \
         dimension,                                                             \
         #base_symbol,                                                          \
-        si_prefixes::prefix                                                    \
+        ::zollstock::si_prefixes::prefix                                       \
     >;                                                                         \
 
 #define ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(dimension, base_symbol) \
@@ -130,8 +148,8 @@
     ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(dimension, base_symbol) \
     ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, base_symbol, 1.0L)        \
 
-#define ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)                       \
-    inline constexpr auto base_symbol##exponent = zollstock::pow_v<base_symbol, exponent>; \
+#define ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)                         \
+    inline constexpr auto base_symbol##exponent = ::zollstock::pow_v<base_symbol, exponent>; \
 
 #define ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, prefix) \
     ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(prefix##base_symbol, exponent)        \
