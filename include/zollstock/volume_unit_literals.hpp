@@ -3,7 +3,7 @@
 
 
 #include <zollstock/volume_unit_constants.hpp>
-#include <zollstock/definition_helpers.hpp>
+#include <zollstock/literal_definition_helpers.hpp>
 #include <zollstock/scalar.hpp>
 
 

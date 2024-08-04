@@ -4,7 +4,7 @@
 
 #include <zollstock/unit_concept.hpp>
 #include <zollstock/si_prefixes.hpp>
-#include <zollstock/definition_helpers.hpp>
+#include <zollstock/constant_definition_helpers.hpp>
 
 
 namespace zollstock::units::inline constants
