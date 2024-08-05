@@ -1,6 +1,10 @@
 # Zollstock
 A header-only type-safe zero overhead compile-time physical units C++20 library.
 
+This library increases the type-safety of your application by providing scalars associated with physical units.
+Furthermore, there are unit-constants and unit-literals, simplifying their usage and increasing readability.
+All additional checks are executed at compile-time, producing no overhead in your final application.
+
 Zollstock is German for folding rule. It's a funny word, because it's a lie. Zoll means inch but the
 so called Zollstock normaly shows centimeters these days.
 
