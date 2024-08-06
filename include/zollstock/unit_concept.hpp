@@ -54,7 +54,7 @@ namespace zollstock
         requires std::same_as<typename Candidate::type, unit_tag>;
         requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
         requires is_unit_factor_tuple_like_c<std::remove_cvref_t<decltype(Candidate::factors)>>;
-    };    struct dimension_tag;
+    };
 
 
     template <typename Candidate>
