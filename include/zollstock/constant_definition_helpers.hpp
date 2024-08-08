@@ -6,12 +6,16 @@
 #include <zollstock/si_prefixes.hpp>
 
 
-#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor)       \
-    inline constexpr ::zollstock::unit<dimension, #symbol, factor> symbol{}; \
+#define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor) \
+    inline constexpr ::zollstock::unit<                                \
+        ::zollstock::dimensions::dimension,                            \
+        #symbol,                                                       \
+        factor                                                         \
+    > symbol{};                                                        \
 
 #define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(dimension, base_symbol, prefix) \
     inline constexpr auto& prefix##base_symbol = ::zollstock::prefixed_unit_v< \
-        dimension,                                                             \
+        ::zollstock::dimensions::dimension,                                    \
         #base_symbol,                                                          \
         ::zollstock::si_prefixes::prefix                                       \
     >;                                                                         \
