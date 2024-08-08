@@ -2,6 +2,10 @@
 #define __ZOLLSTOCK_CONSTANT_DEFINITION_HELPERS_HPP__
 
 
+#include <zollstock/unit_concept.hpp>
+#include <zollstock/si_prefixes.hpp>
+
+
 #define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor)       \
     inline constexpr ::zollstock::unit<dimension, #symbol, factor> symbol{}; \
 

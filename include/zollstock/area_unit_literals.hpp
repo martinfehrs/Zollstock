@@ -4,9 +4,6 @@
 
 #include <zollstock/area_unit_constants.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
-#include <zollstock/scalar.hpp>
-
-#include <limits>
 
 
 namespace zollstock::units::inline literals

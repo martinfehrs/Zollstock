@@ -2,6 +2,11 @@
 #define __ZOLLSTOCK_LITERAL_DEFINITION_HELPERS_HPP__
 
 
+#include <zollstock/scalar.hpp>
+
+#include <limits>
+
+
 #define ZOLLSTOCK_DEFINE_LITERAL(suffix, constant)                                              \
     [[nodiscard]] consteval auto operator""_##suffix(unsigned long long int value) noexcept     \
     {                                                                                           \

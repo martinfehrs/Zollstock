@@ -2,8 +2,6 @@
 #define __ZOLLSTOCK_ANGLE_UNIT_CONSTANTS_HPP__
 
 
-#include <zollstock/unit_concept.hpp>
-#include <zollstock/si_prefixes.hpp>
 #include <zollstock/math_constants.hpp>
 #include <zollstock/constant_definition_helpers.hpp>
 

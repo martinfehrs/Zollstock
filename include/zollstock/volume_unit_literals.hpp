@@ -4,7 +4,6 @@
 
 #include <zollstock/volume_unit_constants.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
-#include <zollstock/scalar.hpp>
 
 
 namespace zollstock::units::inline literals
