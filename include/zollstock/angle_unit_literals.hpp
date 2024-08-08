@@ -11,9 +11,9 @@ namespace zollstock::units::inline literals
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(rad)
 
-    ZOLLSTOCK_DEFINE_LITERAL(deg, deg)
+    ZOLLSTOCK_DEFINE_LITERALS(deg, deg)
 
-    ZOLLSTOCK_DEFINE_LITERAL(amin, amin)
+    ZOLLSTOCK_DEFINE_LITERALS(amin, amin)
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(asec)
 

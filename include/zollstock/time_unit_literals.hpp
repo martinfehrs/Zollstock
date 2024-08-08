@@ -11,10 +11,10 @@ namespace zollstock::units::inline literals
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(s)
 
-    ZOLLSTOCK_DEFINE_LITERAL(min, min)
-    ZOLLSTOCK_DEFINE_LITERAL(h  , h  )
-    ZOLLSTOCK_DEFINE_LITERAL(d  , d  )
-    ZOLLSTOCK_DEFINE_LITERAL(a  , a  )
+    ZOLLSTOCK_DEFINE_LITERALS(min, min)
+    ZOLLSTOCK_DEFINE_LITERALS(h  , h  )
+    ZOLLSTOCK_DEFINE_LITERALS(d  , d  )
+    ZOLLSTOCK_DEFINE_LITERALS(a  , a  )
 
 }
 
