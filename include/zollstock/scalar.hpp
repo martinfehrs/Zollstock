@@ -4,6 +4,7 @@
 
 #include <zollstock/unit_concept.hpp>
 #include <zollstock/number_utilities.hpp>
+#include <zollstock/unit_one_constant.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
 
 #include <cmath>
