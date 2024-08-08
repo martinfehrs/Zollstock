@@ -13,12 +13,12 @@
         factor                                                         \
     > symbol{};                                                        \
 
-#define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(dimension, base_symbol, prefix) \
-    inline constexpr auto& prefix##base_symbol = ::zollstock::prefixed_unit_v< \
-        ::zollstock::dimensions::dimension,                                    \
-        #base_symbol,                                                          \
-        ::zollstock::si_prefixes::prefix                                       \
-    >;                                                                         \
+#define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(dimension, base_symbol, si_prefix) \
+    inline constexpr auto& si_prefix##base_symbol = ::zollstock::prefixed_unit_v< \
+        ::zollstock::dimensions::dimension,                                       \
+        #base_symbol,                                                             \
+        ::zollstock::si_prefixes::si_prefix                                       \
+    >;                                                                            \
 
 #define ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(dimension, base_symbol) \
     ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(dimension, base_symbol, q  )          \
@@ -53,8 +53,8 @@
 #define ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)                         \
     inline constexpr auto base_symbol##exponent = ::zollstock::pow_v<base_symbol, exponent>; \
 
-#define ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, prefix) \
-    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(prefix##base_symbol, exponent)        \
+#define ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, si_prefix) \
+    ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(si_prefix##base_symbol, exponent)        \
 
 #define ZOLLSTOCK_DEFINE_PREFIXED_RAISED_SI_UNIT_CONSTANTS(base_symbol, exponent) \
     ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, q  )          \
