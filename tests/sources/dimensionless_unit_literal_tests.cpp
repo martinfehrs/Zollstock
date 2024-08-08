@@ -1,5 +1,5 @@
 #include <catch2/catch_all.hpp>
-#include <zollstock/scalar.hpp>
+#include <zollstock/unit_one.hpp>
 
 
 using namespace zollstock::units;
