@@ -1,4 +1,3 @@
-#include <zollstock/angle_unit_constants.hpp>
 #include <zollstock/angle_unit_literals.hpp>
 #include <zollstock/tests/literal_test_helpers.hpp>
 
