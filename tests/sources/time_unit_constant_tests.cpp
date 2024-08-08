@@ -5,7 +5,6 @@
 
 
 using namespace zollstock::units;
-using namespace zollstock::dimensions;
 
 
 TEST_CASE("time-unit-constants", "[time][unit][constants]")

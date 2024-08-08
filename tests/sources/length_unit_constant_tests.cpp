@@ -5,7 +5,7 @@
 
 
 using namespace zollstock::units;
-using namespace zollstock::dimensions;
+
 
 TEST_CASE("length-unit-constants", "[length][unit][constants]")
 {
