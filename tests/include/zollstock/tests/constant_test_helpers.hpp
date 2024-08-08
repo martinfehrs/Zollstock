@@ -9,7 +9,7 @@
 
 #define TEST_BASE_UNIT_CONSTANT(symbol_, dimension_, factor_)        \
 {                                                                    \
-    using namespace zollstock;                                       \
+    using namespace ::zollstock;                                     \
                                                                      \
     static constexpr auto factor = std::get<0>(symbol_.factors);     \
                                                                      \
@@ -20,7 +20,7 @@
 
 #define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, dimension_, prefix)            \
 {                                                                                   \
-    using namespace zollstock;                                                      \
+    using namespace ::zollstock;                                                    \
                                                                                     \
     static constexpr auto factor = std::get<0>(prefix##symbol_.factors);            \
                                                                                     \
@@ -64,8 +64,8 @@
     TEST_BASE_UNIT_CONSTANTS_##select(symbol, dimension)    \
 
 
-#define TEST_RAISED_UNIT_CONSTANT(symbol, exponent)                         \
-    STATIC_REQUIRE(symbol##exponent == zollstock::pow_v<symbol, exponent>); \
+#define TEST_RAISED_UNIT_CONSTANT(symbol, exponent)                           \
+    STATIC_REQUIRE(symbol##exponent == ::zollstock::pow_v<symbol, exponent>); \
 
 #define TEST_RAISED_UNIT_CONSTANTS_UNPREFIXED(symbol, exponent) \
     TEST_RAISED_UNIT_CONSTANT(symbol, exponent)                 \
@@ -105,10 +105,10 @@
 
 
 void test_mixed_division_unit_constant(
-    zollstock::base_unit_c auto unit_1, zollstock::base_unit_c auto unit_2
+    ::zollstock::base_unit_c auto unit_1, ::zollstock::base_unit_c auto unit_2
 )
 {
-    using namespace zollstock;
+    using namespace ::zollstock;
 
     static_assert(unit_1 != unit_2);
 
