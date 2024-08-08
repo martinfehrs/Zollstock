@@ -9,7 +9,5 @@ using namespace zollstock::dimensions;
 
 TEST_CASE("time-unit-constants", "[time][unit][constants]")
 {
-
     TEST_BASE_UNIT_CONSTANTS(ALL, s, T)
-
 }

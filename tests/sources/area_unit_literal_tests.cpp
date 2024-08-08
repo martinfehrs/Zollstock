@@ -8,7 +8,5 @@ using namespace zollstock::units;
 
 TEST_CASE("area-unit-literals", "[area][unit][literals]")
 {
-
     TEST_LITERALS(ALL, m2)
-
 }

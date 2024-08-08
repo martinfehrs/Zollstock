@@ -8,7 +8,5 @@ using namespace zollstock::dimensions;
 
 TEST_CASE("length-unit-constants", "[length][unit][constants]")
 {
-
     TEST_BASE_UNIT_CONSTANTS(ALL, m, L)
-
 }

@@ -8,7 +8,5 @@ using namespace zollstock::units;
 
 TEST_CASE("area-unit-constants", "[area][unit][constants]")
 {
-
     TEST_RAISED_UNIT_CONSTANTS(ALL, m, 2)
-
 }

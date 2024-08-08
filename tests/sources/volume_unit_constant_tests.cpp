@@ -8,7 +8,5 @@ using namespace zollstock::units;
 
 TEST_CASE("volume-unit-constants", "[volume][unit][constants]")
 {
-
     TEST_RAISED_UNIT_CONSTANTS(ALL, m, 3)
-
 }

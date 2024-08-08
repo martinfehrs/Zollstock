@@ -9,7 +9,6 @@ using namespace zollstock::units;
 
 TEST_CASE("angular-velocity-unit-constants", "[angular-velocity][unit][constants]")
 {
-
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , ALL       , rad , s  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, rad , min)
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, rad , h  )
@@ -35,5 +34,4 @@ TEST_CASE("angular-velocity-unit-constants", "[angular-velocity][unit][constants
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, gon , h  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, gon , d  )
     TEST_MIXED_DIVISION_UNIT_CONSTANTS(ALL       , UNPREFIXED, gon , a  )
-
 }

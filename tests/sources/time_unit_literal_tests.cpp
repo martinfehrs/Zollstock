@@ -9,7 +9,5 @@ using namespace zollstock::units;
 
 TEST_CASE("time-unit-literals", "[time][unit][literals]")
 {
-
     TEST_LITERALS(ALL, s)
-
 }

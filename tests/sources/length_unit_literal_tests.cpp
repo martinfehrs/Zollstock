@@ -9,7 +9,5 @@ using namespace zollstock::units;
 
 TEST_CASE("length-unit-literals", "[length][unit][literals]")
 {
-
     TEST_LITERALS(ALL, m)
-
 }

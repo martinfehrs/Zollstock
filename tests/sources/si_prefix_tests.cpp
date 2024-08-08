@@ -7,7 +7,6 @@ using namespace zollstock;
 
 TEST_CASE("si-prefixes", "[si-prefixes]")
 {
-
     STATIC_REQUIRE(si_prefixes::q  .factor == 1e-30L);
     STATIC_REQUIRE(si_prefixes::r  .factor == 1e-27L);
     STATIC_REQUIRE(si_prefixes::y  .factor == 1e-24L);
@@ -57,5 +56,4 @@ TEST_CASE("si-prefixes", "[si-prefixes]")
     STATIC_REQUIRE(si_prefixes::Y  .symbol == "Y"  );
     STATIC_REQUIRE(si_prefixes::R  .symbol == "R"  );
     STATIC_REQUIRE(si_prefixes::Q  .symbol == "Q"  );
-
 }

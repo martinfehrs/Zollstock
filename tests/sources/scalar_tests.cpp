@@ -113,7 +113,6 @@ TEST_CASE("scalar arithmetic", "[scalar]")
     STATIC_REQUIRE(check_scalar(zs::int_t<m >{ 6 } / zs::int_t<_1>{ 3 }, m, 2));
     STATIC_REQUIRE(check_scalar(zs::int_t<_1>{ 6 } / zs::int_t<m >{ 3 }, zs::pow_v<m, -1>, 2));
     STATIC_REQUIRE(check_scalar(zs::int_t<m >{ 6 } / zs::int_t<m >{ 3 }, _1, 2));
-
 }
 
 TEST_CASE("scalar comparison", "[scalar]")
