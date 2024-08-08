@@ -14,4 +14,4 @@ namespace zollstock::units::inline constants
 }
 
 
-#endif //__UNIT_ONE_CONSTANT_HPP__
+#endif //__ZOLLSTOCK_UNIT_ONE_CONSTANT_HPP__
