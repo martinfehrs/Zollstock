@@ -1,6 +1,7 @@
-#include <catch2/catch_all.hpp>
 #include <zollstock/area_unit_literals.hpp>
 #include <zollstock/tests/literal_test_helpers.hpp>
+
+#include <catch2/catch_all.hpp>
 
 
 using namespace zollstock::units;

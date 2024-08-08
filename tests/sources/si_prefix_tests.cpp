@@ -1,5 +1,6 @@
-#include <catch2/catch_all.hpp>
 #include <zollstock/si_prefixes.hpp>
+
+#include <catch2/catch_all.hpp>
 
 
 using namespace zollstock;

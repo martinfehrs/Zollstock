@@ -1,7 +1,7 @@
-#include <catch2/catch_all.hpp>
-
 #include <zollstock/scalar.hpp>
 #include <zollstock/length_units.hpp>
+
+#include <catch2/catch_all.hpp>
 
 #include <climits>
 

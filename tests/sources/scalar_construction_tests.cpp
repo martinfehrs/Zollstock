@@ -1,9 +1,10 @@
-#include <catch2/catch_all.hpp>
-
 #define ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS
 #include <zollstock/scalar.hpp>
 
+#include <catch2/catch_all.hpp>
+
 #include <climits>
+
 
 namespace zs = zollstock;
 

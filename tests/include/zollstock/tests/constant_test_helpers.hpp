@@ -4,6 +4,8 @@
 
 #include <zollstock/unit_concept.hpp>
 
+#include <catch2/catch_test_macros.hpp>
+
 
 #define TEST_BASE_UNIT_CONSTANT(symbol_, dimension_, factor_)    \
 {                                                                \

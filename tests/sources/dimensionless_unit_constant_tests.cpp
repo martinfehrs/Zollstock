@@ -1,6 +1,7 @@
-#include <catch2/catch_all.hpp>
 #include <zollstock/unit_concept.hpp>
 #include <zollstock/unit_one_constant.hpp>
+
+#include <catch2/catch_all.hpp>
 
 
 using namespace zollstock::units;
