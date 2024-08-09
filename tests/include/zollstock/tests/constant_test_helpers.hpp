@@ -18,15 +18,16 @@
     STATIC_REQUIRE(factor.scaling_factor == factor_ );               \
 }
 
-#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, dimension_, prefix)            \
-{                                                                                   \
-    using namespace ::zollstock;                                                    \
-                                                                                    \
-    static constexpr auto factor = std::get<0>(prefix##symbol_.factors);            \
-                                                                                    \
-    STATIC_REQUIRE(factor.dimension      == dimensions::dimension_);                \
-    STATIC_REQUIRE(factor.symbol         == si_prefixes::prefix.symbol + #symbol_); \
-    STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix.factor);            \
+#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, dimension_, prefix_) \
+{                                                                         \
+    using namespace ::zollstock;                                          \
+                                                                          \
+    static constexpr auto factor = std::get<0>(prefix_##symbol_.factors); \
+                                                                          \
+    STATIC_REQUIRE(factor.dimension      == dimensions::dimension_);      \
+    STATIC_REQUIRE(factor.symbol         == #symbol_);                    \
+    STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix_.factor); \
+    STATIC_REQUIRE(factor.prefix         == si_prefixes::prefix_.symbol); \
 }
 
 #define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, dimension) \

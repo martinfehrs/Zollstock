@@ -25,6 +25,7 @@ namespace zollstock
         requires dimensions::dimension_c<std::remove_cvref_t<decltype(Candidate::dimension)>>;
         { Candidate::symbol         } -> std::same_as<const static_string&>;
         { Candidate::scaling_factor } -> std::same_as<const long double&>;
+        { Candidate::prefix         } -> std::same_as<const static_string&>;
         { Candidate::exponent       } -> std::same_as<const int&>;
     };
 
@@ -73,7 +74,7 @@ namespace zollstock
             [](const auto& factor_1, const auto& factor_2)
             {
                 return factor_1.dimension == factor_2.dimension
-                    && factor_1.exponent == factor_2.exponent;
+                    && factor_1.exponent  == factor_2.exponent;
             }
         );
     }
@@ -83,6 +84,7 @@ namespace zollstock
         dimensions::dimension_c auto dimension_,
         static_string symbol_,
         long double scaling_factor_,
+        static_string prefix_,
         int exponent_
     >
     struct unit_factor
@@ -90,6 +92,7 @@ namespace zollstock
         static constexpr auto dimension = dimension_;
         static constexpr auto symbol = symbol_;
         static constexpr auto scaling_factor = scaling_factor_;
+        static constexpr auto prefix = prefix_;
         static constexpr auto exponent = exponent_;
     };
 
@@ -140,17 +143,20 @@ namespace zollstock
     template <
         dimensions::dimension_c auto dimension,
         static_string symbol,
-        long double scaling_factor, int exponent = 1
+        long double scaling_factor,
+        static_string prefix = "",
+        int exponent = 1
     >
-    using unit = unit_product<unit_factor<dimension, symbol, scaling_factor, exponent>>;
+    using unit = unit_product<unit_factor<dimension, symbol, scaling_factor, prefix, exponent>>;
 
     template <
         dimensions::dimension_c auto dimension,
         static_string symbol,
         long double scaling_factor,
+        static_string prefix = "",
         int exponent = 1
     >
-    inline constexpr auto unit_v = unit<dimension, symbol, scaling_factor, exponent>{};
+    inline constexpr auto unit_v = unit<dimension, symbol, scaling_factor, prefix, exponent>{};
 
 
 
@@ -160,7 +166,7 @@ namespace zollstock
         prefix_c auto prefix,
         int exponent = 1
     >
-    using prefixed_unit = unit<dimension, prefix.symbol + symbol, prefix.factor, exponent>;
+    using prefixed_unit = unit<dimension, symbol, prefix.factor, prefix.symbol, exponent>;
 
     template <
         dimensions::dimension_c auto dimension,
@@ -210,7 +216,9 @@ namespace zollstock
             },
             [](const unit_factor_c auto& factor)
             {
-                std::string symbol{ factor.symbol.c_str() };
+                std::string symbol{ factor.prefix.c_str() };
+
+                symbol += factor.symbol.c_str();
 
                 if(factor.exponent != 1)
                     symbol += detail::exponent_to_string<Char>(factor.exponent);
@@ -262,6 +270,7 @@ namespace zollstock
                 factor.dimension,
                 factor.symbol,
                 factor.scaling_factor,
+                factor.prefix,
                 factor.exponent * exponent
             >;
         }
@@ -314,10 +323,14 @@ namespace zollstock
             if (factor_1.symbol != factor_2.symbol)
                 throw "incompatible symbols";
 
+            if (factor_1.prefix != factor_2.prefix)
+                throw "incompatible prefixes";
+
             return unit_v<
                 factor_1.dimension,
                 factor_1.symbol,
                 factor_1.scaling_factor,
+                factor_1.prefix,
                 factor_1.exponent + factor_2.exponent
             >;
         }
@@ -350,6 +363,9 @@ namespace zollstock
 
                 if (factor_2.symbol != head_factor.symbol)
                     throw "incompatible symbols";
+
+                if (factor_2.prefix != head_factor.prefix)
+                    throw "incompatible prefixes";
 
                 return detail::unit_product_concat(head * unit_2, tail);
             }
@@ -398,6 +414,7 @@ namespace zollstock
         return factor_1.dimension      == factor_2.dimension
             && factor_1.symbol         == factor_2.symbol
             && factor_1.scaling_factor == factor_2.scaling_factor
+            && factor_1.prefix         == factor_2.prefix
             && factor_1.exponent       == factor_2.exponent;
     }
 
