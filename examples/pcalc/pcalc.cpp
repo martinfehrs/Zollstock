@@ -47,12 +47,11 @@ int main(int argc, char** argv)
     const auto inner_radius = outer_radius - wall_thickness;
     const auto outer_area = pi * outer_radius * outer_radius;
     const auto inner_area = pi * inner_radius * inner_radius;
-    const auto outer_volume = outer_area * pipe_length;
-    const auto inner_volume = inner_area * pipe_length;
-    const auto pipe_volume = outer_volume - inner_volume;
+    const auto ring_area = outer_area - inner_area;
+    const auto pipe_volume = ring_area * pipe_length;
     const zs::double_t<kg> pipe_mass = pipe_volume * copper_density;
 
-    std::cout << std::format("pipe mass ({}): {}\n", pipe_mass.unit(), pipe_mass);
+    std::cout << std::format("pipe mass: {}\n", pipe_mass);
 
     return 0;
 }
