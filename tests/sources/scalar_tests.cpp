@@ -1,5 +1,7 @@
 #include <zollstock/scalar.hpp>
 #include <zollstock/length_units.hpp>
+#include <zollstock/angle_units.hpp>
+#include <zollstock/math_constants.hpp>
 
 #include <catch2/catch_all.hpp>
 
@@ -146,4 +148,6 @@ TEST_CASE("scalar conversions", "[scalar]")
 {
     STATIC_REQUIRE(zs::int_t<m >{ zs::int_t<cm>{ 100 } }.value() ==   1);
     STATIC_REQUIRE(zs::int_t<cm>{ zs::int_t< m>{   1 } }.value() == 100);
+    STATIC_REQUIRE(zs::double_t<rad>{ zs::int_t<deg>{ 180 } }.value() == zs::pi);
+    STATIC_REQUIRE(zs::double_t<_1>{ zs::int_t<deg>{ 180 } }.value() == zs::pi);
 }

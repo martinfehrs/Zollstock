@@ -66,23 +66,7 @@ namespace zollstock
         {
             if constexpr(this_unit != that_unit)
             {
-                constexpr auto this_factors = this_unit.factors;
-                constexpr auto that_factors = that_unit.factors;
-
-                this->value_ = tuple_transform_reduce(
-                    this_unit.factors,
-                    that_unit.factors,
-                    this->value_,
-                    [](auto value, auto scaling_factor)
-                    {
-                        return value * scaling_factor;
-                    },
-                    [](auto unit_1, auto unit_2)
-                    {
-                        return pow(unit_2.scaling_factor, unit_2.exponent) /
-                               pow(unit_1.scaling_factor, unit_1.exponent);
-                    }
-                );
+                this->value_ *= unit_scaling_factor(that_unit) / unit_scaling_factor(this_unit);
             }
         }
 

@@ -60,6 +60,30 @@ namespace zollstock
     namespace detail
     {
 
+        template <typename Tuple, typename UnaryPred, std::size_t... indices>
+        [[nodiscard]] consteval bool tuple_all_of_impl(
+            const Tuple& tuple,
+            UnaryPred pred,
+            std::index_sequence<indices...>
+        )
+        {
+            return (true && ... && static_cast<bool>(pred(std::get<indices>(tuple))));
+        }
+    }
+
+    template <typename Tuple, typename UnaryPred>
+    [[nodiscard]] consteval bool tuple_all_of(const Tuple& tuple, UnaryPred pred)
+    {
+        return detail::tuple_all_of_impl(
+            tuple, pred, std::make_index_sequence<std::tuple_size_v<Tuple>>{}
+        );
+    }
+
+
+
+    namespace detail
+    {
+
         template <
             typename Tuple,
             typename T,
@@ -67,7 +91,7 @@ namespace zollstock
             typename UnaryOp,
             std::size_t index
         >
-        [[nodiscard]] constexpr T tuple_transform_reduce_impl(
+        [[nodiscard]] constexpr auto tuple_transform_reduce_impl(
             Tuple&& tuple,
             T init,
             BinaryOp reduce,
@@ -97,7 +121,7 @@ namespace zollstock
     }
 
     template <typename Tuple, typename T, typename BinaryOp, typename UnaryOp>
-    [[nodiscard]] constexpr T tuple_transform_reduce(
+    [[nodiscard]] constexpr auto tuple_transform_reduce(
         Tuple&& tuple,
         T init,
         BinaryOp reduce,
@@ -126,7 +150,7 @@ namespace zollstock
             typename BinaryOp2,
             std::size_t index
         >
-        [[nodiscard]] constexpr T tuple_transform_reduce_impl(
+        [[nodiscard]] constexpr auto tuple_transform_reduce_impl(
             Tuple1&& tuple_1,
             Tuple2&& tuple_2,
             T init,
@@ -161,7 +185,7 @@ namespace zollstock
     }
 
     template <typename Tuple1, typename Tuple2, typename T, typename BinaryOp1, typename BinaryOp2>
-    [[nodiscard]] constexpr T tuple_transform_reduce(
+    [[nodiscard]] constexpr auto tuple_transform_reduce(
         Tuple1&& tuple_1,
         Tuple2&& tuple_2,
         T init,

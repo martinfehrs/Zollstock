@@ -66,17 +66,41 @@ namespace zollstock
 
 
 
-    [[nodiscard]] consteval bool convertible_units(unit_c auto unit_1, unit_c auto unit_2) noexcept
+    [[nodiscard]] consteval dimensions::dimension_c auto unit_dimensions(unit_c auto unit) noexcept
     {
-        return tuple_equal(
-            unit_1.factors,
-            unit_2.factors,
-            [](const auto& factor_1, const auto& factor_2)
+        return tuple_transform_reduce(
+            unit.factors,
+            dimensions::_1,
+            [](dimensions::dimension_c auto dimension_1, dimensions::dimension_c auto dimension_2)
             {
-                return factor_1.dimension == factor_2.dimension
-                    && factor_1.exponent  == factor_2.exponent;
+                return dimension_1 * dimension_2;
+            },
+            [](unit_factor_c auto factor)
+            {
+                return factor.dimension;
             }
         );
+    }
+
+    [[nodiscard]] consteval auto unit_scaling_factor(unit_c auto unit) noexcept
+    {
+        return tuple_transform_reduce(
+            unit.factors,
+            1.0L,
+            [](long double scaling_factor_1, long double scaling_factor_2)
+            {
+                return scaling_factor_1 * scaling_factor_2;
+            },
+            [](unit_factor_c auto factor)
+            {
+                return factor.scaling_factor;
+            }
+        );
+    }
+
+    [[nodiscard]] consteval bool convertible_units(unit_c auto from, unit_c auto to) noexcept
+    {
+        return unit_dimensions(from) == unit_dimensions(to);
     }
 
 
