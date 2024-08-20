@@ -66,7 +66,8 @@ namespace zollstock
         {
             if constexpr(this_unit != that_unit)
             {
-                this->value_ = this->value_ * unit_scaling_factor(that_unit) / unit_scaling_factor(this_unit);
+                this->value_ = this->value_ * unit_scaling_factor(that_unit)
+                                            / unit_scaling_factor(this_unit);
             }
         }
 
