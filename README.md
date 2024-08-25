@@ -41,12 +41,12 @@ using namespace zs::units;
     try
     {
         return std::tuple{
-            zs::as<mm>(std::stod(argv[1])),
-            zs::as<mm>(std::stod(argv[2])),
-            zs::in<mm>(zs::as<m>(std::stod(argv[3]))),
+            zs::stod<mm>(argv[1]),
+            zs::stod<mm>(argv[2]),
+            zs::in<mm>(zs::stod<m>(argv[3])),
         };
     }
-    catch(const std::exception& e)
+    catch(const std::exception&)
     {
         argument_error();
     }
@@ -54,6 +54,9 @@ using namespace zs::units;
 
 int main(int argc, char** argv)
 {
+    constexpr auto a =  zs::int_t<cm>{ 100 };
+    constexpr auto x = zs::int_t<m >{ a }.value();
+
     // Checking arguments
     const auto [wall_thickness, outer_diameter, pipe_length] = read_args(argc, argv);
 
