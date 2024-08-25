@@ -30,7 +30,7 @@ using namespace zs::units;
             zs::in<mm>(zs::stod<m>(argv[3])),
         };
     }
-    catch(const std::exception& e)
+    catch(const std::exception&)
     {
         argument_error();
     }
