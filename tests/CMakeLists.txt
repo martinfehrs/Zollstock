@@ -12,3 +12,10 @@ add_subdirectory(sources)
 
 include(Catch)
 catch_discover_tests(tests)
+
+add_test(NAME pcalc COMMAND $<TARGET_FILE:pcalc> 1 15 2)
+
+set_property(
+    TEST pcalc
+    PROPERTY PASS_REGULAR_EXPRESSION "^pipe mass: 7125\.13 kg"
+)
