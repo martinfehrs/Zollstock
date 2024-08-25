@@ -383,6 +383,26 @@ namespace zollstock
         return scalar<unit, Value>{ source };
     }
 
+
+
+    template <unit_c auto unit>
+    [[nodiscard]] auto stof(const std::string& str, std::size_t* idx = 0)
+    {
+        return float_t<unit>{ std::stof(str, idx) };
+    }
+
+    template <unit_c auto unit>
+    [[nodiscard]] auto stod(const std::string& str, std::size_t* idx = 0)
+    {
+        return double_t<unit>{ std::stod(str, idx) };
+    }
+
+    template <unit_c auto unit>
+    [[nodiscard]] auto stold(const std::string& str, std::size_t* idx = 0)
+    {
+        return long_double_t<unit>{ std::stold(str, idx) };
+    }
+
 }
 
 

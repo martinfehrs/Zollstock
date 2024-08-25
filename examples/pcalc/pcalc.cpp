@@ -25,9 +25,9 @@ using namespace zs::units;
     try
     {
         return std::tuple{
-            zs::as<mm>(std::stod(argv[1])),
-            zs::as<mm>(std::stod(argv[2])),
-            zs::in<mm>(zs::as<m>(std::stod(argv[3]))),
+            zs::stod<mm>(argv[1]),
+            zs::stod<mm>(argv[2]),
+            zs::in<mm>(zs::stod<m>(argv[3])),
         };
     }
     catch(const std::exception& e)
