@@ -6,6 +6,7 @@
 #include <zollstock/length_units.hpp>
 #include <zollstock/time_units.hpp>
 #include <zollstock/mass_units.hpp>
+#include <zollstock/temperature_units.hpp>
 
 
 #endif //__ZOLLSTOCK_BASE_UNITS_HPP__
