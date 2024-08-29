@@ -54,9 +54,6 @@ using namespace zs::units;
 
 int main(int argc, char** argv)
 {
-    constexpr auto a =  zs::int_t<cm>{ 100 };
-    constexpr auto x = zs::int_t<m >{ a }.value();
-
     // Checking arguments
     const auto [wall_thickness, outer_diameter, pipe_length] = read_args(argc, argv);
 
