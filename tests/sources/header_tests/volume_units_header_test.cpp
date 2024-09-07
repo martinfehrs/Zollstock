@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("volume-units-headers", "[headers][volume-units]")
+TEST_CASE("volume-units-header", "[headers][volume-units]")
 {
 
     STATIC_REQUIRE(includes_volume_units);

@@ -5,9 +5,9 @@
 
 
 
-TEST_CASE("time-units-headers", "[headers][time-units]")
+TEST_CASE("time-units-header", "[headers][time-units]")
 {
 
-    STATIC_REQUIRE(includes_time_units);
+    STATIC_REQUIRE(includes_time_units());
 
 }
