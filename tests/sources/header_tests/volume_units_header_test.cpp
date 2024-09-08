@@ -7,6 +7,6 @@
 TEST_CASE("volume-units-header", "[headers][volume-units]")
 {
 
-    STATIC_REQUIRE(includes_volume_units);
+    STATIC_REQUIRE(includes_volume_units());
 
 }
