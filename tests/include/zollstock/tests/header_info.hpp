@@ -251,7 +251,8 @@ consteval bool includes_base_units() noexcept
 consteval bool includes_derived_units() noexcept
 {
 #ifdef __ZOLLSTOCK_DERIVED_UNITS_HPP__
-    return includes_angle_units()
+    return includes_unit_one()
+        && includes_angle_units()
         && includes_area_units()
         && includes_volume_units()
         && includes_squared_time_unit_constants();
