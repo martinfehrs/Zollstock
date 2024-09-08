@@ -11,27 +11,9 @@ consteval bool includes_unit_one_constant() noexcept
 #endif
 }
 
-consteval bool includes_unit_one_literals() noexcept
-{
-#ifdef __ZOLLSTOCK_UNIT_ONE_LITERALS_HPP__
-    return true;
-#else
-    return false;
-#endif
-}
-
 consteval bool includes_length_unit_constants() noexcept
 {
 #ifdef __ZOLLSTOCK_LENGTH_UNIT_CONSTANTS_HPP__
-    return true;
-#else
-    return false;
-#endif
-}
-
-consteval bool includes_length_unit_literals() noexcept
-{
-#ifdef __ZOLLSTOCK_LENGTH_UNIT_LITERALS_HPP__
     return true;
 #else
     return false;
@@ -47,27 +29,9 @@ consteval bool includes_mass_unit_constants() noexcept
 #endif
 }
 
-consteval bool includes_mass_unit_literals() noexcept
-{
-#ifdef __ZOLLSTOCK_MASS_UNIT_LITERALS_HPP__
-    return true;
-#else
-    return false;
-#endif
-}
-
 consteval bool includes_time_unit_constants() noexcept
 {
 #ifdef __ZOLLSTOCK_TIME_UNIT_CONSTANTS_HPP__
-    return true;
-#else
-    return false;
-#endif
-}
-
-consteval bool includes_time_unit_literals() noexcept
-{
-#ifdef __ZOLLSTOCK_TIME_UNIT_LITERALS_HPP__
     return true;
 #else
     return false;
@@ -83,27 +47,9 @@ consteval bool includes_temperature_unit_constants() noexcept
 #endif
 }
 
-consteval bool includes_temperature_unit_literals() noexcept
-{
-#ifdef __ZOLLSTOCK_TEMPERATURE_UNIT_LITERALS_HPP__
-    return true;
-#else
-    return false;
-#endif
-}
-
 consteval bool includes_angle_unit_constants() noexcept
 {
 #ifdef __ZOLLSTOCK_ANGLE_UNIT_CONSTANTS_HPP__
-    return true;
-#else
-    return false;
-#endif
-}
-
-consteval bool includes_angle_unit_literals() noexcept
-{
-#ifdef __ZOLLSTOCK_ANGLE_UNIT_LITERALS_HPP__
     return true;
 #else
     return false;
@@ -119,15 +65,6 @@ consteval bool includes_area_unit_constants() noexcept
 #endif
 }
 
-consteval bool includes_area_unit_literals() noexcept
-{
-#ifdef __ZOLLSTOCK_AREA_UNIT_LITERALS_HPP__
-    return true;
-#else
-    return false;
-#endif
-}
-
 consteval bool includes_volume_unit_constants() noexcept
 {
 #ifdef __ZOLLSTOCK_VOLUME_UNIT_CONSTANTS_HPP__
@@ -137,18 +74,81 @@ consteval bool includes_volume_unit_constants() noexcept
 #endif
 }
 
-consteval bool includes_volume_unit_literals() noexcept
+consteval bool includes_squared_time_unit_constants() noexcept
 {
-#ifdef __ZOLLSTOCK_VOLUME_UNIT_LITERALS_HPP__
+#ifdef __ZOLLSTOCK_SQUARED_TIME_UNIT_CONSTANTS_HPP__
     return true;
 #else
     return false;
 #endif
 }
 
-consteval bool includes_squared_time_unit_constants() noexcept
+consteval bool includes_unit_one_literals() noexcept
 {
-#ifdef __ZOLLSTOCK_SQUARED_TIME_UNIT_CONSTANTS_HPP__
+#ifdef __ZOLLSTOCK_UNIT_ONE_LITERALS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_length_unit_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_LENGTH_UNIT_LITERALS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_mass_unit_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_MASS_UNIT_LITERALS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_time_unit_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_TIME_UNIT_LITERALS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_temperature_unit_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_TEMPERATURE_UNIT_LITERALS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_angle_unit_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_ANGLE_UNIT_LITERALS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_area_unit_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_AREA_UNIT_LITERALS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_volume_unit_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_VOLUME_UNIT_LITERALS_HPP__
     return true;
 #else
     return false;
