@@ -260,9 +260,9 @@ consteval bool includes_derived_units() noexcept
 #endif
 }
 
-consteval bool includes_all() noexcept
+consteval bool includes_all_units() noexcept
 {
-#ifdef __ZOLLSTOCK_ALL_HPP__
+#ifdef __ZOLLSTOCK_ALL_UNITS_HPP__
     return includes_base_units()
         && includes_derived_units();
 #else

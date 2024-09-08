@@ -25,6 +25,6 @@ target_sources(tests PRIVATE angle_units_header_test.cpp)
 target_sources(tests PRIVATE area_units_header_test.cpp)
 target_sources(tests PRIVATE volume_units_header_test.cpp)
 
-target_sources(tests PRIVATE all_header_test.cpp)
+target_sources(tests PRIVATE all_units_header_test.cpp)
 target_sources(tests PRIVATE base_units_header_test.cpp)
 target_sources(tests PRIVATE derived_units_header_test.cpp)
