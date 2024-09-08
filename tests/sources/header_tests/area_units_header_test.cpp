@@ -7,6 +7,6 @@
 TEST_CASE("area-units-header", "[headers][area-units]")
 {
 
-    STATIC_REQUIRE(includes_area_units);
+    STATIC_REQUIRE(includes_area_units());
 
 }
