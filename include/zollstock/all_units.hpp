@@ -6,4 +6,4 @@
 #include <zollstock/derived_units.hpp>
 
 
-#endif /*__ZOLLSTOCK_ALL_UNITS_HPP__*/
+#endif //__ZOLLSTOCK_ALL_UNITS_HPP__
