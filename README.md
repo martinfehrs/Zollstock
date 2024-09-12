@@ -3,7 +3,9 @@ A header-only type-safe zero overhead compile-time physical units C++20 library.
 
 This library increases the type-safety of your application by providing scalars associated with physical units.
 All additional checks are executed at compile-time, producing no overhead in your final application.
-The library is SI-centric. All non-SI units are defined relative to their corresponding counterpart.
+The library is SI-centric. All non-SI units are defined relative to their corresponding counterpart. All built
+in numeric types can be combined with units except char which isn't seen as a number but a character. You can
+use signed char and unsigned char instead or better std::int8_t or std::uint8_t.
 
 Zollstock is German for folding rule. It's a funny word, because it's a lie. Zoll means inch but the
 so called Zollstock normaly shows centimeters these days.
