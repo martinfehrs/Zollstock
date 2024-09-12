@@ -1,4 +1,4 @@
-#include <zollstock/mass_unit_literals.hpp>
+#include <zollstock/mass_units.hpp>
 #include <zollstock/tests/literal_test_helpers.hpp>
 
 #include <catch2/catch_all.hpp>

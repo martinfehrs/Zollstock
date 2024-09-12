@@ -3,7 +3,15 @@
 
 
 #include <zollstock/volume_unit_constants.hpp>
-#include <zollstock/volume_unit_literals.hpp>
+#include <zollstock/literal_definition_helpers.hpp>
+
+
+namespace zollstock::units::inline literals
+{
+
+    ZOLLSTOCK_DEFINE_SI_LITERALS(m3)
+
+}
 
 
 #endif //__ZOLLSTOCK_VOLUME_UNITS_HPP__
