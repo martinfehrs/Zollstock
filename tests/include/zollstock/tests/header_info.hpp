@@ -83,6 +83,42 @@ consteval bool includes_squared_time_unit_constants() noexcept
 #endif
 }
 
+consteval bool includes_base_unit_constants() noexcept
+{
+#ifdef __ZOLLSTOCK_BASE_UNIT_CONSTANTS_HPP__
+    return includes_unit_one_constant()
+        && includes_length_unit_constants()
+        && includes_mass_unit_constants()
+        && includes_time_unit_constants()
+        && includes_temperature_unit_constants();
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_derived_unit_constants() noexcept
+{
+#ifdef __ZOLLSTOCK_DERIVED_UNIT_CONSTANTS_HPP__
+    return includes_unit_one_constant()
+        && includes_angle_unit_constants()
+        && includes_area_unit_constants()
+        && includes_volume_unit_constants()
+        && includes_squared_time_unit_constants();
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_all_unit_constants() noexcept
+{
+#ifdef __ZOLLSTOCK_ALL_UNIT_CONSTANTS_HPP__
+    return includes_base_unit_constants()
+        && includes_derived_unit_constants();
+#else
+    return false;
+#endif
+}
+
 consteval bool includes_unit_one_literals() noexcept
 {
 #ifdef __ZOLLSTOCK_UNIT_ONE_LITERALS_HPP__
