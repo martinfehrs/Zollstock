@@ -56,7 +56,7 @@
                                                                                                 \
         if (                                                                                    \
             value > std::numeric_limits<double>::max() ||                                       \
-            value < std::numeric_limits<double>::min()                                          \
+            value < std::numeric_limits<double>::lowest()                                       \
         )                                                                                       \
             throw "literal value out of range";                                                 \
                                                                                                 \
@@ -69,7 +69,7 @@
                                                                                                 \
         if (                                                                                    \
             value > std::numeric_limits<float>::max() ||                                        \
-            value < std::numeric_limits<float>::min()                                           \
+            value < std::numeric_limits<float>::lowest()                                        \
         )                                                                                       \
             throw "literal value out of range";                                                 \
                                                                                                 \
