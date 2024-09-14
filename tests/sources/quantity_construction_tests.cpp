@@ -1,5 +1,5 @@
-#define ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS
-#include <zollstock/scalar.hpp>
+#define ZOLLSTOCK_QUANTITY_PUBLIC_MEMBERS
+#include <zollstock/quantity.hpp>
 
 #include <catch2/catch_all.hpp>
 
@@ -11,7 +11,7 @@ namespace zs = zollstock;
 using namespace zs::units;
 
 
-TEST_CASE("scalar construction", "[scalar]")
+TEST_CASE("quantity construction", "[quantity]")
 {
     STATIC_REQUIRE(zs::int_t<>{}.value_ == 0);
     STATIC_REQUIRE(zs::int_t<>{ 1 }.value_ == 1);

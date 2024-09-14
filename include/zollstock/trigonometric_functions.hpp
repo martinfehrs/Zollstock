@@ -13,39 +13,39 @@ namespace zollstock
 {
 
     template <number_c Number>
-    auto sin(scalar<units::rad, Number> angle)
+    auto sin(quantity<units::rad, Number> angle)
     {
-        return scalar<units::_1, Number>{ std::sin(angle.value()) };
+        return quantity<units::_1, Number>{ std::sin(angle.value()) };
     }
 
     template <number_c Number>
-    auto cos(scalar<units::rad, Number> angle)
+    auto cos(quantity<units::rad, Number> angle)
     {
-        return scalar<units::_1, Number>{ std::cos(angle.value()) };
+        return quantity<units::_1, Number>{ std::cos(angle.value()) };
     }
 
     template <number_c Number>
-    auto tan(scalar<units::rad, Number> angle)
+    auto tan(quantity<units::rad, Number> angle)
     {
-        return scalar<units::_1, Number>{ std::tan(angle.value()) };
+        return quantity<units::_1, Number>{ std::tan(angle.value()) };
     }
 
     template <number_c Number>
-    auto asin(scalar<units::_1, Number> num)
+    auto asin(quantity<units::_1, Number> num)
     {
-        return scalar<units::rad, Number>{ std::asin(num.value()) };
+        return quantity<units::rad, Number>{ std::asin(num.value()) };
     }
 
     template <number_c Number>
-    auto acos(scalar<units::_1, Number> num)
+    auto acos(quantity<units::_1, Number> num)
     {
-        return scalar<units::rad, Number>{ std::acos(num.value()) };
+        return quantity<units::rad, Number>{ std::acos(num.value()) };
     }
 
     template <number_c Number>
-    auto atan(scalar<units::_1, Number> num)
+    auto atan(quantity<units::_1, Number> num)
     {
-        return scalar<units::rad, Number>{ std::atan(num.value()) };
+        return quantity<units::rad, Number>{ std::atan(num.value()) };
     }
 
 }

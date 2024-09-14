@@ -1,4 +1,4 @@
-#define ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS
+#define ZOLLSTOCK_QUANTITY_PUBLIC_MEMBERS
 #include <zollstock/trigonometric_functions.hpp>
 
 #include <catch2/catch_all.hpp>

@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_SCALAR_HPP__
-#define __ZOLLSTOCK_SCALAR_HPP__
+#ifndef __ZOLLSTOCK_QUANTITY_HPP__
+#define __ZOLLSTOCK_QUANTITY_HPP__
 
 
 #include <zollstock/unit_concept.hpp>
@@ -28,29 +28,29 @@ namespace zollstock
 
 
     template <unit_c auto this_unit, number_c ThisValue = double>
-    class scalar
+    class quantity
     {
 
         template <unit_c auto, number_c>
-        friend class scalar;
+        friend class quantity;
 
-        using this_type = scalar<this_unit, ThisValue>;
+        using this_type = quantity<this_unit, ThisValue>;
 
     public:
 
         using value_type = ThisValue;
 
-#if !defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION)
+#if !defined(ZOLLSTOCK_QUANTITY_AGGREGATE_INITIALIZATION)
 
-        explicit constexpr scalar(const uninitialized_&) noexcept
+        explicit constexpr quantity(const uninitialized_&) noexcept
         {}
 
-        constexpr scalar() noexcept
+        constexpr quantity() noexcept
             : value_{}
         {}
 
         template <number_c ThatValue>
-        explicit constexpr scalar(
+        explicit constexpr quantity(
             ThatValue value
         ) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : value_{ narrow<ThisValue>(value) }
@@ -59,8 +59,8 @@ namespace zollstock
         template <auto that_unit, number_c ThatValue>
             requires(convertible_units(this_unit, that_unit))
         explicit(!lossless_convertible_v<ThatValue, ThisValue>)
-        constexpr scalar(
-            scalar<that_unit, ThatValue> that
+        constexpr quantity(
+            quantity<that_unit, ThatValue> that
         ) noexcept(lossless_convertible_v<ThatValue, ThisValue>)
             : value_{ narrow<ThisValue>(that.value_) }
         {
@@ -71,7 +71,7 @@ namespace zollstock
             }
         }
 
-#endif //!defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION)
+#endif //!defined(ZOLLSTOCK_QUANTITY_AGGREGATE_INITIALIZATION)
 
         [[nodiscard]] constexpr value_type& value() noexcept
         {
@@ -95,7 +95,7 @@ namespace zollstock
 
         template <number_c ThatValue>
         [[nodiscard]] constexpr bool operator==(
-            const scalar<this_unit, ThatValue>& that
+            const quantity<this_unit, ThatValue>& that
         ) const noexcept
         {
             return cmp_equal(this->value_, that.cvalue());
@@ -103,7 +103,7 @@ namespace zollstock
 
         template <number_c ThatValue>
         [[nodiscard]] constexpr bool operator!=(
-            const scalar<this_unit, ThatValue>& that
+            const quantity<this_unit, ThatValue>& that
         ) const noexcept
         {
             return cmp_not_equal(this->value_, that.cvalue());
@@ -111,7 +111,7 @@ namespace zollstock
 
         template <number_c ThatValue>
         [[nodiscard]] constexpr bool operator<(
-            const scalar<this_unit, ThatValue>& that
+            const quantity<this_unit, ThatValue>& that
         ) const noexcept
         {
             return cmp_less(this->value_, that.cvalue());
@@ -119,7 +119,7 @@ namespace zollstock
 
         template <number_c ThatValue>
         [[nodiscard]] constexpr bool operator>(
-            const scalar<this_unit, ThatValue>& that
+            const quantity<this_unit, ThatValue>& that
         ) const noexcept
         {
             return cmp_greater(this->value_, that.cvalue());
@@ -127,7 +127,7 @@ namespace zollstock
 
         template <number_c ThatValue>
         [[nodiscard]] constexpr bool operator<=(
-            const scalar<this_unit, ThatValue>& that
+            const quantity<this_unit, ThatValue>& that
         ) const noexcept
         {
             return cmp_less_equal(this->value_, that.cvalue());
@@ -135,7 +135,7 @@ namespace zollstock
 
         template <number_c ThatValue>
         [[nodiscard]] constexpr bool operator>=(
-            const scalar<this_unit, ThatValue>& that
+            const quantity<this_unit, ThatValue>& that
         ) const noexcept
         {
             return cmp_greater_equal(this->value_, that.cvalue());
@@ -163,12 +163,12 @@ namespace zollstock
 
         [[nodiscard]] consteval auto operator*(unit_c auto that_unit) && noexcept
         {
-            return scalar<this_unit * that_unit, value_type>{ this->value_ };
+            return quantity<this_unit * that_unit, value_type>{ this->value_ };
         }
 
         [[nodiscard]] consteval auto operator/(unit_c auto that_unit) && noexcept
         {
-            return scalar<this_unit / that_unit, value_type>{ this->value_ };
+            return quantity<this_unit / that_unit, value_type>{ this->value_ };
         }
 
         constexpr this_type& operator*=(value_type that_value) noexcept
@@ -208,9 +208,9 @@ namespace zollstock
             return pow_impl(base, exponent);
         }
 
-#if defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS)
+#if defined(ZOLLSTOCK_QUANTITY_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_QUANTITY_PUBLIC_MEMBERS)
     public:
-#endif //defined(ZOLLSTOCK_SCALAR_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_SCALAR_PUBLIC_MEMBERS)
+#endif //defined(ZOLLSTOCK_QUANTITY_AGGREGATE_INITIALIZATION) || defined(ZOLLSTOCK_QUANITY_PUBLIC_MEMBERS)
 
         value_type value_;
 
@@ -219,136 +219,136 @@ namespace zollstock
 
 
     template <unit_c auto unit = units::_1>
-    using int_t = scalar<unit, int>;
+    using int_t = quantity<unit, int>;
 
     template <unit_c auto unit = units::_1>
-    using unsigned_int_t = scalar<unit, unsigned int>;
+    using unsigned_int_t = quantity<unit, unsigned int>;
 
     template <unit_c auto unit = units::_1>
-    using unsigned_t = scalar<unit, unsigned>;
-
-
-    template <unit_c auto unit = units::_1>
-    using short_int_t = scalar<unit, short int>;
-
-    template <unit_c auto unit = units::_1>
-    using short_t= scalar<unit, short>;
-
-    template <unit_c auto unit = units::_1>
-    using unsigned_short_int_t= scalar<unit, unsigned short int>;
-
-    template <unit_c auto unit = units::_1>
-    using unsigned_short_t= scalar<unit, unsigned short>;
+    using unsigned_t = quantity<unit, unsigned>;
 
 
     template <unit_c auto unit = units::_1>
-    using long_int_t = scalar<unit, long int>;
+    using short_int_t = quantity<unit, short int>;
 
     template <unit_c auto unit = units::_1>
-    using long_t= scalar<unit, long>;
+    using short_t= quantity<unit, short>;
 
     template <unit_c auto unit = units::_1>
-    using unsigned_long_int_t= scalar<unit, unsigned long int>;
+    using unsigned_short_int_t= quantity<unit, unsigned short int>;
 
     template <unit_c auto unit = units::_1>
-    using unsigned_long_t= scalar<unit, unsigned long>;
-
-
-    template <unit_c auto unit = units::_1>
-    using long_long_int_t = scalar<unit, long long int>;
-
-    template <unit_c auto unit = units::_1>
-    using long_long_t= scalar<unit, long long>;
-
-    template <unit_c auto unit = units::_1>
-    using unsigned_long_long_int_t= scalar<unit, unsigned long long int>;
-
-    template <unit_c auto unit = units::_1>
-    using unsigned_long_long_t= scalar<unit, unsigned long long>;
+    using unsigned_short_t= quantity<unit, unsigned short>;
 
 
     template <unit_c auto unit = units::_1>
-    using float_t = scalar<unit, float>;
+    using long_int_t = quantity<unit, long int>;
 
     template <unit_c auto unit = units::_1>
-    using double_t = scalar<unit, double>;
+    using long_t= quantity<unit, long>;
 
     template <unit_c auto unit = units::_1>
-    using long_double_t = scalar<unit, long double>;
+    using unsigned_long_int_t= quantity<unit, unsigned long int>;
+
+    template <unit_c auto unit = units::_1>
+    using unsigned_long_t= quantity<unit, unsigned long>;
+
+
+    template <unit_c auto unit = units::_1>
+    using long_long_int_t = quantity<unit, long long int>;
+
+    template <unit_c auto unit = units::_1>
+    using long_long_t= quantity<unit, long long>;
+
+    template <unit_c auto unit = units::_1>
+    using unsigned_long_long_int_t= quantity<unit, unsigned long long int>;
+
+    template <unit_c auto unit = units::_1>
+    using unsigned_long_long_t= quantity<unit, unsigned long long>;
+
+
+    template <unit_c auto unit = units::_1>
+    using float_t = quantity<unit, float>;
+
+    template <unit_c auto unit = units::_1>
+    using double_t = quantity<unit, double>;
+
+    template <unit_c auto unit = units::_1>
+    using long_double_t = quantity<unit, long double>;
 
 
 
     template <unit_c auto unit, number_c Value>
-    [[nodiscard]] constexpr auto make_scalar(Value value) noexcept
+    [[nodiscard]] constexpr auto make_quantity(Value value) noexcept
     {
-        return scalar<unit, Value>{ value };
+        return quantity<unit, Value>{ value };
     }
 
 
     template <unit_c auto unit, number_c Value1, number_c Value2>
     [[nodiscard]] constexpr auto operator+(
-        scalar<unit, Value1> summand_1, scalar<unit, Value2> summand_2) noexcept
+        quantity<unit, Value1> summand_1, quantity<unit, Value2> summand_2) noexcept
     {
-        return make_scalar<unit>(summand_1.cvalue() + summand_2.cvalue());
+        return make_quantity<unit>(summand_1.cvalue() + summand_2.cvalue());
     }
 
     template <unit_c auto unit, number_c Value1, number_c Value2>
     [[nodiscard]] constexpr auto operator-(
-        scalar<unit, Value1> minuend, scalar<unit, Value2> subtrahend
+        quantity<unit, Value1> minuend, quantity<unit, Value2> subtrahend
     ) noexcept
     {
-        return make_scalar<unit>(minuend.cvalue() - subtrahend.cvalue());
+        return make_quantity<unit>(minuend.cvalue() - subtrahend.cvalue());
     }
 
     [[nodiscard]] consteval auto operator*(number_c auto&& factor, unit_c auto unit) noexcept
     {
-        return make_scalar<unit>(factor);
+        return make_quantity<unit>(factor);
     }
 
     template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto operator*(
-        scalar<unit, Value> factor_1, number_c auto factor_2
+        quantity<unit, Value> factor_1, number_c auto factor_2
     ) noexcept
     {
-        return make_scalar<unit>(factor_1.cvalue() * factor_2);
+        return make_quantity<unit>(factor_1.cvalue() * factor_2);
     }
 
     template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto operator*(
-        number_c auto factor_1, scalar<unit, Value> factor_2
+        number_c auto factor_1, quantity<unit, Value> factor_2
     ) noexcept
     {
-        return make_scalar<unit>(factor_1 * factor_2.cvalue());
+        return make_quantity<unit>(factor_1 * factor_2.cvalue());
     }
 
     template <unit_c auto unit_1, unit_c auto unit_2, number_c Value1, number_c Value2>
     [[nodiscard]] constexpr auto operator*(
-        scalar<unit_1, Value1> factor_1, scalar<unit_2, Value2> factor_2
+        quantity<unit_1, Value1> factor_1, quantity<unit_2, Value2> factor_2
     ) noexcept
     {
-        return make_scalar<unit_1 * unit_2>(factor_1.cvalue() * factor_2.cvalue());
+        return make_quantity<unit_1 * unit_2>(factor_1.cvalue() * factor_2.cvalue());
     }
 
     template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto operator/(
-        scalar<unit, Value> dividend, number_c auto divisor
+        quantity<unit, Value> dividend, number_c auto divisor
     ) noexcept
     {
-        return make_scalar<unit>(dividend.cvalue() / divisor);
+        return make_quantity<unit>(dividend.cvalue() / divisor);
     }
 
     template <unit_c auto unit_1, unit_c auto unit_2, number_c Value1, number_c Value2>
     [[nodiscard]] constexpr auto operator/(
-        scalar<unit_1, Value1> dividend, scalar<unit_2, Value2> divisor
+        quantity<unit_1, Value1> dividend, quantity<unit_2, Value2> divisor
     ) noexcept
     {
-        return make_scalar<unit_1 / unit_2>(dividend.cvalue() / divisor.cvalue());
+        return make_quantity<unit_1 / unit_2>(dividend.cvalue() / divisor.cvalue());
     }
 
 
     template <typename Char, unit_c auto unit, number_c Value>
     std::basic_ostream<Char>& operator<<(
-        std::basic_ostream<Char>& os, scalar<unit, Value> scalar
+        std::basic_ostream<Char>& os, quantity<unit, Value> quantity
     )
     {
         const std::basic_string<Char> unit_representation = to_basic_string<Char>(unit);
@@ -362,7 +362,7 @@ namespace zollstock
         )
             os.width(os.width() - unit_width_including_space);
 
-        os << scalar.cvalue();
+        os << quantity.cvalue();
 
         if(unit_width > 0)
             os << " " << unit;
@@ -372,15 +372,15 @@ namespace zollstock
 
 
     template <unit_c auto target_unit, unit_c auto source_unit, number_c Value>
-    [[nodiscard]] scalar<target_unit, Value> in(scalar<source_unit, Value> source) noexcept
+    [[nodiscard]] quantity<target_unit, Value> in(quantity<source_unit, Value> source) noexcept
     {
-        return scalar<target_unit, Value>{ source };
+        return quantity<target_unit, Value>{ source };
     }
 
     template <unit_c auto unit, number_c Value>
-    [[nodiscard]] scalar<unit, Value> as(Value source) noexcept
+    [[nodiscard]] quantity<unit, Value> as(Value source) noexcept
     {
-        return scalar<unit, Value>{ source };
+        return quantity<unit, Value>{ source };
     }
 
 
@@ -407,7 +407,7 @@ namespace zollstock
 
 
 template<zollstock::unit_c auto this_unit, zollstock::number_c ThisValue>
-struct std::formatter<zollstock::scalar<this_unit, ThisValue>, char>
+struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
 {
 
     template<typename ParseContext>
@@ -417,7 +417,7 @@ struct std::formatter<zollstock::scalar<this_unit, ThisValue>, char>
     }
 
     template<typename FmtContext>
-    FmtContext::iterator format(zollstock::scalar<this_unit, ThisValue> s, FmtContext& ctx) const
+    FmtContext::iterator format(zollstock::quantity<this_unit, ThisValue> s, FmtContext& ctx) const
     {
         std::ostringstream out;
 
@@ -428,4 +428,4 @@ struct std::formatter<zollstock::scalar<this_unit, ThisValue>, char>
 };
 
 
-#endif //__ZOLLSTOCK_SCALAR_HPP__
+#endif //__ZOLLSTOCK_QUANTITY_HPP__
