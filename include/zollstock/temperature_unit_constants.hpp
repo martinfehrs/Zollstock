@@ -8,7 +8,7 @@
 namespace zollstock::units::inline constants
 {
 
-    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(T, K)
+    ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANTS(Theta, K)
 
 }
 

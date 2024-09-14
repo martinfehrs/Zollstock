@@ -9,5 +9,5 @@ using namespace zollstock::units;
 
 TEST_CASE("temperature-unit-constants", "[temperature][unit][constants]")
 {
-    TEST_BASE_UNIT_CONSTANTS(ALL, K, T)
+    TEST_BASE_UNIT_CONSTANTS(ALL, K, Theta)
 }
