@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_TRIGONOMETRIC_FUNCTIONS_HPP__
-#define __ZOLLSTOCK_TRIGONOMETRIC_FUNCTIONS_HPP__
+#ifndef __ZOLLSTOCK_MATH_HPP__
+#define __ZOLLSTOCK_MATH_HPP__
 
 
 #include <zollstock/angle_units.hpp>
@@ -51,4 +51,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_TRIGONOMETRIC_FUNCTIONS_HPP__
+#endif //__ZOLLSTOCK_MATH_HPP__
