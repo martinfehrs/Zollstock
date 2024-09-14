@@ -8,9 +8,10 @@
 namespace zollstock::dimensions
 {
 
-    inline constexpr dimension_t<"T"> T{};
-    inline constexpr dimension_t<"L"> L{};
-    inline constexpr dimension_t<"M"> M{};
+    inline constexpr dimension_t<"T"    > T    {};
+    inline constexpr dimension_t<"L"    > L    {};
+    inline constexpr dimension_t<"M"    > M    {};
+    inline constexpr dimension_t<"Theta"> Theta{};
 
 }
 
