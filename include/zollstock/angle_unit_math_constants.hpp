@@ -2,16 +2,17 @@
 #define __ZOLLSTOCK_ANGLE_UNIT_MATH_CONSTANTS_HPP__
 
 
-#include <zollstock/math_constants.hpp>
 #include <zollstock/scalar.hpp>
+
+#include <numbers>
 
 
 namespace zollstock::inline math_constants
 {
 
-    inline constexpr scalar<units::rad, float      > pi_f_rad{ pi_f };
-    inline constexpr scalar<units::rad, double     > pi_rad  { pi   };
-    inline constexpr scalar<units::rad, long double> pi_l_rad{ pi_l };
+    inline constexpr scalar<units::rad, float      > pi_f_rad{ std::numbers::pi_v<float      > };
+    inline constexpr scalar<units::rad, double     > pi_rad  { std::numbers::pi_v<double     > };
+    inline constexpr scalar<units::rad, long double> pi_l_rad{ std::numbers::pi_v<long double> };
 
 }
 
