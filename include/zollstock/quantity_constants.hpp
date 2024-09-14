@@ -7,7 +7,7 @@
 #include <numbers>
 
 
-namespace zollstock::inline math_constants
+namespace zollstock::inline quantity_constants
 {
 
     template <number_c Number>
