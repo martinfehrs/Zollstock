@@ -22,13 +22,13 @@ TEST_CASE("trigonometric_functions", "[trigonometric_functions]")
     REQUIRE(zs::tan(0.0_rad     ).value_ == std::tan(0.0     ));
     REQUIRE(zs::tan(zs::pi_rad/2).value_ == std::tan(zs::pi/2));
 
-    REQUIRE(zs::asin(0.0_1      ).value_ == std::asin(0.0));
-    REQUIRE(zs::asin(1.0_1      ).value_ == std::asin(1.0));
+    REQUIRE(zs::asin(0.0_1).value_ == std::asin(0.0));
+    REQUIRE(zs::asin(1.0_1).value_ == std::asin(1.0));
 
-    REQUIRE(zs::acos(0.0_1      ).value_ == std::acos(0.0));
-    REQUIRE(zs::acos(1.0_1      ).value_ == std::acos(1.0));
+    REQUIRE(zs::acos(0.0_1).value_ == std::acos(0.0));
+    REQUIRE(zs::acos(1.0_1).value_ == std::acos(1.0));
 
-    REQUIRE(zs::atan(0.0_1      ).value_ == std::atan(0.0));
-    REQUIRE(zs::atan(1.0_1      ).value_ == std::atan(1.0));
+    REQUIRE(zs::atan(0.0_1).value_ == std::atan(0.0));
+    REQUIRE(zs::atan(1.0_1).value_ == std::atan(1.0));
 
 }
