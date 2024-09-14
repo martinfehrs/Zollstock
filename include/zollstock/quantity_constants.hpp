@@ -10,9 +10,12 @@
 namespace zollstock::inline math_constants
 {
 
-    inline constexpr quantity<units::rad, float      > pi_f_rad{ std::numbers::pi_v<float      > };
-    inline constexpr quantity<units::rad, double     > pi_rad  { std::numbers::pi_v<double     > };
-    inline constexpr quantity<units::rad, long double> pi_l_rad{ std::numbers::pi_v<long double> };
+    template <number_c Number>
+    constexpr quantity<units::rad, Number> pi_v{ std::numbers::pi_v<Number> };
+
+    inline constexpr quantity<units::rad, float      > pi_f_rad{ pi_v<float      > };
+    inline constexpr quantity<units::rad, double     > pi_rad  { pi_v<double     > };
+    inline constexpr quantity<units::rad, long double> pi_l_rad{ pi_v<long double> };
 
 }
 
