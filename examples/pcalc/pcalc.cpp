@@ -42,14 +42,14 @@ int main(int argc, char** argv)
     const auto [wall_thickness, outer_diameter, pipe_length] = read_args(argc, argv);
 
     // Calculating mass of a copper pipe
-    static constexpr zs::double_t<g/mm3> copper_density = 8.1_g/cm3;
+    static constexpr auto copper_density = zs::in<g/mm3>(8.1_g/cm3);
     const auto outer_radius = outer_diameter / 2;
     const auto inner_radius = outer_radius - wall_thickness;
     const auto outer_area = pi * outer_radius * outer_radius;
     const auto inner_area = pi * inner_radius * inner_radius;
     const auto ring_area = outer_area - inner_area;
     const auto pipe_volume = ring_area * pipe_length;
-    const zs::double_t<kg> pipe_mass = pipe_volume * copper_density;
+    const auto pipe_mass = zs::in<kg>(pipe_volume * copper_density);
 
     std::cout << std::format("pipe mass: {}\n", pipe_mass);
 
