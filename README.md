@@ -19,14 +19,14 @@ production code.
 
 ```cpp
 #include <zollstock/all_units.hpp>
+#include <zollstock/numbers.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <format>
-#include <numbers>
 
 namespace zs = zollstock;
 
-using namespace std::numbers;
+using namespace zs::numbers;
 using namespace zs::units;
 
 [[noreturn]] void argument_error() noexcept
