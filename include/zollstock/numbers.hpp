@@ -11,7 +11,7 @@ namespace zollstock::inline numbers
 {
 
     template <number_c Number>
-    constexpr quantity<units::rad, Number> pi_v{ std::numbers::pi_v<Number> };
+    constexpr quantity<units::rad, Number> pi_rad_v{ std::numbers::pi_v<Number> };
 
     inline constexpr quantity<units::rad, float      > pi_f_rad{ pi_v<float      > };
     inline constexpr quantity<units::rad, double     > pi_rad  { pi_v<double     > };
