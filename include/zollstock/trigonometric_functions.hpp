@@ -3,7 +3,7 @@
 
 
 #include <zollstock/angle_units.hpp>
-#include <zollstock/angle_unit_math_constants.hpp>
+#include <zollstock/quantity_constants.hpp>
 #include <zollstock/unit_one.hpp>
 
 #include <cmath>

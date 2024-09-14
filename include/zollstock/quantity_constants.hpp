@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_ANGLE_UNIT_MATH_CONSTANTS_HPP__
-#define __ZOLLSTOCK_ANGLE_UNIT_MATH_CONSTANTS_HPP__
+#ifndef __ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
+#define __ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
 
 
 #include <zollstock/quantity.hpp>
@@ -17,4 +17,4 @@ namespace zollstock::inline math_constants
 }
 
 
-#endif //__ZOLLSTOCK_ANGLE_UNIT_MATH_CONSTANTS_HPP__
+#endif //__ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
