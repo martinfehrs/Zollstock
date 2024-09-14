@@ -372,13 +372,17 @@ namespace zollstock
 
 
     template <unit_c auto target_unit, unit_c auto source_unit, number_c Value>
-    [[nodiscard]] quantity<target_unit, Value> in(quantity<source_unit, Value> source) noexcept
+    [[nodiscard]] constexpr quantity<target_unit, Value> in(
+        quantity<source_unit, Value> source
+    ) noexcept
     {
         return quantity<target_unit, Value>{ source };
     }
 
     template <unit_c auto unit, number_c Value>
-    [[nodiscard]] quantity<unit, Value> as(Value source) noexcept
+    [[nodiscard]] constexpr quantity<unit, Value> as(
+        Value source
+    ) noexcept
     {
         return quantity<unit, Value>{ source };
     }
