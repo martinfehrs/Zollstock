@@ -64,6 +64,8 @@ TEST_CASE("quantity value assignment", "[quantity]")
 
 TEST_CASE("quantity arithmetic", "[quantity]")
 {
+
+    STATIC_REQUIRE(check_quantity(+zs::int_t<>{ 1 }, _1, +1));
     STATIC_REQUIRE(check_quantity(-zs::int_t<>{ 1 }, _1, -1));
 
     STATIC_REQUIRE(check_quantity(zs::int_t<>{ 0 } += zs::int_t<>{ 1 }, _1, 1));

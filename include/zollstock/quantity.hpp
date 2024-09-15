@@ -141,6 +141,12 @@ namespace zollstock
             return cmp_greater_equal(this->value_, that.cvalue());
         }
 
+        [[nodiscard]] constexpr this_type operator+() const noexcept
+            requires(std::is_signed_v<ThisValue>)
+        {
+            return *this;
+        }
+
         [[nodiscard]] constexpr this_type operator-() const noexcept
             requires(std::is_signed_v<ThisValue>)
         {
