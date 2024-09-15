@@ -48,6 +48,12 @@ namespace zollstock
         return quantity<units::rad, Number>{ std::atan(num.value()) };
     }
 
+    template <number_c Number, unit_c auto unit>
+    [[nodiscard]] bool signbit(quantity<unit, Number> num)
+    {
+        return std::signbit(num.value());
+    }
+
 }
 
 
