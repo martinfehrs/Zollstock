@@ -13,7 +13,7 @@ namespace zollstock
 
     template <typename Candidate>
     concept number_c = std::same_as<Candidate, unsigned             char>
-                    || std::smae_as<Candidate, signed               char>
+                    || std::same_as<Candidate, signed               char>
                     || std::same_as<Candidate, unsigned              int>
                     || std::same_as<Candidate, signed                int>
                     || std::same_as<Candidate, unsigned short        int>
