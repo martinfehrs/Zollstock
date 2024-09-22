@@ -57,12 +57,12 @@ TEMPLATE_TEST_CASE(
 
     if constexpr(quantity_limits::has_quiet_NaN)
     {
-        STATIC_REQUIRE(std::isnan(quantity_limits::quiet_NaN().value()));
+        REQUIRE(std::isnan(quantity_limits::quiet_NaN().value()));
     }
 
     if constexpr(quantity_limits::has_signaling_NaN)
     {
-        STATIC_REQUIRE(std::isnan(quantity_limits::signaling_NaN().value()));
+        REQUIRE(std::isnan(quantity_limits::signaling_NaN().value()));
     }
 
 }
