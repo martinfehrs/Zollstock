@@ -1,12 +1,12 @@
 #include <zollstock/all_units.hpp>
-#include <zollstock/numbers.hpp>
+#include <zollstock/quantity_constants.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <format>
 
 namespace zs = zollstock;
 
-using namespace zs::numbers;
+using namespace zs::quantities::constants;
 using namespace zs::units;
 
 [[noreturn]] void argument_error() noexcept

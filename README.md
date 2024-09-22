@@ -26,7 +26,7 @@ production code.
 
 namespace zs = zollstock;
 
-using namespace zs::numbers;
+using namespace zs::quantities::constants;
 using namespace zs::units;
 
 [[noreturn]] void argument_error() noexcept

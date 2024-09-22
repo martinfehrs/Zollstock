@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_NUMBERS_HPP__
-#define __ZOLLSTOCK_NUMBERS_HPP__
+#ifndef __ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
+#define __ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
 
 
 #include <zollstock/quantity.hpp>
@@ -7,7 +7,7 @@
 #include <numbers>
 
 
-namespace zollstock::inline numbers
+namespace zollstock::inline quantities::inline constants
 {
 
     template <number_c Number>
@@ -36,4 +36,4 @@ namespace zollstock::inline numbers
 }
 
 
-#endif //__ZOLLSTOCK_NUMBERS_HPP__
+#endif //__ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
