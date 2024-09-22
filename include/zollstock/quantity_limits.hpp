@@ -93,17 +93,7 @@ namespace std
     };
 
     template <zollstock::unit_c auto unit, zollstock::number_c Number>
-    class numeric_limits<const zollstock::quantity<unit, Number>>
-        : numeric_limits<zollstock::quantity<unit, Number>>
-    { };
-
-    template <zollstock::unit_c auto unit, zollstock::number_c Number>
-    class numeric_limits<volatile zollstock::quantity<unit, Number>>
-        : numeric_limits<zollstock::quantity<unit, Number>>
-    { };
-
-    template <zollstock::unit_c auto unit, zollstock::number_c Number>
-    class numeric_limits<const volatile zollstock::quantity<unit, Number>>
+    struct numeric_limits<const zollstock::quantity<unit, Number>>
         : numeric_limits<zollstock::quantity<unit, Number>>
     { };
 
