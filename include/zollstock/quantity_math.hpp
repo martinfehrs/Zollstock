@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_MATH_HPP__
-#define __ZOLLSTOCK_MATH_HPP__
+#ifndef __ZOLLSTOCK_QUANTITY_MATH_HPP__
+#define __ZOLLSTOCK_QUANTITY_MATH_HPP__
 
 
 #include <zollstock/angle_units.hpp>
@@ -71,4 +71,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_MATH_HPP__
+#endif //__ZOLLSTOCK_QUANTITY_MATH_HPP__

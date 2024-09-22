@@ -1,5 +1,5 @@
 #define ZOLLSTOCK_QUANTITY_PUBLIC_MEMBERS
-#include <zollstock/math.hpp>
+#include <zollstock/quantity_math.hpp>
 
 #include <catch2/catch_all.hpp>
 

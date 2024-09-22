@@ -21,7 +21,7 @@ target_sources(tests PRIVATE acceleration_unit_constant_tests.cpp)
 target_sources(tests PRIVATE angular_velocity_unit_constant_tests.cpp)
 target_sources(tests PRIVATE quantity_construction_tests.cpp)
 target_sources(tests PRIVATE quantity_tests.cpp)
-target_sources(tests PRIVATE math_tests.cpp)
+target_sources(tests PRIVATE quantity_math_tests.cpp)
 target_sources(tests PRIVATE quantity_limits_tests.cpp)
 
 add_subdirectory(header_tests)
