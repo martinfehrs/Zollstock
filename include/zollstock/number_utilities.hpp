@@ -30,6 +30,11 @@ namespace zollstock
     template <number_c Number>
     [[nodiscard]] consteval const char* number_type_name() noexcept
     {
+        if constexpr(std::same_as<Number, signed char>)
+        {
+            return "signed char";
+        }
+        else
         if constexpr(std::same_as<Number, short int>)
         {
             return "short int";
@@ -48,6 +53,16 @@ namespace zollstock
         if constexpr(std::same_as<Number, long long int>)
         {
             return "long long int";
+        }
+        else
+        if constexpr(std::same_as<Number, short int>)
+        {
+            return "short int";
+        }
+        else
+        if constexpr(std::same_as<Number, unsigned char>)
+        {
+            return "unsigned char";
         }
         else
         if constexpr(std::same_as<Number, unsigned short int>)
