@@ -13,15 +13,13 @@ using namespace zollstock::units;
 
 TEMPLATE_TEST_CASE(
     "quantity-limits", "[quantity][limits]",
-    double,
-    const double,
-    volatile double,
-    const volatile double
+    zs::quantity<_1>,
+    const zs::quantity<_1>
 )
 {
 
-    using quantity_limits = std::numeric_limits<zs::quantity<_1, double>>;
-    using scalar_limits   = std::numeric_limits<double>;
+    using quantity_limits = std::numeric_limits<TestType>;
+    using scalar_limits   = std::numeric_limits<typename TestType::value_type>;
 
     STATIC_REQUIRE(quantity_limits::is_specialized        == scalar_limits::is_specialized   );
     STATIC_REQUIRE(quantity_limits::is_signed             == scalar_limits::is_signed        );
