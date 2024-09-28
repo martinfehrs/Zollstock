@@ -23,7 +23,7 @@ namespace zollstock
     concept unit_factor_c = requires
     {
         requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
-        requires dimensions::dimension_c<std::remove_cvref_t<decltype(Candidate::dimension)>>;
+        requires std::same_as<std::remove_cvref_t<decltype(Candidate::dimensions)>, dimensions::dimensions_t>;
         { Candidate::symbol         } -> std::same_as<const static_string&>;
         { Candidate::scaling_factor } -> std::same_as<const long double&>;
         { Candidate::prefix         } -> std::same_as<const static_string&>;
@@ -67,18 +67,21 @@ namespace zollstock
 
 
 
-    [[nodiscard]] consteval dimensions::dimension_c auto unit_dimensions(unit_c auto unit) noexcept
+    [[nodiscard]] consteval dimensions::dimensions_t unit_dimensions(unit_c auto unit) noexcept
     {
         return tuple_transform_reduce(
             unit.factors,
             dimensions::_1,
-            [](dimensions::dimension_c auto dimension_1, dimensions::dimension_c auto dimension_2)
+            [](
+                const dimensions::dimensions_t& dimensions_1,
+                const dimensions::dimensions_t& dimensions_2
+            )
             {
-                return dimension_1 * dimension_2;
+                return dimensions_1 * dimensions_2;
             },
             [](unit_factor_c auto factor)
             {
-                return factor.dimension;
+                return factor.dimensions;
             }
         );
     }
@@ -106,7 +109,7 @@ namespace zollstock
 
 
     template<
-        dimensions::dimension_c auto dimension_,
+        const dimensions::dimensions_t& dimensions_,
         static_string symbol_,
         long double scaling_factor_,
         static_string prefix_,
@@ -114,7 +117,7 @@ namespace zollstock
     >
     struct unit_factor
     {
-        static constexpr auto dimension = dimension_;
+        static constexpr auto& dimensions = dimensions_;
         static constexpr auto symbol = symbol_;
         static constexpr auto scaling_factor = scaling_factor_;
         static constexpr auto prefix = prefix_;
@@ -166,40 +169,40 @@ namespace zollstock
 
 
     template <
-        dimensions::dimension_c auto dimension,
+        const dimensions::dimensions_t& dimensions,
         static_string symbol,
         long double scaling_factor,
         static_string prefix = "",
         int exponent = 1
     >
-    using unit = unit_product<unit_factor<dimension, symbol, scaling_factor, prefix, exponent>>;
+    using unit = unit_product<unit_factor<dimensions, symbol, scaling_factor, prefix, exponent>>;
 
     template <
-        dimensions::dimension_c auto dimension,
+        const dimensions::dimensions_t& dimensions,
         static_string symbol,
         long double scaling_factor,
         static_string prefix = "",
         int exponent = 1
     >
-    inline constexpr auto unit_v = unit<dimension, symbol, scaling_factor, prefix, exponent>{};
+    inline constexpr auto unit_v = unit<dimensions, symbol, scaling_factor, prefix, exponent>{};
 
 
 
     template <
-        dimensions::dimension_c auto dimension,
+        const dimensions::dimensions_t& dimensions,
         static_string symbol,
         prefix_c auto prefix,
         int exponent = 1
     >
-    using prefixed_unit = unit<dimension, symbol, prefix.factor, prefix.symbol, exponent>;
+    using prefixed_unit = unit<dimensions, symbol, prefix.factor, prefix.symbol, exponent>;
 
     template <
-        dimensions::dimension_c auto dimension,
+        const dimensions::dimensions_t& dimensions,
         static_string symbol,
         prefix_c auto prefix,
         int exponent = 1
     >
-    inline constexpr auto prefixed_unit_v = prefixed_unit<dimension, symbol, prefix, exponent>{};
+    inline constexpr auto prefixed_unit_v = prefixed_unit<dimensions, symbol, prefix, exponent>{};
 
 
 
@@ -292,7 +295,7 @@ namespace zollstock
             const auto factor = std::get<0>(unit.factors);
 
             return unit_v<
-                factor.dimension,
+                factor.dimensions,
                 factor.symbol,
                 factor.scaling_factor,
                 factor.prefix,
@@ -326,12 +329,12 @@ namespace zollstock
         const unit_factor_c auto factor_1 = std::get<0>(unit_1.factors);
         const unit_factor_c auto factor_2 = std::get<0>(unit_2.factors);
 
-        if constexpr(factor_1.dimension < factor_2.dimension)
+        if constexpr(factor_1.dimensions < factor_2.dimensions)
         {
             return detail::unit_product_concat(unit_1, unit_2);
         }
         else
-        if constexpr(factor_2.dimension < factor_1.dimension)
+        if constexpr(factor_2.dimensions < factor_1.dimensions)
         {
             return detail::unit_product_concat(unit_2, unit_1);
         }
@@ -352,7 +355,7 @@ namespace zollstock
                 throw "incompatible prefixes";
 
             return unit_v<
-                factor_1.dimension,
+                factor_1.dimensions,
                 factor_1.symbol,
                 factor_1.scaling_factor,
                 factor_1.prefix,
@@ -373,14 +376,14 @@ namespace zollstock
             const auto head = unit_product_head(unit_1);
             const auto head_factor = std::get<0>(head.factors);
 
-            if constexpr (factor_2.dimension < head_factor.dimension)
+            if constexpr (factor_2.dimensions < head_factor.dimensions)
             {
                 return detail::unit_product_concat(unit_2, unit_1);
             }
             else
             if constexpr (
                 const auto tail = unit_product_tail(unit_1);
-                factor_2.dimension == head_factor.dimension
+                factor_2.dimensions == head_factor.dimensions
             )
             {
                 if (factor_2.scaling_factor != head_factor.scaling_factor)
@@ -436,7 +439,7 @@ namespace zollstock
         unit_factor_c auto factor_1, unit_factor_c auto factor_2
     ) noexcept
     {
-        return factor_1.dimension      == factor_2.dimension
+        return factor_1.dimensions     == factor_2.dimensions
             && factor_1.symbol         == factor_2.symbol
             && factor_1.scaling_factor == factor_2.scaling_factor
             && factor_1.prefix         == factor_2.prefix

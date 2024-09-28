@@ -7,27 +7,27 @@
 #include <catch2/catch_test_macros.hpp>
 
 
-#define TEST_BASE_UNIT_CONSTANT(symbol_, dimension_, factor_)        \
-{                                                                    \
-    using namespace ::zollstock;                                     \
-                                                                     \
-    static constexpr auto factor = std::get<0>(symbol_.factors);     \
-                                                                     \
-    STATIC_REQUIRE(factor.dimension      == dimensions::dimension_); \
-    STATIC_REQUIRE(factor.symbol         == #symbol_ );              \
-    STATIC_REQUIRE(factor.scaling_factor == factor_ );               \
+#define TEST_BASE_UNIT_CONSTANT(symbol_, dimensions_, factor_)        \
+{                                                                     \
+    using namespace ::zollstock;                                      \
+                                                                      \
+    static constexpr auto factor = std::get<0>(symbol_.factors);      \
+                                                                      \
+    STATIC_REQUIRE(factor.dimensions     == dimensions::dimensions_); \
+    STATIC_REQUIRE(factor.symbol         == #symbol_ );               \
+    STATIC_REQUIRE(factor.scaling_factor == factor_ );                \
 }
 
-#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, dimension_, prefix_) \
-{                                                                         \
-    using namespace ::zollstock;                                          \
-                                                                          \
-    static constexpr auto factor = std::get<0>(prefix_##symbol_.factors); \
-                                                                          \
-    STATIC_REQUIRE(factor.dimension      == dimensions::dimension_);      \
-    STATIC_REQUIRE(factor.symbol         == #symbol_);                    \
-    STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix_.factor); \
-    STATIC_REQUIRE(factor.prefix         == si_prefixes::prefix_.symbol); \
+#define TEST_PREFIXED_BASE_SI_UNIT_CONSTANT(symbol_, dimensions_, prefix_) \
+{                                                                          \
+    using namespace ::zollstock;                                           \
+                                                                           \
+    static constexpr auto factor = std::get<0>(prefix_##symbol_.factors);  \
+                                                                           \
+    STATIC_REQUIRE(factor.dimensions      == dimensions::dimensions_);     \
+    STATIC_REQUIRE(factor.symbol         == #symbol_);                     \
+    STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix_.factor);  \
+    STATIC_REQUIRE(factor.prefix         == si_prefixes::prefix_.symbol);  \
 }
 
 #define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, dimension) \
