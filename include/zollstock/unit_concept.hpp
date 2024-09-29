@@ -342,21 +342,27 @@ namespace zollstock
             return detail::unit_product_concat(unit_2, unit_1);
         }
         else
+        if constexpr(factor_1.scaling_factor != factor_2.scaling_factor)
+        {
+            throw "incompatible factors";
+        }
+        else
+        if constexpr(factor_1.symbol != factor_2.symbol)
+        {
+            throw "incompatible symbols";
+        }
+        else
+        if constexpr(factor_1.prefix != factor_2.prefix)
+        {
+            throw "incompatible prefixes";
+        }
+        else
         if constexpr(factor_1.exponent + factor_2.exponent == 0)
         {
             return unit_product_v<>;
         }
         else
         {
-            if (factor_1.scaling_factor != factor_2.scaling_factor)
-                throw "incompatible factors";
-
-            if (factor_1.symbol != factor_2.symbol)
-                throw "incompatible symbols";
-
-            if (factor_1.prefix != factor_2.prefix)
-                throw "incompatible prefixes";
-
             return unit_v<
                 factor_1.dimensions,
                 factor_1.symbol,
