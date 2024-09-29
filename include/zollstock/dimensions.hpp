@@ -52,9 +52,9 @@ namespace zollstock::dimensions
                 this->time                      + that.time                ,
                 this->mass                      + that.mass                ,
                 this->electric_current          + that.electric_current    ,
-                this->thermodynamic_temperature + thermodynamic_temperature,
-                this->amount_of_substance       + amount_of_substance      ,
-                this->luminous_intensity        + luminous_intensity
+                this->thermodynamic_temperature + that.thermodynamic_temperature,
+                this->amount_of_substance       + that.amount_of_substance      ,
+                this->luminous_intensity        + that.luminous_intensity
             };
         }
 
@@ -65,9 +65,9 @@ namespace zollstock::dimensions
                 this->time                      - that.time                ,
                 this->mass                      - that.mass                ,
                 this->electric_current          - that.electric_current    ,
-                this->thermodynamic_temperature - thermodynamic_temperature,
-                this->amount_of_substance       - amount_of_substance      ,
-                this->luminous_intensity        - luminous_intensity
+                this->thermodynamic_temperature - that.thermodynamic_temperature,
+                this->amount_of_substance       - that.amount_of_substance      ,
+                this->luminous_intensity        - that.luminous_intensity
             };
         }
 
