@@ -67,18 +67,21 @@ namespace zollstock
 
 
 
+    [[nodiscard]] consteval auto multiply_dimensions(
+        const dimensions::dimensions_t& dimensions_1,
+        const dimensions::dimensions_t& dimensions_2
+    ) noexcept
+    {
+        return dimensions_1 * dimensions_2;
+    }
+
     [[nodiscard]] consteval dimensions::dimensions_t unit_dimensions(unit_c auto unit) noexcept
     {
+        return dimensions::_1;
         return tuple_transform_reduce(
             unit.factors,
             dimensions::_1,
-            [](
-                const dimensions::dimensions_t& dimensions_1,
-                const dimensions::dimensions_t& dimensions_2
-            )
-            {
-                return dimensions_1 * dimensions_2;
-            },
+            multiply_dimensions,
             [](unit_factor_c auto factor)
             {
                 return factor.dimensions;
