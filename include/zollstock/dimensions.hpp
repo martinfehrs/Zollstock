@@ -46,10 +46,10 @@ namespace zollstock::dimensions
         [[nodiscard]] consteval dimensions_t operator*(const dimensions_t& that) const noexcept
         {
             return {
-                this->length                    + that.length              ,
-                this->time                      + that.time                ,
-                this->mass                      + that.mass                ,
-                this->electric_current          + that.electric_current    ,
+                this->length                    + that.length                   ,
+                this->time                      + that.time                     ,
+                this->mass                      + that.mass                     ,
+                this->electric_current          + that.electric_current         ,
                 this->thermodynamic_temperature + that.thermodynamic_temperature,
                 this->amount_of_substance       + that.amount_of_substance      ,
                 this->luminous_intensity        + that.luminous_intensity
@@ -59,10 +59,10 @@ namespace zollstock::dimensions
         [[nodiscard]] consteval dimensions_t operator/(const dimensions_t& that) const noexcept
         {
             return {
-                this->length                    - that.length              ,
-                this->time                      - that.time                ,
-                this->mass                      - that.mass                ,
-                this->electric_current          - that.electric_current    ,
+                this->length                    - that.length                   ,
+                this->time                      - that.time                     ,
+                this->mass                      - that.mass                     ,
+                this->electric_current          - that.electric_current         ,
                 this->thermodynamic_temperature - that.thermodynamic_temperature,
                 this->amount_of_substance       - that.amount_of_substance      ,
                 this->luminous_intensity        - that.luminous_intensity
