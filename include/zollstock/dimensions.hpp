@@ -11,13 +11,13 @@ namespace zollstock::dimensions
     struct dimensions_t
     {
 
-        int length;
-        int time;
-        int mass;
-        int electric_current;
-        int thermodynamic_temperature;
-        int amount_of_substance;
-        int luminous_intensity;
+        const int length;
+        const int time;
+        const int mass;
+        const int electric_current;
+        const int thermodynamic_temperature;
+        const int amount_of_substance;
+        const int luminous_intensity;
 
         consteval dimensions_t(
             int length,
@@ -38,8 +38,6 @@ namespace zollstock::dimensions
         { }
 
         consteval dimensions_t(const dimensions_t&) noexcept = default;
-
-        consteval dimensions_t& operator=(const dimensions_t&) noexcept = default;
 
         [[nodiscard]] consteval auto operator<=>(const dimensions_t&) const noexcept = default;
 
