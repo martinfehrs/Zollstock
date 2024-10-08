@@ -106,7 +106,7 @@
 
 
 void test_mixed_division_unit_constant(
-    ::zollstock::base_unit_c auto unit_1, ::zollstock::base_unit_c auto unit_2
+    ::zollstock::homogeneous_unit_c auto unit_1, ::zollstock::homogeneous_unit_c auto unit_2
 )
 {
     using namespace ::zollstock;

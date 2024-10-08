@@ -23,7 +23,10 @@ namespace zollstock
     concept unit_factor_c = requires
     {
         requires std::is_trivial_v<Candidate> && std::is_empty_v<Candidate>;
-        requires std::same_as<std::remove_cvref_t<decltype(Candidate::dimensions)>, dimensions::dimensions_t>;
+        requires std::same_as<
+            std::remove_cvref_t<decltype(Candidate::dimensions)>,
+            dimensions::dimensions_t
+        >;
         { Candidate::symbol         } -> std::same_as<const static_string&>;
         { Candidate::scaling_factor } -> std::same_as<const long double&>;
         { Candidate::prefix         } -> std::same_as<const static_string&>;
@@ -58,14 +61,11 @@ namespace zollstock
         requires is_unit_factor_tuple_like_c<std::remove_cvref_t<decltype(Candidate::factors)>>;
     };
 
+    template <typename Candidate>
+    concept homogeneous_unit_c = unit_c<Candidate> && Candidate::size == 1;
 
     template <typename Candidate>
-    concept base_unit_c = unit_c<Candidate> && Candidate::size == 1;
-
-    template <typename Candidate>
-    concept derived_unit_c = unit_c<Candidate> && Candidate::size != 1;
-
-
+    concept heterogeneous_unit_c = unit_c<Candidate> && Candidate::size != 1;
 
     [[nodiscard]] consteval auto multiply_dimensions(
         const dimensions::dimensions_t& dimensions_1,
@@ -88,6 +88,16 @@ namespace zollstock
             }
         );
     }
+
+    template <typename Candidate>
+    concept base_unit_c = requires(Candidate candidate)
+    {
+        requires unit_c<Candidate>;
+        requires unit_dimensions(candidate).one_dimensional();
+    };
+
+    template <typename Candidate>
+    concept derived_unit_c = !base_unit_c<Candidate>;
 
     [[nodiscard]] consteval auto unit_scaling_factor(unit_c auto unit) noexcept
     {
@@ -293,7 +303,7 @@ namespace zollstock
         }
 
         template<int exponent> requires(exponent < 0 || exponent > 1)
-        [[nodiscard]] consteval auto pow(base_unit_c auto unit) noexcept
+        [[nodiscard]] consteval auto pow(homogeneous_unit_c auto unit) noexcept
         {
             const auto factor = std::get<0>(unit.factors);
 
@@ -307,7 +317,7 @@ namespace zollstock
         }
 
         template<int exponent> requires(exponent < 0 || exponent > 1)
-        [[nodiscard]] consteval auto pow(derived_unit_c auto unit) noexcept
+        [[nodiscard]] consteval auto pow(heterogeneous_unit_c auto unit) noexcept
         {
             if constexpr (unit.size == 0)
             {
@@ -327,7 +337,9 @@ namespace zollstock
 
 
 
-    [[nodiscard]] consteval auto operator*(base_unit_c auto unit_1, base_unit_c auto unit_2)
+    [[nodiscard]] consteval auto operator*(
+        homogeneous_unit_c auto unit_1, homogeneous_unit_c auto unit_2
+    )
     {
         const unit_factor_c auto factor_1 = std::get<0>(unit_1.factors);
         const unit_factor_c auto factor_2 = std::get<0>(unit_2.factors);
@@ -373,7 +385,9 @@ namespace zollstock
         }
     }
 
-    [[nodiscard]] consteval auto operator*(derived_unit_c auto unit_1, base_unit_c auto unit_2)
+    [[nodiscard]] consteval auto operator*(
+        heterogeneous_unit_c auto unit_1, homogeneous_unit_c auto unit_2
+    )
     {
         if constexpr(unit_1.size == 0)
         {
@@ -413,12 +427,16 @@ namespace zollstock
         }
     }
 
-    [[nodiscard]] consteval auto operator*(base_unit_c auto unit_1, derived_unit_c auto unit_2)
+    [[nodiscard]] consteval auto operator*(
+        homogeneous_unit_c auto unit_1, heterogeneous_unit_c auto unit_2
+    )
     {
         return unit_2 * unit_1;
     }
 
-    [[nodiscard]] consteval auto operator*(derived_unit_c auto unit_1, derived_unit_c auto unit_2)
+    [[nodiscard]] consteval auto operator*(
+        heterogeneous_unit_c auto unit_1, heterogeneous_unit_c auto unit_2
+    )
     {
         if constexpr (unit_1.size == 0)
         {

@@ -69,6 +69,23 @@ namespace zollstock::dimensions
             };
         }
 
+        [[nodiscard]] consteval int dimension_count() noexcept
+        {
+            return this->length
+                 + this->time
+                 + this->mass
+                 + this->electric_current
+                 + this->thermodynamic_temperature
+                 + this->amount_of_substance
+                 + this->luminous_intensity
+            ;
+        }
+
+        [[nodiscard]] consteval bool one_dimensional() noexcept
+        {
+            return dimension_count() == 1;
+        }
+
     };
 
     inline constexpr dimensions_t _1   { 0, 0, 0, 0, 0, 0, 0 };
