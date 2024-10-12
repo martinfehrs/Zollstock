@@ -69,21 +69,41 @@ namespace zollstock::dimensions
             };
         }
 
-        [[nodiscard]] consteval int dimension_count() noexcept
+        [[nodiscard]] consteval bool dimensionless() noexcept
         {
-            return this->length
-                 + this->time
-                 + this->mass
-                 + this->electric_current
-                 + this->thermodynamic_temperature
-                 + this->amount_of_substance
-                 + this->luminous_intensity
-            ;
+            return this->dimension_count() == 0;
         }
 
-        [[nodiscard]] consteval bool one_dimensional() noexcept
+        [[nodiscard]] consteval bool base() noexcept
         {
-            return dimension_count() == 1;
+            return this->dimension_count() == 1;
+        }
+
+        [[nodiscard]] consteval bool derived() noexcept
+        {
+            return !this->base();
+        }
+
+    private:
+
+        // Eigene Implementierung von abs, da die Standardimplementierung std::abs
+        // nicht bei allen unterstützten Compilern innerhalb konstanter Ausdrücke verwendet
+        // werden kann.
+        [[nodiscard]] static consteval long int abs(int num) noexcept
+        {
+            return num >= 0 ? num : -num;
+        }
+
+        [[nodiscard]] consteval int dimension_count() noexcept
+        {
+            return abs(this->length)
+                 + abs(this->time)
+                 + abs(this->mass)
+                 + abs(this->electric_current)
+                 + abs(this->thermodynamic_temperature)
+                 + abs(this->amount_of_substance)
+                 + abs(this->luminous_intensity)
+            ;
         }
 
     };

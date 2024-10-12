@@ -90,14 +90,25 @@ namespace zollstock
     }
 
     template <typename Candidate>
-    concept base_unit_c = requires(Candidate candidate)
+    concept base_unit_c = requires
     {
         requires unit_c<Candidate>;
-        requires unit_dimensions(candidate).one_dimensional();
+        requires unit_dimensions(Candidate{}).base();
     };
 
     template <typename Candidate>
-    concept derived_unit_c = !base_unit_c<Candidate>;
+    concept derived_unit_c = requires
+    {
+        requires unit_c<Candidate>;
+        requires unit_dimensions(Candidate{}).derived();
+    };
+
+    template <typename Candidate>
+    concept dimensionless_unit_c = requires
+    {
+        requires unit_c<Candidate>;
+        requires unit_dimensions(Candidate{}).dimensionless();
+    };
 
     [[nodiscard]] consteval auto unit_scaling_factor(unit_c auto unit) noexcept
     {
