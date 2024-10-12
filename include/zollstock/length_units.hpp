@@ -11,6 +11,14 @@ namespace zollstock::units::inline literals
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(m)
 
+
+    template <typename Quantity>
+    concept length_c = requires
+    {
+        requires quantity_c<Quantity>;
+        requires unit_dimensions(Quantity::unit()) == dimensions::L;
+    };
+
 }
 
 
