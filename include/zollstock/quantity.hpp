@@ -2,7 +2,6 @@
 #define __ZOLLSTOCK_QUANTITY_HPP__
 
 
-#include <zollstock/unit_concept.hpp>
 #include <zollstock/number_utilities.hpp>
 #include <zollstock/unit_one_constant.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
@@ -38,6 +37,7 @@ namespace zollstock
 
     public:
 
+        using unit_type = decltype(this_unit);
         using value_type = ThisValue;
 
 #if !defined(ZOLLSTOCK_QUANTITY_AGGREGATE_INITIALIZATION)
