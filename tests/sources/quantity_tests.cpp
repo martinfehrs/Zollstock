@@ -26,6 +26,7 @@ template <zs::unit_c auto unit, zs::unit_c Unit, zs::number_c Number>
 
 TEST_CASE("quantity aliases", "[quantity]")
 {
+
     STATIC_REQUIRE(std::same_as<zs::short_int_t    <>, zs::quantity<_1, short int     >>);
     STATIC_REQUIRE(std::same_as<zs::short_t        <>, zs::quantity<_1, short int     >>);
     STATIC_REQUIRE(std::same_as<zs::int_t          <>, zs::quantity<_1, int           >>);
@@ -36,30 +37,35 @@ TEST_CASE("quantity aliases", "[quantity]")
     STATIC_REQUIRE(std::same_as<zs::float_t        <>, zs::quantity<_1, float         >>);
     STATIC_REQUIRE(std::same_as<zs::double_t       <>, zs::quantity<_1, double        >>);
     STATIC_REQUIRE(std::same_as<zs::long_double_t  <>, zs::quantity<_1, long double   >>);
+
 }
 
 TEST_CASE("quantity type requirements", "[quantity]")
 {
-    STATIC_REQUIRE(std::regular<zs::int_t<>>);
-    STATIC_REQUIRE(std::same_as<typename zs::int_t<>::value_type, int>);
-    STATIC_REQUIRE(zs::int_t<>::unit() == _1);
+
+    STATIC_REQUIRE(zs::quantity_with_unit_c<zs::quantity<_1, int>, decltype(_1)>);
+
 }
 
 TEST_CASE("quantity value access", "[quantity]")
 {
+
     STATIC_REQUIRE(zs::int_t<>{ 1 }.value() == 1);
 
     STATIC_REQUIRE(std::add_const_t<zs::int_t<>>{ 1 }.value() == 1);
     STATIC_REQUIRE(zs::int_t<>{ 1 }.cvalue() == 1);
+
 }
 
 TEST_CASE("quantity value assignment", "[quantity]")
 {
+
     zs::int_t<> s{ 0 };
 
     s.value() = 1;
 
     REQUIRE(s.value() == 1);
+
 }
 
 TEST_CASE("quantity arithmetic", "[quantity]")
