@@ -77,14 +77,13 @@ namespace zollstock
 
     [[nodiscard]] consteval dimensions::dimensions_t unit_dimensions(unit_c auto unit) noexcept
     {
-        return dimensions::_1;
         return tuple_transform_reduce(
             unit.factors,
             dimensions::_1,
             multiply_dimensions,
             [](unit_factor_c auto factor)
             {
-                return factor.dimensions;
+                return dimensions::pow_v<factor.dimensions, factor.exponent>;
             }
         );
     }
