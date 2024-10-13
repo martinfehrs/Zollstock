@@ -69,49 +69,46 @@ namespace zollstock::dimensions
             };
         }
 
-        [[nodiscard]] consteval bool dimensionless() noexcept
+        [[nodiscard]] consteval bool dimensionless() const noexcept
         {
-            return this->dimension_count() == 0;
+            return (this->length                    == 0)
+                && (this->time                      == 0)
+                && (this->mass                      == 0)
+                && (this->electric_current          == 0)
+                && (this->thermodynamic_temperature == 0)
+                && (this->amount_of_substance       == 0)
+                && (this->luminous_intensity        == 0);
         }
 
-        [[nodiscard]] consteval bool base() noexcept
+        [[nodiscard]] consteval bool base() const noexcept
         {
-            return this->dimension_count() == 1;
+            return (this->length                    >= 0)
+                && (this->time                      >= 0)
+                && (this->mass                      >= 0)
+                && (this->electric_current          >= 0)
+                && (this->thermodynamic_temperature >= 0)
+                && (this->amount_of_substance       >= 0)
+                && (this->luminous_intensity        >= 0)
+                && (this->length                    == 1)
+                != (this->time                      == 1)
+                != (this->mass                      == 1)
+                != (this->electric_current          == 1)
+                != (this->thermodynamic_temperature == 1)
+                != (this->amount_of_substance       == 1)
+                != (this->luminous_intensity        == 1);
         }
 
-        [[nodiscard]] consteval bool derived() noexcept
+        [[nodiscard]] consteval bool derived() const noexcept
         {
             return !this->base();
-        }
-
-    private:
-
-        // Eigene Implementierung von abs, da die Standardimplementierung std::abs
-        // nicht bei allen unterstützten Compilern innerhalb konstanter Ausdrücke verwendet
-        // werden kann.
-        [[nodiscard]] static consteval long int abs(int num) noexcept
-        {
-            return num >= 0 ? num : -num;
-        }
-
-        [[nodiscard]] consteval int dimension_count() noexcept
-        {
-            return abs(this->length)
-                 + abs(this->time)
-                 + abs(this->mass)
-                 + abs(this->electric_current)
-                 + abs(this->thermodynamic_temperature)
-                 + abs(this->amount_of_substance)
-                 + abs(this->luminous_intensity)
-            ;
         }
 
     };
 
     inline constexpr dimensions_t _1   { 0, 0, 0, 0, 0, 0, 0 };
     inline constexpr dimensions_t L    { 1, 0, 0, 0, 0, 0, 0 };
-    inline constexpr dimensions_t M    { 0, 1, 0, 0, 0, 0, 0 };
-    inline constexpr dimensions_t T    { 0, 0, 1, 0, 0, 0, 0 };
+    inline constexpr dimensions_t T    { 0, 1, 0, 0, 0, 0, 0 };
+    inline constexpr dimensions_t M    { 0, 0, 1, 0, 0, 0, 0 };
     inline constexpr dimensions_t Theta{ 0, 0, 0, 0, 1, 0, 0 };
 
     namespace detail
