@@ -19,26 +19,6 @@ namespace zollstock::dimensions
         const int amount_of_substance;
         const int luminous_intensity;
 
-        consteval dimensions_t(
-            int length,
-            int time,
-            int mass,
-            int electric_current,
-            int thermodynamic_temperature,
-            int amount_of_substance,
-            int luminous_intensity
-        ) noexcept
-            : length                   { length                    }
-            , time                     { time                      }
-            , mass                     { mass                      }
-            , electric_current         { electric_current          }
-            , thermodynamic_temperature{ thermodynamic_temperature }
-            , amount_of_substance      { amount_of_substance       }
-            , luminous_intensity       { luminous_intensity        }
-        { }
-
-        consteval dimensions_t(const dimensions_t&) noexcept = default;
-
         [[nodiscard]] consteval auto operator<=>(const dimensions_t&) const noexcept = default;
 
         [[nodiscard]] consteval bool operator==(const dimensions_t&) const noexcept = default;
