@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_ANGLE_UNIT_CONSTANTS_HPP__
-#define __ZOLLSTOCK_ANGLE_UNIT_CONSTANTS_HPP__
+#ifndef __ZOLLSTOCK_PLANAR_ANGLE_UNIT_CONSTANTS_HPP__
+#define __ZOLLSTOCK_PLANAR_ANGLE_UNIT_CONSTANTS_HPP__
 
 
 #include <zollstock/constant_definition_helpers.hpp>

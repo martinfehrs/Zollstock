@@ -1,8 +1,8 @@
-#ifndef __ZOLLSTOCK_ANGLE_UNITS_HPP__
-#define __ZOLLSTOCK_ANGLE_UNITS_HPP__
+#ifndef __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
+#define __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
 
 
-#include <zollstock/angle_unit_constants.hpp>
+#include <zollstock/planar_angle_unit_constants.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
 
 
@@ -21,7 +21,7 @@ namespace zollstock::units::inline literals
 
 
     template <typename Quantity>
-    concept angle_c = requires
+    concept planar_angle_c = requires
     {
         requires quantity_c<Quantity>;
         requires unit_dimensions(Quantity::unit()) == dimensions::_1;

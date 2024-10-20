@@ -49,7 +49,7 @@ consteval bool includes_temperature_unit_constants() noexcept
 
 consteval bool includes_angle_unit_constants() noexcept
 {
-#ifdef __ZOLLSTOCK_ANGLE_UNIT_CONSTANTS_HPP__
+#ifdef __ZOLLSTOCK_PLANAR_ANGLE_UNIT_CONSTANTS_HPP__
     return true;
 #else
     return false;
@@ -166,7 +166,7 @@ consteval bool includes_temperature_units() noexcept
 
 consteval bool includes_angle_units() noexcept
 {
-#ifdef __ZOLLSTOCK_ANGLE_UNITS_HPP__
+#ifdef __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
     return includes_angle_unit_constants();
 #else
     return false;
