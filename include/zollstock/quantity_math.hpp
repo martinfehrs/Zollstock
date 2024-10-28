@@ -4,6 +4,7 @@
 
 #include <zollstock/planar_angle_units.hpp>
 #include <zollstock/quantity_constants.hpp>
+#include <zollstock/length_concept.hpp>
 #include <zollstock/unit_one.hpp>
 
 #include <cmath>
@@ -60,6 +61,12 @@ namespace zollstock
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto atan(quantity<units::_1, Number> num)
     {
         return quantity<units::rad, Number>{ std::atan(num.value()) };
+    }
+
+    template <number_c Number>
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto atan2(length_c auto x, length_c auto y)
+    {
+        return quantity<units::rad, Number>{ std::atan2(x.value(), y.value()) };
     }
 
     template <number_c Number, unit_c auto unit>
