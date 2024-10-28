@@ -55,11 +55,6 @@ namespace zollstock
             return "long long int";
         }
         else
-        if constexpr(std::same_as<Number, short int>)
-        {
-            return "short int";
-        }
-        else
         if constexpr(std::same_as<Number, unsigned char>)
         {
             return "unsigned char";
