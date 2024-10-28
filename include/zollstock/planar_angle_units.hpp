@@ -19,14 +19,6 @@ namespace zollstock::units::inline literals
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(gon)
 
-
-    template <typename Quantity>
-    concept planar_angle_c = requires
-    {
-        requires quantity_c<Quantity>;
-        requires unit_dimensions(Quantity::unit()) == dimensions::_1;
-    };
-
 }
 
 

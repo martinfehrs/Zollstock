@@ -11,14 +11,6 @@ namespace zollstock::units::inline literals
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(K)
 
-
-    template <typename Quantity>
-    concept temperature_c = requires
-    {
-        requires quantity_c<Quantity>;
-        requires unit_dimensions(Quantity::unit()) == dimensions::Theta;
-    };
-
 }
 
 

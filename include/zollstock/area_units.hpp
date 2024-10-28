@@ -11,14 +11,6 @@ namespace zollstock::units::inline literals
 
     ZOLLSTOCK_DEFINE_SI_LITERALS(m2)
 
-
-    template <typename Quantity>
-    concept area_c = requires
-    {
-        requires quantity_c<Quantity>;
-        requires unit_dimensions(Quantity::unit()) == dimensions::pow_v<dimensions::L, 2>;
-    };
-
 }
 
 

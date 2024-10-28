@@ -2,6 +2,84 @@
 #define __ZOLLSTOCK_TESTS_HEADER_INFO_HPP__
 
 
+consteval bool includes_length_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_LENGTH_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_mass_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_MASS_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_time_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_TIME_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_temperature_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_TEMPERATURE_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_planar_angle_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_PLANAR_ANGLE_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_area_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_AREA_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_volume_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_VOLUME_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_quantity_concepts() noexcept
+{
+#ifdef __ZOLLSTOCK_QUANTITY_CONCEPTS_HPP__
+    return includes_length_concept()
+        && includes_mass_concept()
+        && includes_time_concept()
+        && includes_temperature_concept()
+        && includes_planar_angle_concept()
+        && includes_area_concept()
+        && includes_volume_concept();
+#else
+    return false;
+#endif
+}
+
 consteval bool includes_unit_one_constant() noexcept
 {
 #ifdef __ZOLLSTOCK_UNIT_ONE_CONSTANT_HPP__

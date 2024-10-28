@@ -1,3 +1,12 @@
+target_sources(tests PRIVATE length_concept_header_test.cpp)
+target_sources(tests PRIVATE mass_concept_header_test.cpp)
+target_sources(tests PRIVATE time_concept_header_test.cpp)
+target_sources(tests PRIVATE temperature_concept_header_test.cpp)
+target_sources(tests PRIVATE planar_angle_concept_header_test.cpp)
+target_sources(tests PRIVATE area_concept_header_test.cpp)
+target_sources(tests PRIVATE volume_concept_header_test.cpp)
+target_sources(tests PRIVATE quantity_concepts_header_test.cpp)
+
 target_sources(tests PRIVATE unit_one_constant_header_test.cpp)
 target_sources(tests PRIVATE length_unit_constants_header_test.cpp)
 target_sources(tests PRIVATE mass_unit_constants_header_test.cpp)
