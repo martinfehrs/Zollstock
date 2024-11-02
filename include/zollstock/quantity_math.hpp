@@ -71,8 +71,7 @@ namespace zollstock
         };
     }
 
-    template <number_c Number, unit_c auto unit>
-    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 bool signbit(quantity<unit, Number> num)
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 bool signbit(quantity_c auto num)
     {
         return std::signbit(num.value());
     }
