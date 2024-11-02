@@ -9,12 +9,20 @@
 namespace zollstock::inline quantities
 {
 
-    template <typename Quantity>
-    concept volume_c = requires
+    namespace detail
     {
-        requires quantity_c<Quantity>;
-        requires unit_dimensions(Quantity::unit()) == dimensions::pow_v<dimensions::L, 3>;
-    };
+
+        // Kapselung des Aufrufes unit_dimensions in einer Vorlagenvariable wegen eines
+        // internen Fehlers des MSVC-Compilers.
+        template <typename Quantity>
+        inline constexpr bool volume_v =
+            quantity_c<Quantity> &&
+            unit_dimensions(Quantity::unit()) == dimensions::pow_v<dimensions::L, 3>;
+
+    }
+
+    template <typename Quantity>
+    concept volume_c = detail::volume_v<Quantity>;
 
 }
 

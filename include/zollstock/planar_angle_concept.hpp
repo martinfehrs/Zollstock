@@ -9,12 +9,20 @@
 namespace zollstock::inline quantities
 {
 
-    template <typename Quantity>
-    concept planar_angle_c = requires
+    namespace detail
     {
-        requires quantity_c<Quantity>;
-        requires unit_dimensions(Quantity::unit()) == dimensions::_1;
-    };
+
+        // Kapselung des Aufrufes unit_dimensions in einer Vorlagenvariable wegen eines
+        // internen Fehlers des MSVC-Compilers.
+        template <typename Quantity>
+        inline constexpr bool planar_angle_v =
+            quantity_c<Quantity> &&
+            unit_dimensions(Quantity::unit()) == dimensions::_1;
+
+    }
+
+    template <typename Quantity>
+    concept planar_angle_c = detail::planar_angle_v<Quantity>;
 
 }
 
