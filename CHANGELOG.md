@@ -1,4 +1,4 @@
-Version 0.3
+Latest
 ----------------------------------------------------------------------------------------------------
 - Introduction of quantity concepts
 - Trigonometric function atan2
