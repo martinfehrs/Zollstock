@@ -63,10 +63,12 @@ namespace zollstock
         return quantity<units::rad, Number>{ std::atan(num.value()) };
     }
 
-    template <number_c Number>
-    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto atan2(length_c auto x, length_c auto y)
+    template <length_c Length>
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto atan2(Length x, Length y)
     {
-        return quantity<units::rad, Number>{ std::atan2(x.value(), y.value()) };
+        return quantity<units::rad, typename Length::value_type>{
+            std::atan2(x.value(), y.value())
+        };
     }
 
     template <number_c Number, unit_c auto unit>
