@@ -7,6 +7,7 @@
 #include <zollstock/time_unit_constants.hpp>
 #include <zollstock/mass_unit_constants.hpp>
 #include <zollstock/temperature_unit_constants.hpp>
+#include <zollstock/amount_of_substance_unit_constants.hpp>
 
 
 #endif //__ZOLLSTOCK_BASE_UNIT_CONSTANTS_HPP__

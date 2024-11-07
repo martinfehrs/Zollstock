@@ -38,6 +38,15 @@ consteval bool includes_temperature_concept() noexcept
 #endif
 }
 
+consteval bool includes_amount_of_substance_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_CONCEPT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
 consteval bool includes_planar_angle_concept() noexcept
 {
 #ifdef __ZOLLSTOCK_PLANAR_ANGLE_CONCEPT_HPP__
@@ -72,6 +81,7 @@ consteval bool includes_quantity_concepts() noexcept
         && includes_mass_concept()
         && includes_time_concept()
         && includes_temperature_concept()
+        && includes_amount_of_substance_concept()
         && includes_planar_angle_concept()
         && includes_area_concept()
         && includes_volume_concept();
@@ -125,6 +135,15 @@ consteval bool includes_temperature_unit_constants() noexcept
 #endif
 }
 
+consteval bool includes_amount_of_substance_unit_constants() noexcept
+{
+#ifdef __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNIT_CONSTANTS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
 consteval bool includes_angle_unit_constants() noexcept
 {
 #ifdef __ZOLLSTOCK_PLANAR_ANGLE_UNIT_CONSTANTS_HPP__
@@ -168,7 +187,8 @@ consteval bool includes_base_unit_constants() noexcept
         && includes_length_unit_constants()
         && includes_mass_unit_constants()
         && includes_time_unit_constants()
-        && includes_temperature_unit_constants();
+        && includes_temperature_unit_constants()
+        && includes_amount_of_substance_unit_constants();
 #else
     return false;
 #endif
@@ -242,6 +262,15 @@ consteval bool includes_temperature_units() noexcept
 #endif
 }
 
+consteval bool includes_amount_of_substance_units() noexcept
+{
+#ifdef __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNITS_HPP__
+    return includes_temperature_unit_constants();
+#else
+    return false;
+#endif
+}
+
 consteval bool includes_angle_units() noexcept
 {
 #ifdef __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
@@ -276,7 +305,8 @@ consteval bool includes_base_units() noexcept
         && includes_length_units()
         && includes_mass_units()
         && includes_time_units()
-        && includes_temperature_units();
+        && includes_temperature_units()
+        && includes_amount_of_substance_units();
 #else
     return false;
 #endif
