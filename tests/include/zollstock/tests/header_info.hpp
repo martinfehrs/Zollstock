@@ -265,7 +265,7 @@ consteval bool includes_temperature_units() noexcept
 consteval bool includes_amount_of_substance_units() noexcept
 {
 #ifdef __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNITS_HPP__
-    return includes_temperature_unit_constants();
+    return includes_amount_of_substance_unit_constants();
 #else
     return false;
 #endif
