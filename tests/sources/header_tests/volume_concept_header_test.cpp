@@ -1,4 +1,4 @@
-#include <zollstock/volume_concept.hpp>
+#include <zollstock/concepts/volume.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

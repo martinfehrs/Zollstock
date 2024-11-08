@@ -1,4 +1,4 @@
-#include <zollstock/temperature_concept.hpp>
+#include <zollstock/concepts/temperature.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

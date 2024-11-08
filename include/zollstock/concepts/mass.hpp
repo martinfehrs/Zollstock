@@ -1,9 +1,9 @@
-#ifndef __ZOLLSTOCK_MASS_CONCEPT_HPP__
-#define __ZOLLSTOCK_MASS_CONCEPT_HPP__
+#ifndef __ZOLLSTOCK_CONCEPTS_MASS_HPP__
+#define __ZOLLSTOCK_CONCEPTS_MASS_HPP__
 
 
-#include <zollstock/quantity_concept.hpp>
-#include <zollstock/unit_concept.hpp>
+#include <zollstock/concepts/quantity.hpp>
+#include <zollstock/concepts/unit.hpp>
 
 
 namespace zollstock::inline quantities
@@ -27,4 +27,4 @@ namespace zollstock::inline quantities
 }
 
 
-#endif //__ZOLLSTOCK_MASS_CONCEPT_HPP__
+#endif //__ZOLLSTOCK_CONCEPTS_MASS_HPP__

@@ -1,6 +1,6 @@
 #include <zollstock/all_units.hpp>
 #include <zollstock/quantity_constants.hpp>
-#include <zollstock/quantity_concepts.hpp>
+#include <zollstock/concepts/quantities.hpp>
 #include <iostream>
 #include <cstdlib>
 #include <format>

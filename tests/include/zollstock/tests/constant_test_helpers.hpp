@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_TESTS_CONSTANT_TEST_HELPERS_HPP__
 
 
-#include <zollstock/unit_concept.hpp>
+#include <zollstock/concepts/unit.hpp>
 
 #include <catch2/catch_test_macros.hpp>
 

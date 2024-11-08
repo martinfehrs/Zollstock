@@ -4,7 +4,7 @@
 
 #include <zollstock/planar_angle_units.hpp>
 #include <zollstock/quantity_constants.hpp>
-#include <zollstock/length_concept.hpp>
+#include <zollstock/concepts/length.hpp>
 #include <zollstock/unit_one.hpp>
 
 #include <cmath>

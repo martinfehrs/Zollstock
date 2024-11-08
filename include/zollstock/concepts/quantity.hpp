@@ -1,9 +1,9 @@
-#ifndef __ZOLLSTOCK_QUANTITY_CONCEPT_HPP__
-#define __ZOLLSTOCK_QUANTITY_CONCEPT_HPP__
+#ifndef __ZOLLSTOCK_CONCEPTS_QUANTITY_HPP__
+#define __ZOLLSTOCK_CONCEPTS_QUANTITY_HPP__
 
 
 #include <zollstock/number_utilities.hpp>
-#include <zollstock/unit_concept.hpp>
+#include <zollstock/concepts/unit.hpp>
 
 #include <concepts>
 
@@ -65,4 +65,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_QUANTITY_CONCEPT_HPP__
+#endif //__ZOLLSTOCK_CONCEPTS_QUANTITY_HPP__

@@ -1,5 +1,7 @@
 Latest
 ----------------------------------------------------------------------------------------------------
+- Improved header structure
+- Support for unit Mole
 - Introduction of quantity concepts
 - Trigonometric function atan2
 - Function signbit
@@ -10,7 +12,7 @@ Latest
 
 Version 0.2
 ----------------------------------------------------------------------------------------------------
-- Support for Kelvin
+- Support for unit Kelvin
 - Trigonometric functions sin, cos, tan, asin, acos and atan
 - π-template variables and constants for unit 1 with and without suffix
 - π-template variable for unit rad

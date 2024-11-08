@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_UNIT_CONCEPT_HPP__
-#define __ZOLLSTOCK_UNIT_CONCEPT_HPP__
+#ifndef __ZOLLSTOCK_CONCEPTS_UNIT_HPP__
+#define __ZOLLSTOCK_CONCEPTS_UNIT_HPP__
 
 
 #include <zollstock/dimensions.hpp>

@@ -4,7 +4,7 @@
 
 consteval bool includes_length_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_LENGTH_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_LENGTH_HPP__
     return true;
 #else
     return false;
@@ -13,7 +13,7 @@ consteval bool includes_length_concept() noexcept
 
 consteval bool includes_mass_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_MASS_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_MASS_HPP__
     return true;
 #else
     return false;
@@ -22,7 +22,7 @@ consteval bool includes_mass_concept() noexcept
 
 consteval bool includes_time_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_TIME_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_TIME_HPP__
     return true;
 #else
     return false;
@@ -31,7 +31,7 @@ consteval bool includes_time_concept() noexcept
 
 consteval bool includes_temperature_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_TEMPERATURE_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_TEMPERATURE_HPP__
     return true;
 #else
     return false;
@@ -40,7 +40,7 @@ consteval bool includes_temperature_concept() noexcept
 
 consteval bool includes_amount_of_substance_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_AMOUNT_OF_SUBSTANCE_HPP__
     return true;
 #else
     return false;
@@ -49,7 +49,7 @@ consteval bool includes_amount_of_substance_concept() noexcept
 
 consteval bool includes_planar_angle_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_PLANAR_ANGLE_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_PLANAR_ANGLE_HPP__
     return true;
 #else
     return false;
@@ -58,7 +58,7 @@ consteval bool includes_planar_angle_concept() noexcept
 
 consteval bool includes_area_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_AREA_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_AREA_HPP__
     return true;
 #else
     return false;
@@ -67,7 +67,7 @@ consteval bool includes_area_concept() noexcept
 
 consteval bool includes_volume_concept() noexcept
 {
-#ifdef __ZOLLSTOCK_VOLUME_CONCEPT_HPP__
+#ifdef __ZOLLSTOCK_CONCEPTS_VOLUME_HPP__
     return true;
 #else
     return false;
