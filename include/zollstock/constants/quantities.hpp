@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
-#define __ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
+#ifndef __ZOLLSTOCK_CONSTANTS_QUANTITIES_HPP__
+#define __ZOLLSTOCK_CONSTANTS_QUANTITIES_HPP__
 
 
 #include <zollstock/quantity.hpp>
@@ -36,4 +36,4 @@ namespace zollstock::inline quantities::inline constants
 }
 
 
-#endif //__ZOLLSTOCK_QUANTITY_CONSTANTS_HPP__
+#endif //__ZOLLSTOCK_CONSTANTS_QUANTITIES_HPP__

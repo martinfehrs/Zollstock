@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_TEMPERATURE_UNITS_HPP__
 
 
-#include <zollstock/temperature_unit_constants.hpp>
+#include <zollstock/constants/units/temperature.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
 
 

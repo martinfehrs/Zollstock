@@ -1,5 +1,5 @@
 #include <zollstock/concepts/unit.hpp>
-#include <zollstock/unit_one_constant.hpp>
+#include <zollstock/constants/units/one.hpp>
 
 #include <catch2/catch_all.hpp>
 

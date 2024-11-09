@@ -3,7 +3,7 @@
 
 
 #include <zollstock/planar_angle_units.hpp>
-#include <zollstock/quantity_constants.hpp>
+#include <zollstock/constants/quantities.hpp>
 #include <zollstock/concepts/length.hpp>
 #include <zollstock/unit_one.hpp>
 

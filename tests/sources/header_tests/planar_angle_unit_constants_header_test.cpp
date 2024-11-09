@@ -1,4 +1,4 @@
-#include <zollstock/planar_angle_unit_constants.hpp>
+#include <zollstock/constants/units/planar_angle.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

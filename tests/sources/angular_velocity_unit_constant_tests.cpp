@@ -1,5 +1,5 @@
-#include <zollstock/planar_angle_unit_constants.hpp>
-#include <zollstock/time_unit_constants.hpp>
+#include <zollstock/constants/units/planar_angle.hpp>
+#include <zollstock/constants/units/time.hpp>
 #include <zollstock/tests/constant_test_helpers.hpp>
 
 #include <catch2/catch_all.hpp>

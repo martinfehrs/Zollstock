@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNITS_HPP__
 
 
-#include <zollstock/amount_of_substance_unit_constants.hpp>
+#include <zollstock/constants/units/amount_of_substance.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
 
 

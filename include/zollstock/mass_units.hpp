@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_MASS_UNITS_HPP__
 
 
-#include <zollstock/mass_unit_constants.hpp>
+#include <zollstock/constants/units/mass.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
 
 

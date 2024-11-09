@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_TIME_UNITS_HPP__
 
 
-#include <zollstock/time_unit_constants.hpp>
+#include <zollstock/constants/units/time.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
 
 

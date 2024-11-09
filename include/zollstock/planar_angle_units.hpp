@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
 
 
-#include <zollstock/planar_angle_unit_constants.hpp>
+#include <zollstock/constants/units/planar_angle.hpp>
 #include <zollstock/literal_definition_helpers.hpp>
 
 
