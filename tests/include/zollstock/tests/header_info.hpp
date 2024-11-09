@@ -219,7 +219,7 @@ consteval bool includes_all_unit_constants() noexcept
 
 consteval bool includes_unit_one() noexcept
 {
-#ifdef __ZOLLSTOCK_UNIT_ONE_HPP__
+#ifdef __ZOLLSTOCK_UNITS_ONE_HPP__
     return includes_unit_one_constant();
 #else
     return false;
@@ -228,7 +228,7 @@ consteval bool includes_unit_one() noexcept
 
 consteval bool includes_length_units() noexcept
 {
-#ifdef __ZOLLSTOCK_LENGTH_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_LENGTH_HPP__
     return includes_length_unit_constants();
 #else
     return false;
@@ -237,7 +237,7 @@ consteval bool includes_length_units() noexcept
 
 consteval bool includes_mass_units() noexcept
 {
-#ifdef __ZOLLSTOCK_MASS_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_MASS_HPP__
     return includes_mass_unit_constants();
 #else
     return false;
@@ -246,7 +246,7 @@ consteval bool includes_mass_units() noexcept
 
 consteval bool includes_time_units() noexcept
 {
-#ifdef __ZOLLSTOCK_TIME_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_TIME_HPP__
     return includes_time_unit_constants();
 #else
     return false;
@@ -255,7 +255,7 @@ consteval bool includes_time_units() noexcept
 
 consteval bool includes_temperature_units() noexcept
 {
-#ifdef __ZOLLSTOCK_TEMPERATURE_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_TEMPERATURE_HPP__
     return includes_temperature_unit_constants();
 #else
     return false;
@@ -264,7 +264,7 @@ consteval bool includes_temperature_units() noexcept
 
 consteval bool includes_amount_of_substance_units() noexcept
 {
-#ifdef __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_AMOUNT_OF_SUBSTANCE_HPP__
     return includes_amount_of_substance_unit_constants();
 #else
     return false;
@@ -273,7 +273,7 @@ consteval bool includes_amount_of_substance_units() noexcept
 
 consteval bool includes_angle_units() noexcept
 {
-#ifdef __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_PLANAR_ANGLE_HPP__
     return includes_angle_unit_constants();
 #else
     return false;
@@ -282,7 +282,7 @@ consteval bool includes_angle_units() noexcept
 
 consteval bool includes_area_units() noexcept
 {
-#ifdef __ZOLLSTOCK_AREA_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_AREA_HPP__
     return includes_area_unit_constants();
 #else
     return false;
@@ -291,7 +291,7 @@ consteval bool includes_area_units() noexcept
 
 consteval bool includes_volume_units() noexcept
 {
-#ifdef __ZOLLSTOCK_VOLUME_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_VOLUME_HPP__
     return includes_volume_unit_constants();
 #else
     return false;
@@ -300,7 +300,7 @@ consteval bool includes_volume_units() noexcept
 
 consteval bool includes_base_units() noexcept
 {
-#ifdef __ZOLLSTOCK_BASE_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_BASE_HPP__
     return includes_unit_one()
         && includes_length_units()
         && includes_mass_units()
@@ -314,7 +314,7 @@ consteval bool includes_base_units() noexcept
 
 consteval bool includes_derived_units() noexcept
 {
-#ifdef __ZOLLSTOCK_DERIVED_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_DERIVED_HPP__
     return includes_unit_one()
         && includes_angle_units()
         && includes_area_units()
@@ -325,9 +325,9 @@ consteval bool includes_derived_units() noexcept
 #endif
 }
 
-consteval bool includes_all_units() noexcept
+consteval bool includes_units() noexcept
 {
-#ifdef __ZOLLSTOCK_ALL_UNITS_HPP__
+#ifdef __ZOLLSTOCK_UNITS_HPP__
     return includes_base_units()
         && includes_derived_units();
 #else

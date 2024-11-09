@@ -1,4 +1,4 @@
-#include <zollstock/amount_of_substance_units.hpp>
+#include <zollstock/units/amount_of_substance.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

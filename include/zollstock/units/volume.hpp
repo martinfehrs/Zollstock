@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_VOLUME_UNITS_HPP__
-#define __ZOLLSTOCK_VOLUME_UNITS_HPP__
+#ifndef __ZOLLSTOCK_UNITS_VOLUME_HPP__
+#define __ZOLLSTOCK_UNITS_VOLUME_HPP__
 
 
 #include <zollstock/constants/units/volume.hpp>
@@ -14,4 +14,4 @@ namespace zollstock::units::inline literals
 }
 
 
-#endif //__ZOLLSTOCK_VOLUME_UNITS_HPP__
+#endif //__ZOLLSTOCK_UNITS_VOLUME_HPP__

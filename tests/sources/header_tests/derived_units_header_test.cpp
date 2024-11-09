@@ -1,4 +1,4 @@
-#include <zollstock/derived_units.hpp>
+#include <zollstock/units/derived.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

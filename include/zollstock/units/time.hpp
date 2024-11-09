@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_TIME_UNITS_HPP__
-#define __ZOLLSTOCK_TIME_UNITS_HPP__
+#ifndef __ZOLLSTOCK_UNITS_TIME_HPP__
+#define __ZOLLSTOCK_UNITS_TIME_HPP__
 
 
 #include <zollstock/constants/units/time.hpp>
@@ -19,4 +19,4 @@ namespace zollstock::units::inline literals
 }
 
 
-#endif //__ZOLLSTOCK_TIME_UNITS_HPP__
+#endif //__ZOLLSTOCK_UNITS_TIME_HPP__

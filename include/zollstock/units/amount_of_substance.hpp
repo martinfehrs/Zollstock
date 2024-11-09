@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNITS_HPP__
-#define __ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNITS_HPP__
+#ifndef __ZOLLSTOCK_UNITS_AMOUNT_OF_SUBSTANCE_HPP__
+#define __ZOLLSTOCK_UNITS_AMOUNT_OF_SUBSTANCE_HPP__
 
 
 #include <zollstock/constants/units/amount_of_substance.hpp>
@@ -14,4 +14,4 @@ namespace zollstock::units::inline literals
 }
 
 
-#endif //__ZOLLSTOCK_AMOUNT_OF_SUBSTANCE_UNITS_HPP__
+#endif //__ZOLLSTOCK_UNITS_AMOUNT_OF_SUBSTANCE_HPP__

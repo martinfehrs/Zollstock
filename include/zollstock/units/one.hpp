@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_UNIT_ONE_HPP__
-#define __ZOLLSTOCK_UNIT_ONE_HPP__
+#ifndef __ZOLLSTOCK_UNITS_ONE_HPP__
+#define __ZOLLSTOCK_UNITS_ONE_HPP__
 
 
 #include <zollstock/constants/units/one.hpp>
@@ -14,4 +14,4 @@ namespace zollstock::units::inline literals
 }
 
 
-#endif //__ZOLLSTOCK_UNIT_ONE_HPP__
+#endif //__ZOLLSTOCK_UNITS_ONE_HPP__

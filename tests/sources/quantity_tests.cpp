@@ -1,6 +1,6 @@
 #include <zollstock/quantity.hpp>
-#include <zollstock/length_units.hpp>
-#include <zollstock/planar_angle_units.hpp>
+#include <zollstock/units/length.hpp>
+#include <zollstock/units/planar_angle.hpp>
 
 #include <catch2/catch_all.hpp>
 

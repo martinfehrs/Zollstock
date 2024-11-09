@@ -1,4 +1,4 @@
-#include <zollstock/time_units.hpp>
+#include <zollstock/units/time.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

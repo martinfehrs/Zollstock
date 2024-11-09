@@ -1,5 +1,5 @@
 #include <zollstock/quantity_limits.hpp>
-#include <zollstock/all_units.hpp>
+#include <zollstock/units.hpp>
 
 #include <catch2/catch_all.hpp>
 

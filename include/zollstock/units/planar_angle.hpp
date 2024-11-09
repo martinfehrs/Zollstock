@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
-#define __ZOLLSTOCK_PLANAR_ANGLE_UNITS_HPP__
+#ifndef __ZOLLSTOCK_UNITS_PLANAR_ANGLE_HPP__
+#define __ZOLLSTOCK_UNITS_PLANAR_ANGLE_HPP__
 
 
 #include <zollstock/constants/units/planar_angle.hpp>
@@ -22,4 +22,4 @@ namespace zollstock::units::inline literals
 }
 
 
-#endif //__ZOLLSTOCK_ANGLE_UNITS_HPP__
+#endif //__ZOLLSTOCK_UNITS_PLANAR_ANGLE_HPP__
