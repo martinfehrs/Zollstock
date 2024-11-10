@@ -3,7 +3,6 @@
 
 
 #include <zollstock/concepts/unit.hpp>
-#include <zollstock/constant_definition_helpers.hpp>
 
 
 namespace zollstock::units::inline constants
