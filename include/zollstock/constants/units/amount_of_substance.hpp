@@ -2,7 +2,6 @@
 #define __ZOLLSTOCK_CONSTANTS_UNITS_AMOUNT_OF_SUBSTANCE_HPP__
 
 
-#include <zollstock/constants/units/length.hpp>
 #include <zollstock/constant_definition_helpers.hpp>
 
 
