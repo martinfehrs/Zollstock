@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_SI_PREFIXES_HPP__
 
 
-#include <zollstock/unit_prefix_concept.hpp>
+#include <zollstock/concepts/unit_prefix.hpp>
 
 
 namespace zollstock::si_prefixes
