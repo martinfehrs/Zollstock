@@ -1,4 +1,4 @@
-target_sources(tests PRIVATE si_prefix_tests.cpp)
+target_sources(tests PRIVATE prefix_tests.cpp)
 target_sources(tests PRIVATE length_unit_constant_tests.cpp)
 target_sources(tests PRIVATE length_unit_literal_tests.cpp)
 target_sources(tests PRIVATE time_unit_constant_tests.cpp)

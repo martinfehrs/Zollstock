@@ -3,7 +3,7 @@
 
 
 #include <zollstock/concepts/unit.hpp>
-#include <zollstock/si_prefixes.hpp>
+#include <zollstock/prefixes.hpp>
 
 #include <catch2/catch_test_macros.hpp>
 
@@ -27,8 +27,8 @@
                                                                            \
     STATIC_REQUIRE(factor.dimensions      == dimensions::dimensions_);     \
     STATIC_REQUIRE(factor.symbol         == #symbol_);                     \
-    STATIC_REQUIRE(factor.scaling_factor == si_prefixes::prefix_.factor);  \
-    STATIC_REQUIRE(factor.prefix         == si_prefixes::prefix_.symbol);  \
+    STATIC_REQUIRE(factor.scaling_factor == prefixes::prefix_.factor);     \
+    STATIC_REQUIRE(factor.prefix         == prefixes::prefix_.symbol);     \
 }
 
 #define TEST_BASE_UNIT_CONSTANTS_UNPREFIXED(symbol, dimension) \

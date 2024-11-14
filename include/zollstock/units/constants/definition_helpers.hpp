@@ -3,7 +3,7 @@
 
 
 #include <zollstock/concepts/unit.hpp>
-#include <zollstock/si_prefixes.hpp>
+#include <zollstock/prefixes.hpp>
 
 
 #define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor) \
@@ -17,7 +17,7 @@
     inline constexpr auto& si_prefix##base_symbol = ::zollstock::prefixed_unit_v< \
         ::zollstock::dimensions::dimension,                                       \
         #base_symbol,                                                             \
-        ::zollstock::si_prefixes::si_prefix                                       \
+        ::zollstock::prefixes::si_prefix                                          \
     >;                                                                            \
 
 #define ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(dimension, base_symbol) \

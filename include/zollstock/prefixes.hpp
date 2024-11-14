@@ -1,11 +1,11 @@
-#ifndef __ZOLLSTOCK_SI_PREFIXES_HPP__
-#define __ZOLLSTOCK_SI_PREFIXES_HPP__
+#ifndef __ZOLLSTOCK_PREFIXES_HPP__
+#define __ZOLLSTOCK_PREFIXES_HPP__
 
 
 #include <zollstock/concepts/unit_prefix.hpp>
 
 
-namespace zollstock::si_prefixes
+namespace zollstock::prefixes
 {
 
     inline constexpr prefix<"q"  , 1e-30L> q  ;
@@ -36,4 +36,4 @@ namespace zollstock::si_prefixes
 }
 
 
-#endif //__ZOLLSTOCK_SI_PREFIXES_HPP__
+#endif //__ZOLLSTOCK_PREFIXES_HPP__
