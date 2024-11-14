@@ -3,8 +3,8 @@
 
 
 #include <zollstock/concepts/quantity.hpp>
-#include <zollstock/number_utilities.hpp>
 #include <zollstock/units/constants/one.hpp>
+#include <zollstock/numbers.hpp>
 
 #include <cmath>
 #include <format>
