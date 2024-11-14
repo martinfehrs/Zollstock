@@ -1,4 +1,4 @@
-#include <zollstock/constants/units/squared_time.hpp>
+#include <zollstock/units/constants/squared_time.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

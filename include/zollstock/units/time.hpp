@@ -2,21 +2,8 @@
 #define __ZOLLSTOCK_UNITS_TIME_HPP__
 
 
-#include <zollstock/constants/units/time.hpp>
-#include <zollstock/literal_definition_helpers.hpp>
-
-
-namespace zollstock::units::inline literals
-{
-
-    ZOLLSTOCK_DEFINE_SI_LITERALS(s)
-
-    ZOLLSTOCK_DEFINE_LITERALS(min, min)
-    ZOLLSTOCK_DEFINE_LITERALS(h  , h  )
-    ZOLLSTOCK_DEFINE_LITERALS(d  , d  )
-    ZOLLSTOCK_DEFINE_LITERALS(a  , a  )
-
-}
+#include <zollstock/units/constants/time.hpp>
+#include <zollstock/units/literals/time.hpp>
 
 
 #endif //__ZOLLSTOCK_UNITS_TIME_HPP__

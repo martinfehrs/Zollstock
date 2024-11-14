@@ -1,5 +1,5 @@
-#include <zollstock/constants/units/length.hpp>
-#include <zollstock/constants/units/squared_time.hpp>
+#include <zollstock/units/constants/length.hpp>
+#include <zollstock/units/constants/squared_time.hpp>
 #include <zollstock/tests/constant_test_helpers.hpp>
 
 #include <catch2/catch_all.hpp>

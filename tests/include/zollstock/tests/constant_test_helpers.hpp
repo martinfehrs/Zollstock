@@ -3,6 +3,7 @@
 
 
 #include <zollstock/concepts/unit.hpp>
+#include <zollstock/si_prefixes.hpp>
 
 #include <catch2/catch_test_macros.hpp>
 

@@ -2,16 +2,8 @@
 #define __ZOLLSTOCK_UNITS_VOLUME_HPP__
 
 
-#include <zollstock/constants/units/volume.hpp>
-#include <zollstock/literal_definition_helpers.hpp>
-
-
-namespace zollstock::units::inline literals
-{
-
-    ZOLLSTOCK_DEFINE_SI_LITERALS(m3)
-
-}
+#include <zollstock/units/constants/volume.hpp>
+#include <zollstock/units/literals/volume.hpp>
 
 
 #endif //__ZOLLSTOCK_UNITS_VOLUME_HPP__

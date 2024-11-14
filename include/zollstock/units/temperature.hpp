@@ -2,16 +2,8 @@
 #define __ZOLLSTOCK_UNITS_TEMPERATURE_HPP__
 
 
-#include <zollstock/constants/units/temperature.hpp>
-#include <zollstock/literal_definition_helpers.hpp>
-
-
-namespace zollstock::units::inline literals
-{
-
-    ZOLLSTOCK_DEFINE_SI_LITERALS(K)
-
-}
+#include <zollstock/units/constants/temperature.hpp>
+#include <zollstock/units/literals/temperature.hpp>
 
 
 #endif //__ZOLLSTOCK_UNITS_TEMPERATURE_HPP__

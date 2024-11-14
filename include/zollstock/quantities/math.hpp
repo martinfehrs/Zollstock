@@ -1,9 +1,9 @@
-#ifndef __ZOLLSTOCK_QUANTITY_MATH_HPP__
-#define __ZOLLSTOCK_QUANTITY_MATH_HPP__
+#ifndef __ZOLLSTOCK_QUANTITIES_MATH_HPP__
+#define __ZOLLSTOCK_QUANTITIES_MATH_HPP__
 
 
 #include <zollstock/units/planar_angle.hpp>
-#include <zollstock/constants/quantities.hpp>
+#include <zollstock/quantities/constants.hpp>
 #include <zollstock/concepts/length.hpp>
 #include <zollstock/units/one.hpp>
 
@@ -79,4 +79,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_QUANTITY_MATH_HPP__
+#endif //__ZOLLSTOCK_QUANTITIES_MATH_HPP__

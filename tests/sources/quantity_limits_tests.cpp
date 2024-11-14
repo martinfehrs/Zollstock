@@ -1,4 +1,4 @@
-#include <zollstock/quantity_limits.hpp>
+#include <zollstock/quantities/limits.hpp>
 #include <zollstock/units.hpp>
 
 #include <catch2/catch_all.hpp>

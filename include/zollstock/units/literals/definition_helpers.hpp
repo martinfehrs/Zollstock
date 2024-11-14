@@ -1,8 +1,8 @@
-#ifndef __ZOLLSTOCK_LITERAL_DEFINITION_HELPERS_HPP__
-#define __ZOLLSTOCK_LITERAL_DEFINITION_HELPERS_HPP__
+#ifndef __ZOLLSTOCK_UNITS_LITERALS_DEFINITION_HELPERS_HPP__
+#define __ZOLLSTOCK_UNITS_LITERALS_DEFINITION_HELPERS_HPP__
 
 
-#include <zollstock/quantity.hpp>
+#include <zollstock/quantities/quantity.hpp>
 
 #include <limits>
 
@@ -12,42 +12,42 @@
     {                                                                                           \
         using namespace ::zollstock;                                                            \
                                                                                                 \
-        return quantity<constant, int>{ narrow<int>(value) };                                     \
+        return quantity<constant, int>{ narrow<int>(value) };                                   \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_l_##suffix(unsigned long long int value) noexcept   \
     {                                                                                           \
         using namespace ::zollstock;                                                            \
                                                                                                 \
-        return quantity<constant, long int>{ narrow<long int>(value) };                           \
+        return quantity<constant, long int>{ narrow<long int>(value) };                         \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ll_##suffix(unsigned long long int value) noexcept  \
     {                                                                                           \
         using namespace ::zollstock;                                                            \
                                                                                                 \
-        return quantity<constant, long long int>{ narrow<long long int>(value) };                 \
+        return quantity<constant, long long int>{ narrow<long long int>(value) };               \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_u_##suffix(unsigned long long int value) noexcept   \
     {                                                                                           \
         using namespace ::zollstock;                                                            \
                                                                                                 \
-        return quantity<constant, unsigned int>{ narrow<unsigned int>(value) };                   \
+        return quantity<constant, unsigned int>{ narrow<unsigned int>(value) };                 \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ul_##suffix(unsigned long long int value) noexcept  \
     {                                                                                           \
         using namespace ::zollstock;                                                            \
                                                                                                 \
-        return quantity<constant, unsigned long int>{ narrow<unsigned long int>(value) };         \
+        return quantity<constant, unsigned long int>{ narrow<unsigned long int>(value) };       \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_ull_##suffix(unsigned long long int value) noexcept \
     {                                                                                           \
         using namespace ::zollstock;                                                            \
                                                                                                 \
-        return quantity<constant, unsigned long long int>{ value };                               \
+        return quantity<constant, unsigned long long int>{ value };                             \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_##suffix(long double value)                         \
@@ -60,7 +60,7 @@
         )                                                                                       \
             throw "literal value out of range";                                                 \
                                                                                                 \
-        return quantity<constant, double>{ static_cast<double>(value) };                          \
+        return quantity<constant, double>{ static_cast<double>(value) };                        \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_f_##suffix(long double value)                       \
@@ -73,14 +73,14 @@
         )                                                                                       \
             throw "literal value out of range";                                                 \
                                                                                                 \
-        return quantity<constant, float>{ static_cast<float>(value) };                            \
+        return quantity<constant, float>{ static_cast<float>(value) };                          \
     }                                                                                           \
                                                                                                 \
     [[nodiscard]] consteval auto operator""_l_##suffix(long double value) noexcept              \
     {                                                                                           \
         using namespace ::zollstock;                                                            \
                                                                                                 \
-        return quantity<constant, long double>{ value };                                          \
+        return quantity<constant, long double>{ value };                                        \
     }                                                                                           \
 
 #define ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol)        \
@@ -114,4 +114,4 @@
     ZOLLSTOCK_DEFINE_SI_PREFIXED_LITERALS(base_symbol)  \
 
 
-#endif //__ZOLLSTOCK_LITERAL_DEFINITION_HELPERS_HPP__
+#endif //__ZOLLSTOCK_UNITS_LITERALS_DEFINITION_HELPERS_HPP__

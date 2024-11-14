@@ -2,16 +2,8 @@
 #define __ZOLLSTOCK_UNITS_ONE_HPP__
 
 
-#include <zollstock/constants/units/one.hpp>
-#include <zollstock/literal_definition_helpers.hpp>
-
-
-namespace zollstock::units::inline literals
-{
-
-    ZOLLSTOCK_DEFINE_LITERALS(1, _1)
-
-}
+#include <zollstock/units/constants/one.hpp>
+#include <zollstock/units/literals/one.hpp>
 
 
 #endif //__ZOLLSTOCK_UNITS_ONE_HPP__

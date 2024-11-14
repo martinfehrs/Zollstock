@@ -1,5 +1,5 @@
 #include <zollstock/units.hpp>
-#include <zollstock/constants/quantities.hpp>
+#include <zollstock/quantities/constants.hpp>
 #include <zollstock/concepts/quantities.hpp>
 #include <iostream>
 #include <cstdlib>

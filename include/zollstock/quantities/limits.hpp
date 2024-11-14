@@ -1,8 +1,8 @@
-#ifndef __ZOLLSTOCK_QANTITY_LIMITS_HPP__
-#define __ZOLLSTOCK_QANTITY_LIMITS_HPP__
+#ifndef __ZOLLSTOCK_QUANTITIES_LIMITS_HPP__
+#define __ZOLLSTOCK_QUANTITIES_LIMITS_HPP__
 
 
-#include <zollstock/quantity.hpp>
+#include <zollstock/quantities/quantity.hpp>
 
 #include <limits>
 
@@ -100,4 +100,4 @@ namespace std
 }
 
 
-#endif //__ZOLLSTOCK_QANTITY_LIMITS_HPP__
+#endif //__ZOLLSTOCK_QUANTITIES_LIMITS_HPP__

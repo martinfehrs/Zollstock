@@ -1,11 +1,10 @@
-#ifndef __ZOLLSTOCK_QUANTITY_HPP__
-#define __ZOLLSTOCK_QUANTITY_HPP__
+#ifndef __ZOLLSTOCK_QUANTITIES_QUANTITY_HPP__
+#define __ZOLLSTOCK_QUANTITIES_QUANTITY_HPP__
 
 
 #include <zollstock/concepts/quantity.hpp>
 #include <zollstock/number_utilities.hpp>
-#include <zollstock/constants/units/one.hpp>
-#include <zollstock/literal_definition_helpers.hpp>
+#include <zollstock/units/constants/one.hpp>
 
 #include <cmath>
 #include <format>
@@ -439,4 +438,4 @@ struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
 };
 
 
-#endif //__ZOLLSTOCK_QUANTITY_HPP__
+#endif //__ZOLLSTOCK_QUANTITIES_QUANTITY_HPP__

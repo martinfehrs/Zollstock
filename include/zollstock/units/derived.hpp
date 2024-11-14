@@ -7,7 +7,7 @@
 #include <zollstock/units/area.hpp>
 #include <zollstock/units/volume.hpp>
 
-#include <zollstock/constants/units/squared_time.hpp>
+#include <zollstock/units/constants/squared_time.hpp>
 
 
 #endif //__ZOLLSTOCK_UNITS_DERIVED_HPP__

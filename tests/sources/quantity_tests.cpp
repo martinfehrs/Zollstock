@@ -1,4 +1,4 @@
-#include <zollstock/quantity.hpp>
+#include <zollstock/quantities/quantity.hpp>
 #include <zollstock/units/length.hpp>
 #include <zollstock/units/planar_angle.hpp>
 

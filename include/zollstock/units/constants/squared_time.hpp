@@ -1,9 +1,9 @@
-#ifndef __ZOLLSTOCK_CONSTANTS_UNITS_SQUARED_TIME_HPP__
-#define __ZOLLSTOCK_CONSTANTS_UNITS_SQUARED_TIME_HPP__
+#ifndef __ZOLLSTOCK_UNITS_CONSTANTS_SQUARED_TIME_HPP__
+#define __ZOLLSTOCK_UNITS_CONSTANTS_SQUARED_TIME_HPP__
 
 
-#include <zollstock/constants/units/time.hpp>
-#include <zollstock/constant_definition_helpers.hpp>
+#include <zollstock/units/constants/time.hpp>
+#include <zollstock/units/constants/definition_helpers.hpp>
 
 
 namespace zollstock::units::inline constants
@@ -19,4 +19,4 @@ namespace zollstock::units::inline constants
 }
 
 
-#endif //__ZOLLSTOCK_CONSTANTS_UNITS_SQUARED_TIME_HPP__
+#endif //__ZOLLSTOCK_UNITS_CONSTANTS_SQUARED_TIME_HPP__

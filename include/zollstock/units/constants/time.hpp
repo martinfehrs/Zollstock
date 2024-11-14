@@ -1,8 +1,8 @@
-#ifndef __ZOLLSTOCK_CONSTANTS_UNITS_TIME_HPP__
-#define __ZOLLSTOCK_CONSTANTS_UNITS_TIME_HPP__
+#ifndef __ZOLLSTOCK_UNITS_CONSTANTS_TIME_HPP__
+#define __ZOLLSTOCK_UNITS_CONSTANTS_TIME_HPP__
 
 
-#include <zollstock/constant_definition_helpers.hpp>
+#include <zollstock/units/constants/definition_helpers.hpp>
 
 
 namespace zollstock::units::inline constants
@@ -18,4 +18,4 @@ namespace zollstock::units::inline constants
 }
 
 
-#endif //__ZOLLSTOCK_CONSTANTS_UNITS_TIME_HPP__
+#endif //__ZOLLSTOCK_UNITS_CONSTANTS_TIME_HPP__
