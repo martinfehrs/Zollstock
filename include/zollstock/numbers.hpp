@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_FLOATING_POINT_UTILITIES_HPP__
-#define __ZOLLSTOCK_FLOATING_POINT_UTILITIES_HPP__
+#ifndef __ZOLLSTOCK_NUMBERS_HPP__
+#define __ZOLLSTOCK_NUMBERS_HPP__
 
 
 #include <concepts>
@@ -358,4 +358,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_FLOATING_POINT_UTILITIES_HPP__
+#endif //__ZOLLSTOCK_NUMBERS_HPP__

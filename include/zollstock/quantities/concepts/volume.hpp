@@ -1,9 +1,10 @@
-#ifndef __ZOLLSTOCK_CONCEPTS_VOLUME_HPP__
-#define __ZOLLSTOCK_CONCEPTS_VOLUME_HPP__
+#ifndef __ZOLLSTOCK_QUANTITIES_CONCEPTS_VOLUME_HPP__
+#define __ZOLLSTOCK_QUANTITIES_CONCEPTS_VOLUME_HPP__
 
 
-#include <zollstock/concepts/quantity.hpp>
-#include <zollstock/concepts/unit.hpp>
+#include <zollstock/quantities/concepts/quantity.hpp>
+#include <zollstock/units/concepts/unit.hpp>
+
 
 namespace zollstock::inline quantities
 {
@@ -26,4 +27,4 @@ namespace zollstock::inline quantities
 }
 
 
-#endif //__ZOLLSTOCK_CONCEPTS_VOLUME_HPP__
+#endif //__ZOLLSTOCK_QUANTITIES_CONCEPTS_VOLUME_HPP__

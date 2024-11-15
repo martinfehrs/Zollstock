@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_QUANTITIES_QUANTITY_HPP__
 
 
-#include <zollstock/concepts/quantity.hpp>
+#include <zollstock/quantities/concepts/quantity.hpp>
 #include <zollstock/units/constants/one.hpp>
 #include <zollstock/numbers.hpp>
 

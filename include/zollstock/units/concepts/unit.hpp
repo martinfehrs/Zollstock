@@ -1,9 +1,9 @@
-#ifndef __ZOLLSTOCK_CONCEPTS_UNIT_HPP__
-#define __ZOLLSTOCK_CONCEPTS_UNIT_HPP__
+#ifndef __ZOLLSTOCK_UNITS_CONCEPTS_UNIT_HPP__
+#define __ZOLLSTOCK_UNITS_CONCEPTS_UNIT_HPP__
 
 
 #include <zollstock/dimensions.hpp>
-#include <zollstock/concepts/unit_prefix.hpp>
+#include <zollstock/units/concepts/prefix.hpp>
 #include <zollstock/tuple_utils.hpp>
 
 #include <format>
@@ -527,4 +527,4 @@ struct std::formatter<Unit, char>
 };
 
 
-#endif //__ZOLLSTOCK_UNIT_CONCEPT_HPP__
+#endif //__ZOLLSTOCK_UNITS_CONCEPT_UNIT_HPP__

@@ -1,9 +1,9 @@
-#ifndef __ZOLLSTOCK_CONCEPTS_DIMENSIONLESS_HPP__
-#define __ZOLLSTOCK_CONCEPTS_DIMENSIONLESS_HPP__
+#ifndef __ZOLLSTOCK_QUANTITIES_CONCEPTS_PLANAR_ANGLE_HPP__
+#define __ZOLLSTOCK_QUANTITIES_CONCEPTS_PLANAR_ANGLE_HPP__
 
 
-#include <zollstock/concepts/quantity.hpp>
-#include <zollstock/unit_concept.hpp>
+#include <zollstock/quantities/concepts/quantity.hpp>
+#include <zollstock/units/concepts/unit.hpp>
 
 
 namespace zollstock::inline quantities
@@ -15,16 +15,16 @@ namespace zollstock::inline quantities
         // Kapselung des Aufrufes unit_dimensions in einer Vorlagenvariable wegen eines
         // internen Fehlers des MSVC-Compilers.
         template <typename Quantity>
-        inline constexpr bool dimensionless_v =
+        inline constexpr bool planar_angle_v =
             quantity_c<Quantity> &&
             unit_dimensions(Quantity::unit()) == dimensions::_1;
 
     }
 
     template <typename Quantity>
-    concept dimensionless_v = detail::dimensionless_v<Quantity>;
+    concept planar_angle_c = detail::planar_angle_v<Quantity>;
 
 }
 
 
-#endif //__ZOLLSTOCK_CONCEPTS_DIMENSIONLESS_HPP__
+#endif //__ZOLLSTOCK_QUANTITIES_CONCEPTS_PLANAR_ANGLE_HPP__

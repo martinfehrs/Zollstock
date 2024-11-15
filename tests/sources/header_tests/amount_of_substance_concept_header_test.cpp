@@ -1,4 +1,4 @@
-#include <zollstock/concepts/amount_of_substance.hpp>
+#include <zollstock/quantities/concepts/amount_of_substance.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

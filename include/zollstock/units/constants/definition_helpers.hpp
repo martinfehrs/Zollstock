@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_UNITS_CONSTANTS_DEFINITION_HELPERS_HPP__
 
 
-#include <zollstock/concepts/unit.hpp>
+#include <zollstock/units/concepts/unit.hpp>
 #include <zollstock/prefixes.hpp>
 
 

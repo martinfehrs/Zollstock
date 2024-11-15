@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_CONCEPTS_UNIT_PREFIX_HPP__
-#define __ZOLLSTOCK_CONCEPTS_UNIT_PREFIX_HPP__
+#ifndef __ZOLLSTOCK_UNITS_CONCEPTS_PREFIX_HPP__
+#define __ZOLLSTOCK_UNITS_CONCEPTS_PREFIX_HPP__
 
 
 #include <zollstock/static_string.hpp>
@@ -29,4 +29,4 @@ namespace zollstock
 }
 
 
-#endif //__ZOLLSTOCK_CONCEPTS_UNIT_PREFIX_HPP__
+#endif //__ZOLLSTOCK_UNITS_CONCEPTS_PREFIX_HPP__

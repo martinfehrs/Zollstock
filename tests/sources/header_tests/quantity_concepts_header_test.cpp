@@ -1,4 +1,4 @@
-#include <zollstock/concepts/quantities.hpp>
+#include <zollstock/quantities/concepts.hpp>
 #include <zollstock/tests/header_info.hpp>
 
 #include <catch2/catch_all.hpp>

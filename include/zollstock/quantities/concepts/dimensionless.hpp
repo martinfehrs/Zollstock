@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_CONCEPTS_AMOUNT_OF_SUBSTANCE_HPP__
-#define __ZOLLSTOCK_CONCEPTS_AMOUNT_OF_SUBSTANCE_HPP__
+#ifndef __ZOLLSTOCK_QUANTITIES_CONCEPTS_DIMENSIONLESS_HPP__
+#define __ZOLLSTOCK_QUANTITIES_CONCEPTS_DIMENSIONLESS_HPP__
 
 
 #include <zollstock/concepts/quantity.hpp>
@@ -15,16 +15,16 @@ namespace zollstock::inline quantities
         // Kapselung des Aufrufes unit_dimensions in einer Vorlagenvariable wegen eines
         // internen Fehlers des MSVC-Compilers.
         template <typename Quantity>
-        inline constexpr bool amount_of_substance_v =
+        inline constexpr bool dimensionless_v =
             quantity_c<Quantity> &&
-            unit_dimensions(Quantity::unit()) == dimensions::N;
+            unit_dimensions(Quantity::unit()) == dimensions::_1;
 
     }
 
     template <typename Quantity>
-    concept amount_of_substance_v = detail::amount_of_substance_v<Quantity>;
+    concept dimensionless_v = detail::dimensionless_v<Quantity>;
 
 }
 
 
-#endif //__ZOLLSTOCK_CONCEPTS_AMOUNT_OF_SUBSTANCE_HPP__
+#endif //__ZOLLSTOCK_QUANTITIES_CONCEPTS_DIMENSIONLESS_HPP__
