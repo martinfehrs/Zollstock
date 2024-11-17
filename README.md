@@ -18,9 +18,9 @@ production code.
 ## Example
 
 ```cpp
-#include <zollstock/all_units.hpp>
-#include <zollstock/quantity_constants.hpp>
-#include <zollstock/quantity_concepts.hpp>
+#include <zollstock/units.hpp>
+#include <zollstock/quantities.hpp>
+
 #include <iostream>
 #include <cstdlib>
 #include <format>
