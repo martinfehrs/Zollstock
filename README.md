@@ -8,8 +8,8 @@ This library increases the type-safety of your application by providing scalars 
 All additional checks are executed at compile-time, producing no overhead in your final application.
 The library is SI-centric. All non-SI units are defined relative to their corresponding counterpart. All
 built-in numeric types known in C++20 can be combined with units except `char` which isn't considered a number
-but a character. You can use `signed char` and `unsigned char` instead or better `std::int8_t` or
-`std::uint8_t`. There is currently no support for C++23 fixed width floating-point types. But their support is
+but a character. You can use `signed char`, `unsigned char`, `std::int8_t` or
+`std::uint8_t` instead. There is currently no support for C++23 fixed width floating-point types. But their support is
 planed.
 
 The library is still in a very early development stage. So please be careful when using it in
