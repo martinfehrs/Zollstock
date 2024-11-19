@@ -1,4 +1,4 @@
-Latest
+Version 0.3
 ----------------------------------------------------------------------------------------------------
 - Improved header structure
 - Support for unit Mole
