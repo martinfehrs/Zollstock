@@ -57,7 +57,12 @@
                 "CMAKE_CXX_COMPILER": "clang++"
             }
         },
-
+        {
+            "name": "visual-studio-2022",
+            "displayName": "Visual Studio 2022",
+            "generator": "Visual Studio 17 2022",
+            "inherits": "base"
+        },
         {
             "name": "ninja-debug",
             "displayName": "Ninja - Debug",
@@ -188,6 +193,24 @@
         }
     ],
     "buildPresets": [
+        {
+            "name": "visual-studio-2022-debug",
+            "displayName": "Debug",
+            "configurePreset": "visual-studio-2022",
+            "configuration": "Debug"
+        },
+        {
+            "name": "visual-studio-2022-release",
+            "displayName": "Release",
+            "configurePreset": "visual-studio-2022",
+            "configuration": "Release"
+        },
+        {
+            "name": "visual-studio-2022-release-with-debug-info",
+            "displayName": "Release with debug info",
+            "configurePreset": "visual-studio-2022",
+            "configuration": "RelWithDebInfo"
+        },
         {
             "name": "ninja-multi-config-release",
             "displayName": "Release",
