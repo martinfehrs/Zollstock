@@ -2,58 +2,418 @@
     "version": 6,
     "configurePresets": [
         {
-            "name": "ninja-debug",
-            "displayName": "Ninja - Debug",
-            "generator": "Ninja",
+            "name": "base",
+            "hidden": true,
             "binaryDir": "${sourceDir}/build/${presetName}",
+            "installDir": "${sourceDir}/install/${presetName}"
+        },
+        {
+            "name": "debug",
+            "hidden": true,
+            "inherits": "base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug"
             }
+        },
+        {
+            "name": "release",
+            "hidden": true,
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release-with-debug-info",
+            "hidden": true,
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+            }
+        },
+        {
+            "name": "release-minimal-size",
+            "hidden": true,
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "MinSizeRel"
+            }
+        },
+        {
+            "name": "gcc",
+            "hidden": true,
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "clang",
+            "hidden": true,
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_COMPILER": "clang++"
+            }
+        },
+
+        {
+            "name": "ninja-debug",
+            "displayName": "Ninja - Debug",
+            "generator": "Ninja",
+            "inherits": "debug"
+        },
+        {
+            "name": "ninja-gcc-debug",
+            "displayName": "Ninja GCC - Debug",
+            "generator": "Ninja",
+            "inherits": ["debug", "gcc"]
+        },
+        {
+            "name": "ninja-clang-debug",
+            "displayName": "Ninja Clang - Debug",
+            "generator": "Ninja",
+            "inherits": ["debug", "clang"]
         },
         {
             "name": "ninja-release",
             "displayName": "Ninja - Release",
             "generator": "Ninja",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
+            "inherits": "release"
         },
+        {
+            "name": "ninja-gcc-release",
+            "displayName": "Ninja GCC - Release",
+            "generator": "Ninja",
+            "inherits": ["release", "gcc"]
+        },
+        {
+            "name": "ninja-clang-release",
+            "displayName": "Ninja Clang - Release",
+            "generator": "Ninja",
+            "inherits": ["release", "clang"]
+        },
+        {
+            "name": "ninja-release-with-debug-info",
+            "displayName": "Ninja - Release with debug info",
+            "generator": "Ninja",
+            "inherits": "release-with-debug-info"
+        },
+        {
+            "name": "ninja-gcc-release-with-debug-info",
+            "displayName": "Ninja GCC - Release with debug info",
+            "generator": "Ninja",
+            "inherits": ["release-with-debug-info", "gcc"]
+        },
+        {
+            "name": "ninja-clang-release-with-debug-info",
+            "displayName": "Ninja Clang - Release with debug info",
+            "generator": "Ninja",
+            "inherits": ["release-with-debug-info", "clang"]
+        },
+
         {
             "name": "unix-make-debug",
             "displayName": "Unix Make - Debug",
             "generator": "Unix Makefiles",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            }
+            "inherits": "debug"
+        },
+        {
+            "name": "unix-make-gcc-debug",
+            "displayName": "Unix Make GCC - Debug",
+            "generator": "Unix Makefiles",
+            "inherits": ["debug", "gcc"]
+        },
+        {
+            "name": "unix-make-clang-debug",
+            "displayName": "Unix Make Clang - Debug",
+            "generator": "Unix Makefiles",
+            "inherits": ["debug", "clang"]
         },
         {
             "name": "unix-make-release",
             "displayName": "Unix Make - Release",
             "generator": "Unix Makefiles",
-            "binaryDir": "${sourceDir}/build/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Release"
-            }
+            "inherits": "release"
         },
+        {
+            "name": "unix-make-gcc-release",
+            "displayName": "Unix Make GCC - Release",
+            "generator": "Unix Makefiles",
+            "inherits": ["release", "gcc"]
+        },
+        {
+            "name": "unix-make-clang-release",
+            "displayName": "Unix Make Clang - Release",
+            "generator": "Unix Makefiles",
+            "inherits": ["release", "clang"]
+        },
+        {
+            "name": "unix-make-release-with-debug-info",
+            "displayName": "Unix Make - Release with debug info",
+            "generator": "Unix Makefiles",
+            "inherits": "release-with-debug-info"
+        },
+        {
+            "name": "unix-make-gcc-release-with-debug-info",
+            "displayName": "Unix Make GCC - Release with debug info",
+            "generator": "Unix Makefiles",
+            "inherits": ["release-with-debug-info", "gcc"]
+        },
+        {
+            "name": "unix-make-clang-release-with-debug-info",
+            "displayName": "Unix Make Clang - Release with debug info",
+            "generator": "Unix Makefiles",
+            "inherits": ["release-with-debug-info", "clang"]
+        },
+
         {
             "name": "ninja-multi-config",
             "displayName": "Ninja Multi-Config",
             "generator": "Ninja Multi-Config",
-            "binaryDir": "${sourceDir}/build/${presetName}"
+            "inherits": "base"
+        },
+        {
+            "name": "ninja-multi-config-gcc",
+            "displayName": "Ninja Multi-Config GCC",
+            "generator": "Ninja Multi-Config",
+            "inherits": ["base", "gcc"]
+        },
+        {
+            "name": "ninja-multi-config-clang",
+            "displayName": "Ninja Multi-Config Clang",
+            "generator": "Ninja Multi-Config",
+            "inherits": ["base", "clang"]
         }
     ],
     "buildPresets": [
         {
-            "name": "Release",
+            "name": "ninja-multi-config-release",
+            "displayName": "Release",
             "configurePreset": "ninja-multi-config",
             "configuration": "Release"
         },
         {
-            "name": "Debug",
+            "name": "ninja-multi-config-debug",
+            "displayName": "Debug",
             "configurePreset": "ninja-multi-config",
             "configuration": "Debug"
+        },
+        {
+            "name": "ninja-multi-config-rel-with-debug-info",
+            "displayName": "Release with debug info",
+            "configurePreset": "ninja-multi-config",
+            "configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "ninja-multi-config-gcc-release",
+            "displayName": "Release",
+            "configurePreset": "ninja-multi-config-gcc",
+            "configuration": "Release"
+        },
+        {
+            "name": "ninja-multi-config-gcc-debug",
+            "displayName": "Debug",
+            "configurePreset": "ninja-multi-config-gcc",
+            "configuration": "Debug"
+        },
+        {
+            "name": "ninja-multi-config-gcc-rel-with-debug-info",
+            "displayName": "Release with debug info",
+            "configurePreset": "ninja-multi-config-gcc",
+            "configuration": "RelWithDebInfo"
+        },
+        {
+            "name": "ninja-multi-config-clang-release",
+            "displayName": "Release",
+            "configurePreset": "ninja-multi-config-clang",
+            "configuration": "Release"
+        },
+        {
+            "name": "ninja-multi-config-clang-debug",
+            "displayName": "Debug",
+            "configurePreset": "ninja-multi-config-clang",
+            "configuration": "Debug"
+        },
+        {
+            "name": "ninja-multi-config-clang-rel-with-debug-info",
+            "displayName": "Release with debug info",
+            "configurePreset": "ninja-multi-config-clang",
+            "configuration": "RelWithDebInfo"
+        }
+    ],
+    "testPresets": [
+    ],
+    "packagePresets": [
+        {
+            "name": "ninja-release",
+            "displayName": "All",
+            "configurePreset": "ninja-release",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-gcc-release",
+            "displayName": "All",
+            "configurePreset": "ninja-gcc-release",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-clang-release",
+            "displayName": "All",
+            "configurePreset": "ninja-clang-release",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-debug",
+            "displayName": "All",
+            "configurePreset": "ninja-debug",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-gcc-debug",
+            "displayName": "All",
+            "configurePreset": "ninja-gcc-debug",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-clang-debug",
+            "displayName": "All",
+            "configurePreset": "ninja-clang-debug",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-release-with-debug-info",
+            "displayName": "All",
+            "configurePreset": "ninja-release-with-debug-info",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-gcc-release-with-debug-info",
+            "displayName": "All",
+            "configurePreset": "ninja-gcc-release-with-debug-info",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-clang-release-with-debug-info",
+            "displayName": "All",
+            "configurePreset": "ninja-clang-release-with-debug-info",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+
+        {
+            "name": "unix-make-debug",
+            "displayName": "All",
+            "configurePreset": "unix-make-debug",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-gcc-debug",
+            "displayName": "All",
+            "configurePreset": "unix-make-gcc-debug",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-clang-debug",
+            "displayName": "All",
+            "configurePreset": "unix-make-clang-debug",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-release",
+            "displayName": "All",
+            "configurePreset": "unix-make-release",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-gcc-release",
+            "displayName": "All",
+            "configurePreset": "unix-make-gcc-release",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-clang-release",
+            "displayName": "All",
+            "configurePreset": "unix-make-clang-release",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-release-with-debug-info",
+            "displayName": "All",
+            "configurePreset": "unix-make-release-with-debug-info",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-gcc-release-with-debug-info",
+            "displayName": "All",
+            "configurePreset": "unix-make-gcc-release-with-debug-info",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "unix-make-clang-release-with-debug-info",
+            "displayName": "All",
+            "configurePreset": "unix-make-clang-release-with-debug-info",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-multi-config",
+            "displayName": "All",
+            "configurePreset": "ninja-multi-config",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-multi-config-gcc",
+            "displayName": "All",
+            "configurePreset": "ninja-multi-config-gcc",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
+        },
+        {
+            "name": "ninja-multi-config-clang",
+            "displayName": "All",
+            "configurePreset": "ninja-multi-config-clang",
+            "generators": [
+                "TGZ", "ZIP"
+            ]
         }
     ]
 }
