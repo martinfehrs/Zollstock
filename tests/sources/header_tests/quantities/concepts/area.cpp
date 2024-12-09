@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("area-concept-header", "[headers][concept][area]")
+TEST_CASE("area-concept-header", "[headers][quantities][concepts][area]")
 {
 
     STATIC_REQUIRE(includes_area_concept());

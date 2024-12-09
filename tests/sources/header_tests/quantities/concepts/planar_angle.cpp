@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("planar-angle-concept-header", "[headers][concept][planar-angle]")
+TEST_CASE("planar-angle-concept-header", "[headers][quantities][concepts][planar-angle]")
 {
 
     STATIC_REQUIRE(includes_planar_angle_concept());

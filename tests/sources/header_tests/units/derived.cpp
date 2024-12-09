@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("derived-units-header", "[headers][derived-units]")
+TEST_CASE("derived-units-header", "[headers][units][derived]")
 {
 
     STATIC_REQUIRE(includes_derived_units());

@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("squared-time-unit-constants-header", "[headers][squared-time-units]")
+TEST_CASE("squared-time-unit-constants-header", "[headers][units][constants][squared-time]")
 {
 
     STATIC_REQUIRE(includes_squared_time_unit_constants());

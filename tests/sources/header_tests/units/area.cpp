@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("area-units-header", "[headers][area-units]")
+TEST_CASE("area-units-header", "[headers][units][area]")
 {
 
     STATIC_REQUIRE(includes_area_units());

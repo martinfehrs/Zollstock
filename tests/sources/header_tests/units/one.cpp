@@ -5,7 +5,7 @@
 
 
 
-TEST_CASE("unit-one-header", "[headers][unit-one]")
+TEST_CASE("unit-one-header", "[headers][units][one]")
 {
 
     STATIC_REQUIRE(includes_unit_one());

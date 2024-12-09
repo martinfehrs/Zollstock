@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("base-units-header", "[headers][base-units]")
+TEST_CASE("base-units-header", "[headers][units][base]")
 {
 
     STATIC_REQUIRE(includes_base_units());

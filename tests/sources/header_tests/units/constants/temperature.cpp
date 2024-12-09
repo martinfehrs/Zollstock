@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("temperature-unit-constants-header", "[headers][temperature-units]")
+TEST_CASE("temperature-unit-constants-header", "[headers][units][constants][temperature]")
 {
 
     STATIC_REQUIRE(includes_temperature_unit_constants());

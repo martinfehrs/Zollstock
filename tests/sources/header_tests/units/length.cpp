@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("length-units-header", "[headers][length-units]")
+TEST_CASE("length-units-header", "[headers][units][length]")
 {
 
     STATIC_REQUIRE(includes_length_units());

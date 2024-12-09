@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("angle-unit-constants-header", "[headers][angle-units]")
+TEST_CASE("angle-unit-constants-header", "[headers][units][constants][planar-angle]")
 {
 
     STATIC_REQUIRE(includes_angle_unit_constants());

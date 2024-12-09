@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("temperature-concept-header", "[headers][concept][temperature]")
+TEST_CASE("temperature-concept-header", "[headers][quantities][concepts][temperature]")
 {
 
     STATIC_REQUIRE(includes_temperature_concept());

@@ -4,7 +4,7 @@
 #include <catch2/catch_all.hpp>
 
 
-TEST_CASE("time-unit-constants-header", "[headers][time-units]")
+TEST_CASE("time-unit-constants-header", "[headers][units][constants][time]")
 {
 
     STATIC_REQUIRE(includes_time_unit_constants());
