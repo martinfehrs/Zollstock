@@ -90,6 +90,33 @@ consteval bool includes_quantity_concepts() noexcept
 #endif
 }
 
+consteval bool includes_quantity_constants() noexcept
+{
+#ifdef __ZOLLSTOCK_QUANTITIES_CONSTANTS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_quantity_limits() noexcept
+{
+#ifdef __ZOLLSTOCK_QUANTITIES_LIMITS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_quantity_math() noexcept
+{
+#ifdef __ZOLLSTOCK_QUANTITIES_MATH_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
 consteval bool includes_unit_one_constant() noexcept
 {
 #ifdef __ZOLLSTOCK_UNITS_CONSTANTS_ONE_HPP__
