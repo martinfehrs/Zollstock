@@ -53,3 +53,5 @@ target_sources(tests PRIVATE units/base.cpp)
 target_sources(tests PRIVATE units/derived.cpp)
 
 target_sources(tests PRIVATE units.cpp)
+
+target_sources(tests PRIVATE header_structure_tests.cpp)
