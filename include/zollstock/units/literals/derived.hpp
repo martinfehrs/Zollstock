@@ -5,7 +5,6 @@
 #include <zollstock/units/literals/one.hpp>
 #include <zollstock/units/literals/planar_angle.hpp>
 #include <zollstock/units/literals/area.hpp>
-#include <zollstock/units/literals/squared_time.hpp>
 #include <zollstock/units/literals/volume.hpp>
 
 

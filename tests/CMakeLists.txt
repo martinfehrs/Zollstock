@@ -11,7 +11,7 @@ target_compile_features(tests PRIVATE cxx_std_20)
 add_subdirectory(sources)
 
 include(Catch)
-catch_discover_tests(tests)
+catch_discover_tests(tests WORKING_DIRECTORY ${CMAKE_SOURCE_DIR})
 
 add_test(NAME pcalc COMMAND $<TARGET_FILE:pcalc> 1 15 2)
 

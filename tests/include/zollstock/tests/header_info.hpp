@@ -117,6 +117,24 @@ consteval bool includes_quantity_math() noexcept
 #endif
 }
 
+consteval bool includes_prefix_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_CONCEPTS_PREFIX_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_unit_concept() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_CONCEPTS_UNIT_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
 consteval bool includes_unit_one_constant() noexcept
 {
 #ifdef __ZOLLSTOCK_UNITS_CONSTANTS_ONE_HPP__
@@ -239,6 +257,113 @@ consteval bool includes_all_unit_constants() noexcept
 #ifdef __ZOLLSTOCK_UNITS_CONSTANTS_HPP__
     return includes_base_unit_constants()
         && includes_derived_unit_constants();
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_amount_of_substance_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_AMOUNT_OF_SUBSTANCE_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_area_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_AREA_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_length_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_LENGTH_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_mass_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_MASS_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_one_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_ONE_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_planar_angle_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_PLANAR_ANGLE_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_temperature_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_TEMPERATURE_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_time_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_TIME_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_volume_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_VOLUME_HPP__
+    return true;
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_base_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_BASE_HPP__
+    return includes_one_literals()
+        && includes_amount_of_substance_literals()
+        && includes_length_literals()
+        && includes_mass_literals()
+        && includes_temperature_literals()
+        && includes_time_literals();
+#else
+    return false;
+#endif
+}
+
+consteval bool includes_derived_literals() noexcept
+{
+#ifdef __ZOLLSTOCK_UNITS_LITERALS_DERIVED_HPP__
+    return includes_one_literals()
+        && includes_area_literals()
+        && includes_planar_angle_literals()
+        && includes_volume_literals();
 #else
     return false;
 #endif
