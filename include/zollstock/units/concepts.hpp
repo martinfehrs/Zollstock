@@ -6,4 +6,4 @@
 #include <zollstock/quantities/concepts/prefix.hpp>
 
 
-#endif __ZOLLSTOCK_UNITS_CONCEPTS_HPP__
+#endif //__ZOLLSTOCK_UNITS_CONCEPTS_HPP__
