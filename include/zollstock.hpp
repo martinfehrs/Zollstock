@@ -8,7 +8,7 @@
 #include <zollstock/quantities.hpp>
 #include <zollstock/static_string.hpp>
 #include <zollstock/tuple_utils.hpp>
-#include <zollstock/units/units.hpp>
+#include <zollstock/units.hpp>
 
 
 #endif //__ZOLLSTOCK_HPP__
