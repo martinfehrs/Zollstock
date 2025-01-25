@@ -23,8 +23,7 @@ target_sources(tests PRIVATE quantity_tests/construction.cpp)
 target_sources(tests PRIVATE quantity_tests/quantity.cpp)
 target_sources(tests PRIVATE quantity_tests/math.cpp)
 target_sources(tests PRIVATE quantity_tests/limits.cpp)
-
-add_subdirectory(header_tests)
+target_sources(tests PRIVATE header_structure_tests.cpp)
 
 if (MSVC)
     target_link_options   (tests PRIVATE "/stack:10000000")

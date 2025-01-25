@@ -2,8 +2,8 @@
 #define __ZOLLSTOCK_QUANTITIES_CONCEPTS_DIMENSIONLESS_HPP__
 
 
-#include <zollstock/concepts/quantity.hpp>
-#include <zollstock/concepts/unit.hpp>
+#include <zollstock/quantities/concepts/quantity.hpp>
+#include <zollstock/units/concepts/unit.hpp>
 
 
 namespace zollstock::inline quantities

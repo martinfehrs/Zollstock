@@ -2,6 +2,8 @@
 #define __ZOLLSTOCK_QUANTITIES_CONCEPTS_HPP__
 
 
+#include <zollstock/quantities/concepts/dimensionless.hpp>
+
 #include <zollstock/quantities/concepts/length.hpp>
 #include <zollstock/quantities/concepts/mass.hpp>
 #include <zollstock/quantities/concepts/time.hpp>
