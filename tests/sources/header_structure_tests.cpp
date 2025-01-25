@@ -112,7 +112,7 @@ const std::regex header_include{ "#include\\s<([^\\>]+)>" };
             REQUIRE(std::regex_match(lines[line_pos], matches, header_include));
 
             REQUIRE(matches.size() == 2);
-            include_paths.insert(fs::path{ matches[1] });
+            include_paths.insert(fs::path{ matches.str(1) });
         }
     }
 
