@@ -46,11 +46,11 @@ const std::regex header_include{ "#include\\s<([^\\>]+)>" };
 
     for(const auto& part : header_path.parent_path())
     {
-        include_guard += toupper(part);
+        include_guard += toupper(part.string());
         include_guard += "_";
     }
 
-    include_guard += toupper(header_path.stem());
+    include_guard += toupper(header_path.stem().string());
     include_guard += "_";
     include_guard += toupper(header_path.extension().string().substr(1));
     include_guard += "__";
