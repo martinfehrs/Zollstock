@@ -40,4 +40,5 @@ template <typename Element>
     return set_union(set_1, set_2);
 }
 
+
 #endif //__ZOLLSTOCK_TESTS_HEADER_DEPENDENCIES_HPP__
