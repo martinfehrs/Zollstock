@@ -8,6 +8,7 @@
 #include <zollstock/units/literals/mass.hpp>
 #include <zollstock/units/literals/temperature.hpp>
 #include <zollstock/units/literals/amount_of_substance.hpp>
+#include <zollstock/units/literals/electric_current.hpp>
 
 
 #endif //__ZOLLSTOCK_UNITS_LITERALS_BASE_HPP__

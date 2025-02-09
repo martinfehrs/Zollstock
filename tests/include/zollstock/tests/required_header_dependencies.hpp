@@ -21,7 +21,8 @@ inline const header_set quantity_concepts{
     "zollstock/quantities/concepts/quantity.hpp",
     "zollstock/quantities/concepts/temperature.hpp",
     "zollstock/quantities/concepts/time.hpp",
-    "zollstock/quantities/concepts/volume.hpp"
+    "zollstock/quantities/concepts/volume.hpp",
+    "zollstock/quantities/concepts/electric_current.hpp"
 };
 
 inline const header_set base_unit_constants{
@@ -29,7 +30,8 @@ inline const header_set base_unit_constants{
     "zollstock/units/constants/amount_of_substance.hpp",
     "zollstock/units/constants/length.hpp",
     "zollstock/units/constants/mass.hpp",
-    "zollstock/units/constants/temperature.hpp"
+    "zollstock/units/constants/temperature.hpp",
+    "zollstock/units/constants/electric_current.hpp"
 };
 
 inline const header_set derived_unit_constants{
@@ -48,7 +50,8 @@ inline const header_set base_unit_literals{
     "zollstock/units/literals/time.hpp",
     "zollstock/units/literals/mass.hpp",
     "zollstock/units/literals/temperature.hpp",
-    "zollstock/units/literals/amount_of_substance.hpp"
+    "zollstock/units/literals/amount_of_substance.hpp",
+    "zollstock/units/literals/electric_current.hpp"
 };
 
 inline const header_set derived_unit_literals{
@@ -152,6 +155,12 @@ inline const header_dependencies required_header_dependencies{
         "zollstock/units/mass.hpp", {
             "zollstock/units/constants/mass.hpp",
             "zollstock/units/literals/mass.hpp"
+        }
+    },
+    {
+        "zollstock/units/electric_current.hpp", {
+            "zollstock/units/constants/electric_current.hpp",
+            "zollstock/units/literals/electric_current.hpp"
         }
     },
     {

@@ -89,6 +89,7 @@ namespace zollstock::dimensions
     inline constexpr dimensions_t L    { 1, 0, 0, 0, 0, 0, 0 };
     inline constexpr dimensions_t T    { 0, 1, 0, 0, 0, 0, 0 };
     inline constexpr dimensions_t M    { 0, 0, 1, 0, 0, 0, 0 };
+    inline constexpr dimensions_t I    { 0, 0, 0, 1, 0, 0, 0 };
     inline constexpr dimensions_t Theta{ 0, 0, 0, 0, 1, 0, 0 };
     inline constexpr dimensions_t N    { 0, 0, 0, 0, 0, 1, 0 };
 

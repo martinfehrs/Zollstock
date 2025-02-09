@@ -9,6 +9,7 @@
 #include <zollstock/quantities/concepts/time.hpp>
 #include <zollstock/quantities/concepts/temperature.hpp>
 #include <zollstock/quantities/concepts/amount_of_substance.hpp>
+#include <zollstock/quantities/concepts/electric_current.hpp>
 
 #include <zollstock/quantities/concepts/planar_angle.hpp>
 #include <zollstock/quantities/concepts/area.hpp>
