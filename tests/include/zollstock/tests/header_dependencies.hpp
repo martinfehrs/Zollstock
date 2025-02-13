@@ -17,8 +17,6 @@ struct compare_paths
 };
 
 using header_set = std::set<std::filesystem::path>;
-using header_dependencies = std::map<std::filesystem::path, header_set, compare_paths>;
-
 
 template <typename Element>
 [[nodiscard]] std::set<Element> set_union(
@@ -39,6 +37,22 @@ template <typename Element>
 {
     return set_union(set_1, set_2);
 }
+
+[[nodiscard]] inline header_set header_dir(
+    const std::filesystem::path& base_dir,
+    std::initializer_list<std::filesystem::path> relative_header_paths
+)
+{
+    header_set result;
+
+    for(const auto& relative_header_path : relative_header_paths)
+        result.insert(base_dir/relative_header_path);
+
+    return result;
+}
+
+
+using header_dependencies = std::map<std::filesystem::path, header_set, compare_paths>;
 
 
 #endif //__ZOLLSTOCK_TESTS_HEADER_DEPENDENCIES_HPP__
