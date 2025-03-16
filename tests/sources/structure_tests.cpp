@@ -3,6 +3,7 @@
 #include <zollstock/tests/required_features.hpp>
 #include <zollstock/tests/string_utils.hpp>
 #include <zollstock/tests/stream_utils.hpp>
+#include <zollstock/tests/config.hpp>
 
 #include <algorithm>
 #include <filesystem>
@@ -110,10 +111,10 @@ const std::regex header_include{ "#include\\s<([^\\>]+)>" };
 {
     return analyse_header_content(header_path, root_dir)
         | rng::views::filter([](const auto& path){ return path.extension() == ".hpp"; })
-        | rng::views::transform([&](const fs::path& include_path){
+        | rng::views::transform([&](fs::path include_path){
             return std::pair{
                 fs::relative(header_path, root_dir),
-                include_path
+                include_path.make_preferred()
             };
         });
 }
@@ -191,7 +192,7 @@ header_dependencies follow_includes(const header_dependencies& direct_dependenci
 {
     std::string feature{ header.string() };
 
-    std::ranges::replace(feature, '/', '.');
+    std::ranges::replace(feature,  fs::path::preferred_separator, '.');
 
     auto suffix_start_pos = feature.find_last_of('.');
 
@@ -230,7 +231,7 @@ header_dependencies follow_includes(const header_dependencies& direct_dependenci
 TEST_CASE("structure-tests", "[structure]")
 {
 
-    const auto include_dir = fs::current_path()/"include";
+    const auto include_dir = source_dir/"include";
 
     auto required_feature_deps = gen_feature_deps(features, additional_feature_deps);
 

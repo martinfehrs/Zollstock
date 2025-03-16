@@ -1,0 +1,7 @@
+#pragma once
+
+
+#include <filesystem>
+
+
+inline const std::filesystem::path source_dir{ "@CMAKE_SOURCE_DIR@" };

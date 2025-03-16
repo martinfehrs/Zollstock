@@ -101,7 +101,8 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp",
-        "text_encoding": "cpp"
+        "text_encoding": "cpp",
+        "filesystem": "cpp"
     },
     "C_Cpp.intelliSenseEngine": "Tag Parser"
 }
