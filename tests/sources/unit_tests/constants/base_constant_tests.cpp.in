@@ -1,0 +1,13 @@
+#include <zollstock/units/constants/${entry_0}.hpp>
+#include <zollstock/tests/constant_test_helpers.hpp>
+
+#include <catch2/catch_all.hpp>
+
+
+using namespace zollstock::units;
+
+
+TEST_CASE("${hyphenated_base_dimension_name}-unit-constants", "[${hyphenated_base_dimension_name}][unit][constants]")
+{
+    TEST_BASE_UNIT_CONSTANTS(ALL, ${entry_2}, ${entry_1})
+}

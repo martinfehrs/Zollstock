@@ -1,0 +1,13 @@
+#include <zollstock/units/literals/${entry_0}.hpp>
+#include <zollstock/tests/literal_test_helpers.hpp>
+
+#include <catch2/catch_all.hpp>
+
+
+using namespace zollstock::units;
+
+
+TEST_CASE("${hyphenated_base_dimension_name}-unit-literals", "[${hyphenated_base_dimension_name}][unit][literals]")
+{
+    TEST_LITERALS(ALL, ${entry_2})
+}
