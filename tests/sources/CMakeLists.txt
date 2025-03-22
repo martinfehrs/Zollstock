@@ -1,5 +1,5 @@
-set(quantities_dir ${CMAKE_CURRENT_SOURCE_DIR}/quantity_tests)
-set(units_dir ${CMAKE_CURRENT_SOURCE_DIR}/unit_tests)
+set(quantities_dir ${CMAKE_CURRENT_SOURCE_DIR}/quantities)
+set(units_dir ${CMAKE_CURRENT_SOURCE_DIR}/units)
 set(unit_constants_dir ${units_dir}/constants)
 set(unit_literals_dir ${units_dir}/literals)
 
