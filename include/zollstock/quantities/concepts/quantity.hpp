@@ -42,6 +42,14 @@ namespace zollstock
 
             { quantity * quantity };
             { quantity / quantity };
+
+            { quantity == quantity } -> std::same_as<bool>;
+            { quantity != quantity } -> std::same_as<bool>;
+            { quantity <  quantity } -> std::same_as<bool>;
+            { quantity >  quantity } -> std::same_as<bool>;
+            { quantity <= quantity } -> std::same_as<bool>;
+            { quantity >= quantity } -> std::same_as<bool>;
+
         };
 
     }
