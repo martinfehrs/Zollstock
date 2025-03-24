@@ -17,7 +17,6 @@ TEMPLATE_TEST_CASE(
     const zs::quantity<_1>
 )
 {
-
     using quantity_limits = std::numeric_limits<TestType>;
     using scalar_limits   = std::numeric_limits<typename TestType::value_type>;
 
@@ -62,5 +61,4 @@ TEMPLATE_TEST_CASE(
     {
         REQUIRE(std::isnan(quantity_limits::signaling_NaN().value()));
     }
-
 }
