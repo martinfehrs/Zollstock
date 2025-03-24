@@ -18,6 +18,7 @@ namespace zollstock
         concept quantity_base_c = requires(Quantity quantity, Quantity::value_type number)
         {
             requires std::regular<Quantity>;
+            requires std::totally_ordered<Quantity>;
 
             requires number_c<typename Quantity::value_type>;
             requires unit_c<typename Quantity::unit_type>;
@@ -42,13 +43,6 @@ namespace zollstock
 
             { quantity * quantity };
             { quantity / quantity };
-
-            { quantity == quantity } -> std::same_as<bool>;
-            { quantity != quantity } -> std::same_as<bool>;
-            { quantity <  quantity } -> std::same_as<bool>;
-            { quantity >  quantity } -> std::same_as<bool>;
-            { quantity <= quantity } -> std::same_as<bool>;
-            { quantity >= quantity } -> std::same_as<bool>;
 
         };
 
