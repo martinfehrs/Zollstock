@@ -22,6 +22,7 @@ target_sources(tests PRIVATE ${quantities_dir}/math.cpp)
 target_sources(tests PRIVATE ${quantities_dir}/limits.cpp)
 target_sources(tests PRIVATE structure_tests.cpp)
 target_sources(tests PRIVATE manual_testing.cpp)
+target_sources(tests PRIVATE dimensions.cpp)
 
 file(GLOB_RECURSE headers RELATIVE "${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/include/zollstock/*.hpp")
 
