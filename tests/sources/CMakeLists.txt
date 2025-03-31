@@ -1,9 +1,11 @@
 set(quantities_dir ${CMAKE_CURRENT_SOURCE_DIR}/quantities)
 set(units_dir ${CMAKE_CURRENT_SOURCE_DIR}/units)
+set(unit_concepts_dir ${units_dir}/concepts)
 set(unit_constants_dir ${units_dir}/constants)
 set(unit_literals_dir ${units_dir}/literals)
 
 target_sources(tests PRIVATE ${units_dir}/prefixes.cpp)
+target_sources(tests PRIVATE ${unit_concepts_dir}/unit.cpp)
 target_sources(tests PRIVATE ${unit_literals_dir}/area.cpp)
 target_sources(tests PRIVATE ${unit_literals_dir}/volume.cpp)
 target_sources(tests PRIVATE ${unit_literals_dir}/planar_angle.cpp)
