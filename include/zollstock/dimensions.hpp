@@ -83,6 +83,18 @@ namespace zollstock::dimensions
             return !this->base();
         }
 
+        // Wahr falls genau eine Basisdimension einen Exponenten != 0 aufweist.
+        [[nodiscard]] consteval bool homogeneous() const noexcept
+        {
+            return (this->length                    != 0)
+                != (this->time                      != 0)
+                != (this->mass                      != 0)
+                != (this->electric_current          != 0)
+                != (this->thermodynamic_temperature != 0)
+                != (this->amount_of_substance       != 0)
+                != (this->luminous_intensity        != 0);
+        }
+
     };
 
     inline constexpr dimensions_t _1   { 0, 0, 0, 0, 0, 0, 0 };
