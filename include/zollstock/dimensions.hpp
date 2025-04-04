@@ -19,9 +19,35 @@ namespace zollstock::dimensions
         const int amount_of_substance;
         const int luminous_intensity;
 
-        [[nodiscard]] consteval auto operator<=>(const dimensions_t&) const noexcept = default;
+        [[nodiscard]] consteval auto operator<=>(const dimensions_t &that) const noexcept
+        {
+            if (auto cmp = (this->length != 0) <=> (that.length != 0); cmp != 0)
+                return cmp;
 
-        [[nodiscard]] consteval bool operator==(const dimensions_t&) const noexcept = default;
+            if (auto cmp = (this->time != 0) <=> (that.time != 0); cmp != 0)
+                return cmp;
+
+            if (auto cmp = (this->mass != 0) <=> (that.mass != 0); cmp != 0)
+                return cmp;
+
+            if (auto cmp = (this->electric_current != 0) <=> (that.electric_current != 0); cmp != 0)
+                return cmp;
+
+            if (auto cmp = (this->thermodynamic_temperature != 0) <=> (that.thermodynamic_temperature != 0); cmp != 0)
+                return cmp;
+
+            if (auto cmp = (this->amount_of_substance != 0) <=> (that.amount_of_substance != 0); cmp != 0)
+                return cmp;
+
+            return (this->luminous_intensity != 0) <=> (that.luminous_intensity != 0);
+        }
+
+        [[nodiscard]] consteval bool operator==(const dimensions_t& that) const noexcept
+        {
+            return (this->length != 0) == (that.length != 0)
+                && (this->mass   != 0) == (that.mass   != 0)
+                && (this->time   != 0) == (that.time   != 0);
+        }
 
         [[nodiscard]] consteval dimensions_t operator*(const dimensions_t& that) const noexcept
         {

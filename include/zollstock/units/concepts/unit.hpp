@@ -132,7 +132,7 @@ namespace zollstock
 
 
     template<
-        const dimensions::dimensions_t& dimensions_,
+        dimensions::dimensions_t dimensions_,
         static_string symbol_,
         long double scaling_factor_,
         static_string prefix_,
@@ -140,7 +140,7 @@ namespace zollstock
     >
     struct unit_factor
     {
-        static constexpr auto& dimensions = dimensions_;
+        static constexpr auto dimensions = dimensions_;
         static constexpr auto symbol = symbol_;
         static constexpr auto scaling_factor = scaling_factor_;
         static constexpr auto prefix = prefix_;
@@ -192,7 +192,7 @@ namespace zollstock
 
 
     template <
-        const dimensions::dimensions_t& dimensions,
+        dimensions::dimensions_t dimensions,
         static_string symbol,
         long double scaling_factor,
         static_string prefix = "",
@@ -201,7 +201,7 @@ namespace zollstock
     using unit = unit_product<unit_factor<dimensions, symbol, scaling_factor, prefix, exponent>>;
 
     template <
-        const dimensions::dimensions_t& dimensions,
+        dimensions::dimensions_t dimensions,
         static_string symbol,
         long double scaling_factor,
         static_string prefix = "",
@@ -212,7 +212,7 @@ namespace zollstock
 
 
     template <
-        const dimensions::dimensions_t& dimensions,
+        dimensions::dimensions_t dimensions,
         static_string symbol,
         prefix_c auto prefix,
         int exponent = 1
@@ -220,7 +220,7 @@ namespace zollstock
     using prefixed_unit = unit<dimensions, symbol, prefix.factor, prefix.symbol, exponent>;
 
     template <
-        const dimensions::dimensions_t& dimensions,
+        dimensions::dimensions_t dimensions,
         static_string symbol,
         prefix_c auto prefix,
         int exponent = 1
@@ -386,7 +386,7 @@ namespace zollstock
         else
         {
             return unit_v<
-                factor_1.dimensions,
+                factor_1.dimensions * factor_2.dimensions,
                 factor_1.symbol,
                 factor_1.scaling_factor,
                 factor_1.prefix,

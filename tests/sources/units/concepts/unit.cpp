@@ -20,6 +20,6 @@ TEST_CASE("unit-concept", "[units][concepts][unit]")
 
     static constexpr auto m3 = m2 * m;
 
-    //STATIC_REQUIRE(m2.size == 1);
-    //STATIC_REQUIRE(std::get<0>(m2.factors).exponent == 3);
+    STATIC_REQUIRE(m3.size == 1);
+    STATIC_REQUIRE(std::get<0>(m3.factors).exponent == 3);
 }

@@ -96,6 +96,13 @@ namespace zollstock
             return comparison_result < 0 || comparison_result == 0 && this->size_ < that.size_;
         }
 
+        [[nodiscard]] constexpr bool operator>(const static_string& that) const noexcept
+        {
+            const int comparison_result = this->compare(that);
+
+            return comparison_result > 0 || comparison_result == 0 && this->size_ > that.size_;
+        }
+
         [[nodiscard]] constexpr static_string operator+(const static_string& that) const noexcept
         {
             static_string result{ *this };
