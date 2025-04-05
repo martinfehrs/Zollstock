@@ -359,24 +359,39 @@ namespace zollstock
             return detail::unit_product_concat(unit_1, unit_2);
         }
         else
-        if constexpr(factor_2.dimensions < factor_1.dimensions)
+        if constexpr(factor_1.dimensions > factor_2.dimensions)
         {
             return detail::unit_product_concat(unit_2, unit_1);
         }
         else
-        if constexpr(factor_1.scaling_factor != factor_2.scaling_factor)
+        if constexpr(factor_1.symbol < factor_2.symbol)
         {
-            throw "incompatible factors";
+            return detail::unit_product_concat(unit_1, unit_2);
         }
         else
-        if constexpr(factor_1.symbol != factor_2.symbol)
+        if constexpr(factor_1.symbol > factor_2.symbol)
         {
-            throw "incompatible symbols";
+            return detail::unit_product_concat(unit_2, unit_1);
         }
         else
-        if constexpr(factor_1.prefix != factor_2.prefix)
+        if constexpr(factor_1.scaling_factor < factor_2.scaling_factor)
         {
-            throw "incompatible prefixes";
+            return detail::unit_product_concat(unit_1, unit_2);
+        }
+        else
+        if constexpr(factor_1.scaling_factor > factor_2.scaling_factor)
+        {
+            return detail::unit_product_concat(unit_2, unit_1);
+        }
+        else
+        if constexpr((factor_1.prefix) < (factor_2.prefix))
+        {
+            return detail::unit_product_concat(unit_1, unit_2);
+        }
+        else
+        if constexpr(factor_1.prefix > factor_2.prefix)
+        {
+            return detail::unit_product_concat(unit_2, unit_1);
         }
         else
         if constexpr(factor_1.exponent + factor_2.exponent == 0)
@@ -414,25 +429,33 @@ namespace zollstock
                 return detail::unit_product_concat(unit_2, unit_1);
             }
             else
-            if constexpr (
-                const auto tail = unit_product_tail(unit_1);
-                factor_2.dimensions == head_factor.dimensions
-            )
+            if constexpr (factor_2.dimensions > head_factor.dimensions)
             {
-                if (factor_2.scaling_factor != head_factor.scaling_factor)
-                    throw "incompatible factors";
-
-                if (factor_2.symbol != head_factor.symbol)
-                    throw "incompatible symbols";
-
-                if (factor_2.prefix != head_factor.prefix)
-                    throw "incompatible prefixes";
-
-                return detail::unit_product_concat(head * unit_2, tail);
+                return detail::unit_product_concat(head, unit_product_tail(unit_1) * unit_2);
+            }
+            else
+            if constexpr (factor_2.symbol < head_factor.symbol)
+            {
+                return detail::unit_product_concat(unit_2, unit_1);
+            }
+            else
+            if constexpr (factor_2.symbol > head_factor.symbol)
+            {
+                return detail::unit_product_concat(head, unit_product_tail(unit_1) * unit_2);
+            }
+            else
+            if constexpr ((factor_2.prefix) < (head_factor.prefix))
+            {
+                return detail::unit_product_concat(unit_2, unit_1);
+            }
+            else
+            if constexpr (factor_2.prefix > head_factor.prefix)
+            {
+                return detail::unit_product_concat(head, unit_product_tail(unit_1) * unit_2);
             }
             else
             {
-                return detail::unit_product_concat(head, tail * unit_2);
+                return detail::unit_product_concat(head * unit_2, unit_product_tail(unit_1));
             }
         }
     }
