@@ -76,6 +76,36 @@ namespace zollstock
         return std::signbit(num.value());
     }
 
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 auto abs(quantity_c auto num)
+    {
+        return as<num.unit()>(std::abs(num.value()));
+    }
+
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 auto ceil(quantity_c auto num)
+    {
+        return as<num.unit()>(std::ceil(num.value()));
+    }
+
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 auto floor(quantity_c auto num)
+    {
+        return as<num.unit()>(std::floor(num.value()));
+    }
+
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 auto trunc(quantity_c auto num)
+    {
+        return as<num.unit()>(std::trunc(num.value()));
+    }
+
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 auto round(quantity_c auto num)
+    {
+        return as<num.unit()>(std::round(num.value()));
+    }
+
+    [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 auto rint(quantity_c auto num)
+    {
+        return as<num.unit()>(std::rint(num.value()));
+    }
+
 }
 
 

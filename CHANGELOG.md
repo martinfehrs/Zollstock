@@ -3,6 +3,7 @@ Development
 - CMakePresets.json
 - Support for all base SI units
 - Simplified quantity concepts
+- Added math functions abs, floor, ceil, trunc, round and rint
 
 Version 0.3
 ----------------------------------------------------------------------------------------------------
