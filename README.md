@@ -95,8 +95,8 @@ int main(int argc, char** argv)
 
 ## Supported SI base units
 
-All seven SI base units m, s, mol, A, K, cd and kg are supported, including all prefixed variants
-from quetta to quecto.
+All seven SI base units **m**, **s**, **mol**, **A**, **K**, **cd** and **kg** are supported,
+including all prefixed variants from **quetta** to **quecto**.
 
 ## Supported SI named derived units
 
