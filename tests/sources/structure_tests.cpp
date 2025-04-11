@@ -233,6 +233,8 @@ TEST_CASE("structure-tests", "[structure]")
 
     const auto include_dir = source_dir/"include";
 
+    REQUIRE(valid_feature_deps(features, additional_feature_deps));
+
     auto required_feature_deps = gen_feature_deps(features, additional_feature_deps);
 
     const auto existing_direct_header_deps = collect_direct_header_dependencies(include_dir);

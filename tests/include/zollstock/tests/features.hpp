@@ -62,6 +62,19 @@ using feature_dependencies = std::vector<std::pair<std::string, std::string>>;
     return filtered_deps;
 }
 
+[[nodiscard]] inline bool valid_feature_deps(
+    const feature_set& features, const feature_dependencies& deps
+)
+{
+    return std::ranges::all_of(
+        deps,
+        [&features](const auto& entry)
+        {
+            return features.contains(entry.first) && features.contains(entry.second);
+        }
+    );
+}
+
 [[nodiscard]] inline feature_dependencies gen_feature_deps(
     const feature_set& features, const feature_dependencies& additional_deps
 )
