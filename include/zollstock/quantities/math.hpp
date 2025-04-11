@@ -30,45 +30,43 @@ namespace zollstock
     template <number_c Number>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto sin(quantity<units::rad, Number> angle)
     {
-        return quantity<units::_1, Number>{ std::sin(angle.value()) };
+        return as<units::_1>(std::sin(angle.value()));
     }
 
     template <number_c Number>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto cos(quantity<units::rad, Number> angle)
     {
-        return quantity<units::_1, Number>{ std::cos(angle.value()) };
+        return as<units::_1>(std::cos(angle.value()));
     }
 
     template <number_c Number>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto tan(quantity<units::rad, Number> angle)
     {
-        return quantity<units::_1, Number>{ std::tan(angle.value()) };
+        return as<units::_1>(std::tan(angle.value()));
     }
 
     template <number_c Number>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto asin(quantity<units::_1, Number> num)
     {
-        return quantity<units::rad, Number>{ std::asin(num.value()) };
+        return as<units::rad>(std::asin(num.value()));
     }
 
     template <number_c Number>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto acos(quantity<units::_1, Number> num)
     {
-        return quantity<units::rad, Number>{ std::acos(num.value()) };
+        return as<units::rad>(std::acos(num.value()));
     }
 
     template <number_c Number>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto atan(quantity<units::_1, Number> num)
     {
-        return quantity<units::rad, Number>{ std::atan(num.value()) };
+        return as<units::rad>(std::atan(num.value()));
     }
 
     template <of_dimension_c<dimensions::L> Length>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto atan2(Length x, Length y)
     {
-        return quantity<units::rad, typename Length::value_type>{
-            std::atan2(x.value(), y.value())
-        };
+        return as<units::rad>(std::atan2(x.value(), y.value()));
     }
 
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_23 bool signbit(quantity_c auto num)
