@@ -4,6 +4,7 @@
 
 #include <zollstock/units/one.hpp>
 #include <zollstock/units/planar_angle.hpp>
+#include <zollstock/units/solid_angle.hpp>
 #include <zollstock/units/area.hpp>
 #include <zollstock/units/volume.hpp>
 

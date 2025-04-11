@@ -27,6 +27,7 @@ inline const feature_set features{
     "zollstock.units.temperature",
     "zollstock.units.amount_of_substance",
     "zollstock.units.planar_angle",
+    "zollstock.units.solid_angle",
     "zollstock.units.area",
     "zollstock.units.volume",
     "zollstock.units.constants",
@@ -40,6 +41,7 @@ inline const feature_set features{
     "zollstock.units.constants.temperature",
     "zollstock.units.constants.amount_of_substance",
     "zollstock.units.constants.planar_angle",
+    "zollstock.units.constants.solid_angle",
     "zollstock.units.constants.area",
     "zollstock.units.constants.volume",
     "zollstock.units.constants.squared_time",
@@ -54,6 +56,7 @@ inline const feature_set features{
     "zollstock.units.literals.temperature",
     "zollstock.units.literals.amount_of_substance",
     "zollstock.units.literals.planar_angle",
+    "zollstock.units.literals.solid_angle",
     "zollstock.units.literals.area",
     "zollstock.units.literals.volume"
 };
@@ -73,6 +76,8 @@ inline const feature_dependencies additional_feature_deps{
     { "zollstock.units.electric_current"   , "zollstock.units.literals.electric_current"     },
     { "zollstock.units.planar_angle"       , "zollstock.units.constants.planar_angle"        },
     { "zollstock.units.planar_angle"       , "zollstock.units.literals.planar_angle"         },
+    { "zollstock.units.solid_angle"        , "zollstock.units.constants.solid_angle"         },
+    { "zollstock.units.solid_angle"        , "zollstock.units.literals.solid_angle"          },
     { "zollstock.units.area"               , "zollstock.units.constants.area"                },
     { "zollstock.units.area"               , "zollstock.units.literals.area"                 },
     { "zollstock.units.volume"             , "zollstock.units.constants.volume"              },
@@ -86,6 +91,7 @@ inline const feature_dependencies additional_feature_deps{
     { "zollstock.units.constants.base"     , "zollstock.units.constants.electric_current"    },
     { "zollstock.units.constants.derived"  , "zollstock.units.constants.one"                 },
     { "zollstock.units.constants.derived"  , "zollstock.units.constants.planar_angle"        },
+    { "zollstock.units.constants.derived"  , "zollstock.units.constants.solid_angle"         },
     { "zollstock.units.constants.derived"  , "zollstock.units.constants.area"                },
     { "zollstock.units.constants.derived"  , "zollstock.units.constants.volume"              },
     { "zollstock.units.constants.derived"  , "zollstock.units.constants.squared_time"        },
@@ -98,6 +104,7 @@ inline const feature_dependencies additional_feature_deps{
     { "zollstock.units.literals.base"      , "zollstock.units.literals.electric_current"     },
     { "zollstock.units.literals.derived"   , "zollstock.units.literals.one"                  },
     { "zollstock.units.literals.derived"   , "zollstock.units.literals.planar_angle"         },
+    { "zollstock.units.literals.derived"   , "zollstock.units.literals.solid_angle"          },
     { "zollstock.units.literals.derived"   , "zollstock.units.literals.area"                 },
     { "zollstock.units.literals.derived"   , "zollstock.units.literals.volume"               },
 };
