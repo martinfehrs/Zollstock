@@ -43,7 +43,7 @@ TEST_CASE("quantity aliases", "[quantity]")
 TEST_CASE("quantity type requirements", "[quantity]")
 {
 
-    STATIC_REQUIRE(zs::quantity_with_unit_c<zs::quantity<_1, int>, decltype(_1)>);
+    STATIC_REQUIRE(zs::measured_in_c<zs::quantity<_1, int>, decltype(_1)>);
 
 }
 
