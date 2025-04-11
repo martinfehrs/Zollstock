@@ -9,6 +9,7 @@ namespace zs = zollstock;
 
 using namespace zs::quantities::constants;
 using namespace zs::units;
+using namespace zs::dimensions;
 
 [[noreturn]] void argument_error() noexcept
 {
@@ -37,10 +38,10 @@ using namespace zs::units;
     }
 }
 
-[[nodiscard]] zs::mass_c auto calculate_pipe_mass(
-    zs::length_c auto wall_thickness,
-    zs::length_c auto outer_diameter,
-    zs::length_c auto pipe_length
+[[nodiscard]] zs::of_dimension_c<M> auto calculate_pipe_mass(
+    zs::of_dimension_c<L> auto wall_thickness,
+    zs::of_dimension_c<L> auto outer_diameter,
+    zs::of_dimension_c<L> auto pipe_length
 )
 {
     static constexpr auto copper_density = zs::in<g/mm3>(8.1_g/cm3);

@@ -4,7 +4,7 @@
 
 #include <zollstock/units/planar_angle.hpp>
 #include <zollstock/quantities/constants.hpp>
-#include <zollstock/quantities/concepts/length.hpp>
+#include <zollstock/quantities/concepts.hpp>
 #include <zollstock/units/one.hpp>
 
 #include <cmath>
@@ -63,7 +63,7 @@ namespace zollstock
         return quantity<units::rad, Number>{ std::atan(num.value()) };
     }
 
-    template <length_c Length>
+    template <of_dimension_c<dimensions::L> Length>
     [[nodiscard]] ZOLLSTOCK_CONSTEXPR_MATH_26 auto atan2(Length x, Length y)
     {
         return quantity<units::rad, typename Length::value_type>{
