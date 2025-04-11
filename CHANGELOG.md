@@ -1,3 +1,7 @@
+Development
+----------------------------------------------------------------------------------------------------
+- Support for unit steradian
+
 Version 0.4
 ----------------------------------------------------------------------------------------------------
 - CMakePresets.json
@@ -9,7 +13,7 @@ Version 0.4
 Version 0.3
 ----------------------------------------------------------------------------------------------------
 - Improved header structure
-- Support for unit Mole
+- Support for unit mole
 - Introduction of quantity concepts
 - Trigonometric function atan2
 - Function signbit
@@ -20,7 +24,7 @@ Version 0.3
 
 Version 0.2
 ----------------------------------------------------------------------------------------------------
-- Support for unit Kelvin
+- Support for unit kelvin
 - Trigonometric functions sin, cos, tan, asin, acos and atan
 - π-template variables and constants for unit 1 with and without suffix
 - π-template variable for unit rad
