@@ -62,17 +62,30 @@ using feature_dependencies = std::vector<std::pair<std::string, std::string>>;
     return filtered_deps;
 }
 
-[[nodiscard]] inline bool valid_feature_deps(
+[[nodiscard]] inline auto unknown_dependency_features(
     const feature_set& features, const feature_dependencies& deps
 )
 {
-    return std::ranges::all_of(
-        deps,
-        [&features](const auto& entry)
-        {
-            return features.contains(entry.first) && features.contains(entry.second);
-        }
+    static const auto to_arrays = [](const auto& entry)
+    {
+        return std::array{ entry.first, entry.second };
+    };
+
+    const auto unknown_feature = [&features](const auto& feature)
+    {
+        return !features.contains(feature);
+    };
+
+    feature_set unknown_features;
+
+    std::ranges::copy(
+        deps | std::views::transform(to_arrays)
+             | std::views::join
+             | std::views::filter(unknown_feature),
+        std::inserter(unknown_features, std::ranges::end(unknown_features))
     );
+
+    return unknown_features;
 }
 
 [[nodiscard]] inline feature_dependencies gen_feature_deps(

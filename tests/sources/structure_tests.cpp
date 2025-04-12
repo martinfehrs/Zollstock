@@ -233,7 +233,12 @@ TEST_CASE("structure-tests", "[structure]")
 
     const auto include_dir = source_dir/"include";
 
-    REQUIRE(valid_feature_deps(features, additional_feature_deps));
+    const auto unknown_features = unknown_dependency_features(features, additional_feature_deps);
+
+    for(const auto& unknown_feature : unknown_features)
+        UNSCOPED_INFO(unknown_feature);
+
+    REQUIRE(std::ranges::size(unknown_features) == 0);
 
     auto required_feature_deps = gen_feature_deps(features, additional_feature_deps);
 
