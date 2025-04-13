@@ -57,5 +57,5 @@ endforeach()
 
 if (MSVC)
     target_link_options   (tests PRIVATE "/stack:10000000")
-    target_compile_options(tests PRIVATE "/bigobj"        )
+    target_compile_options(tests PRIVATE "/bigobj" "/Zc:preprocessor")
 endif(MSVC)
