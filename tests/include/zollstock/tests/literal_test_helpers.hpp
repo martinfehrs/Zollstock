@@ -2,6 +2,9 @@
 #define __ZOLLSTOCK_TESTS_LITERAL_TEST_HELPERS_HPP__
 
 
+#include <zollstock/tests/preprocessor_utils.hpp>
+
+
 #define TEST_LITERAL(literal, constant)              \
     STATIC_REQUIRE(1.0_##literal == 1.0 * constant); \
     STATIC_REQUIRE(1_##literal   == 1   * constant); \
@@ -39,8 +42,14 @@
     TEST_LITERALS_PREFIXED(literal, constant)     \
     TEST_LITERALS_UNPREFIXED(literal, constant)   \
 
-#define TEST_LITERALS(select, literal, constant) \
-    TEST_LITERALS_##select(literal, constant)    \
+#define TEST_LITERALS_2(select, literal, constant) \
+    TEST_LITERALS_##select(literal, constant)      \
+
+#define TEST_LITERALS_1(select, literal)           \
+    TEST_LITERALS_##select(literal, literal)       \
+
+#define TEST_LITERALS(select, ...) \
+    CONCAT(TEST_LITERALS_, COUNT_ARGS(__VA_ARGS__))(select, __VA_ARGS__)
 
 
 #endif //__ZOLLSTOCK_TESTS_LITERAL_TEST_HELPERS_HPP__
