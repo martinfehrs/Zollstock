@@ -9,5 +9,5 @@ using namespace zollstock::units;
 
 TEST_CASE("volume-unit-literals", "[volume][unit][literals]")
 {
-    TEST_LITERALS(ALL, m3)
+    TEST_LITERALS(ALL, m3, m3)
 }

@@ -1,4 +1,5 @@
 #include <zollstock/units/literals/one.hpp>
+#include <zollstock/tests/literal_test_helpers.hpp>
 
 #include <catch2/catch_all.hpp>
 
@@ -8,6 +9,5 @@ using namespace zollstock::units;
 
 TEST_CASE("dimensionless-unit-literals", "[dimensionless][unit][literals]")
 {
-    STATIC_REQUIRE(1.0_1   == 1.0 * _1);
-    STATIC_REQUIRE(1_1     == 1   * _1);
+    TEST_LITERALS(UNPREFIXED, 1 , _1)
 }

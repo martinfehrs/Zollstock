@@ -2,45 +2,45 @@
 #define __ZOLLSTOCK_TESTS_LITERAL_TEST_HELPERS_HPP__
 
 
-#define TEST_LITERAL(symbol)                        \
-    STATIC_REQUIRE(1.0_##symbol   == 1.0 * symbol); \
-    STATIC_REQUIRE(1_##symbol     == 1   * symbol); \
+#define TEST_LITERAL(literal, constant)              \
+    STATIC_REQUIRE(1.0_##literal == 1.0 * constant); \
+    STATIC_REQUIRE(1_##literal   == 1   * constant); \
 
-#define TEST_LITERALS_UNPREFIXED(base_symbol) \
-    TEST_LITERAL(base_symbol)                 \
+#define TEST_LITERALS_UNPREFIXED(literal, constant) \
+    TEST_LITERAL(literal, constant)                 \
 
-#define TEST_LITERALS_PREFIXED(base_symbol) \
-    TEST_LITERAL(q##base_symbol  )          \
-    TEST_LITERAL(r##base_symbol  )          \
-    TEST_LITERAL(y##base_symbol  )          \
-    TEST_LITERAL(z##base_symbol  )          \
-    TEST_LITERAL(a##base_symbol  )          \
-    TEST_LITERAL(f##base_symbol  )          \
-    TEST_LITERAL(p##base_symbol  )          \
-    TEST_LITERAL(n##base_symbol  )          \
-    TEST_LITERAL(mic##base_symbol)          \
-    TEST_LITERAL(m##base_symbol  )          \
-    TEST_LITERAL(c##base_symbol  )          \
-    TEST_LITERAL(d##base_symbol  )          \
-    TEST_LITERAL(da##base_symbol )          \
-    TEST_LITERAL(h##base_symbol  )          \
-    TEST_LITERAL(k##base_symbol  )          \
-    TEST_LITERAL(M##base_symbol  )          \
-    TEST_LITERAL(G##base_symbol  )          \
-    TEST_LITERAL(T##base_symbol  )          \
-    TEST_LITERAL(P##base_symbol  )          \
-    TEST_LITERAL(E##base_symbol  )          \
-    TEST_LITERAL(Z##base_symbol  )          \
-    TEST_LITERAL(Y##base_symbol  )          \
-    TEST_LITERAL(R##base_symbol  )          \
-    TEST_LITERAL(Q##base_symbol  )          \
+#define TEST_LITERALS_PREFIXED(literal, constant) \
+    TEST_LITERAL(q##literal  , q##constant  )     \
+    TEST_LITERAL(r##literal  , r##constant  )     \
+    TEST_LITERAL(y##literal  , y##constant  )     \
+    TEST_LITERAL(z##literal  , z##constant  )     \
+    TEST_LITERAL(a##literal  , a##constant  )     \
+    TEST_LITERAL(f##literal  , f##constant  )     \
+    TEST_LITERAL(p##literal  , p##constant  )     \
+    TEST_LITERAL(n##literal  , n##constant  )     \
+    TEST_LITERAL(mic##literal, mic##constant)     \
+    TEST_LITERAL(m##literal  , m##constant  )     \
+    TEST_LITERAL(c##literal  , c##constant  )     \
+    TEST_LITERAL(d##literal  , d##constant  )     \
+    TEST_LITERAL(da##literal , da##constant )     \
+    TEST_LITERAL(h##literal  , h##constant  )     \
+    TEST_LITERAL(k##literal  , k##constant  )     \
+    TEST_LITERAL(M##literal  , M##constant  )     \
+    TEST_LITERAL(G##literal  , G##constant  )     \
+    TEST_LITERAL(T##literal  , T##constant  )     \
+    TEST_LITERAL(P##literal  , P##constant  )     \
+    TEST_LITERAL(E##literal  , E##constant  )     \
+    TEST_LITERAL(Z##literal  , Z##constant  )     \
+    TEST_LITERAL(Y##literal  , Y##constant  )     \
+    TEST_LITERAL(R##literal  , R##constant  )     \
+    TEST_LITERAL(Q##literal  , Q##constant  )     \
 
-#define TEST_LITERALS_ALL(base_symbol)    \
-    TEST_LITERALS_PREFIXED(base_symbol)   \
-    TEST_LITERALS_UNPREFIXED(base_symbol) \
+#define TEST_LITERALS_ALL(literal, constant)      \
+    TEST_LITERALS_PREFIXED(literal, constant)     \
+    TEST_LITERALS_UNPREFIXED(literal, constant)   \
 
-#define TEST_LITERALS(select, base_symbol) \
-    TEST_LITERALS_##select(base_symbol)    \
+#define TEST_LITERALS(select, literal, constant) \
+    TEST_LITERALS_##select(literal, constant)    \
 
 
 #endif //__ZOLLSTOCK_TESTS_LITERAL_TEST_HELPERS_HPP__

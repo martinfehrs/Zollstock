@@ -9,5 +9,5 @@ using namespace zollstock::units;
 
 TEST_CASE("${hyphenated_base_dimension_name}-unit-literals", "[${hyphenated_base_dimension_name}][unit][literals]")
 {
-    TEST_LITERALS(ALL, ${entry_2})
+    TEST_LITERALS(ALL, ${entry_2}, ${entry_2})
 }
