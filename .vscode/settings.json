@@ -103,7 +103,8 @@
         "xutility": "cpp",
         "text_encoding": "cpp",
         "filesystem": "cpp",
-        "codecvt": "cpp"
+        "codecvt": "cpp",
+        "climits": "cpp"
     },
     "C_Cpp.intelliSenseEngine": "Tag Parser"
 }

@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_UNITS_LITERALS_DEFINITION_HELPERS_HPP__
 
 
-#include <zollstock/quantities/quantity.hpp>
+#include <zollstock/quantities/template.hpp>
 
 #include <limits>
 

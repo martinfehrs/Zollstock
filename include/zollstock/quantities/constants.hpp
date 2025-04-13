@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_QUANTITIES_CONSTANTS_HPP__
 
 
-#include <zollstock/quantities/quantity.hpp>
+#include <zollstock/quantities/template.hpp>
 #include <zollstock/units/constants/planar_angle.hpp>
 
 #include <numbers>

@@ -1,5 +1,5 @@
-#ifndef __ZOLLSTOCK_QUANTITIES_QUANTITY_HPP__
-#define __ZOLLSTOCK_QUANTITIES_QUANTITY_HPP__
+#ifndef __ZOLLSTOCK_QUANTITIES_TEMPLATE_HPP__
+#define __ZOLLSTOCK_QUANTITIES_TEMPLATE_HPP__
 
 
 #include <zollstock/quantities/concepts.hpp>
@@ -438,4 +438,4 @@ struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
 };
 
 
-#endif //__ZOLLSTOCK_QUANTITIES_QUANTITY_HPP__
+#endif //__ZOLLSTOCK_QUANTITIES_TEMPLATE_HPP__

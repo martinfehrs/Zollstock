@@ -2,7 +2,7 @@
 #define __ZOLLSTOCK_QUANTITIES_LIMITS_HPP__
 
 
-#include <zollstock/quantities/quantity.hpp>
+#include <zollstock/quantities/template.hpp>
 
 #include <limits>
 

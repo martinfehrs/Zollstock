@@ -12,7 +12,7 @@ inline const feature_set features{
     "zollstock.quantities.constants",
     "zollstock.quantities.limits",
     "zollstock.quantities.math",
-    "zollstock.quantities.quantity",
+    "zollstock.quantities.template",
     "zollstock.units",
     "zollstock.units.concepts",
     "zollstock.units.concepts.prefix",
