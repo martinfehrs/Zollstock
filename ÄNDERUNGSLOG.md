@@ -1,4 +1,4 @@
-Development
+Entwicklungsversion
 ----------------------------------------------------------------------------------------------------
 - Unterstüzung der Einheit Steradiant
 
