@@ -4,7 +4,7 @@
 
 #include <zollstock/dimensions.hpp>
 #include <zollstock/numbers.hpp>
-#include <zollstock/units/concepts.hpp>
+#include <zollstock/units/concepts/unit.hpp>
 
 
 namespace zollstock::inline quantities
