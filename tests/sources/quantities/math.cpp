@@ -1,5 +1,7 @@
 #define ZOLLSTOCK_QUANTITY_PUBLIC_MEMBERS
 #include <zollstock/quantities/math.hpp>
+#include <zollstock/units/literals/one.hpp>
+#include <zollstock/units/literals/planar_angle.hpp>
 
 #include <catch2/catch_all.hpp>
 

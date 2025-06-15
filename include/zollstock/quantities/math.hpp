@@ -2,10 +2,10 @@
 #define __ZOLLSTOCK_QUANTITIES_MATH_HPP__
 
 
-#include <zollstock/units/planar_angle.hpp>
 #include <zollstock/quantities/constants.hpp>
 #include <zollstock/quantities/concepts.hpp>
-#include <zollstock/units/one.hpp>
+#include <zollstock/units/constants/planar_angle.hpp>
+#include <zollstock/units/constants/one.hpp>
 
 #include <cmath>
 #include <version>
