@@ -2,23 +2,27 @@
 #define __ZOLLSTOCK_UNITS_CONSTANTS_DEFINITION_HELPERS_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
 #include <zollstock/units/concepts/unit.hpp>
 #include <zollstock/prefixes.hpp>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 #define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor) \
-    inline constexpr ::zollstock::unit<                                \
+    ZOLLSTOCK_MODULE_EXPORT constexpr ::zollstock::unit<               \
         ::zollstock::dimensions::dimension,                            \
         #symbol,                                                       \
         factor                                                         \
     > symbol{};                                                        \
 
 #define ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(dimension, base_symbol, si_prefix) \
-    inline constexpr auto& si_prefix##base_symbol = ::zollstock::prefixed_unit_v< \
-        ::zollstock::dimensions::dimension,                                       \
-        #base_symbol,                                                             \
-        ::zollstock::prefixes::si_prefix                                          \
-    >;                                                                            \
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr auto& si_prefix##base_symbol =       \
+        ::zollstock::prefixed_unit_v<                                             \
+            ::zollstock::dimensions::dimension,                                   \
+            #base_symbol,                                                         \
+            ::zollstock::prefixes::si_prefix                                      \
+        >;                                                                        \
 
 #define ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(dimension, base_symbol) \
     ZOLLSTOCK_DEFINE_BASE_SI_UNIT_CONSTANT(dimension, base_symbol, q  )          \
@@ -50,8 +54,9 @@
     ZOLLSTOCK_DEFINE_PREFIXED_BASE_SI_UNIT_CONSTANTS(dimension, base_symbol) \
     ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, base_symbol, 1.0L)        \
 
-#define ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)                         \
-    inline constexpr auto base_symbol##exponent = ::zollstock::pow_v<base_symbol, exponent>; \
+#define ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(base_symbol, exponent)      \
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr auto base_symbol##exponent = \
+        ::zollstock::pow_v<base_symbol, exponent>;                        \
 
 #define ZOLLSTOCK_DEFINE_RAISED_SI_UNIT_CONSTANT(base_symbol, exponent, si_prefix) \
     ZOLLSTOCK_DEFINE_RAISED_UNIT_CONSTANT(si_prefix##base_symbol, exponent)        \

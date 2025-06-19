@@ -2,16 +2,20 @@
 #define __ZOLLSTOCK_NUMBERS_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
+
 #include <concepts>
 #include <limits>
 #include <sstream>
 #include <utility>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock
 {
 
-    template <typename Candidate>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Candidate>
     concept number_c = std::same_as<Candidate, unsigned             char>
                     || std::same_as<Candidate, signed               char>
                     || std::same_as<Candidate, unsigned              int>
@@ -27,7 +31,7 @@ namespace zollstock
                     || std::same_as<Candidate,          long      double>;
 
 
-    template <number_c Number>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Number>
     [[nodiscard]] consteval const char* number_type_name() noexcept
     {
         if constexpr(std::same_as<Number, signed char>)
@@ -101,11 +105,11 @@ namespace zollstock
     }
 
 
-    template <number_c Candidate>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Candidate>
     inline constexpr bool is_iec559_v = std::numeric_limits<Candidate>::is_iec559;
 
 
-    template <std::integral Int>
+    ZOLLSTOCK_MODULE_EXPORT template <std::integral Int>
     struct int_range
     {
         Int min = 0;
@@ -124,7 +128,7 @@ namespace zollstock
         }
     };
 
-    template <std::integral Int>
+    ZOLLSTOCK_MODULE_EXPORT template <std::integral Int>
     int_range(Int, Int) -> int_range<Int>;
 
     namespace detail
@@ -160,7 +164,7 @@ namespace zollstock
 
     }
 
-    template <typename Candidate>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Candidate>
     inline constexpr auto continous_int_range_v = detail::continous_int_range<Candidate>();
 
 
@@ -202,10 +206,10 @@ namespace zollstock
 
     }
 
-    template <number_c Source, number_c Target>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Source, number_c Target>
     inline constexpr bool lossless_convertible_v = detail::lossless_convertible<Source, Target>();
 
-    template <number_c Source, number_c Target>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Source, number_c Target>
     class narrowing_conversion : public std::exception
     {
 
@@ -247,7 +251,7 @@ namespace zollstock
 
     };
 
-    template <number_c Target, number_c Source>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Target, number_c Source>
     [[nodiscard]] constexpr Target narrow(
         Source source
     ) noexcept(lossless_convertible_v<Source, Target>)
@@ -277,7 +281,7 @@ namespace zollstock
 
 
 
-    template <number_c Number1, number_c Number2>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -290,7 +294,7 @@ namespace zollstock
         }
     }
 
-    template <number_c Number1, number_c Number2>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_not_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -303,7 +307,7 @@ namespace zollstock
         }
     }
 
-    template <number_c Number1, number_c Number2>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_less(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -316,7 +320,7 @@ namespace zollstock
         }
     }
 
-    template <number_c Number1, number_c Number2>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_greater(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -329,7 +333,7 @@ namespace zollstock
         }
     }
 
-    template <number_c Number1, number_c Number2>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_less_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)
@@ -342,7 +346,7 @@ namespace zollstock
         }
     }
 
-    template <number_c Number1, number_c Number2>
+    ZOLLSTOCK_MODULE_EXPORT template <number_c Number1, number_c Number2>
     [[nodiscard]] constexpr bool cmp_greater_equal(Number1 number_1, Number2 number_2) noexcept
     {
         if constexpr(std::integral<Number1> && std::integral<Number2>)

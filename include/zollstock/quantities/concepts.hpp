@@ -2,9 +2,13 @@
 #define __ZOLLSTOCK_QUANTITIES_CONCEPTS_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
 #include <zollstock/dimensions.hpp>
 #include <zollstock/numbers.hpp>
 #include <zollstock/units/concepts/unit.hpp>
+
+#include <concepts>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock::inline quantities
@@ -13,7 +17,7 @@ namespace zollstock::inline quantities
     namespace detail
     {
 
-        template <typename Quantity>
+        ZOLLSTOCK_MODULE_EXPORT template <typename Quantity>
         concept quantity_base_c = requires(Quantity quantity, Quantity::value_type number)
         {
             requires std::regular<Quantity>;
@@ -47,7 +51,7 @@ namespace zollstock::inline quantities
 
     }
 
-    template <typename Quantity>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Quantity>
     concept quantity_c = requires(Quantity quantity)
     {
         requires detail::quantity_base_c<Quantity>;
@@ -56,7 +60,7 @@ namespace zollstock::inline quantities
         { quantity / quantity } -> detail::quantity_base_c;
     };
 
-    template <typename Quantity, typename Unit>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Quantity, typename Unit>
     concept measured_in_c = requires
     {
         requires quantity_c<Quantity>;
@@ -77,7 +81,7 @@ namespace zollstock::inline quantities
 
     }
 
-    template <typename Quantity, dimensions::dimensions_t dimensions>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Quantity, dimensions::dimensions_t dimensions>
     concept of_dimension_c = detail::of_dimension_v<Quantity, dimensions>;
 
 }

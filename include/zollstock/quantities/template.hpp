@@ -2,6 +2,7 @@
 #define __ZOLLSTOCK_QUANTITIES_TEMPLATE_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
 #include <zollstock/numbers.hpp>
 #include <zollstock/quantities/concepts.hpp>
 #include <zollstock/units/concepts/unit.hpp>
@@ -12,22 +13,23 @@
 #include <algorithm>
 #include <sstream>
 #include <utility>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock
 {
 
-    struct uninitialized_
+    ZOLLSTOCK_MODULE_EXPORT struct uninitialized_
     {
         consteval uninitialized_() noexcept = default;
         uninitialized_(const uninitialized_&) = delete;
         uninitialized_& operator=(const uninitialized_&) = delete;
     };
 
-    inline constexpr uninitialized_ uninitialized{};
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr uninitialized_ uninitialized{};
 
 
-    template <unit_c auto this_unit, number_c ThisValue = double>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto this_unit, number_c ThisValue = double>
     class quantity
     {
 
@@ -225,81 +227,81 @@ namespace zollstock
 
 
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using int_t = quantity<unit, int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_int_t = quantity<unit, unsigned int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_t = quantity<unit, unsigned>;
 
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using short_int_t = quantity<unit, short int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using short_t= quantity<unit, short>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_short_int_t= quantity<unit, unsigned short int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_short_t= quantity<unit, unsigned short>;
 
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using long_int_t = quantity<unit, long int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using long_t= quantity<unit, long>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_long_int_t= quantity<unit, unsigned long int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_long_t= quantity<unit, unsigned long>;
 
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using long_long_int_t = quantity<unit, long long int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using long_long_t= quantity<unit, long long>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_long_long_int_t= quantity<unit, unsigned long long int>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using unsigned_long_long_t= quantity<unit, unsigned long long>;
 
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using float_t = quantity<unit, float>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using double_t = quantity<unit, double>;
 
-    template <unit_c auto unit = units::_1>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit = units::_1>
     using long_double_t = quantity<unit, long double>;
 
 
 
-    template <unit_c auto unit, number_c Value>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto make_quantity(Value value) noexcept
     {
         return quantity<unit, Value>{ value };
     }
 
 
-    template <unit_c auto unit, number_c Value1, number_c Value2>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit, number_c Value1, number_c Value2>
     [[nodiscard]] constexpr auto operator+(
         quantity<unit, Value1> summand_1, quantity<unit, Value2> summand_2) noexcept
     {
         return make_quantity<unit>(summand_1.cvalue() + summand_2.cvalue());
     }
 
-    template <unit_c auto unit, number_c Value1, number_c Value2>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit, number_c Value1, number_c Value2>
     [[nodiscard]] constexpr auto operator-(
         quantity<unit, Value1> minuend, quantity<unit, Value2> subtrahend
     ) noexcept
@@ -307,12 +309,14 @@ namespace zollstock
         return make_quantity<unit>(minuend.cvalue() - subtrahend.cvalue());
     }
 
-    [[nodiscard]] consteval auto operator*(number_c auto&& factor, unit_c auto unit) noexcept
+    ZOLLSTOCK_MODULE_EXPORT [[nodiscard]] consteval auto operator*(
+        number_c auto&& factor, unit_c auto unit
+    ) noexcept
     {
         return make_quantity<unit>(factor);
     }
 
-    template <unit_c auto unit, number_c Value>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto operator*(
         quantity<unit, Value> factor_1, number_c auto factor_2
     ) noexcept
@@ -320,7 +324,7 @@ namespace zollstock
         return make_quantity<unit>(factor_1.cvalue() * factor_2);
     }
 
-    template <unit_c auto unit, number_c Value>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto operator*(
         number_c auto factor_1, quantity<unit, Value> factor_2
     ) noexcept
@@ -328,7 +332,9 @@ namespace zollstock
         return make_quantity<unit>(factor_1 * factor_2.cvalue());
     }
 
-    template <unit_c auto unit_1, unit_c auto unit_2, number_c Value1, number_c Value2>
+    ZOLLSTOCK_MODULE_EXPORT template <
+        unit_c auto unit_1, unit_c auto unit_2, number_c Value1, number_c Value2
+    >
     [[nodiscard]] constexpr auto operator*(
         quantity<unit_1, Value1> factor_1, quantity<unit_2, Value2> factor_2
     ) noexcept
@@ -336,7 +342,7 @@ namespace zollstock
         return make_quantity<unit_1 * unit_2>(factor_1.cvalue() * factor_2.cvalue());
     }
 
-    template <unit_c auto unit, number_c Value>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr auto operator/(
         quantity<unit, Value> dividend, number_c auto divisor
     ) noexcept
@@ -344,7 +350,9 @@ namespace zollstock
         return make_quantity<unit>(dividend.cvalue() / divisor);
     }
 
-    template <unit_c auto unit_1, unit_c auto unit_2, number_c Value1, number_c Value2>
+    ZOLLSTOCK_MODULE_EXPORT template <
+        unit_c auto unit_1, unit_c auto unit_2, number_c Value1, number_c Value2
+    >
     [[nodiscard]] constexpr auto operator/(
         quantity<unit_1, Value1> dividend, quantity<unit_2, Value2> divisor
     ) noexcept
@@ -353,7 +361,7 @@ namespace zollstock
     }
 
 
-    template <typename Char, unit_c auto unit, number_c Value>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Char, unit_c auto unit, number_c Value>
     std::basic_ostream<Char>& operator<<(
         std::basic_ostream<Char>& os, quantity<unit, Value> quantity
     )
@@ -378,7 +386,9 @@ namespace zollstock
     }
 
 
-    template <unit_c auto target_unit, unit_c auto source_unit, number_c Value>
+    ZOLLSTOCK_MODULE_EXPORT template <
+        unit_c auto target_unit, unit_c auto source_unit, number_c Value
+    >
     [[nodiscard]] constexpr quantity<target_unit, Value> in(
         quantity<source_unit, Value> source
     ) noexcept
@@ -386,7 +396,7 @@ namespace zollstock
         return quantity<target_unit, Value>{ source };
     }
 
-    template <unit_c auto unit, number_c Value>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit, number_c Value>
     [[nodiscard]] constexpr quantity<unit, Value> as(
         Value source
     ) noexcept
@@ -396,19 +406,19 @@ namespace zollstock
 
 
 
-    template <unit_c auto unit>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit>
     [[nodiscard]] auto stof(const std::string& str, std::size_t* idx = 0)
     {
         return float_t<unit>{ std::stof(str, idx) };
     }
 
-    template <unit_c auto unit>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit>
     [[nodiscard]] auto stod(const std::string& str, std::size_t* idx = 0)
     {
         return double_t<unit>{ std::stod(str, idx) };
     }
 
-    template <unit_c auto unit>
+    ZOLLSTOCK_MODULE_EXPORT template <unit_c auto unit>
     [[nodiscard]] auto stold(const std::string& str, std::size_t* idx = 0)
     {
         return long_double_t<unit>{ std::stold(str, idx) };
@@ -417,7 +427,7 @@ namespace zollstock
 }
 
 
-template<zollstock::unit_c auto this_unit, zollstock::number_c ThisValue>
+ZOLLSTOCK_MODULE_EXPORT template<zollstock::unit_c auto this_unit, zollstock::number_c ThisValue>
 struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
 {
 

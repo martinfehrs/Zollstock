@@ -2,9 +2,11 @@
 #define __ZOLLSTOCK_UNITS_CONSTANTS_PLANAR_ANGLE_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
 #include <zollstock/units/constants/definition_helpers.hpp>
 
 #include <numbers>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock::units::inline constants

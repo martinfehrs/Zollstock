@@ -2,8 +2,10 @@
 #define __ZOLLSTOCK_UNITS_LITERALS_TIME_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
 #include <zollstock/units/constants/time.hpp>
 #include <zollstock/units/literals/definition_helpers.hpp>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock::units::inline literals

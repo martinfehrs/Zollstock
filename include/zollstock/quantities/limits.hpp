@@ -2,15 +2,19 @@
 #define __ZOLLSTOCK_QUANTITIES_LIMITS_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/numbers.hpp>
 #include <zollstock/quantities/template.hpp>
+#include <zollstock/units/concepts/unit.hpp>
 
 #include <limits>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace std
 {
 
-    template <zollstock::unit_c auto unit, zollstock::number_c Number>
+    ZOLLSTOCK_MODULE_EXPORT template <zollstock::unit_c auto unit, zollstock::number_c Number>
     class numeric_limits<zollstock::quantity<unit, Number>>
     {
 
@@ -92,7 +96,7 @@ namespace std
 
     };
 
-    template <zollstock::unit_c auto unit, zollstock::number_c Number>
+    ZOLLSTOCK_MODULE_EXPORT template <zollstock::unit_c auto unit, zollstock::number_c Number>
     struct numeric_limits<const zollstock::quantity<unit, Number>>
         : numeric_limits<zollstock::quantity<unit, Number>>
     { };

@@ -2,8 +2,10 @@
 #define __ZOLLSTOCK_UNITS_CONSTANTS_VOLUME_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
 #include <zollstock/units/constants/length.hpp>
 #include <zollstock/units/constants/definition_helpers.hpp>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock::units::inline constants

@@ -1,13 +1,20 @@
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.28)
 
 project(Zollstock VERSION 0.3.0)
 
-add_library(zollstock INTERFACE)
+option(USE_MODULES "Provide C++ Modules" OFF)
 
-target_include_directories(zollstock INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+if(USE_MODULES)
+    add_library(zollstock)
+    target_include_directories(zollstock PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    target_compile_features(zollstock PUBLIC cxx_std_20)
+else(USE_MODULES)
+    add_library(zollstock INTERFACE)
+    target_include_directories(zollstock INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+    target_compile_features(zollstock INTERFACE cxx_std_20)
+endif(USE_MODULES)
 
-target_compile_features(zollstock INTERFACE cxx_std_20)
-
+add_subdirectory(module)
 add_subdirectory(dependencies/Catch2)
 
 add_subdirectory(examples)

@@ -61,63 +61,67 @@
             "name": "visual-studio-2022",
             "displayName": "Visual Studio 2022",
             "generator": "Visual Studio 17 2022",
-            "inherits": "base"
+            "inherits": "base",
+            "cacheVariables": {
+                "USE_MODULES": "ON"
+            }
+        },
+        {
+            "name": "ninja",
+            "hidden": true,
+            "generator": "Ninja",
+            "cacheVariables": {
+                "USE_MODULES": "ON"
+            }
         },
         {
             "name": "ninja-debug",
             "displayName": "Ninja - Debug",
             "generator": "Ninja",
-            "inherits": "debug"
-        },
-        {
-            "name": "ninja-gcc-debug",
-            "displayName": "Ninja GCC - Debug",
-            "generator": "Ninja",
-            "inherits": ["debug", "gcc"]
-        },
-        {
-            "name": "ninja-clang-debug",
-            "displayName": "Ninja Clang - Debug",
-            "generator": "Ninja",
-            "inherits": ["debug", "clang"]
+            "inherits": ["ninja", "debug"]
         },
         {
             "name": "ninja-release",
             "displayName": "Ninja - Release",
-            "generator": "Ninja",
-            "inherits": "release"
+            "inherits": ["ninja", "release"]
+        },
+        {
+            "name": "ninja-release-with-debug-info",
+            "displayName": "Release with debug info",
+            "inherits": ["ninja", "release-with-debug-info"]
+        },
+        {
+            "name": "ninja-gcc-debug",
+            "displayName": "Ninja GCC - Debug",
+            "inherits": ["ninja-debug", "gcc"]
+        },
+        {
+            "name": "ninja-clang-debug",
+            "displayName": "Ninja Clang - Debug",
+            "inherits": ["ninja-debug", "clang"]
         },
         {
             "name": "ninja-gcc-release",
             "displayName": "Ninja GCC - Release",
-            "generator": "Ninja",
-            "inherits": ["release", "gcc"]
+            "inherits": ["ninja-release", "gcc"]
         },
         {
             "name": "ninja-clang-release",
             "displayName": "Ninja Clang - Release",
-            "generator": "Ninja",
-            "inherits": ["release", "clang"]
-        },
-        {
-            "name": "ninja-release-with-debug-info",
-            "displayName": "Ninja - Release with debug info",
-            "generator": "Ninja",
-            "inherits": "release-with-debug-info"
+            "inherits": ["ninja-release", "clang"]
         },
         {
             "name": "ninja-gcc-release-with-debug-info",
             "displayName": "Ninja GCC - Release with debug info",
             "generator": "Ninja",
-            "inherits": ["release-with-debug-info", "gcc"]
+            "inherits": ["ninja-release-with-debug-info", "gcc"]
         },
         {
             "name": "ninja-clang-release-with-debug-info",
             "displayName": "Ninja Clang - Release with debug info",
             "generator": "Ninja",
-            "inherits": ["release-with-debug-info", "clang"]
+            "inherits": ["ninja-release-with-debug-info", "clang"]
         },
-
         {
             "name": "unix-make-debug",
             "displayName": "Unix Make - Debug",
@@ -177,7 +181,10 @@
             "name": "ninja-multi-config",
             "displayName": "Ninja Multi-Config",
             "generator": "Ninja Multi-Config",
-            "inherits": "base"
+            "inherits": "base",
+            "cacheVariables": {
+                "USE_MODULES": "ON"
+            }
         },
         {
             "name": "ninja-multi-config-gcc",

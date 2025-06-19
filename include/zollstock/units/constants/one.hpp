@@ -2,7 +2,9 @@
 #define __ZOLLSTOCK_UNITS_CONSTANTS_ONE_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
 #include <zollstock/units/concepts/unit.hpp>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock::units::inline constants

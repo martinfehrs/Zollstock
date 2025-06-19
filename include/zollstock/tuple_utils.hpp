@@ -2,9 +2,13 @@
 #define __ZOLLSTOCK_TUPLE_UTILS_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
+
 #include <cstddef>
 #include <functional>
 #include <tuple>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock
@@ -35,7 +39,7 @@ namespace zollstock
 
     }
 
-    template <typename Tuple1, typename Tuple2, typename BinaryPred>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Tuple1, typename Tuple2, typename BinaryPred>
     [[nodiscard]] consteval bool tuple_equal(
         const Tuple1& tuple_1, const Tuple2& tuple_2, BinaryPred compare
     ) noexcept
@@ -48,7 +52,9 @@ namespace zollstock
         );
     }
 
-    [[nodiscard]] consteval bool tuple_equal(const auto& tuple_1, const auto& tuple_2) noexcept
+    ZOLLSTOCK_MODULE_EXPORT [[nodiscard]] consteval bool tuple_equal(
+        const auto& tuple_1, const auto& tuple_2
+    ) noexcept
     {
         return tuple_equal(
             tuple_1, tuple_2, [](const auto& lhs, const auto& rhs) consteval { return lhs == rhs; }
@@ -71,7 +77,7 @@ namespace zollstock
         }
     }
 
-    template <typename Tuple, typename UnaryPred>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Tuple, typename UnaryPred>
     [[nodiscard]] consteval bool tuple_all_of(const Tuple& tuple, UnaryPred pred)
     {
         return detail::tuple_all_of_impl(
@@ -120,7 +126,9 @@ namespace zollstock
 
     }
 
-    template <typename Tuple, typename T, typename BinaryOp, typename UnaryOp>
+    ZOLLSTOCK_MODULE_EXPORT template <
+        typename Tuple, typename T, typename BinaryOp, typename UnaryOp
+    >
     [[nodiscard]] constexpr auto tuple_transform_reduce(
         Tuple&& tuple,
         T init,
@@ -184,7 +192,9 @@ namespace zollstock
 
     }
 
-    template <typename Tuple1, typename Tuple2, typename T, typename BinaryOp1, typename BinaryOp2>
+    ZOLLSTOCK_MODULE_EXPORT template <
+        typename Tuple1, typename Tuple2, typename T, typename BinaryOp1, typename BinaryOp2
+    >
     [[nodiscard]] constexpr auto tuple_transform_reduce(
         Tuple1&& tuple_1,
         Tuple2&& tuple_2,
@@ -216,7 +226,7 @@ namespace zollstock
 
     }
 
-    template <typename Tuple, typename T>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Tuple, typename T>
     [[nodiscard]] consteval bool tuple_contains(const Tuple& tuple, const T& value)
     {
         return detail::tuple_contains_impl(
@@ -272,7 +282,7 @@ namespace zollstock
 
     }
 
-    template <typename Tuple1, typename Tuple2>
+    ZOLLSTOCK_MODULE_EXPORT template <typename Tuple1, typename Tuple2>
     [[nodiscard]] consteval int tuple_lexicographical_compare_three_way(
         const Tuple1& tuple_1, const Tuple2& tuple_2
     )

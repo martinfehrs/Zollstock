@@ -2,14 +2,19 @@
 #define __ZOLLSTOCK_STATIC_STRING_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
+
 #include <cstddef>
+#include <exception>
 #include <string>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock
 {
 
-    struct unterminated_string : std::exception
+    ZOLLSTOCK_MODULE_EXPORT struct unterminated_string : std::exception
     {
         const char* what() const noexcept override
         {
@@ -17,7 +22,7 @@ namespace zollstock
         }
     };
 
-    class static_string
+    ZOLLSTOCK_MODULE_EXPORT class static_string
     {
 
     public:

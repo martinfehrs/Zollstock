@@ -2,13 +2,17 @@
 #define __ZOLLSTOCK_DIMENSIONS_HPP__
 
 
+#ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
+
 #include <compare>
+#endif //ZOLLSTOCK_USE_MODULES
 
 
 namespace zollstock::dimensions
 {
 
-    struct dimensions_t
+    ZOLLSTOCK_MODULE_EXPORT struct dimensions_t
     {
 
         const int length;
@@ -33,11 +37,22 @@ namespace zollstock::dimensions
             if (auto cmp = (this->electric_current != 0) <=> (that.electric_current != 0); cmp != 0)
                 return cmp;
 
-            if (auto cmp = (this->thermodynamic_temperature != 0) <=> (that.thermodynamic_temperature != 0); cmp != 0)
+            if (
+                auto cmp = (this->thermodynamic_temperature != 0) <=>
+                           (that.thermodynamic_temperature != 0);
+                cmp != 0
+            )
+            {
                 return cmp;
+            }
 
-            if (auto cmp = (this->amount_of_substance != 0) <=> (that.amount_of_substance != 0); cmp != 0)
+            if (
+                auto cmp = (this->amount_of_substance != 0) <=> (that.amount_of_substance != 0);
+                cmp != 0
+            )
+            {
                 return cmp;
+            }
 
             return (this->luminous_intensity != 0) <=> (that.luminous_intensity != 0);
         }
@@ -123,14 +138,14 @@ namespace zollstock::dimensions
 
     };
 
-    inline constexpr dimensions_t _1   { 0, 0, 0, 0, 0, 0, 0 };
-    inline constexpr dimensions_t L    { 1, 0, 0, 0, 0, 0, 0 };
-    inline constexpr dimensions_t T    { 0, 1, 0, 0, 0, 0, 0 };
-    inline constexpr dimensions_t M    { 0, 0, 1, 0, 0, 0, 0 };
-    inline constexpr dimensions_t I    { 0, 0, 0, 1, 0, 0, 0 };
-    inline constexpr dimensions_t Theta{ 0, 0, 0, 0, 1, 0, 0 };
-    inline constexpr dimensions_t N    { 0, 0, 0, 0, 0, 1, 0 };
-    inline constexpr dimensions_t J    { 0, 0, 0, 0, 0, 0, 1 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t _1   { 0, 0, 0, 0, 0, 0, 0 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t L    { 1, 0, 0, 0, 0, 0, 0 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t T    { 0, 1, 0, 0, 0, 0, 0 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t M    { 0, 0, 1, 0, 0, 0, 0 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t I    { 0, 0, 0, 1, 0, 0, 0 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t Theta{ 0, 0, 0, 0, 1, 0, 0 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t N    { 0, 0, 0, 0, 0, 1, 0 };
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr dimensions_t J    { 0, 0, 0, 0, 0, 0, 1 };
 
     namespace detail
     {
@@ -151,7 +166,7 @@ namespace zollstock::dimensions
 
     }
 
-    template<dimensions_t dimensions, int exponent>
+    ZOLLSTOCK_MODULE_EXPORT template<dimensions_t dimensions, int exponent>
     inline constexpr dimensions_t pow_v = detail::pow<exponent>(dimensions);
 
 }
