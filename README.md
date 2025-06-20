@@ -1,11 +1,12 @@
 # Zollstock
-A header-only type-safe zero overhead compile-time physical units C++20 library.
+A header-only modularized type-safe zero overhead compile-time physical units C++20 library.
 
 *Zollstock is German for folding rule. It's a funny word, because it's a lie. Zoll means inch but the
 so called Zollstock normaly shows centimeters these days*
 
 This library increases the type-safety of your application by providing scalars associated with physical units.
 All additional checks are executed at compile-time, producing no overhead in your final application.
+It comes in two flavours: modularized and as header-only, for those poor souls who got stuck in the past.
 The library is SI-centric. All non-SI units are defined relative to their corresponding counterpart. All
 built-in numeric types known in C++20 can be combined with units except `char` which isn't considered a number
 but a character. You can use `signed char`, `unsigned char`, `std::int8_t` or
@@ -15,11 +16,11 @@ planed.
 The library is still in a very early development stage. So please be careful when using it in
 production code.
 
+
 ## Example
 
 ```cpp
-#include <zollstock/units.hpp>
-#include <zollstock/quantities.hpp>
+import zollstock;
 
 #include <iostream>
 #include <cstdlib>
