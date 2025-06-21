@@ -57,6 +57,8 @@ jobs:
             c_compiler: cl
           - os: ubuntu-24.04
             generator: Visual Studio 17 2022
+          - c_compiler: gcc-14
+            modules: ON
 
     steps:
     - uses: actions/checkout@v3
