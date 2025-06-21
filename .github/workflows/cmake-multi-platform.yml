@@ -25,13 +25,13 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        os: [ubuntu-24.04, windows-latest]
+        os: [ubuntu-24.04, windows-2022]
         build_type: [Release]
         c_compiler: [gcc-14, clang-18, cl]
         generator: [Ninja, Visual Studio 17 2022]
         modules: [ON, OFF]
         include:
-          - os: windows-latest
+          - os: windows-2022
             c_compiler: cl
             cpp_compiler: cl
             generator: Visual Studio 17 2022
@@ -47,11 +47,11 @@ jobs:
             generator: Ninja
             modules: ON
         exclude:
-          - os: windows-latest
+          - os: windows-2022
             c_compiler: gcc-14
-          - os: windows-latest
+          - os: windows-2022
             c_compiler: clang-18
-          - os: windows-latest
+          - os: windows-2022
             generator: Ninja
           - os: ubuntu-24.04
             c_compiler: cl
@@ -59,6 +59,8 @@ jobs:
             generator: Visual Studio 17 2022
           - c_compiler: gcc-14
             modules: ON
+          - c_compiler: clang-18
+            modules: OFF
 
     steps:
     - uses: actions/checkout@v3
