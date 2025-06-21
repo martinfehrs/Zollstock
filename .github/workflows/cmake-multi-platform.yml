@@ -4,11 +4,11 @@ name: CMake on multiple platforms
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "CI-Module" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "CI-Module" ]
   workflow_dispatch:
-    branches: [ "main" ]
+    branches: [ "CI-Module" ]
 
 jobs:
   build:
@@ -65,6 +65,7 @@ jobs:
         -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DUSE_MODULES=ON
         -S ${{ github.workspace }}
 
     - name: Build
