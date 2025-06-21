@@ -61,6 +61,8 @@ jobs:
             modules: ON
           - c_compiler: clang-18
             modules: OFF
+          - c_compiler: cl
+            modules: OFF
 
     steps:
     - uses: actions/checkout@v3
