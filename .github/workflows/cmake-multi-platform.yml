@@ -28,16 +28,20 @@ jobs:
         os: [ubuntu-24.04, windows-latest]
         build_type: [Release]
         c_compiler: [gcc-14, clang-18, cl]
+        generator: [Ninja, Visual Studio 17 2022]
         include:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
+            generator: Visual Studio 17 2022
           - os: ubuntu-24.04
             c_compiler: gcc-14
             cpp_compiler: g++-14
+            generator: Ninja
           - os: ubuntu-24.04
             c_compiler: clang-18
             cpp_compiler: clang++-18
+            generator: Ninja
         exclude:
           - os: windows-latest
             c_compiler: gcc-14
@@ -66,6 +70,7 @@ jobs:
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DUSE_MODULES=ON
+        -G Ninja
         -S ${{ github.workspace }}
 
     - name: Build
