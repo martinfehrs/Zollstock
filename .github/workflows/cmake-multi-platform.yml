@@ -47,8 +47,12 @@ jobs:
             c_compiler: gcc-14
           - os: windows-latest
             c_compiler: clang-18
+          - os: windows-latest
+            generator: Ninja
           - os: ubuntu-24.04
             c_compiler: cl
+          - os: ubuntu-24.04
+            generator: Visual Studio 17 2022
 
     steps:
     - uses: actions/checkout@v3
