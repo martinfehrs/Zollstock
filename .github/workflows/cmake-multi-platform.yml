@@ -74,7 +74,7 @@ jobs:
         -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
         -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
         -DUSE_MODULES=ON
-        -G ${{ matrix.generator }}
+        -G "${{ matrix.generator }}"
         -S ${{ github.workspace }}
 
     - name: Build
