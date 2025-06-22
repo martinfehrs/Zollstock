@@ -3,6 +3,7 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
 #include <zollstock/quantities/template.hpp>
 
 #include <limits>

@@ -3,6 +3,7 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
 #include <zollstock/dimensions.hpp>
 #include <zollstock/numbers.hpp>
 #include <zollstock/quantities/constants.hpp>

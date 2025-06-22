@@ -3,6 +3,7 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
 #include <zollstock/numbers.hpp>
 #include <zollstock/quantities/template.hpp>
 #include <zollstock/units/constants/planar_angle.hpp>
