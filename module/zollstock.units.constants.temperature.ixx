@@ -1,7 +1,5 @@
 module;
 
-#define ZOLLSTOCK_USE_MODULES
-
 #include "zollstock/config.hpp"
 #include "zollstock/units/constants/definition_helpers.hpp"
 
