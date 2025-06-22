@@ -2,10 +2,12 @@
 #define __ZOLLSTOCK_CONFIG_HPP__
 
 
-#ifdef ZOLLSTOCK_USE_MODULES
-#  define ZOLLSTOCK_MODULE_EXPORT export
-#else
-#  define ZOLLSTOCK_MODULE_EXPORT
+#ifndef ZOLLSTOCK_MODULE_EXPORT
+#  ifdef ZOLLSTOCK_USE_MODULES
+#    define ZOLLSTOCK_MODULE_EXPORT export
+#  else
+#    define ZOLLSTOCK_MODULE_EXPORT
+#  endif
 #endif
 
 
