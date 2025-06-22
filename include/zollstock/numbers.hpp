@@ -6,8 +6,8 @@
 #include <zollstock/config.hpp>
 
 #include <concepts>
+#include <format>
 #include <limits>
-#include <sstream>
 #include <utility>
 #endif //ZOLLSTOCK_USE_MODULES
 
@@ -233,18 +233,13 @@ namespace zollstock
 
         static std::string build_message(Source source, Target target) noexcept
         {
-            std::stringstream ss;
-
-            ss << "Narrowing conversion from "
-               << number_type_name<Source>()
-               << " "
-               << source
-               << " to "
-               << number_type_name<Target>()
-               << " "
-               << target;
-
-            return ss.str();
+            return std::format(
+                "Narrowing conversion from {} {} to {} {}",
+                number_type_name<Source>(),
+                source,
+                number_type_name<Target>(),
+                target
+            );
         }
 
         std::string message;

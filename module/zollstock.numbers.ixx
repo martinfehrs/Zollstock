@@ -5,8 +5,8 @@ module;
 #include "zollstock/config.hpp"
 
 #include <concepts>
+#include <format>
 #include <limits>
-#include <sstream>
 #include <utility>
 
 export module zollstock:numbers;
