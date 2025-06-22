@@ -3,18 +3,18 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/dimensions.hpp>
-#include <zollstock/numbers.hpp>
-#include <zollstock/quantities/constants.hpp>
-#include <zollstock/quantities/concepts.hpp>
-#include <zollstock/quantities/template.hpp>
-#include <zollstock/units/constants/planar_angle.hpp>
-#include <zollstock/units/constants/one.hpp>
+#  include <zollstock/config.hpp>
+#  include <zollstock/dimensions.hpp>
+#  include <zollstock/numbers.hpp>
+#  include <zollstock/quantities/constants.hpp>
+#  include <zollstock/quantities/concepts.hpp>
+#  include <zollstock/quantities/template.hpp>
+#  include <zollstock/units/constants/planar_angle.hpp>
+#  include <zollstock/units/constants/one.hpp>
 
-#include <cmath>
-#include <version>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <cmath>
+#  include <version>
+#endif
 
 
 #if __cpp_lib_constexpr_cmath >= 202202L

@@ -3,13 +3,13 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/numbers.hpp>
-#include <zollstock/quantities/template.hpp>
-#include <zollstock/units/concepts/unit.hpp>
+#  include <zollstock/config.hpp>
+#  include <zollstock/numbers.hpp>
+#  include <zollstock/quantities/template.hpp>
+#  include <zollstock/units/concepts/unit.hpp>
 
-#include <limits>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <limits>
+#endif
 
 
 namespace std

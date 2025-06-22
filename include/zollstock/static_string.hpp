@@ -3,12 +3,12 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
+#  include <zollstock/config.hpp>
 
-#include <cstddef>
-#include <exception>
-#include <string>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <cstddef>
+#  include <exception>
+#  include <string>
+#endif
 
 
 namespace zollstock

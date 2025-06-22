@@ -3,13 +3,12 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/static_string.hpp>
+#  include <zollstock/config.hpp>
+#  include <zollstock/static_string.hpp>
 
-#include <concepts>
-#include <type_traits>
-#endif //ZOLLSTOCK_USE_MODULES
-
+#  include <concepts>
+#  include <type_traits>
+#endif
 
 namespace zollstock
 {

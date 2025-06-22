@@ -3,13 +3,13 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/numbers.hpp>
-#include <zollstock/quantities/template.hpp>
-#include <zollstock/units/constants/planar_angle.hpp>
+#  include <zollstock/config.hpp>
+#  include <zollstock/numbers.hpp>
+#  include <zollstock/quantities/template.hpp>
+#  include <zollstock/units/constants/planar_angle.hpp>
 
-#include <numbers>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <numbers>
+#endif
 
 
 namespace zollstock::inline quantities::inline constants

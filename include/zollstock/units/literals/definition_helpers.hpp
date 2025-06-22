@@ -3,11 +3,11 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/quantities/template.hpp>
+#  include <zollstock/config.hpp>
+#  include <zollstock/quantities/template.hpp>
 
-#include <limits>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <limits>
+#endif
 
 
 #define ZOLLSTOCK_DEFINE_LITERALS(suffix, constant)                                             \

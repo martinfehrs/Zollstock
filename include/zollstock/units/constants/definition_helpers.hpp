@@ -3,10 +3,10 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/units/concepts/unit.hpp>
-#include <zollstock/prefixes.hpp>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <zollstock/config.hpp>
+#  include <zollstock/units/concepts/unit.hpp>
+#  include <zollstock/prefixes.hpp>
+#endif
 
 
 #define ZOLLSTOCK_DEFINE_BASE_UNIT_CONSTANT(dimension, symbol, factor) \

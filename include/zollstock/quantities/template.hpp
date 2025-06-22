@@ -3,18 +3,18 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/numbers.hpp>
-#include <zollstock/quantities/concepts.hpp>
-#include <zollstock/units/concepts/unit.hpp>
-#include <zollstock/units/constants/one.hpp>
+#  include <zollstock/config.hpp>
+#  include <zollstock/numbers.hpp>
+#  include <zollstock/quantities/concepts.hpp>
+#  include <zollstock/units/concepts/unit.hpp>
+#  include <zollstock/units/constants/one.hpp>
 
-#include <cmath>
-#include <format>
-#include <algorithm>
-#include <sstream>
-#include <utility>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <cmath>
+#  include <format>
+#  include <algorithm>
+#  include <sstream>
+#  include <utility>
+#endif
 
 
 namespace zollstock

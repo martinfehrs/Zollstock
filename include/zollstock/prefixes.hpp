@@ -3,9 +3,9 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/units/concepts/prefix.hpp>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <zollstock/config.hpp>
+#  include <zollstock/units/concepts/prefix.hpp>
+#endif
 
 
 namespace zollstock::prefixes

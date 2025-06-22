@@ -3,9 +3,9 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/units/concepts/unit.hpp>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <zollstock/config.hpp>
+#  include <zollstock/units/concepts/unit.hpp>
+#endif
 
 
 namespace zollstock::units::inline constants

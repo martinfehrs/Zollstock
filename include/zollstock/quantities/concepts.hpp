@@ -3,13 +3,13 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
-#include <zollstock/dimensions.hpp>
-#include <zollstock/numbers.hpp>
-#include <zollstock/units/concepts/unit.hpp>
+#  include <zollstock/config.hpp>
+#  include <zollstock/dimensions.hpp>
+#  include <zollstock/numbers.hpp>
+#  include <zollstock/units/concepts/unit.hpp>
 
-#include <concepts>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <concepts>
+#endif
 
 
 namespace zollstock::inline quantities

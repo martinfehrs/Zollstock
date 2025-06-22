@@ -3,8 +3,8 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/units/constants/definition_helpers.hpp>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <zollstock/units/constants/definition_helpers.hpp>
+#endif
 
 
 namespace zollstock::units::inline constants

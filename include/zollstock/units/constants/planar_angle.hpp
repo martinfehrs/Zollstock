@@ -3,10 +3,10 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/units/constants/definition_helpers.hpp>
+#  include <zollstock/units/constants/definition_helpers.hpp>
 
-#include <numbers>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <numbers>
+#endif
 
 
 namespace zollstock::units::inline constants

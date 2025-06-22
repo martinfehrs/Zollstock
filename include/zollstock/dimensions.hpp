@@ -3,10 +3,10 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
-#include <zollstock/config.hpp>
+#  include <zollstock/config.hpp>
 
-#include <compare>
-#endif //ZOLLSTOCK_USE_MODULES
+#  include <compare>
+#endif
 
 
 namespace zollstock::dimensions
