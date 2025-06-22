@@ -3,6 +3,7 @@
 
 
 #ifndef ZOLLSTOCK_USE_MODULES
+#include <zollstock/config.hpp>
 #include <zollstock/units/concepts/unit.hpp>
 #endif //ZOLLSTOCK_USE_MODULES
 
@@ -10,7 +11,7 @@
 namespace zollstock::units::inline constants
 {
 
-    inline constexpr unit_product<> _1{};
+    ZOLLSTOCK_MODULE_EXPORT inline constexpr unit_product<> _1{};
 
 }
 
