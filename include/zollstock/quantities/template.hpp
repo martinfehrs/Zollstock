@@ -442,8 +442,6 @@ struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
     template<typename FmtContext>
     FmtContext::iterator format(zollstock::quantity<this_unit, ThisValue> quantity, FmtContext& ctx) const
     {
-
-
         if(const auto unit_representation = to_string(this_unit); unit_representation.size() > 0)
             return std::format_to(ctx.out(), "{} {}", quantity.cvalue(), unit_representation);
         else
