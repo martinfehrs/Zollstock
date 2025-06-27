@@ -555,13 +555,9 @@ struct std::formatter<Unit, char>
     }
 
     template<typename FmtContext>
-    FmtContext::iterator format(Unit u, FmtContext& ctx) const
+    FmtContext::iterator format(Unit unit, FmtContext& ctx) const
     {
-        std::ostringstream out;
-
-        out << u;
-
-        return std::ranges::copy(std::move(out).str(), ctx.out()).out;
+        return std::format_to(ctx.out(), "{}", to_string(unit));
     }
 };
 
