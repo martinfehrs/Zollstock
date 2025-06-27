@@ -9,10 +9,11 @@
 #  include <zollstock/units/concepts/unit.hpp>
 #  include <zollstock/units/constants/one.hpp>
 
+#  include <algorithm>
 #  include <cmath>
 #  include <format>
-#  include <algorithm>
-#  include <sstream>
+#  include <iostream>
+#  include <format>
 #  include <utility>
 #endif
 
@@ -439,13 +440,14 @@ struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
     }
 
     template<typename FmtContext>
-    FmtContext::iterator format(zollstock::quantity<this_unit, ThisValue> s, FmtContext& ctx) const
+    FmtContext::iterator format(zollstock::quantity<this_unit, ThisValue> quantity, FmtContext& ctx) const
     {
-        std::ostringstream out;
 
-        out << s;
 
-        return std::ranges::copy(std::move(out).str(), ctx.out()).out;
+        if(const auto unit_representation = to_string(this_unit); unit_representation.size() > 0)
+            return std::format_to(ctx.out(), "{} {}", quantity.cvalue(), unit_representation);
+        else
+            return std::format_to(ctx.out(), "{}", quantity.cvalue());
     }
 };
 
