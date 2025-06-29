@@ -9,6 +9,7 @@
 #  include <zollstock/tuple_utils.hpp>
 #  include <zollstock/units/concepts/prefix.hpp>
 
+#  include <cstring>
 #  include <format>
 #  include <tuple>
 #  include <type_traits>
