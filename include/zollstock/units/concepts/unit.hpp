@@ -10,7 +10,6 @@
 #  include <zollstock/units/concepts/prefix.hpp>
 
 #  include <format>
-#  include <sstream>
 #  include <tuple>
 #  include <type_traits>
 #  include <concepts>
@@ -243,19 +242,18 @@ namespace zollstock
     {
 
         template <typename Char>
-        [[nodiscard]] std::basic_string<Char> exponent_to_string(int exponent)
+        [[nodiscard]] std::basic_string<Char> exponent_to_string(int exponent) = delete;
+
+        template <>
+        [[nodiscard]] inline std::string exponent_to_string<char>(int exponent)
         {
-            std::basic_string<Char> string_representation;
+            return std::format("^{}", exponent);
+        }
 
-            string_representation += '^';
-
-            std::basic_stringstream<Char> ss;
-
-            ss << exponent;
-
-            string_representation += ss.str();
-
-            return string_representation;
+        template <>
+        [[nodiscard]] inline std::wstring exponent_to_string<wchar_t>(int exponent)
+        {
+            return std::format(L"^{}", exponent);
         }
 
     }
@@ -267,8 +265,8 @@ namespace zollstock
 
         return tuple_transform_reduce(
             unit.factors,
-            ""s,
-            [](std::string lhs, const std::string& rhs)
+            std::basic_string<Char>{},
+            [](std::basic_string<Char> lhs, const std::basic_string<Char>& rhs)
             {
                 if (!lhs.empty() && lhs.back() != '*')
                     lhs += '*';
@@ -277,9 +275,15 @@ namespace zollstock
             },
             [](const unit_factor_c auto& factor)
             {
-                std::string symbol{ factor.prefix.c_str() };
+                std::basic_string<Char> symbol{
+                    factor.prefix.c_str(),
+                    factor.prefix.c_str() + std::strlen(factor.prefix.c_str())
+                };
 
-                symbol += factor.symbol.c_str();
+                symbol += std::basic_string<Char>{
+                    factor.symbol.c_str(),
+                    factor.symbol.c_str() + std::strlen(factor.symbol.c_str())
+                };
 
                 if(factor.exponent != 1)
                     symbol += detail::exponent_to_string<Char>(factor.exponent);
@@ -559,6 +563,7 @@ struct std::formatter<Unit, char>
     {
         return std::format_to(ctx.out(), "{}", to_string(unit));
     }
+
 };
 
 
