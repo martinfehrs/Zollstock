@@ -65,7 +65,7 @@ int main(int argc, char** argv)
     // Calculating mass of a copper pipe
 
     std::cout << std::format(
-        "pipe mass: {}\n",
+        "pipe mass: {:.2f}\n",
         calculate_pipe_mass(wall_thickness, outer_diameter, pipe_length)
     );
 

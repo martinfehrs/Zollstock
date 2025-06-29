@@ -433,20 +433,27 @@ ZOLLSTOCK_MODULE_EXPORT template<zollstock::unit_c auto this_unit, zollstock::nu
 struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
 {
 
+    std::formatter<ThisValue, char> value_formatter;
+
     template<typename ParseContext>
     constexpr ParseContext::iterator parse(ParseContext& ctx)
     {
-        return ctx.begin();
+        return value_formatter.parse(ctx);
     }
 
     template<typename FmtContext>
-    FmtContext::iterator format(zollstock::quantity<this_unit, ThisValue> quantity, FmtContext& ctx) const
+    FmtContext::iterator format(
+        zollstock::quantity<this_unit, ThisValue> quantity, FmtContext& ctx
+    ) const
     {
+        auto it = value_formatter.format(quantity.cvalue(), ctx);
+
         if(const auto unit_representation = to_string(this_unit); unit_representation.size() > 0)
-            return std::format_to(ctx.out(), "{} {}", quantity.cvalue(), unit_representation);
-        else
-            return std::format_to(ctx.out(), "{}", quantity.cvalue());
+            it = std::format_to(it, " {}", unit_representation);
+
+        return it;
     }
+
 };
 
 

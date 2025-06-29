@@ -25,7 +25,7 @@ using header_dependencies = std::vector<std::pair<fs::path, fs::path>>;
 const std::string header_file_extension = ".hpp";
 const std::regex snake_case{ "[a-z]+(_[a-z0-9]+)*" };
 const std::regex header_include_prefix{ "^\\s*#\\s*include" };
-const std::regex header_include{ "#include\\s<([^\\>]+)>" };
+const std::regex header_include{ "#\\s*include\\s<([^\\>]+)>" };
 
 
 [[nodiscard]] bool is_header_include(const std::string& line)
