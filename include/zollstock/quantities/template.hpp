@@ -12,8 +12,7 @@
 #  include <algorithm>
 #  include <cmath>
 #  include <format>
-#  include <iostream>
-#  include <format>
+#  include <ostream>
 #  include <utility>
 #endif
 
@@ -429,11 +428,15 @@ namespace zollstock
 }
 
 
-ZOLLSTOCK_MODULE_EXPORT template<zollstock::unit_c auto this_unit, zollstock::number_c ThisValue>
-struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
+ZOLLSTOCK_MODULE_EXPORT template<
+    zollstock::unit_c auto this_unit, zollstock::number_c ThisValue, typename Char
+>
+struct std::formatter<zollstock::quantity<this_unit, ThisValue>, Char>
 {
 
-    std::formatter<ThisValue, char> value_formatter;
+    static inline const auto separator = static_cast<Char>(' ');
+
+    std::formatter<ThisValue, Char> value_formatter;
 
     template<typename ParseContext>
     constexpr ParseContext::iterator parse(ParseContext& ctx)
@@ -448,8 +451,13 @@ struct std::formatter<zollstock::quantity<this_unit, ThisValue>, char>
     {
         auto it = value_formatter.format(quantity.cvalue(), ctx);
 
-        if(const auto unit_representation = to_string(this_unit); unit_representation.size() > 0)
-            it = std::format_to(it, " {}", unit_representation);
+        if(
+            const auto unit_representation = to_basic_string<Char>(this_unit);
+            unit_representation.size() > 0
+        )
+        {
+            it = std::ranges::copy(separator + unit_representation, it).out;
+        }
 
         return it;
     }

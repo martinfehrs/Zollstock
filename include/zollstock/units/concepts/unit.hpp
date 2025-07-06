@@ -15,7 +15,7 @@
 #  include <type_traits>
 #  include <concepts>
 #  include <string>
-#  include <iostream>
+#  include <ostream>
 #  include <utility>
 #endif
 
@@ -549,8 +549,8 @@ namespace zollstock
 }
 
 
-ZOLLSTOCK_MODULE_EXPORT template<zollstock::unit_c Unit>
-struct std::formatter<Unit, char>
+ZOLLSTOCK_MODULE_EXPORT template<zollstock::unit_c Unit, typename Char>
+struct std::formatter<Unit, Char>
 {
 
     template<typename ParseContext>
@@ -562,10 +562,12 @@ struct std::formatter<Unit, char>
     template<typename FmtContext>
     FmtContext::iterator format(Unit unit, FmtContext& ctx) const
     {
-        return std::format_to(ctx.out(), "{}", to_string(unit));
+        return std::ranges::copy(to_basic_string<Char>(unit), ctx.out()).out;
     }
 
 };
+
+
 
 
 #endif //__ZOLLSTOCK_UNITS_CONCEPTS_UNIT_HPP__
