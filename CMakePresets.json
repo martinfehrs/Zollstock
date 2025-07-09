@@ -69,15 +69,11 @@
         {
             "name": "ninja",
             "hidden": true,
-            "generator": "Ninja",
-            "cacheVariables": {
-                "USE_MODULES": "ON"
-            }
+            "generator": "Ninja"
         },
         {
             "name": "ninja-debug",
             "displayName": "Ninja - Debug",
-            "generator": "Ninja",
             "inherits": ["ninja", "debug"]
         },
         {
@@ -98,6 +94,9 @@
         {
             "name": "ninja-clang-debug",
             "displayName": "Ninja Clang - Debug",
+            "cacheVariables": {
+                "USE_MODULES": "ON"
+            },
             "inherits": ["ninja-debug", "clang"]
         },
         {
@@ -108,18 +107,22 @@
         {
             "name": "ninja-clang-release",
             "displayName": "Ninja Clang - Release",
+            "cacheVariables": {
+                "USE_MODULES": "ON"
+            },
             "inherits": ["ninja-release", "clang"]
         },
         {
             "name": "ninja-gcc-release-with-debug-info",
             "displayName": "Ninja GCC - Release with debug info",
-            "generator": "Ninja",
             "inherits": ["ninja-release-with-debug-info", "gcc"]
         },
         {
             "name": "ninja-clang-release-with-debug-info",
             "displayName": "Ninja Clang - Release with debug info",
-            "generator": "Ninja",
+            "cacheVariables": {
+                "USE_MODULES": "ON"
+            },
             "inherits": ["ninja-release-with-debug-info", "clang"]
         },
         {
@@ -181,10 +184,7 @@
             "name": "ninja-multi-config",
             "displayName": "Ninja Multi-Config",
             "generator": "Ninja Multi-Config",
-            "inherits": "base",
-            "cacheVariables": {
-                "USE_MODULES": "ON"
-            }
+            "inherits": "base"
         },
         {
             "name": "ninja-multi-config-gcc",
@@ -196,6 +196,9 @@
             "name": "ninja-multi-config-clang",
             "displayName": "Ninja Multi-Config Clang",
             "generator": "Ninja Multi-Config",
+            "cacheVariables": {
+                "USE_MODULES": "ON"
+            },
             "inherits": ["base", "clang"]
         }
     ],
