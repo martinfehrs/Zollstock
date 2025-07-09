@@ -40,19 +40,27 @@ namespace zollstock
     ZOLLSTOCK_MODULE_EXPORT template<class Candidate, std::size_t index>
     concept has_unit_factor_tuple_element_c = requires (Candidate candidate)
     {
-        requires unit_factor_c<typename std::tuple_element<index, Candidate>::type>;
-        { get<index>(candidate) } -> std::convertible_to<std::tuple_element_t<index, Candidate>&>;
+        requires unit_factor_c<typename std::tuple_element<index, std::remove_const_t<Candidate>>::type>;
+        //requires std::convertible_to<decltype(get<index>(std::declval<Candidate&>())), const std::tuple_element_t<index, Candidate>&>;
     };
+
+    namespace detail
+    {
+
+        template <typename Candidate, std::size_t... indices>
+        constexpr bool has_unit_factor_tuple_elements(std::index_sequence<indices...>)
+        {
+            return (true && ... && has_unit_factor_tuple_element_c<Candidate, indices>);
+        }
+
+    }
 
     ZOLLSTOCK_MODULE_EXPORT template<class Candidate>
     concept is_unit_factor_tuple_like_c = requires
     {
-        requires []<std::size_t... indices>(std::index_sequence<indices...>)
-        {
-            return (has_unit_factor_tuple_element_c<Candidate, indices> && ...);
-        }
-        (std::make_index_sequence<std::tuple_size_v<Candidate>>{});
-
+        requires detail::has_unit_factor_tuple_elements<Candidate>(
+            std::make_index_sequence<std::tuple_size_v<Candidate>>{}
+        );
     };
 
     ZOLLSTOCK_MODULE_EXPORT struct unit_tag;

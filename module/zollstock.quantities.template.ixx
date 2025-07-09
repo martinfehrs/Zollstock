@@ -2,10 +2,10 @@ module;
 
 #include "zollstock/config.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <format>
-#include <algorithm>
-#include <sstream>
+#include <string>
 #include <utility>
 
 // Fragmentname darf zumindest bei clang nicht template enthalten
