@@ -5,6 +5,8 @@ module;
 #include <algorithm>
 #include <cmath>
 #include <format>
+// Warnung LNK4006 unter MSVC
+// #include <ostream>
 #include <string>
 #include <utility>
 

@@ -7,6 +7,8 @@ module;
 #include <tuple>
 #include <type_traits>
 #include <concepts>
+// Fehler C2487 unter MSVC
+// #include <ostream>
 #include <string>
 #include <utility>
 
