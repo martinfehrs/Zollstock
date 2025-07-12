@@ -6,6 +6,7 @@
 #  include <zollstock/config.hpp>
 
 #  include <compare>
+#  include <format>
 #endif
 
 
@@ -169,6 +170,41 @@ namespace zollstock::dimensions
     ZOLLSTOCK_MODULE_EXPORT template<dimensions_t dimensions, int exponent>
     inline constexpr dimensions_t pow_v = detail::pow<exponent>(dimensions);
 
+
+    namespace detail
+    {
+
+        template <typename Char>
+        consteval auto dimensions_format_string() noexcept = delete;
+
+        template <>
+        consteval auto dimensions_format_string<char>() noexcept
+        {
+            return "dimensions_t{{ {}, {}, {}, {}, {}, {}, {} }}";
+        }
+
+        template <>
+        consteval auto dimensions_format_string<wchar_t>() noexcept
+        {
+            return L"dimensions_t{{ {}, {}, {}, {}, {}, {}, {} }}";
+        }
+
+    }
+
+    ZOLLSTOCK_MODULE_EXPORT template <typename Char>
+    [[nodiscard]] inline auto to_basic_string(const dimensions_t& dimensions)
+    {
+        return std::format(
+            detail::dimensions_format_string<Char>(),
+            dimensions.length,
+            dimensions.time,
+            dimensions.mass,
+            dimensions.electric_current,
+            dimensions.thermodynamic_temperature,
+            dimensions.amount_of_substance,
+            dimensions.luminous_intensity
+        );
+    }
 }
 
 
