@@ -6,6 +6,7 @@
 #  include <zollstock/config.hpp>
 #  include <zollstock/dimensions.hpp>
 #  include <zollstock/static_string.hpp>
+#  include <zollstock/text_conversions.hpp>
 #  include <zollstock/tuple_utils.hpp>
 #  include <zollstock/units/concepts/prefix.hpp>
 
@@ -267,32 +268,26 @@ namespace zollstock
 
     }
 
-    ZOLLSTOCK_MODULE_EXPORT template <typename Char>
+    ZOLLSTOCK_MODULE_EXPORT template <character_c Char>
     [[nodiscard]] std::basic_string<Char> to_basic_string(unit_c auto unit)
     {
-        using namespace std::string_literals;
-
         return tuple_transform_reduce(
             unit.factors,
             std::basic_string<Char>{},
             [](std::basic_string<Char> lhs, const std::basic_string<Char>& rhs)
             {
-                if (!lhs.empty() && lhs.back() != '*')
-                    lhs += '*';
+                static const auto asterisc = transcode_to<Char>("*");
+
+                if (!lhs.empty() && lhs.ends_with(asterisc))
+                    lhs += asterisc;
 
                 return lhs += rhs;
             },
             [](const unit_factor_c auto& factor)
             {
-                std::basic_string<Char> symbol{
-                    factor.prefix.c_str(),
-                    factor.prefix.c_str() + std::strlen(factor.prefix.c_str())
-                };
+                auto symbol = transcode_to<Char>(factor.prefix.c_str());
 
-                symbol += std::basic_string<Char>{
-                    factor.symbol.c_str(),
-                    factor.symbol.c_str() + std::strlen(factor.symbol.c_str())
-                };
+                symbol += transcode_to<Char>(factor.symbol.c_str());
 
                 if(factor.exponent != 1)
                     symbol += detail::exponent_to_string<Char>(factor.exponent);
@@ -312,7 +307,7 @@ namespace zollstock
         return to_basic_string<wchar_t>(unit);
     }
 
-    ZOLLSTOCK_MODULE_EXPORT template <typename Char>
+    ZOLLSTOCK_MODULE_EXPORT template <character_c Char>
     std::basic_ostream<Char>& operator<<(std::basic_ostream<Char>& os, unit_c auto unit)
     {
         return os << to_basic_string<Char>(unit);

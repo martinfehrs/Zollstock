@@ -16,6 +16,7 @@ export module zollstock:units.concepts.unit;
 
 import :dimensions;
 import :static_string;
+import :text_conversions;
 import :tuple_utils;
 import :units.concepts.prefix;
 
