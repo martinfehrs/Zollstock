@@ -15,7 +15,7 @@
 namespace zollstock
 {
 
-    ZOLLSTOCK_MODULE_EXPORT template <typename T>
+    template <typename T>
     concept character_c = std::same_as<T, char> || std::same_as<T, wchar_t>;
 
 
@@ -51,13 +51,13 @@ namespace zollstock
 
 
 
-    ZOLLSTOCK_MODULE_EXPORT template <character_c Char>
+    template <character_c Char>
     [[nodiscard]] std::basic_string<Char> transcode_to(std::string text)
     {
         return transcoder<Char>::transcode(std::move(text));
     }
 
-    ZOLLSTOCK_MODULE_EXPORT template <character_c Char>
+    template <character_c Char>
     [[nodiscard]] std::basic_string<Char> transcode_to(const char* text)
     {
         return transcoder<Char>::transcode(text);
