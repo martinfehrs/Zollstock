@@ -4,6 +4,7 @@ module;
 
 #include <algorithm>
 #include <concepts>
+#include <iterator>
 #include <string>
 
 export module zollstock:text_conversions;
